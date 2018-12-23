@@ -1,14 +1,23 @@
 Rails.application.routes.draw do
-  resources :reviews
-  resources :transactions
-  resources :items
-  resources :groups
-  resources :lower_categories
-  resources :middle_categories
-  resources :upper_categories
-  resources :brands
-  devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
   root 'viewtest#index'
+  devise_for :users
+
+  resources :items do
+    resources :reviews
+    resources :reports, only: [:create, :destroy]
+    resources :likes, only: [:create, :destroy]
+    resources :comments, only: [:create, :update, :destroy]
+    resources :buys, only: [:index]
+    resources :transaction_messages
+  end
+
+  resources :groups, only: [:show, :index] do
+    resources :brands, only: [:show]
+  end
+
+  resources :upper_categories, only: [:show] do
+    resources :middle_categories, only: [:show] do
+      resources :lower_categories, only: [:show]
+    end
+  end
 end

@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181223061638) do
+ActiveRecord::Schema.define(version: 20181223073017) do
 
   create_table "brand_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "brand_id"
-    t.bigint "group_id"
+    t.bigint "brand_id", null: false
+    t.bigint "group_id", null: false
     t.index ["brand_id"], name: "index_brand_groups_on_brand_id"
     t.index ["group_id"], name: "index_brand_groups_on_group_id"
   end
@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20181223061638) do
   end
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "user_id"
-    t.bigint "item_id"
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
     t.text "text", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -50,13 +50,13 @@ ActiveRecord::Schema.define(version: 20181223061638) do
     t.integer "commission_price", default: 0, null: false
     t.integer "transaction_stage", default: 0, null: false
     t.integer "like_count", default: 0, null: false
-    t.bigint "size_id"
-    t.bigint "brand_id"
-    t.bigint "upper_category_id"
-    t.bigint "middle_category_id"
-    t.bigint "lower_category_id"
-    t.bigint "seller_id"
-    t.bigint "buyer_id"
+    t.bigint "size_id", null: false
+    t.bigint "brand_id", null: false
+    t.bigint "upper_category_id", null: false
+    t.bigint "middle_category_id", null: false
+    t.bigint "lower_category_id", null: false
+    t.bigint "seller_id", null: false
+    t.bigint "buyer_id", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["brand_id"], name: "index_items_on_brand_id"
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(version: 20181223061638) do
   end
 
   create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "user_id"
-    t.bigint "item_id"
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_likes_on_item_id"
@@ -79,14 +79,14 @@ ActiveRecord::Schema.define(version: 20181223061638) do
 
   create_table "lower_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", default: "", null: false
-    t.bigint "middle_category_id"
+    t.bigint "middle_category_id", null: false
     t.index ["middle_category_id"], name: "index_lower_categories_on_middle_category_id"
   end
 
   create_table "middle_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", default: "", null: false
-    t.bigint "upper_category_id"
-    t.bigint "size_type_id"
+    t.bigint "upper_category_id", null: false
+    t.bigint "size_type_id", null: false
     t.index ["size_type_id"], name: "index_middle_categories_on_size_type_id"
     t.index ["upper_category_id"], name: "index_middle_categories_on_upper_category_id"
   end
@@ -94,15 +94,15 @@ ActiveRecord::Schema.define(version: 20181223061638) do
   create_table "pictures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "content", default: "", null: false
     t.integer "status", default: 0, null: false
-    t.bigint "item_id"
+    t.bigint "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_pictures_on_item_id"
   end
 
   create_table "reports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "user_id"
-    t.bigint "item_id"
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_reports_on_item_id"
@@ -112,9 +112,9 @@ ActiveRecord::Schema.define(version: 20181223061638) do
   create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "text", null: false
     t.integer "evaluation", default: 0, null: false
-    t.bigint "item_id"
-    t.bigint "appraiser_id"
-    t.bigint "appraisee_id"
+    t.bigint "item_id", null: false
+    t.bigint "appraiser_id", null: false
+    t.bigint "appraisee_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["appraisee_id"], name: "index_reviews_on_appraisee_id"
@@ -128,24 +128,18 @@ ActiveRecord::Schema.define(version: 20181223061638) do
 
   create_table "sizes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", default: "", null: false
-    t.bigint "size_type_id"
+    t.bigint "size_type_id", null: false
     t.index ["size_type_id"], name: "index_sizes_on_size_type_id"
   end
 
   create_table "transaction_messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "transaction_id"
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
+    t.text "text", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["transaction_id"], name: "index_transaction_messages_on_transaction_id"
+    t.index ["item_id"], name: "index_transaction_messages_on_item_id"
     t.index ["user_id"], name: "index_transaction_messages_on_user_id"
-  end
-
-  create_table "transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "item_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_transactions_on_item_id"
   end
 
   create_table "upper_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -207,7 +201,6 @@ ActiveRecord::Schema.define(version: 20181223061638) do
   add_foreign_key "reviews", "users", column: "appraisee_id"
   add_foreign_key "reviews", "users", column: "appraiser_id"
   add_foreign_key "sizes", "size_types"
-  add_foreign_key "transaction_messages", "transactions"
+  add_foreign_key "transaction_messages", "items"
   add_foreign_key "transaction_messages", "users"
-  add_foreign_key "transactions", "items"
 end
