@@ -1,0 +1,10 @@
+= form_for @middle_category do |f|
+  - if @middle_category.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@middle_category.errors.count, "error")} prohibited this middle_category from being saved:"
+      %ul
+        - @middle_category.errors.full_messages.each do |message|
+          %li= message
+
+  .actions
+    = f.submit 'Save'
