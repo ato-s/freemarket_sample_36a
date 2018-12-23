@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181223055356) do
+ActiveRecord::Schema.define(version: 20181223061638) do
 
   create_table "brand_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "brand_id"
@@ -91,6 +91,15 @@ ActiveRecord::Schema.define(version: 20181223055356) do
     t.index ["upper_category_id"], name: "index_middle_categories_on_upper_category_id"
   end
 
+  create_table "pictures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "content", default: "", null: false
+    t.integer "status", default: 0, null: false
+    t.bigint "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_pictures_on_item_id"
+  end
+
   create_table "reports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
     t.bigint "item_id"
@@ -98,6 +107,19 @@ ActiveRecord::Schema.define(version: 20181223055356) do
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_reports_on_item_id"
     t.index ["user_id"], name: "index_reports_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text "text", null: false
+    t.integer "evaluation", default: 0, null: false
+    t.bigint "item_id"
+    t.bigint "appraiser_id"
+    t.bigint "appraisee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["appraisee_id"], name: "index_reviews_on_appraisee_id"
+    t.index ["appraiser_id"], name: "index_reviews_on_appraiser_id"
+    t.index ["item_id"], name: "index_reviews_on_item_id"
   end
 
   create_table "size_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -178,8 +200,12 @@ ActiveRecord::Schema.define(version: 20181223055356) do
   add_foreign_key "lower_categories", "middle_categories"
   add_foreign_key "middle_categories", "size_types"
   add_foreign_key "middle_categories", "upper_categories"
+  add_foreign_key "pictures", "items"
   add_foreign_key "reports", "items"
   add_foreign_key "reports", "users"
+  add_foreign_key "reviews", "items"
+  add_foreign_key "reviews", "users", column: "appraisee_id"
+  add_foreign_key "reviews", "users", column: "appraiser_id"
   add_foreign_key "sizes", "size_types"
   add_foreign_key "transaction_messages", "transactions"
   add_foreign_key "transaction_messages", "users"
