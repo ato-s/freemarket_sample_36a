@@ -11,24 +11,24 @@
 |bad_count|integer|null:false, default: 0|
 
 ### Association
-- has_one : phone number
+- has_one : phone_number
 - has_one : adress
 - has_one : creditcard
 - has_one : avatar
-- has_many : report
-- has_many : like
-- has_many : comment
-- has_many : transaction message
-- has_many : transaction
-- has_many : item
+- has_many : reports
+- has_many : likes
+- has_many : comments
+- has_many : transaction_messages
+- has_many : transactions
+- has_many : items
 - has_and_belongs_to_many : todo
 - has_and_belongs_to_many : information
-- has_many : user information
+- has_many : user_informations
 - has_one : walet
-- has_many : review
+- has_many : reviews
 
 
-# phoneNumberテーブル
+# phone_numberテーブル
 |Column|Type|Options|
 |------|----|-------|
 |number|integer|null:false,unique:true|
@@ -118,10 +118,10 @@ belongs_to : user
 |money|integer|null:false,default:0|
 
 ### Association
-has_many:withdrawalhistory
+has_many:withdrawalhistorys
 
 
-# withdrawalHistoryテーブル
+# withdrawal_Historyテーブル
 |Column|Type|Options|
 |------|----|-------|
 |walet_id|integer|null:false|
@@ -139,9 +139,10 @@ belongs_to : wallet
 
 ### Association
 has_and_belongs_to_many:user
-has_many : user information
+has_many : user informations
 
-# userinfomationテーブル
+
+# user_infomationテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null:false,foreign_key:true|
@@ -188,22 +189,22 @@ has_and_belongs_to_many:user
 
 ### Association
 belongs_to:user
-has_many:report
-has_many:like
-has_many:comment
-has_many:transaction
-has_many:picture
+has_many:reports
+has_many:likes
+has_many:comments
+has_many:transactions
+has_many:pictures
 belongs_to:brand
-has_many:uppercategory
-has_many:middlecategory
-has_many:lowercategory
+has_many:upper_categorys
+has_many:middle_categorys
+has_many:lower_categorys
 belongs_to:size
-has_many:todo
-has_many:information
-has_many:review
+has_many:todos
+has_many:informations
+has_many:reviews
 
 
-# transaction messageテーブル
+# transaction_messageテーブル
 |Column|Type|Options|
 |------|----|-------|
 |transaction_id|integer|null:false|
@@ -223,7 +224,7 @@ belongs_to:user
 |item_id|integer|null:false,foreign_key:true|
 
 ### Association
-has_many:transaction
+has_many:transactions
 belongs_to:user
 belongs_to:item
 
@@ -246,17 +247,17 @@ belongs_to:item
 |initial_word|string|null:false|
 
 ### Association
-has_many:item
+has_many:items
 
 
-# brand groupテーブル
+# brand_groupテーブル
 |Column|Type|Options|
 |------|----|-------|
 |brand_id|references|null:false,foreign_key:true|
 |group_id|references|null:false,foreign_key:true|
 
 ### Association
-has_many:item
+has_many:items
 
 
 # groupテーブル
@@ -265,21 +266,21 @@ has_many:item
 |name|string|null:false|
 
 ### Association
-has_many:brandgroup
+has_many:brand_groups
 has_and_belongs_to_many:brand
 
 
-# upper categoryテーブル
+# upper_categoryテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null:false|
 
 ### Association
-has_many:item
-has_many:middlecategory
+has_many:items
+has_many:middle_categorys
 
 
-# middle categoryテーブル
+# middle_categoryテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null:false|
@@ -287,19 +288,20 @@ has_many:middlecategory
 |size_type_id|references|foreign_key:true|
 
 ### Association
-has_many:item
-belongs_to:uppercategory
-has_many:lowercategory
+has_many:items
+belongs_to:upper_category
+has_many:lower_categorys
 
 
-# lower categoryテーブル
+# lower_categoryテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null:false|
 |middle_category_id|integer|null:false|
 
 ### Association
-
+belongs_to:middle_category
+has_many:items
 
 
 # sizeテーブル
@@ -309,12 +311,15 @@ has_many:lowercategory
 |size_type_id|integer|null:false,foreign_key:true|
 
 ### Association
+has_many:items
+belongs_to:size_type
 
 
-
-# sizetypyeテーブル
+# size_typyeテーブル
 |Column|Type|Options|
 |------|----|-------|
 |size_type|string|null:false|
 
 ### Association
+has_many:sizes
+has_many:middle_categorys
