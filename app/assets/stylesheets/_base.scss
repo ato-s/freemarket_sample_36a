@@ -1,0 +1,312 @@
+@include media-spS {
+  /* spS */
+}
+@include media-spM {
+  /* spM */
+}
+@include media-spL {
+  /* spL */
+}
+@include media-sp {
+  /* sp */
+}
+@include media-pc {
+  /* pc */
+}
+@include media-pcL {
+  /* pcL */
+}
+@include media-pcLL {
+  /* pcLL */
+}
+@include media-tb {
+  /* tb-pc */
+}
+
+/*! sanitize.css v3.2.0 | CC0 1.0 Public Domain | github.com/10up/sanitize.css */
+audio:not([controls]) {
+  display: none;
+}
+button {
+  -webkit-appearance: button;
+  overflow: visible;
+}
+details {
+  display: block;
+}
+html {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+}
+input {
+  -webkit-border-radius: 0;
+  &[type="button"], &[type="reset"], &[type="submit"] {
+    -webkit-appearance: button;
+  }
+  &[type="number"] {
+    width: auto;
+  }
+  &[type="search"] {
+    -webkit-appearance: textfield;
+    &::-webkit-search-cancel-button, &::-webkit-search-decoration {
+      -webkit-appearance: none;
+    }
+  }
+}
+main {
+  display: block;
+}
+pre {
+  overflow: auto;
+}
+
+progress {
+  display: inline-block;
+}
+
+small {
+  font-size: 75%;
+}
+
+summary {
+  display: block;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+template {
+  display: none;
+}
+
+textarea {
+  overflow: auto;
+}
+
+[hidden] {
+  display: none;
+}
+
+*, ::after, ::before {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+* {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+::after, ::before {
+  text-decoration: inherit;
+  vertical-align: inherit;
+}
+
+*, ::after, ::before {
+  border-style: solid;
+  border-width: 0;
+}
+
+* {
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  background-color: #fff;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #000;
+  cursor: default;
+  font: 66.66667% sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+audio, canvas, iframe, img, svg, video {
+  vertical-align: middle;
+}
+
+button, input, select, textarea {
+  background-color: transparent;
+}
+
+button, input, select, textarea {
+  color: inherit;
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+}
+
+[type="button"], [type="date"], [type="datetime"], [type="datetime-local"], [type="email"], [type="month"], [type="number"], [type="password"], [type="reset"], [type="search"], [type="submit"], [type="tel"], [type="text"], [type="time"], [type="url"], [type="week"], select, textarea, button {
+  min-height: 1.5em;
+}
+
+code, kbd, pre, samp {
+  font-family: monospace, monospace;
+}
+
+nav {
+  ol, ul {
+    list-style: none;
+  }
+}
+
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  &::-ms-expand {
+    display: none;
+  }
+  &::-ms-value {
+    color: currentColor;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+::-moz-selection, ::selection {
+  background-color: #b3d4fc;
+  color: #fff;
+  text-shadow: none;
+}
+
+[aria-busy="true"] {
+  cursor: progress;
+}
+
+[aria-controls] {
+  cursor: pointer;
+}
+
+[aria-disabled] {
+  cursor: default;
+}
+
+[hidden][aria-hidden="false"] {
+  clip: rect(0 0 0 0);
+  display: inherit;
+  position: absolute;
+  &:focus {
+    clip: auto;
+  }
+}
+
+[tabindex], a, area, button, input, label, select, textarea {
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+html {
+  overflow-y: auto;
+}
+
+:root {
+  cursor: auto;
+}
+
+::-moz-selection, ::selection {
+  color: currentColor;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+address {
+  font-style: normal;
+}
+
+img {
+  vertical-align: middle;
+}
+
+input {
+  border: 0;
+  outline: 0;
+  font-family: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  &[type='checkbox']:focus, &[type='radio']:focus {
+    outline: 0;
+  }
+  &[type='number'] {
+    -moz-appearance: textfield;
+    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+    }
+  }
+  &[type='search'] {
+    -webkit-appearance: none;
+  }
+}
+
+label {
+  display: inline-block;
+}
+
+textarea {
+  border-radius: 0;
+  border: 0;
+  outline: 0;
+  -webkit-appearance: none;
+}
+
+select {
+  outline: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+button {
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600');
+
+@font-face {
+  font-family: 'icon-font';
+  src: url("/assets/icon-font.eot") format("eot"), url("/assets/icon-font.woff") format("woff"), url("/assets/icon-font.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+  background: #f5f5f5;
+  font-family: 'Source Sans Pro', Helvetica, Arial, '貂ｸ繧ｴ繧ｷ繝�け菴�', 'YuGothic', '繝｡繧､繝ｪ繧ｪ', 'Meiryo', sans-serif;
+  font-size: 14px;
+  color: #333;
+  line-height: 1;
+}
+
+a {
+  color: #0099e8;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+    opacity: 0.7;
+  }
+}

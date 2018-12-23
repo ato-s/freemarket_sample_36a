@@ -1,0 +1,108 @@
+// -------------------------------------------------------------------
+//   variables
+// -------------------------------------------------------------------
+
+//ページ幅
+$width: 1068px;
+
+//ブレイクポイント
+$bpS: 375px;
+$bpM: 480px;
+$bpL: 600px;
+$bp: 768px;
+$bp2: $width;
+$bp3: 1440px;
+
+//パディング
+$spPd: 5%;
+
+$hdHeight: 11vw;
+$hdHeightSp: 120px;
+
+// -------------------------------------------------------------------
+//   color
+// -------------------------------------------------------------------
+$bl: #2979ff;
+$pbl: #f5f7fa;
+$lbl: #b7bed1;
+$gy: #b7bed1;
+$nv: #283f67;
+
+// -------------------------------------------------------------------
+//   text
+// -------------------------------------------------------------------
+$textColor: #59729d;
+
+$textLh: 2.5;
+
+// -------------------------------------------------------------------
+//   font
+// -------------------------------------------------------------------
+$baseFont: 'ヒラギノ角ゴ Pro', 'Hiragino Kaku Gothic Pro',　'Yu Gothic Medium', YuGothic, sans-serif;
+$serif: 'ten-mincho' ,'游明朝', YuMincho, 'ヒラギノ明朝 ProN W3', 'Hiragino Mincho ProN', 'HG明朝E', 'ＭＳ Ｐ明朝', 'ＭＳ 明朝', serif;
+
+$en: 'oswald', sans-serif;
+
+$fzPc: 15px;
+$fzSp: 12px;
+
+// -------------------------------------------------------------------
+//   z-index
+// -------------------------------------------------------------------
+$gMenuBtn: 9995;
+$gMenu: 9990;
+$header: 9900;
+$pagetop: 9800;
+
+// -------------------------------------------------------------------
+//   mediaquery
+// -------------------------------------------------------------------
+
+// スマホ SMALL ~
+@mixin media-spS {
+	@media screen and (min-width: $bpS) {
+		@content;
+	}
+}
+// スマホ MEDIUM ~
+@mixin media-spM {
+	@media screen and (min-width: $bpM) {
+		@content;
+	}
+}
+// スマホ LARGE ~
+@mixin media-spL {
+	@media screen and (min-width: $bpL) {
+		@content;
+	}
+}
+// スマホ
+@mixin media-sp {
+	@media screen and (max-width: $bp - 1) {
+		@content;
+	}
+}
+// PC
+@mixin media-pc {
+	@media print, screen and (min-width: $bp) {
+		@content;
+	}
+}
+// PC LARGE
+@mixin media-pcL {
+	@media screen and (min-width: $bp2) {
+		@content;
+	}
+}
+// PC LARGE
+@mixin media-pcLL {
+	@media screen and (min-width: $bp3) {
+		@content;
+	}
+}
+// PC MIN ~ LARGE, TABLET
+@mixin media-tb {
+	@media screen and (min-width: $bp) and (max-width: $bp2 - 1) {
+		@content;
+	}
+}
