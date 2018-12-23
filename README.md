@@ -58,14 +58,6 @@
 - belonsgs_to:adress
 
 
-# bankテーブル
-|Column|Type|Options|
-|------|----|-------|
-
-### Association
-- belongs_to:user
-
-
 # avatarテーブル
 |Column|Type|Options|
 |------|----|-------|
@@ -254,6 +246,7 @@
 
 ### Association
 - has_many:items
+- has_many:groups,through: :brand_group
 
 
 # brand_groupテーブル
@@ -273,8 +266,7 @@
 |name|string|null:false|
 
 ### Association
-- has_many:brand_groups
-- belongs_to:brand
+- has_many:brand,through: :brand_groups
 
 
 # upper_categoryテーブル
