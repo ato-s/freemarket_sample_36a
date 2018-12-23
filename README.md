@@ -75,7 +75,7 @@
 |item|references|null:false|
 
 ### Association
-belongs_to : user
+- belongs_to : user
 
 
 # likeテーブル
@@ -85,7 +85,7 @@ belongs_to : user
 |item|references|null:false|
 
 ### Association
-belongs_to : user
+- belongs_to : user
 
 # commentテーブル
 |Column|Type|Options|
@@ -95,7 +95,7 @@ belongs_to : user
 |sentence|text|null:false|
 
 ### Association
-belongs_to : user
+- belongs_to : user
 
 # reviewテーブル
 |Column|Type|Options|
@@ -107,7 +107,7 @@ belongs_to : user
 |text|text|null: false, default: “”|
 
 ### Association
-belongs_to : user
+- belongs_to : user
 
 
 # walletテーブル
@@ -118,7 +118,7 @@ belongs_to : user
 |money|integer|null:false,default:0|
 
 ### Association
-has_many:withdrawalhistorys
+- has_many:withdrawalhistorys
 
 
 # withdrawal_Historyテーブル
@@ -128,7 +128,7 @@ has_many:withdrawalhistorys
 |withdrawal_price|integer|null:false|
 
 ### Association
-belongs_to : wallet
+- belongs_to : wallet
 
 
 # informationテーブル
@@ -138,8 +138,8 @@ belongs_to : wallet
 |item_id|integer|null:false|
 
 ### Association
-has_and_belongs_to_many:user
-has_many : user informations
+- has_and_belongs_to_many:user
+- has_many : user informations
 
 
 # user_infomationテーブル
@@ -149,8 +149,8 @@ has_many : user informations
 |infomation_id|integer|null:false,foreign_key:true|
 
 ### Association
-belongs_to : userinformation
-belongs_to : user
+- belongs_to : userinformation
+- belongs_to : user
 
 
 # todoテーブル
@@ -162,7 +162,7 @@ belongs_to : user
 |user_id|integer|null:false|
 
 ### Association
-has_and_belongs_to_many:user
+- has_and_belongs_to_many:user
 
 
 # itemテーブル
@@ -188,20 +188,20 @@ has_and_belongs_to_many:user
 |buyer_id||add_foreign_key :items, :users, column: :buyer_id, index:true|
 
 ### Association
-belongs_to:user
-has_many:reports
-has_many:likes
-has_many:comments
-has_many:transactions
-has_many:pictures
-belongs_to:brand
-has_many:upper_categorys
-has_many:middle_categorys
-has_many:lower_categorys
-belongs_to:size
-has_many:todos
-has_many:informations
-has_many:reviews
+- belongs_to:user
+- has_many:reports
+- has_many:likes
+- has_many:comments
+- has_many:transactions
+- has_many:pictures
+- belongs_to:brand
+- has_many:upper_categorys
+- has_many:middle_categorys
+- has_many:lower_categorys
+- belongs_to:size
+- has_many:todos
+- has_many:informations
+- has_many:reviews
 
 
 # transaction_messageテーブル
@@ -212,8 +212,8 @@ has_many:reviews
 |message|text|null:false,default:””|
 
 ### Association
-belongs_to:tansaction
-belongs_to:user
+- belongs_to:tansaction
+- belongs_to:user
 
 
 # transactionテーブル
@@ -224,9 +224,9 @@ belongs_to:user
 |item_id|integer|null:false,foreign_key:true|
 
 ### Association
-has_many:transactions
-belongs_to:user
-belongs_to:item
+- has_many:transactions
+- belongs_to:user
+- belongs_to:item
 
 
 # pictureテーブル
@@ -237,7 +237,7 @@ belongs_to:item
 |item_id|references|null:false,foreign_key:true|
 
 ### Association
-belongs_to:item
+- belongs_to:item
 
 
 # brandテーブル
@@ -247,7 +247,7 @@ belongs_to:item
 |initial_word|string|null:false|
 
 ### Association
-has_many:items
+- has_many:items
 
 
 # brand_groupテーブル
@@ -257,7 +257,7 @@ has_many:items
 |group_id|references|null:false,foreign_key:true|
 
 ### Association
-has_many:items
+- has_many:items
 
 
 # groupテーブル
@@ -266,8 +266,8 @@ has_many:items
 |name|string|null:false|
 
 ### Association
-has_many:brand_groups
-has_and_belongs_to_many:brand
+- has_many:brand_groups
+- has_and_belongs_to_many:brand
 
 
 # upper_categoryテーブル
@@ -276,8 +276,8 @@ has_and_belongs_to_many:brand
 |name|string|null:false|
 
 ### Association
-has_many:items
-has_many:middle_categorys
+- has_many:items
+- has_many:middle_categorys
 
 
 # middle_categoryテーブル
@@ -288,9 +288,9 @@ has_many:middle_categorys
 |size_type_id|references|foreign_key:true|
 
 ### Association
-has_many:items
-belongs_to:upper_category
-has_many:lower_categorys
+- has_many:items
+- belongs_to:upper_category
+- has_many:lower_categorys
 
 
 # lower_categoryテーブル
@@ -300,8 +300,8 @@ has_many:lower_categorys
 |middle_category_id|integer|null:false|
 
 ### Association
-belongs_to:middle_category
-has_many:items
+- belongs_to:middle_category
+- has_many:items
 
 
 # sizeテーブル
@@ -311,8 +311,8 @@ has_many:items
 |size_type_id|integer|null:false,foreign_key:true|
 
 ### Association
-has_many:items
-belongs_to:size_type
+- has_many:items
+- belongs_to:size_type
 
 
 # size_typyeテーブル
@@ -321,5 +321,5 @@ belongs_to:size_type
 |size_type|string|null:false|
 
 ### Association
-has_many:sizes
-has_many:middle_categorys
+- has_many:sizes
+- has_many:middle_categorys
