@@ -29,7 +29,7 @@
 - has_many : appraisee, class_name : 'review', foreign_key : 'appraisee_id'
 
 
-# phone_numberテーブル
+# phone_numbersテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null:false, foreign_key:true|
@@ -38,7 +38,7 @@
 ### Association
 - belongs_to : user
 
-# addressテーブル
+# addressesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null:false, foreign_key:true|
@@ -57,7 +57,7 @@
 - belonsgs_to : user
 
 
-# avatarテーブル
+# avatarsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null:false, foreign_key:true|
@@ -67,7 +67,7 @@
 - belongs_to : user
 
 
-# reportテーブル
+# reportsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null:false, foreign_key:true|
@@ -78,7 +78,7 @@
 - belongs_to : item
 
 
-# likeテーブル
+# likesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null:false, foreign_key:true|
@@ -89,7 +89,7 @@
 - belongs_to : item, counter_cache:like_count
 
 
-# commentテーブル
+# commentsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null:false, foreign_key:true|
@@ -100,7 +100,7 @@
 - belongs_to : user
 - belongs_to : item
 
-# reviewテーブル
+# reviewsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |item_id|integer|null:false, foreign_key:true|
@@ -116,7 +116,7 @@
 - belongs_to : item
 
 
-# walletテーブル
+# walletsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null:false, foreign_key:true|
@@ -128,7 +128,7 @@
 - has_many : withdraws
 
 
-# withdrawalテーブル
+# withdrawalsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |walet_id|integer|null:false, foreign_key:true|
@@ -138,7 +138,7 @@
 - belongs_to : wallet
 
 
-# informationテーブル
+# informationsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |item_id|integer|null:false, foreign_key:true|
@@ -153,7 +153,7 @@
 - has_many : user_informations
 
 
-# user_infomationテーブル
+# user_infomationsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null:false, foreign_key:true|
@@ -164,7 +164,7 @@
 - belongs_to : user
 
 
-# todoテーブル
+# todosテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null:false, foreign_key:true|
@@ -176,7 +176,7 @@
 - belongs_to : user
 - belongs_to : item
 
-# itemテーブル
+# itemsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null:false, default:""|
@@ -215,7 +215,7 @@
 - has_many : reviews
 
 
-# transaction_messageテーブル
+# transaction_messagesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null:false, foreign_key:true|
@@ -227,7 +227,7 @@
 - belongs_to : item
 
 
-# pictureテーブル
+# picturesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |item_id|integer|null:false, foreign_key:true|
@@ -238,7 +238,7 @@
 - belongs_to : item
 
 
-# brandテーブル
+# brandsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null:false|
@@ -249,7 +249,7 @@
 - has_many : groups,through: :brand_group
 
 
-# brand_groupテーブル
+# brand_groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |brand_id|integer|null:false, foreign_key:true|
@@ -260,7 +260,7 @@
 - belongs_to : group
 
 
-# groupテーブル
+# groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null:false|
@@ -269,7 +269,7 @@
 - has_many : brand, through: :brand_groups
 
 
-# upper_categoryテーブル
+# upper_categoriesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null:false|
@@ -279,7 +279,7 @@
 - has_many : middle_categorys
 
 
-# middle_categoryテーブル
+# middle_categoriesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null:false|
@@ -293,7 +293,7 @@
 - belongs_to : size_type
 
 
-# lower_categoryテーブル
+# lower_categoriesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null:false|
@@ -304,7 +304,7 @@
 - has_many : items
 
 
-# sizeテーブル
+# sizesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null:false|
@@ -315,7 +315,7 @@
 - belongs_to : size_type
 
 
-# size_typyeテーブル
+# size_typesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |size_type|string|null:false|
