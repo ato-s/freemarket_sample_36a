@@ -1,0 +1,10 @@
+= form_for @upper_category do |f|
+  - if @upper_category.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@upper_category.errors.count, "error")} prohibited this upper_category from being saved:"
+      %ul
+        - @upper_category.errors.full_messages.each do |message|
+          %li= message
+
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,19 @@
+%h1 Listing lower_categories
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @lower_categories.each do |lower_category|
+      %tr
+        %td= link_to 'Show', lower_category
+        %td= link_to 'Edit', edit_lower_category_path(lower_category)
+        %td= link_to 'Destroy', lower_category, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Lower category', new_lower_category_path

@@ -1,0 +1,19 @@
+%h1 Listing upper_categories
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @upper_categories.each do |upper_category|
+      %tr
+        %td= link_to 'Show', upper_category
+        %td= link_to 'Edit', edit_upper_category_path(upper_category)
+        %td= link_to 'Destroy', upper_category, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Upper category', new_upper_category_path
