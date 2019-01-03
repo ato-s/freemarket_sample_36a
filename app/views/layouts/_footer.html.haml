@@ -1,94 +1,94 @@
-%footer.global-footer
+%footer.l-footer
   %nav
     %ul
-      %li.download-app
-        %a.is-disable{:href => ""}
-          %img{:alt => "", :src => "/assets/common/mercari_icon.png", :width => "35px"}>/
+      %li.l-footer_downloadApp
+        = link_to '', class: 'is-disable' do
+          = image_tag 'common/mercari_icon.png', width: '35'
           今すぐ無料ダウンロード！
-      %li.footer-cell
-        %h2.footer-head メルカリについて
+      %li.l-footer_col
+        %h2.l-footer_title メルカリについて
         %ul
           %li
-            %a.is-disable{:href => ""} 会社概要（運営会社）
+            = link_to '会社概要（運営会社）', class: 'is-disable'
           %li
-            %a{:href => "/privacy/"} プライバシーポリシー
+            = link_to 'プライバシーポリシー', '/privacy/'
           %li
-            %a{:href => "/tos/"} メルカリ利用規約
+            = link_to 'メルカリ利用規約', '/tos/'
           %li
-            %a{:href => "/tos_paid_point/"} メルカリ利用規約・有償ポイントに関する特約
+            = link_to 'メルカリ利用規約・有償ポイントに関する特約', '/tos_paid_point/'
           %li
-            %a{:href => "/tos_smartphone_support/"} あんしんスマホサポート制度に関する利用特約
+            = link_to 'あんしんスマホサポート制度に関する利用特約', '/tos_smartphone_support/'
           %li
-            %a{:href => "/compliance/"} コンプライアンスポリシー
+            = link_to 'コンプライアンスポリシー', '/compliance/'
           %li
-            %a{:href => "/data_security/"} 個人データの安全管理に係る基本方針
+            = link_to '個人データの安全管理に係る基本方針', '/data_security/'
           %li
-            %a{:href => "/tokutei/"} 特定商取引に関する表記
+            = link_to '特定商取引に関する表記', '/tokutei/'
           %li
-            %a{:href => "/shikin_kessai/"} 資金決済法に基づく表示
+            = link_to '資金決済法に基づく表示', '/shikin_kessai/'
           %li
-            %a.is-disable{:href => ""} 法令順守と犯罪抑止のために
+            = link_to '法令順守と犯罪抑止のために', class: 'is-disable'
           %li
-            %a{:href => "/jobs/"} 採用情報
-      %li.footer-cell
-        %h2.footer-head メルカリを見る
+            = link_to '採用情報', '/jobs/'
+      %li.l-footer_col
+        %h2.l-footer_title メルカリを見る
         %ul
           %li
-            %a{:href => "/category/"} カテゴリー一覧
+            = link_to 'カテゴリー一覧', '/category/'
           %li
-            %a{:href => "/brand/"} ブランド一覧
+            = link_to 'ブランド一覧', '/brand/'
           %li
-            %a{:href => "/area/"} 出品地域一覧
+            = link_to '出品地域一覧', '/area/'
           %li
-            %a.is-disable{:href => "", :target => "_blank"} 公式ブログ
+            = link_to '公式ブログ', target: '_blank', class: 'is-disable'
           %li
-            %a.is-disable{:href => "", :target => "_blank"} 公式Twitter
+            = link_to '公式Twitter', target: '_blank', class: 'is-disable'
           %li
-            %a.is-disable{:href => "", :target => "_blank"} 公式Facebook
-      %li.footer-cell
-        %h2.footer-head ヘルプ＆ガイド
+            = link_to '公式Facebook', target: '_blank', class: 'is-disable'
+      %li.l-footer_col
+        %h2.l-footer_title ヘルプ＆ガイド
         %ul
           %li
-            %a{:href => "/help_center/"} メルカリガイド
+            = link_to 'メルカリガイド', '/help_center/'
           %li
-            %a{:href => "/logo-guidelines/"} メルカリロゴ利用ガイドライン
+            = link_to 'メルカリロゴ利用ガイドライン', '/logo-guidelines/'
           %li
-            %a.is-disable{:href => ""} お知らせ
+            = link_to 'お知らせ', class: 'is-disable'
           %li
-            %a{:href => "/rakuraku-mercari/"} らくらくメルカリ便とは
+            = link_to 'らくらくメルカリ便とは', '/rakuraku-mercari/'
           %li
-            %a{:href => "/yuyu-mercari/"} ゆうゆうメルカリ便とは
+            = link_to 'ゆうゆうメルカリ便とは', '/yuyu-mercari/'
           %li
-            %a{:href => "/rakuraku-ogata/"} 大型らくらくメルカリ便とは
+            = link_to '大型らくらくメルカリ便とは', '/rakuraku-ogata/'
           %li
-            %a{:href => "/guide/car/"} 車体取引ガイド
+            = link_to '車体取引ガイド', '/guide/car/'
           %li
-            %a{:href => "/refund-returns/"} 返品・返金ポリシー
+            = link_to '返品・返金ポリシー', '/refund-returns/'
           %li
-            %a{:href => "/safe/description/", :target => "_blank"} メルカリあんしん・あんぜん宣言！
+            = link_to 'メルカリあんしん・あんぜん宣言！', '/safe/description/', target: '_blank'
           %li
-            %a{:href => "/authenticity/"} 偽ブランド品撲滅への取り組み
+            = link_to '偽ブランド品撲滅への取り組み', '/authenticity/'
           %li
-            %a{:href => "/box/"} メルカリボックス
-      %li.footer-cell
-        %h2.footer-head 国
-        %ul.footer-nav-lang
+            = link_to 'メルカリボックス', '/box/'
+      %li.l-footer_col
+        %h2.l-footer_title 国
+        %ul.l-footer_navLang
           %li
-            %a.is-disable{:href => ""}
-              %img{:alt => "", :src => "/assets/common/flag_us.png", :width => "22"}>/
+            = link_to '', class: 'is-disable' do
+              = image_tag 'common/flag_us.png', width: '22'
               United States
           %li
-            %a.is-disable{:href => ""}
-              %img{:alt => "", :src => "/assets/common/flag_uk.png", :width => "22"}>/
+            = link_to '', class: 'is-disable' do
+              = image_tag 'common/flag_uk.png', width: '22'
               United Kingdom
           %li
-            %a.active{:href => "/"}
-              %img{:alt => "", :src => "/assets/common/flag_jp.png", :width => "22"}>/
+            = link_to '/', class: 'is-active' do
+              = image_tag 'common/flag_jp.png', width: '22'
               日本
-  %a.footer-logo{:href => "/"}
-    %img{:alt => "mercari", :height => "33", :src => "/assets/common/logo-white.svg", :width => "124"}/
-  %p.footer-copyright
-    %small © 2018 Mercari
-%a.footer-sell-btn{:href => "/sell/"}
+  = link_to '/', class: 'l-footer_logo' do
+    = image_tag 'common/logo-white.svg', alt: 'mercari', width: '124', height: '33'
+  %p.l-footer_copyright
+    %small &#169; 2018 Mercari
+= link_to '/sell/', class: 'l-footer_sellBtn' do
   %div 出品
-  %i.icon-camera
+  %i.c-icon-camera

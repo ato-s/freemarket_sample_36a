@@ -1,0 +1,13 @@
+%footer.l-footer-s
+  %nav
+    %ul.l-clearfix
+      %li
+        = link_to 'プライバシーポリシー', '/privacy/'
+      %li
+        = link_to 'メルカリ利用規約', '/tos/'
+      %li
+        = link_to '特定商取引に関する表記', '/tokutei/'
+  = link_to root_path, class: 'l-footer-s_logo' do
+    = image_tag 'common/logo-gray.svg', alt: 'mercari', height: '65', width: '80'
+  %p
+    %small &#169; 2018 Mercari
