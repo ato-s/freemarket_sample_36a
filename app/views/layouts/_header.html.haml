@@ -1,4 +1,4 @@
-%header.l-headerSp.l-visibleSp
+%header.l-headerSp.l-visibleSp.is-has-search_nav
   .l-headerSp_inner.l-clearfix
     %h1.logo
       = link_to root_path do
@@ -2714,7 +2714,7 @@
                 %span やることリスト
               %ul.l-headerPc_user-box.l-headerPc_todo-box.c-mypage_item-list{"data-id" => "l-headerPc_user-items"}
         - else
-          %ul.l-headerPc.p-login_nav
+          %ul.l-headerPc.l-login_nav
             %li
               = link_to 'ログイン', user_session_path, class: 'l-header_btn is-red'
             %li

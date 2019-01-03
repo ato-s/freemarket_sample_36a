@@ -1,3 +1,20 @@
+%aside.l-app-banner
+  .l-app-banner-pc
+    .l-app-banner-pc-inner
+      %h2 スマホでかんたんフリマアプリ
+      %p 今すぐ無料ダウンロード！
+      .l-app-banner-icon.l-clearfix
+        %figure
+          = image_tag 'common/mercari_icon.png', width: '68'
+        %ul.l-clearfix
+          %li
+            = link_to '', target: '_blank' do
+              = image_tag 'common/app-store.svg', width: '133', height: '40'
+          %li
+            = link_to '', target: '_blank' do
+              = image_tag 'common/google-play.svg', width: '133', height: '40'
+    %figure
+      = image_tag 'common/jp/download_content_pc.png'
 %footer.l-footer
   %nav
     %ul
