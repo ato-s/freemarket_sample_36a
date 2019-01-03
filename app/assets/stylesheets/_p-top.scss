@@ -1,0 +1,309 @@
+.p-top_carousel {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+
+  @include media-pc {
+    height: 290px;
+  }
+  @include media-pcL {
+    height: 390px;
+  }
+  .owl-item {
+    height: 100%;
+    > a {
+      height: 100%;
+    }
+  }
+  .owl-stage, .owl-stage-outer {
+    height: 100%;
+  }
+  .owl-nav {
+    color: transparent;
+    display: block;
+  }
+  .owl-next, .owl-prev {
+    cursor: pointer;
+    height: 46px;
+    width: 31px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-23px);
+  }
+  .owl-next {
+    background-image: image-url("common/jp/top/carousel-next.png");
+    right: 10px;
+
+    @include media-pc {
+      right: 60px;
+    }
+  }
+  .owl-prev {
+    background-image: image-url("common/jp/top/carousel-prev.png");
+    left: 10px;
+
+    @include media-pc {
+      left: 60px;
+    }
+  }
+  .owl-dots {
+    display: none;
+    margin: -30px;
+    text-align: center;
+
+    @include media-pc {
+      display: block;
+    }
+    .owl-dot {
+      background: #fff;
+      border-radius: 50%;
+      height: 12px;
+      margin-right: 15px;
+      width: 12px;
+      min-height: 0;
+
+      &:last-child {
+        margin-right: 0;
+      }
+      &.active {
+        background: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+}
+.p-top_mainVisual {
+  background: image-url("common/jp/top/main_bg_pc.jpg");
+  background-size: cover;
+  display: none;
+  height: 290px;
+
+  @include media-pc {
+    display: block;
+  }
+  @include media-pcL {
+    height: 390px;
+  }
+  > div {
+    position: relative;
+    max-width: 730px;
+    height: 100%;
+    margin: 0 auto;
+
+    @include media-pcL {
+      max-width: 860px;
+    }
+    > img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: auto;
+    }
+  }
+  h2 {
+    font-size: 40px;
+    line-height: 1.2;
+
+    @include media-pcL {
+      font-size: 60px;
+    }
+  }
+  p {
+    margin: 16px 0 0;
+    font-size: 16px;
+    line-height: 1.8;
+
+    @include media-pcL {
+      font-size: 18px;
+    }
+  }
+  &_content {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+  }
+}
+.p-top_banner {
+  display: block;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+
+  @include media-pcL {
+    background-size: auto;
+  }
+  @include media-pcLL {
+    background-size: contain;
+    background-repeat: repeat-x;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+  &.p-top_banner-new-register {
+    background-image: image-url("common/jp/top/top-banner-new-register.png");
+    background-repeat: repeat-x;
+  }
+  &.p-top_banner-welcome {
+    background-color: #D9F7FF;
+    background-image: image-url("common/jp/top/top-banner-welcome.png");
+  }
+  &.p-top_banner-kusanagi-xmas {
+    background-image: image-url("common/jp/top/top-banner-kusanagi-xmas.jpg");
+  }
+}
+
+.p-top_mainVisual_store {
+  margin: 24px 0 0;
+  line-height: 0;
+  > a {
+    display: inline-block;
+    width: 128px;
+    height: 38px;
+    margin: 0 0 0 8px;
+
+    @include media-pcL {
+      width: 170px;
+      height: 50px;
+    }
+
+    &:first-child {
+      margin: 0;
+    }
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.p-top_sp-banner {
+  background: image-url("common/jp/top/main_bg_pc.jpg");
+  background-size: cover;
+  color: #333;
+  height: 157px;
+  padding: 20px 15px;
+  position: relative;
+
+  @include media-spS {
+    padding: 20px 50px;
+  }
+
+  h2 {
+    font-size: 1.8em;
+    position: relative;
+    z-index: 1;
+  }
+  img {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
+
+    @include media-spS {
+      right: 30px;
+    }
+  }
+}
+
+.p-top_sp-dl {
+  width: 240px;
+  margin: 5px auto;
+
+  @include media-spM {
+    width: 468px;
+    margin: 20px auto;
+  }
+
+  a {
+    float: left;
+    display: block;
+    width: 110px;
+    height: 32px;
+    margin: 0 20px 0 0;
+
+    @include media-spM {
+      width: 230px;
+      height: 68px;
+    }
+
+    &:last-child {
+      margin: 0;
+    }
+    img {
+      height: 100%;
+    }
+  }
+}
+.p-top_pickup {
+  padding: 20px 0 0;
+  background: #f5f5f5;
+
+  @include media-pc {
+    padding: 40px 0;
+  }
+  h2 {
+    font-size: 22px;
+    text-align: center;
+
+    @include media-pc {
+      font-size: 28px;
+    }
+  }
+  .c-items-box_container {
+    @include media-pc {
+      width: 700px;
+      margin: 0 auto;
+    }
+    @include media-pcL {
+      width: 940px;
+    }
+    > h3 {
+      font-size: 18px;
+      margin: 26px 11px;
+
+      @include media-pc {
+        font-size: 22px;
+      }
+    }
+  }
+  .c-items-box {
+    margin: 0 0 20px 20px;
+    width: calc(50% - 30px);
+
+    @include media-pc {
+      margin: 0 0 0 20px;
+      width: 213px;
+    }
+    &:last-child {
+      @include media-pc {
+        display: none;
+      }
+      @include media-pcL {
+        display: block;
+        margin: 0 0 0 20px;
+      }
+    }
+    figure {
+      width: 100%;
+
+      @include media-pc {
+        width: 213px;
+      }
+    }
+  }
+  .c-items-box_view-all {
+    padding: 0 0 30px;
+    text-align: right;
+    width: 91%;
+
+    @include media-pc {
+      padding: 20px 0 30px;
+      width: 99.5%;
+    }
+  }
+}
+.p-top_pickup-head {
+  font-size: 28px;
+}
