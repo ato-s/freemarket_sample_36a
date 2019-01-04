@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   root 'viewtest#index'
   devise_for :users
-
-  get '/viewtest/login', to: 'viewtest#login'
-  get '/viewtest/signup', to: 'viewtest#signup'
-  get '/viewtest/signup/registration', to: 'viewtest#signup_registration'
+  devise_scope :user do
+    get 'login', to: 'viewtest#login'
+    get 'signup', to: 'viewtest#signup'
+    get 'signup/registration', to: 'viewtest#signup_registration'
+  end
 
   resources :items do
     resources :reviews
