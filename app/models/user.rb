@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable, :trackable
+         # , :omniauthable, omniauth_providers: [:twitter]
 
   has_many :sell_items, class_name: 'Item', foreign_key: 'seller_id', dependent: :destroy
   has_many :buy_items, class_name: 'Item', foreign_key: 'buyer_id', dependent: :destroy
