@@ -9,7 +9,7 @@
         = button_tag 'Googleでログイン', id: 'google-login', class: 'c-btn-default is-sns is-sns-google'
 
       = form_for 'resource', url: 'registration_path' do |f|
-        .p-login_form-inner
+        .p-login_form-inner.is-borderNone
           .c-form_group
             = f.email_field :email, placeholder: 'メールアドレス', class: 'p-login_input-text c-input-default'
           .c-form_group
