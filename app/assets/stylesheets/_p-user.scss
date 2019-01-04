@@ -1,0 +1,67 @@
+/* login */
+.p-login_panel {
+  max-width: 456px;
+  margin: 0 auto;
+  background: #fff;
+
+  @include media-pc {
+    max-width: none;
+    width: 456px;
+  }
+  a {
+    display: block;
+    margin: 40px 0 0;
+  }
+}
+.p-login_no-account {
+  padding: 24px 32px;
+  text-align: center;
+
+  @include media-pc {
+    padding: 40px 64px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+  a {
+    display: block;
+    margin: 8px 0 0;
+    border: 1px solid #0099e8;
+    background: #0099e8;
+    color: #fff;
+    line-height: 40px;
+    &:hover {
+      opacity: 1;
+      text-decoration: none;
+    }
+  }
+}
+.p-login_form-inner {
+  padding: 24px 32px;
+  border-top: 1px solid #eee;
+
+  @include media-pc {
+    padding: 32px 64px;
+  }
+  &.is-borderNone {
+    padding: 24px 32px;
+    border: 0;
+
+    @include media-pc {
+      padding: 24px 64px 32px;
+    }
+  }
+  .c-form_group {
+    margin: 24px 0 0;
+    &:first-child {
+      margin: 0;
+    }
+  }
+  .c-input-default {
+    margin: 0;
+  }
+}
+.p-login_submit {
+  margin: 24px 0 0;
+}
