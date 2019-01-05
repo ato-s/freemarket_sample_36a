@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get 'sell', to: 'viewtest#sell'
   get 'item-id', to: 'viewtest#item_id'
+  get 'transaction/buy/id', to: 'viewtest#transaction_buy_id'
 
   resources :items do
     resources :reviews
