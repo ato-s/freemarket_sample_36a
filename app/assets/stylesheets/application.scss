@@ -9,3 +9,6 @@
 @import "./p-top";
 @import "./p-user";
 @import "./p-sell";
+
+*= require dropzone/basic
+*= require dropzone/dropzone
