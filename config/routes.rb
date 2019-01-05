@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     get 'signup/registration', to: 'viewtest#signup_registration'
   end
 
+  get 'sell', to: 'viewtest#sell'
+
   resources :items do
     resources :reviews
     resources :reports, only: [:create, :destroy]
