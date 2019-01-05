@@ -2,7 +2,7 @@
   %main.l-single_main
     %section.l-single_container
       %h2.l-single_head 商品の情報を入力
-      = form_for 'dummy', url: 'dummy', html: {class: 'p-sell_form'} do |f|
+      = form_for '#', url: '#', html: {class: 'p-sell_form'} do |f|
         .p-sell_upload_box
           %h3.p-sell_upload_head
             出品画像
@@ -13,9 +13,9 @@
               %figure.p-sell_upload_figure{style: 'background-image: url(/assets/common/img_dummy.jpg)'}
               %ul.p-sell_upload_button
                 %li
-                  = link_to '編集'
+                  = link_to '編集', '#'
                 %li
-                  = link_to '削除'
+                  = link_to '削除', '#'
             .p-sell_upload_drop-box
               %pre.l-visiblePc
                 ドラッグアンドドロップまたは
@@ -111,4 +111,4 @@
               = link_to '加盟店規約', '/seller_terms/'
               に同意したことになります。
           = f.submit '出品する', class: 'c-btn-default is-red'
-          = link_to 'もどる', 'dummy', class: 'c-btn-default is-gray'
+          = link_to 'もどる', '#', class: 'c-btn-default is-gray'
