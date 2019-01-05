@@ -256,6 +256,50 @@ i {
     font-size: 16px;
   }
 }
+.c-item-button {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 40px;
+  transition: all ease-out 0.3s;
+}
+.c-item-button-left {
+  @include media-pc {
+    float: left;
+  }
+}
+.c-item-button-right {
+  margin: 16px 0 0;
+
+  @include media-pc {
+    margin: 8px 0 0;
+    float: right;
+  }
+}
+.c-item-button-like {
+  color: #333;
+  border: 1px solid #f5f5f5;
+  background: #f5f5f5;
+  &.has-error {
+    animation: wobble 1s forwards;
+  }
+  &.is-liked {
+    border: 1px solid #ea352d;
+    background: none;
+    color: #ea352d;
+  }
+  .icon-loading {
+    margin: 0 0 0 8px;
+  }
+}
+.c-item-button-report {
+  margin: 0 0 0 8px;
+  color: #333;
+  background: #f5f5f5;
+
+  @include media-pc {
+    margin: 0 0 0 16px;
+  }
+}
 /* form */
 .c-input-default {
   height: 48px;
@@ -361,7 +405,7 @@ i {
     border-color: #0099e8;
   }
 }
-.c-form_require {
+.c-form_require, .p-item_message_seller {
   background: #ea352d;
   margin: 0 0 0 8px;
   padding: 2px 4px;
@@ -677,6 +721,140 @@ i {
       &:nth-child(3n+1) {
         margin: 0 0 20px;
       }
+    }
+  }
+}
+.c-items-in-user-profile {
+  @include media-pc {
+    width: 700px;
+    margin: 0px auto;
+  }
+  .c-items-box_overflow:last-of-type {
+    margin-bottom: 40px;
+  }
+}
+/* sns btn area */
+.c-item_social-media-box {
+  margin: 24px 0 0;
+  background: #fff;
+  padding: 16px 0 8px;
+
+  @include media-pc {
+    margin: 24px auto 48px;
+    padding: 32px 0 24px;
+    width: 700px;
+  }
+}
+.c-social-media-box {
+  margin: 16px 0 0;
+  text-align: center;
+  font-size: 0;
+  li {
+    display: inline-block;
+    margin: 0 8px 8px 0;
+    vertical-align: middle;
+    text-align: center;
+    &:last-child {
+      margin: 0 0 8px;
+    }
+    a {
+      display: block;
+    }
+  }
+  i {
+    width: 44px;
+    height: 44px;
+    border-radius: 4px;
+    line-height: 44px;
+  }
+  .social-hidden-item {
+    @include media-pcL {
+      display: none;
+    }
+  }
+}
+/* modal */
+.c-modal {
+  animation: is-fade-in-down .3s ease-out 0s forwards;
+}
+.c-modal_inner {
+  position: relative;
+  overflow: hidden;
+  margin: 8px auto;
+  background: #fff;
+
+  .c-icon-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.64);
+    text-align: center;
+    line-height: 44px;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+.c-modal_head {
+  font-size: 16px;
+}
+.c-modal_body {
+  padding: 32px 2.5%;
+  line-height: 1.5;
+
+  @include media-pc {
+    padding: 64px;
+  }
+}
+.c-modal_btn {
+  border-top: 1px solid #ccc;
+  width: 50%;
+  text-align: center;
+  line-height: 49px;
+
+  @include media-pc {
+    line-height: 63px;
+    cursor: pointer;
+  }
+}
+.c-modal_btn-cancel {
+  float: left;
+}
+.c-modal_btn-submit {
+  float: right;
+  border-left: 1px solid #ccc;
+  color: #0099e8;
+}
+.c-modal_btn-yes {
+  border-top: 1px solid #ccc;
+  width: 100%;
+  text-align: center;
+  line-height: 49px;
+
+  @include media-pc {
+    line-height: 63px;
+    cursor: pointer;
+  }
+}
+.c-modal_banner {
+  text-align: center;
+  h2 {
+    font-size: 22px;
+    line-height: 1;
+    color: #ea352d;
+
+    @include media-pc {
+      font-size: 34px;
+    }
+  }
+  p {
+    margin: 16px 0 0;
+    font-size: 13px;
+
+    @include media-pc {
+      font-size: 18px;
     }
   }
 }
