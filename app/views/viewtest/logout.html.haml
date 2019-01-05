@@ -1,0 +1,5 @@
+.l-content
+  .l-chapter-container
+    = form_for '#', url: '#', html: {class: 'l-single_inner'} do |f|
+      .l-single_content
+        = f.submit 'ログアウト', class: 'c-btn-default is-red'

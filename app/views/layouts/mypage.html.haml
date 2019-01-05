@@ -1,0 +1,8 @@
+- content_for(:single) do
+  = render 'layouts/header'
+  = render 'layouts/breadcrumbs'
+  %main.l-container.l-clearfix
+    = yield
+    = render 'layouts/side_mypage'
+  = render 'layouts/footer'
+= render template: 'layouts/application'
