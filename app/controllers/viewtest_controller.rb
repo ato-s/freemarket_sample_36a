@@ -1,5 +1,6 @@
 class ViewtestController < ApplicationController
   layout "single", only: [:login, :signup, :sell, :transaction_buy_id]
+  layout "mypage", only: [:logout]
   def index; end
   def login; end
   def signup; end
@@ -7,4 +8,5 @@ class ViewtestController < ApplicationController
   def sell; end
   def item_id; end
   def transaction_buy_id; end
+  def logout; end
 end
