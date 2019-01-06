@@ -13,6 +13,8 @@
     .l-default-container
     - if content_for?(:single)
       = yield(:single)
+    - elsif content_for?(:mypage)
+      = yield(:mypage)
     - else
       = render 'layouts/header'
       = yield
