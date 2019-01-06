@@ -15,6 +15,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
+    @item.pictures.build
   end
 
   # GET /items/1/edit
@@ -24,17 +25,22 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
+    binding.pry
     @item = Item.new(item_params)
 
-    respond_to do |format|
-      if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: @item }
-      else
-        format.html { render :new }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
+    if @item.save
+      redirect_to :rooot
     end
+
+    # respond_to do |format|
+    #   if @item.save
+    #     format.html { redirect_to @item, notice: 'Item was successfully created.' }
+    #     format.json { render :show, status: :created, location: @item }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @item.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /items/1
