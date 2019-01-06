@@ -31,3 +31,4 @@ doc/
 /vendor/cache/*
 /vendor/bundle/*
 /config/secrets.yml
+Gemfile.lock
