@@ -5,4 +5,5 @@ class ViewtestController < ApplicationController
   def signup; end
   def signup_registration; end
   def sell; end
+  def item_id; end
 end

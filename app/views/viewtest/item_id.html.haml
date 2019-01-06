@@ -1,0 +1,180 @@
+.l-default-container
+  %section.p-item_box-container.l-single_container
+    %h1.p-item_name ロジェガレ フィグパフューム ソープ （香水石鹸）3個セット
+    .p-item_main-content.l-clearfix
+      .p-item_photo
+        .owl-carousel.owl-loaded.owl-drag.js-owl-carousel-item
+          - 8.times do
+            %div.p-item_photo_item
+              = image_tag 'common/img_dummy.jpg', alt: 'ロジェガレ フィグパフューム オーデパルファム'
+      %table.p-item_detail-table
+        %tbody
+          %tr
+            %th 出品者
+            %td
+              = link_to 'なまえ', '#'
+              %div
+                .p-item_user-ratings
+                  %i.c-icon-good
+                  %span 189
+                .p-item_user-ratings
+                  %i.c-icon-normal
+                  %span 1
+                .p-item_user-ratings
+                  %i.c-icon-bad
+                  %span 0
+          %tr
+            %th カテゴリー
+            %td
+              = link_to '/category/6/' do
+                コスメ・香水・美容
+              = link_to '/category/1387/' do
+                .p-item_detail-table-sub-category
+                  %i.c-icon-arrow-right
+                  メイクアップ
+              = link_to '/category/791/' do
+                .p-item_detail-table-sub-sub-category
+                  %i.c-icon-arrow-right
+                  チーク
+          %tr
+            %th ブランド
+            %td
+              = link_to '/brand/3117/' do
+                %div
+                  クリニーク
+          %tr
+            %th 商品の状態
+            %td 未使用に近い
+          %tr
+            %th 配送料の負担
+            %td 送料込み(出品者負担)
+          %tr
+            %th 配送の方法
+            %td 普通郵便(定形、定形外)
+          %tr
+            %th 配送元地域
+            %td
+              = link_to '大阪府', '/area/27/'
+          %tr
+            %th 発送日の目安
+            %td 2~3日で発送
+    .p-item_price-box.u-taCenter
+      %span.p-item_price.u-fwBold ¥ 6,666
+      %span.p-item_tax (税込)
+      %span.p-item_shipping-fee 送料込み
+    .u-taCenter
+      .p-item_sales-point-message
+        P 500 をお持ちです
+    = link_to '購入画面に進む', '#', class: 'p-item_buy-btn u-fz18-24'
+    .p-item_description.u-fz14
+      %p.p-item_description-inner
+        クリニークの限定品のチークポップパレットです。ブラシで2.3回ほど使用しましたが、新品同様の綺麗さです。
+
+        お値下げは考えておりません。
+
+        \#クリニーク #チークポップパレット #クリニークチーク
+    .p-item_button-container.l-clearfix
+      .c-item-button-left
+        = button_tag class: 'c-item-button c-item-button-like' do
+          %i.c-icon-like-border
+          %span いいね!
+          %span.is-fade-in-down 9
+        = link_to '#report-item', class: 'c-item-button c-item-button-report l-clearfix js-modal' do
+          %i.c-icon-flag
+          %span 不適切な商品の報告
+      .c-item-button-right
+        = link_to '/safe/description/', target:'_blank' do
+          %i.c-icon-lock
+          %span あんしん・あんぜんへの取り組み
+  .p-item_message
+    .p-item_message_container
+      .p-item_message_content
+        %ul.p-item_message_block
+          %li.l-clearfix
+            = link_to '#', class: 'p-item_message_user' do
+              %figure
+                %div
+                  = image_tag 'common/member_photo_noimage_thumb.png'
+                %figcaption.u-fwBold
+                  はる
+            .p-item_message_body
+              .p-item_message_body-text 購入希望です^_^
+              .p-item_message_icons.l-clearfix
+                %time.p-item_message_icon-left
+                  %i.c-icon-time
+                  %span 4 日前
+                .p-item_message_icon-right
+                  = form_for '#', html: {class: 'c-message-form'} do |f|
+                    = button_tag '' do
+                      %i.c-icon-flag
+              %i.c-icon-balloon
+          %li.l-clearfix
+            = link_to '#', class: 'p-item_message_user' do
+              %figure
+                %div
+                  = image_tag 'common/member_photo_noimage_thumb.png'
+                %figcaption.u-fwBold
+                  りさ
+              .p-item_message_seller 出品者
+            .p-item_message_body
+              .p-item_message_body-text ありがとうございます！このままこちらからご購入ください。
+              .p-item_message_icons.l-clearfix
+                %time.p-item_message_icon-left
+                  %i.c-icon-time
+                  %span 4 日前
+                .p-item_message_icon-right
+                  = form_for '#', html: {class: 'c-message-form'} do |f|
+                    = button_tag '' do
+                      %i.c-icon-flag
+              %i.c-icon-balloon
+      .p-item_message_content
+        = form_for '#', html: {class: 'c-message-form'} do |f|
+          %p 相手のことを考え丁寧なコメントを心がけましょう。不快な言葉遣いなどは利用制限や退会処分となることがあります。
+          = f.text_area :param_name, class: 'c-textarea-default'
+          = button_tag '#', class: 'p-message_submit c-btn-default is-gray' do
+            %span コメントする
+    %ul.p-item_nav-link.l-clearfix
+      %li.p-item_nav-link_prev
+        = link_to '/' do
+          %i.c-icon-arrow-left>
+          マグ＆スプーンセット  きのこ
+      %li.p-item_nav-link_next
+        = link_to '/' do
+          ★ちくわさん専用★エフデ ♡リボン スエード レザーグローブ♡手袋
+          %i.c-icon-arrow-right
+    .c-item_social-media-box
+      %ul.c-social-media-box
+        %li
+          = link_to '#', target: '_blank', class: 'c-share-btn' do
+            %i.c-icon-facebook
+        %li
+          = link_to '#', target: '_blank', class: 'c-share-btn' do
+            %i.c-icon-twitter
+        %li.social-hidden-item
+          = link_to '#', target: '_blank', class: 'c-share-btn' do
+            %i.c-icon-line
+        %li
+          = link_to '#', target: '_blank', class: 'c-share-btn' do
+            %i.c-icon-pinterest
+    .c-items-in-user-profile
+      %section.c-items-box_container.l-clearfix.c-items-box_overflow.c-items-in-user-profile
+        %h2.c-items-box_head
+          = link_to 'りささんのその他の出品', '#'
+        .c-items-box_content.l-clearfix
+          - 6.times do
+            = render 'layouts/itembox'
+      %section.c-items-box_container.l-clearfix.c-items-box_overflow
+        %h2.c-items-box_head
+          = link_to '/brand/3117/791/' do
+            クリニークのチーク その他の商品
+        .c-items-box_content.l-clearfix
+          - 6.times do
+            = render 'layouts/itembox'
+    = form_for '#', html: {id: 'report-item', class: 'c-modal mfp-hide'} do |f|
+      .c-modal_inner.c-modal_banner
+        .c-modal_body
+          .c-modal_head.u-fwBold 確認
+          不適切な商品を報告しますか？
+        .l-clearfix
+          .c-modal_btn.c-modal_btn-cancel.js-modal_btn-cancel キャンセル
+          = f.submit 'はい', class: 'c-modal_btn c-modal_btn-submit'
