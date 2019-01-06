@@ -23,4 +23,12 @@ $(function() {
         $(this).removeClass('is-active');
     }
   });
+  // tab
+	$('.js-tab_menu li').click(function() {
+		var num = $(this).parent().children('li').index(this);
+		$(this).parent().each(function(){
+			$('>li',this).removeClass('is-active').eq(num).addClass('is-active');
+		});
+		$(this).parent().next().children('.js-tab_content').hide().eq(num).show();
+	}).first().click();
 });
