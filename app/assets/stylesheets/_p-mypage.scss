@@ -1,3 +1,4 @@
+/* side menu */
 .p-mypage_nav_list {
   li {
     border-top: 1px solid #eee;
@@ -63,5 +64,216 @@
   }
   + .p-mypage_nav_list {
     margin: 8px 0 0;
+  }
+}
+/* index */
+.p-mypage_user-icon {
+  position: relative;
+  height: 155px;
+  padding: 20px;
+  background: image-url("mypage/user-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+
+  @include media-pc {
+    height: 200px;
+  }
+  > a {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translate(0, -50%);
+    color: #333;
+  }
+  figure {
+    overflow: hidden;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+    border-radius: 50%;
+  }
+  h2 {
+    margin: 8px 0 0;
+    font-size: 14px;
+  }
+  + .p-mypage_tab-container {
+    margin: 0;
+  }
+  .user-official-badge {
+    margin: 8px 0 0;
+  }
+}
+.p-mypage_number {
+  margin: 8px 0 0;
+  font-size: 0;
+  div {
+    display: inline-block;
+    font-size: 14px;
+    + div {
+      margin: 0 0 0 16px;
+    }
+  }
+  span {
+    margin: 0 0 0 8px;
+    font-size: 16px;
+  }
+}
+.p-mypage_tab-container-notification-todo {
+  margin: 0;
+  background: #fff;
+}
+.p-mypage_tab-container {
+  margin: 40px 0 0;
+  background: #fff;
+  &:nth-of-type(1) {
+    margin: 0;
+  }
+  + .pager {
+    margin: 40px 0 0;
+  }
+}
+.p-mypage_tabs li {
+  width: 50%;
+}
+.p-mypage_tab-content .p-mypage_tab-content_tab-pane {
+  display: none;
+  &.is-active {
+    display: block;
+  }
+}
+.p-mypage_tab-head {
+  padding: 0 4%;
+  background: #fafafa;
+  font-size: 16px;
+  line-height: 72px;
+
+  @include media-pc {
+    padding: 0 16px;
+  }
+}
+.p-mypage_item-link {
+  display: block;
+  min-height: 80px;
+  padding: 16px;
+  color: #333;
+  figure {
+    position: relative;
+    overflow: hidden;
+    float: left;
+    width: 48px;
+    height: 48px;
+  }
+  time {
+    display: inline-block;
+    color: #888;
+    span {
+      vertical-align: middle;
+    }
+  }
+  .c-icon-time {
+    margin: 0 8px 0 0;
+  }
+  .c-icon-arrow-right {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translate(0, -50%);
+  }
+}
+.p-mypage_item-not-found {
+  padding: 160px 0 60px;
+  background: image-url("common/logo-gray-icon.svg");
+  background-repeat: no-repeat;
+  background-position: center 40px;
+  background-size: 78px 85px;
+  text-align: center;
+  font-size: 16px;
+  color: #ccc;
+}
+.p-mypage_listing-tabs, .p-mypage_tabs, .p-mypage_review-history-tabs {
+  border: 0;
+  background: #eee;
+  display: flex;
+}
+.p-mypage_listing-tabs li, .p-mypage_tabs li, .p-mypage_review-history-tabs li {
+  text-align: center;
+  vertical-align: top;
+  position: relative;
+  display: block;
+  color: #333;
+  line-height: 72px;
+  cursor: pointer;
+
+  h3 {
+    font-size: 16px;
+  }
+}
+.p-mypage_listing-tabs li.is-active, .p-mypage_tabs li.is-active, .p-mypage_review-history-tabs li.is-active {
+  background: #fff;
+  border-top: 2px solid #ea352d;
+}
+.p-mypage_listing-tabs .p-mypage_nav_number, .p-mypage_tabs .p-mypage_nav_number, .p-mypage_review-history-tabs .p-mypage_nav_number {
+  top: 16px;
+  right: 2px;
+}
+.p-mypage_item-body {
+  margin: 0 40px 0 68px;
+  .l-clearfix {
+    margin: 8px 0 0;
+  }
+  .l-flLeft {
+    width: 50%;
+
+    @include media-pc {
+      width: auto;
+    }
+  }
+  &.show-stock-item {
+    margin-right: 100px;
+  }
+}
+.p-mypage_item-text {
+  overflow: hidden;
+  display: block;
+  max-height: 4.4em;
+  text-overflow: ellipsis;
+  line-height: 1.5;
+}
+.p-mypage_item-status {
+  display: inline-block;
+  margin: 8px 0 0;
+  padding: 5px 6px;
+  border-radius: 2px;
+  font-size: 12px;
+  color: #fff;
+  &.is-action-required {
+    background: #ea352d;
+  }
+  &.is-awaiting {
+    background: #0099e8;
+  }
+  &.is-done {
+    background: #888;
+  }
+}
+.p-mypage_go-list {
+  padding: 16px;
+  a {
+    display: block;
+    height: 56px;
+    margin: 0 auto;
+    background: #eee;
+    color: #333;
+    line-height: 56px;
+    text-align: center;
+  }
+  .c-icon-arrow-right, span {
+    vertical-align: middle;
+  }
+  .c-icon-arrow-right {
+    margin: 0 0 0 8px;
   }
 }

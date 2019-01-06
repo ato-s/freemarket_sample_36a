@@ -922,3 +922,44 @@ i {
     display: none;
   }
 }
+/* item list */
+.c-mypage_item-list {
+  li {
+    position: relative;
+    border-bottom: 1px solid #eee;
+    &:last-child {
+      border: 0;
+    }
+    &:first-child {
+      border-bottom: 1px solid #eee;
+    }
+    &.p-mypage_item-not-found {
+      border: 0;
+    }
+  }
+  a:hover {
+    background: #fafafa;
+    opacity: 1;
+    text-decoration: none;
+  }
+  img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    &.is-higher-height {
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+    &.is-higher-width {
+      width: auto;
+      left: 50%;
+      right: auto;
+      height: 100%;
+      transform: translate(-50%, 0);
+    }
+  }
+}
