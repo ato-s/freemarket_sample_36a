@@ -7,4 +7,7 @@ class ViewtestController < ApplicationController
   def sell; end
   def item_id; end
   def transaction_buy_id; end
+  def logout
+    render :logout, layout: "mypage"
+  end
 end

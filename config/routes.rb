@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get 'login', to: 'viewtest#login'
     get 'signup', to: 'viewtest#signup'
     get 'signup/registration', to: 'viewtest#signup_registration'
+    get 'logout', to: 'viewtest#logout'
   end
 
   get 'sell', to: 'viewtest#sell'
