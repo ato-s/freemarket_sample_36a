@@ -4,5 +4,4 @@ class ViewtestController < ApplicationController
   def login; end
   def signup; end
   def signup_registration; end
-  def sell; end
 end

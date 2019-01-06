@@ -106,6 +106,6 @@
     = image_tag 'common/logo-white.svg', alt: 'mercari', width: '124', height: '33'
   %p.l-footer_copyright
     %small &#169; 2018 Mercari
-= link_to '/sell/', class: 'l-footer_sellBtn' do
+= link_to new_item_path, class: 'l-footer_sellBtn' do
   %div 出品
   %i.c-icon-camera
