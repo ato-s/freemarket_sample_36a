@@ -370,7 +370,44 @@ i {
     border-color: #0099e8;
   }
 }
-
+.c-radio-default {
+  position: relative;
+  input[type='radio'] {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    background: #fff;
+    transition: all ease-out 0.3s;
+    cursor: pointer;
+    transform: translate(0, -50%);
+    &:checked {
+      border: 0;
+      border: 6px solid #0099e8;
+    }
+  }
+  label {
+    margin: 0 0 0 28px;
+    font-weight: 400;
+    cursor: pointer;
+  }
+}
+.radio-has-icon {
+  &:first-child {
+    margin: 0;
+  }
+  label {
+    margin: 0 0 0 4px;
+    vertical-align: middle;
+  }
+  input[type='radio'] {
+    left: auto;
+    right: 0;
+  }
+}
 .c-select-wrap {
   position: relative;
   background: #fff;
@@ -424,6 +461,17 @@ i {
   line-height: 14px;
   font-size: 12px;
   text-align: center;
+}
+.c-has-error-text {
+  color: #ea352d;
+  line-height: 1.5;
+  font-size: 14px;
+  li {
+    margin: 8px 0 0;
+  }
+  + label {
+    margin: 24px 0 0;
+  }
 }
 /* item */
 .c-items-box {
@@ -856,5 +904,21 @@ i {
     @include media-pc {
       font-size: 18px;
     }
+  }
+}
+/* accordion */
+.c-accordion {
+  &_toggle {
+    cursor: pointer;
+  }
+  &_icon {
+    transition: .4s;
+    transform-origin: center center;
+    &.is-active {
+      transform: rotate(-180deg) scale(1.4);
+    }
+  }
+  &_child {
+    display: none;
   }
 }
