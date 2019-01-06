@@ -30,4 +30,6 @@ Rails.application.routes.draw do
       resources :lower_categories, only: [:show]
     end
   end
+
+  resources :mypage, only: [:index]
 end
