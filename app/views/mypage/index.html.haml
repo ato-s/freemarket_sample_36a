@@ -22,7 +22,7 @@
           やることリスト
 
     .p-mypage_tab-content
-      %ul#p-mypage_tab-notification.p-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
+      %ul#p-mypage_tab-notification.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
         %li
           = link_to '#', class: 'p-mypage_item-link js-modal' do
             %figure
@@ -75,7 +75,7 @@
             %i.c-icon-arrow-right
         %li.p-mypage_go-list
           = link_to '一覧を見る', '/mypage/notification/'
-      %ul#p-mypage_tab-todo.p-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+      %ul#p-mypage_tab-todo.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
         %li.p-mypage_item-not-found.u-fwBold 現在、やることリストはありません
   %section.p-mypage_tab-container
     %h2.p-mypage_tab-head 購入した商品
@@ -87,7 +87,7 @@
         %h3
           過去の取引
     .p-mypage_tab-content
-      %ul#p-mypage_tab-transaction-now.p-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
+      %ul#p-mypage_tab-transaction-now.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
         %li
           = link_to '', class: 'p-mypage_item-link' do
             %figure
@@ -99,7 +99,7 @@
               .p-mypage_item-status.u-fwBold.is-action-required
                 受取評価待ち
             %i.c-icon-arrow-right
-      %ul#p-mypage_tab-transaction-old.p-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+      %ul#p-mypage_tab-transaction-old.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
         %li
           = link_to '', class: 'p-mypage_item-link' do
             %figure
