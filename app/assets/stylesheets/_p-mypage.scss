@@ -277,3 +277,34 @@
     margin: 0 0 0 8px;
   }
 }
+/* profile */
+.p-mypage_profile-icon {
+  padding: 72px 16px 24px;
+  background: image-url("mypage/user-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  font-size: 0;
+  figure {
+    display: inline-block;
+    overflow: hidden;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    vertical-align: middle;
+  }
+  .c-input-default {
+    width: 220px;
+    margin: 0 0 0 8px;
+    vertical-align: middle;
+  }
+}
+.p-mypage_profile-content {
+  padding: 40px 16px;
+  .c-textarea-default {
+    min-height: 216px;
+  }
+  .is-red {
+    margin: 16px 0 0;
+  }
+}
