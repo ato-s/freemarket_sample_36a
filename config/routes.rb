@@ -32,5 +32,4 @@ Rails.application.routes.draw do
   end
 
   resources :mypage, only: [:index]
-  get 'mypage/profile', to: 'mypage#profile'
 end
