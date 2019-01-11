@@ -33,4 +33,5 @@ Rails.application.routes.draw do
 
   resources :mypage, only: [:index]
   get 'mypage/profile', to: 'mypage#profile'
+  get 'mypage/identification', to: 'mypage#identification'
 end
