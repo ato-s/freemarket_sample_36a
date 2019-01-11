@@ -442,7 +442,25 @@ i {
     border-color: #0099e8;
   }
 }
-.c-form_require, .p-item_message_seller {
+.c-select-wrap-birthday {
+  display: block;
+
+  @include media-pc {
+    display: inline-block;
+  }
+  .c-select-wrap {
+    display: inline-block;
+    width: 200px;
+
+    @include media-pc {
+      width: 140px;
+    }
+    + span {
+      margin: 0 8px;
+    }
+  }
+}
+.c-form_require, .p-item_message_seller, .c-form_arbitrary {
   background: #ea352d;
   margin: 0 0 0 8px;
   padding: 2px 4px;
@@ -450,6 +468,9 @@ i {
   color: #fff;
   font-size: 12px;
   vertical-align: top;
+}
+.c-form_arbitrary {
+  background: #ccc;
 }
 .c-form_question {
   display: inline-block;
