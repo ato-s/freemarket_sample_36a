@@ -4,6 +4,7 @@ class ViewtestController < ApplicationController
   def login; end
   def signup; end
   def signup_registration; end
+  def u_id; end
   def password_reset_start; end
   def sell; end
   def item_id; end

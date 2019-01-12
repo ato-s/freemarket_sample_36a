@@ -2719,5 +2719,5 @@
               = link_to 'ログイン', user_session_path, class: 'l-header_btn is-red'
             %li
               = link_to '新規会員登録', '/signup', class: 'l-header_btn l-header_btn-signup'
-- if current_page? item_id_path
+- if %w[item_id u_id].any? { |name| current_page?(send("#{name}_path")) }
   = render 'layouts/breadcrumbs'

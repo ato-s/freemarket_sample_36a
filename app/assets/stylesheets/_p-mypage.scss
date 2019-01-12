@@ -362,3 +362,13 @@
     font-weight: bold;
   }
 }
+.p-mypage_sold .c-item_sold-out-badge {
+  &:after {
+    border-width: 40px 40px 0 0;
+  }
+  > div {
+    top: 8px;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+}

@@ -1,0 +1,50 @@
+.l-default-container
+  %section.p-user_details.l-single_container
+    .p-user_detail-profile-box{style: 'background-image: url(/assets/common/user_bg.jpg)'}
+      .p-user_detail-photo_box.u-taCenter
+        = link_to '#' do
+          .p-user_detail-photo{style: 'background-image: url(/assets/common/member_photo_noimage_thumb.png)'}
+          %h2.p-user_detail-title.c-font-6
+            マサ
+        .p-user_detail-score.c-font-3
+          %span 評価 11
+          %span 出品数 14
+    .u-bgWhite
+      .p-user_detail-ratings-box.c-font-6
+        %div
+          .p-user_detail-ratings.l-clearfix
+            %i.c-icon-good
+            .u-taCenter.p-user_detail-ragtings-score
+              11
+        %div
+          .p-user_detail-ratings.l-clearfix
+            %i.c-icon-normal
+            .u-taCenter.p-user_detail-ragtings-score
+              0
+        %div
+          .p-user_detail-ratings.l-clearfix
+            %i.c-icon-bad
+            .u-taCenter.p-user_detail-ragtings-score
+              0
+      .p-user_detail-description_box
+        %p.c-font-2
+          最近メルカリを始めましたので、不慣れなところもありますが出来る限り誠実に取引させていただきます。
+          %br
+          衣服を中心に出品しますが、当方180センチ、67キロ、タバコは吸いませんり
+    .c-item_social-media-box
+      %ul.c-social-media-box
+        %li
+          %a.c-share-btn{"data-window-name" => "facebook_window", :href => "", :target => "_blank"}
+            %i.c-icon-facebook
+        %li
+          %a.c-share-btn{"data-window-name" => "twitter_window", :href => "", :target => "_blank"}
+            %i.c-icon-twitter
+        %li
+          = link_to '', target: '_blank' do
+            %i.c-icon-line
+    %section.p-item-box_container.l-clearfix.c-items-box_overflow
+      %h2.c-items-box_head
+        この出品者の商品
+      .c-items-box_content.l-clearfix
+        - 18.times do
+          = render 'layouts/itembox'

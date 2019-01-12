@@ -258,3 +258,22 @@
 .transact-select-card-footer {
     padding-top: 24px;
 }
+.p-item_box-container {
+  background: #fff;
+  margin: 40px auto 0;
+  padding: 24px 16px 55px;
+
+  @include media-pc {
+    padding: 24px 40px 40px;
+  }
+
+  .c-item_sold-out-badge {
+    > div {
+      top: 24px;
+      font-size: 28px;
+    }
+    &:after {
+      border-width: 120px 120px 0 0;
+    }
+  }
+}

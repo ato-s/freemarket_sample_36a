@@ -5,12 +5,13 @@ Rails.application.routes.draw do
     get 'login', to: 'viewtest#login'
     get 'signup', to: 'viewtest#signup'
     get 'signup/registration', to: 'viewtest#signup_registration'
+    get 'u/id', to: 'viewtest#u_id'
     get 'password/reset/start', to: 'viewtest#password_reset_start'
     get 'logout', to: 'viewtest#logout'
   end
 
   get 'sell', to: 'viewtest#sell'
-  get 'item-id', to: 'viewtest#item_id'
+  get 'item/id', to: 'viewtest#item_id'
   get 'transaction/buy/id', to: 'viewtest#transaction_buy_id'
   get 'transaction/address/id/', to: 'viewtest#transaction_address_id'
   get 'transaction/card/id/', to: 'viewtest#transaction_card_id'
