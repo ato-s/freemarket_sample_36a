@@ -9,4 +9,7 @@ class MypageController < ApplicationController
 
   def identification
   end
+
+  def card
+  end
 end
