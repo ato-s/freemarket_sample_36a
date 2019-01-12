@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'transaction/card/id/', to: 'viewtest#transaction_card_id'
   get 'transaction/select_card/id/', to: 'viewtest#transaction_selectcard_id'
   get 'search', to: 'viewtest#search_index'
+  get 'category', to: 'viewtest#category'
 
   resources :items do
     resources :reviews

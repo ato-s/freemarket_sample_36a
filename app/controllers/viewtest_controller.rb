@@ -15,6 +15,7 @@ class ViewtestController < ApplicationController
   def search_index
     render :search_index, layout: "search"
   end
+  def category; end
   def logout
     render :logout, layout: "mypage"
   end
