@@ -308,3 +308,57 @@
     margin: 16px 0 0;
   }
 }
+/* payment */
+.p-mypage_payment-list li {
+  padding: 24px 0;
+  border-bottom: 1px solid #eee;
+  form {
+    position: relative;
+  }
+}
+.p-mypage_not-regist a {
+  display: block;
+  margin: 40px 0 0;
+  text-align: right;
+  span {
+    vertical-align: middle;
+  }
+  i {
+    vertical-align: middle;
+    &:first-child {
+      margin: 0 8px 0 0;
+    }
+    &:last-child {
+      margin: 0 0 0 8px;
+    }
+  }
+}
+.p-mypage_payment-num {
+    margin: 8px 0 0;
+    font-size: 16px;
+}
+.p-mypage_payment-remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 4px 6px;
+  background: #fff;
+  border-radius: 3px;
+  border: 1px solid #ea352d;
+  color: #ea352d;
+}
+.p-mypage_add-card {
+  padding: 24px 0;
+  border-bottom: 1px solid #eee;
+  a {
+    margin-bottom: 8px !important;
+    i {
+      margin-right: 16px;
+    }
+  }
+  small {
+    color: #888;
+    font-size: 12px;
+    font-weight: bold;
+  }
+}
