@@ -166,3 +166,95 @@
     vertical-align: middle;
   }
 }
+.signup-card-list {
+  margin: 8px 0 0;
+  font-size: 0;
+
+  li {
+    display: inline-block;
+    margin: 0 0 0 8px;
+    vertical-align: middle;
+
+    &::first-child {
+        margin: 0;
+    }
+  }
+}
+.signup-form-expire .c-select-wrap {
+    display: inline-block;
+    width: 35%;
+
+    + span {
+      margin: 0 8px;
+    }
+}
+.signup-seqcode {
+  position: relative;
+  margin: 8px 0 0;
+}
+.signup-seqcode-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 28px;
+  z-index: 1;
+  padding: 16px;
+  border-radius: 6px;
+  background: #eee;
+  color: #333;
+  line-height: 1.5;
+  text-align: center;
+  -webkit-transition: all ease-out .3s;
+  transition: all ease-out .3s;
+  visibility: hidden;
+  opacity: 0;
+
+  &.is-show {
+    visibility: visible;
+    opacity: 1;
+  }
+  &:before {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    top: -8px;
+    right: 32px;
+    border-width: 0 8px 8px 8px;
+    border-color: transparent transparent #eee transparent;
+  }
+  img {
+    margin: 8px 0 0;
+  }
+}
+.signup-seqcode-text {
+    text-align: right;
+    color: #0099e8;
+}
+.transact-select-card li {
+    padding: 24px 0;
+    border-bottom: 1px solid #eee;
+
+    label {
+      display: block;
+      position: relative;
+    }
+
+    input {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      -moz-appearance: radio;
+      -webkit-appearance: radio;
+      -o-appearance: radio;
+      -ms-appearance: radio;
+      appearance: radio;
+    }
+}
+.transact-select-card-footer {
+    padding-top: 24px;
+}
