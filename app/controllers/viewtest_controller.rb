@@ -12,6 +12,9 @@ class ViewtestController < ApplicationController
   def transaction_address_id; end
   def transaction_card_id; end
   def transaction_selectcard_id; end
+  def search_index
+    render :search_index, layout: "search"
+  end
   def logout
     render :logout, layout: "mypage"
   end

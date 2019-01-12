@@ -15,6 +15,8 @@
       = yield(:single)
     - elsif content_for?(:mypage)
       = yield(:mypage)
+    - elsif content_for?(:search)
+      = yield(:search)
     - else
       = render 'layouts/header'
       = yield

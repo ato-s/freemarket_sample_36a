@@ -343,12 +343,53 @@ i {
   select {
     width: 100%;
   }
-  .checkbox-default, .c-radio-default, .c-textarea-default {
+  .c-checkbox-default, .c-radio-default, .c-textarea-default {
     margin: 16px 0 0;
   }
   .c-icon-arrow-bottom {
     position: absolute;
   }
+}
+.c-checkbox-default {
+    position: relative;
+    font-size: 0;
+}
+.c-checkbox-default input[type='checkbox'] {
+    display: none;
+}
+.c-checkbox-default label {
+    position: relative;
+    z-index: 2;
+    padding: 0 0 0 28px;
+    font-size: 14px;
+    font-weight: 400;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.c-checkbox-default .c-icon-check {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    background: #fff;
+    border: 1px solid #ccc;
+    font-size: 10px;
+    line-height: 17px;
+    text-align: center;
+    color: #fff;
+    vertical-align: middle;
+    -webkit-transition: all ease-out .3s;
+    transition: all ease-out .3s;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+}
+.c-checkbox-default input[type='checkbox']:checked + .c-icon-check {
+    border-color: transparent;
+    background: #0099e8;
+    opacity: 1;
 }
 .c-textarea-default {
   display: block;
