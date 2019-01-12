@@ -1,7 +1,6 @@
 // -------------------------------------------------------------------
 //   variables
 // -------------------------------------------------------------------
-
 //ページ幅
 $width: 1068px;
 
@@ -13,11 +12,10 @@ $bp: 768px;
 $bp2: $width;
 $bp3: 1440px;
 
-//パディング
-$spPd: 5%;
-
-$hdHeight: 11vw;
-$hdHeightSp: 120px;
+// -------------------------------------------------------------------
+//   font
+// -------------------------------------------------------------------
+$defaultFont: 'Source Sans Pro', Helvetica, Arial, '遊ゴシック', 'YuGothic', 'メイリオ', 'Meiryo';
 
 // -------------------------------------------------------------------
 //   color
@@ -34,17 +32,6 @@ $nv: #283f67;
 $textColor: #59729d;
 
 $textLh: 2.5;
-
-// -------------------------------------------------------------------
-//   font
-// -------------------------------------------------------------------
-$baseFont: 'ヒラギノ角ゴ Pro', 'Hiragino Kaku Gothic Pro',　'Yu Gothic Medium', YuGothic, sans-serif;
-$serif: 'ten-mincho' ,'游明朝', YuMincho, 'ヒラギノ明朝 ProN W3', 'Hiragino Mincho ProN', 'HG明朝E', 'ＭＳ Ｐ明朝', 'ＭＳ 明朝', serif;
-
-$en: 'oswald', sans-serif;
-
-$fzPc: 15px;
-$fzSp: 12px;
 
 // -------------------------------------------------------------------
 //   z-index
@@ -105,4 +92,20 @@ $pagetop: 9800;
 	@media screen and (min-width: $bp) and (max-width: $bp2 - 1) {
 		@content;
 	}
+}
+
+// -------------------------------------------------------------------
+//   mixin
+// -------------------------------------------------------------------
+@mixin icon {
+	display: inline-block;
+	font-family: 'icon-font';
+	speak: none;
+	font-style: normal;
+	font-weight: 400;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }

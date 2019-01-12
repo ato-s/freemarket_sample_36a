@@ -1,6 +1,23 @@
 Rails.application.routes.draw do
   root 'viewtest#index'
   devise_for :users
+  devise_scope :user do
+    get 'login', to: 'viewtest#login'
+    get 'signup', to: 'viewtest#signup'
+    get 'signup/registration', to: 'viewtest#signup_registration'
+    get 'u/id', to: 'viewtest#u_id'
+    get 'password/reset/start', to: 'viewtest#password_reset_start'
+    get 'logout', to: 'viewtest#logout'
+  end
+
+  get 'sell', to: 'viewtest#sell'
+  get 'item/id', to: 'viewtest#item_id'
+  get 'transaction/buy/id', to: 'viewtest#transaction_buy_id'
+  get 'transaction/address/id/', to: 'viewtest#transaction_address_id'
+  get 'transaction/card/id/', to: 'viewtest#transaction_card_id'
+  get 'transaction/select_card/id/', to: 'viewtest#transaction_selectcard_id'
+  get 'search', to: 'viewtest#search_index'
+  get 'category', to: 'viewtest#category'
 
   resources :items do
     resources :reviews
@@ -20,4 +37,9 @@ Rails.application.routes.draw do
       resources :lower_categories, only: [:show]
     end
   end
+
+  resources :mypage, only: [:index]
+  get 'mypage/profile', to: 'mypage#profile'
+  get 'mypage/identification', to: 'mypage#identification'
+  get 'mypage/card', to: 'mypage#card'
 end
