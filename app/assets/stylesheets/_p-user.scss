@@ -65,3 +65,12 @@
 .p-login_submit {
   margin: 24px 0 0;
 }
+.p-signup_bar.l-progressBar {
+  padding: 16px 0;
+  border-top: 1px solid #eee;
+
+  @include media-pc {
+    padding: 40px 0 0 44px;
+    border: 0;
+  }
+}
