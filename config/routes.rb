@@ -27,6 +27,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :mypage, only: [:index, :show, :edit]
-  get 'mypage/logout', to: 'mypage#logout'
+  get 'logout' => 'mypages#logout'
+  resources :mypages, only: [:index, :show, :edit]
+  resources :addresses, only: [:new, :create, :edit, :update]
+  resources :phone_numbers, only: [:new, :create, :edit, :update]
+
 end
