@@ -1,14 +1,10 @@
-.l-single_wrapper
-  %main.l-single_main
-    %section.l-single_container
-      %h2.l-single_head アカウントロック解除される方
-      = form_for resource, as: resource_name, url: unlock_path(resource_name), html: {class: 'l-single_inner'} do |f|
-        = devise_error_messages!
-        .l-single_content
-          .c-form_group
-            = f.label :email, 'メールアドレス'
-            = f.email_field :email, autofocus: true, placeholder: 'ご登録されたメールアドレス', class: 'c-input-default', value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
-            %p.password-reset-info ご登録されたメールアドレスにアカウントロック解除に関する内容が送信されます。
-          .c-form_group
-          = f.submit '送信する', class: 'c-btn-default is-red'
-      = render "devise/shared/links"
+%h2 Resend unlock instructions
+= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+  = devise_error_messages!
+  .field
+    = f.label :email
+    %br/
+    = f.email_field :email, autofocus: true, autocomplete: "email"
+  .actions
+    = f.submit "Resend unlock instructions"
+= render "devise/shared/links"

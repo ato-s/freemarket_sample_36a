@@ -1,24 +1,17 @@
-.l-single_wrapper
-  %main.l-single_main
-    .p-login_panel
-      .p-login_no-account
-        %p アカウントをお持ちでない方はこちら
-        = link_to '新規会員登録', select_api_path
-      .p-login_form-inner
-        = button_tag 'Facebookでログイン', id: 'facebook-login', class: 'c-btn-default is-sns is-sns-facebook'
-        = button_tag 'Googleでログイン', id: 'google-login', class: 'c-btn-default is-sns is-sns-google'
-
-      = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
-        = devise_error_messages!
-        .p-login_form-inner.is-borderNone
-          .c-form_group
-            = f.email_field :email, autofocus: true, placeholder: 'メールアドレス', class: 'p-login_input-text c-input-default'
-          .c-form_group
-            = f.password_field :password, placeholder: 'パスワード', class: 'p-login_input-text c-input-default'
-          - if devise_mapping.rememberable?
-            .c-form_group
-              = f.check_box :remember_me
-              = f.label :remember_me
-          .c-form_group
-            = f.submit 'ログイン', class: 'p-login_submit c-btn-default is-red'
-          = render "devise/shared/links"
+%h2 Log in
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .field
+    = f.label :email
+    %br/
+    = f.email_field :email, autofocus: true, autocomplete: "email"
+  .field
+    = f.label :password
+    %br/
+    = f.password_field :password, autocomplete: "current-password"
+  - if devise_mapping.rememberable?
+    .field
+      = f.check_box :remember_me
+      = f.label :remember_me
+  .actions
+    = f.submit "Log in"
+= render "devise/shared/links"
