@@ -1,4 +1,4 @@
 class Picture < ApplicationRecord
   belongs_to :item
-  validates :content, :status, :item_id, presence: true
+  validates :content, :status, presence: true
 end
