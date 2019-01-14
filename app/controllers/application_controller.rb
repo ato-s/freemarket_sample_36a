@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :basic_auth, if: :production?
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_devise_layout, if: :devise_controller?
@@ -15,6 +16,7 @@ class ApplicationController < ActionController::Base
     "layout_name_for_devise"
   end
 
+
   def after_sign_out_path_for(resource)
     root_path
   end
@@ -28,5 +30,17 @@ class ApplicationController < ActionController::Base
   end
   def move_to_sign_in
     redirect_to new_user_session_path unless user_signed_in?
+  end
+
+  private
+
+  def production?
+    Rails.env.production?
+  end
+
+  def basic_auth
+    authenticate_or_request_with_http_basic do |username, password|
+      username == ENV["BASIC_AUTH_USER"] && password == ENV["BASIC_AUTH_PASSWORD"]
+    end
   end
 end
