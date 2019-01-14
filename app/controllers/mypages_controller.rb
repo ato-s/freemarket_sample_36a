@@ -33,9 +33,6 @@ class MypagesController < ApplicationController
     def mypage_params
       params.require(:mypage).permit(:profile, :user_id)
     end
-    def move_to_sign_in
-      redirect_to root_path unless user_signed_in?
-    end
     def confirm_current_user
       redirect_to root_path unless current_user == @mypage.user
     end
