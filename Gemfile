@@ -26,6 +26,7 @@ gem 'pry-rails'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'kaminari'
+gem 'fog-aws'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
