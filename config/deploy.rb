@@ -3,7 +3,7 @@ lock '3.11.0'
 
 set :application, 'freemarket_sample_36a'
 set :repo_url,  'git@github.com:ato-s/freemarket_sample_36a.git'
-set :branch, 'develop-deploy-settings'
+set :branch, 'develop'
 
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
