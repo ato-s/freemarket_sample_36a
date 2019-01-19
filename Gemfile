@@ -27,6 +27,10 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'kaminari'
 gem 'fog-aws'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-instagram'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
