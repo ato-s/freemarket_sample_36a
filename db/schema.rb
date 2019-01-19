@@ -76,12 +76,12 @@ ActiveRecord::Schema.define(version: 20190114045234) do
     t.integer "commission_price", default: 0, null: false
     t.integer "transaction_stage", default: 0, null: false
     t.integer "like_count", default: 0, null: false
-    t.bigint "size_id", default: 0, null: false
-    t.bigint "brand_id", default: 0, null: false
-    t.bigint "upper_category_id", default: 0, null: false
-    t.bigint "middle_category_id", default: 0, null: false
-    t.bigint "lower_category_id", default: 0, null: false
-    t.bigint "seller_id", default: 0, null: false
+    t.bigint "size_id", null: false
+    t.bigint "brand_id", null: false
+    t.bigint "upper_category_id", null: false
+    t.bigint "middle_category_id", null: false
+    t.bigint "lower_category_id", null: false
+    t.bigint "seller_id", null: false
     t.bigint "buyer_id", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
