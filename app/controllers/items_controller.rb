@@ -15,6 +15,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
+    @item.pictures.build
   end
 
   # GET /items/1/edit
@@ -24,17 +25,27 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
+    binding.pry
     @item = Item.new(item_params)
+    @item.save
+    redirect_to action: "index"
+    # @picture = @item.pictures.new(picture_params)
+    # @picture.save
+    logger.debug @item.errors.inspect
 
-    respond_to do |format|
-      if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: @item }
-      else
-        format.html { render :new }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
-    end
+    # # if @item.save
+    # #   redirect_to items_path
+    # # end
+
+    # respond_to do |format|
+    #   if @item.save
+    #     format.html { redirect_to :index, notice: 'Item was successfully created.' }
+    #     format.json { render :root, status: :created, location: @item }
+    #   else
+    #     format.html { render :index }
+    #     format.json { render json: @item.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /items/1
@@ -69,6 +80,10 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.fetch(:item, {})
+      params.require(:item).permit(:name, :description, :state, :delivery_payer, :upper_category_id, :delivery_region, :delivery_duration, :buy_price, :commission_price, :sell_price, pictures_attributes: [:content]).merge(size_id: "10",brand_id: "20",middle_category_id: "30",lower_category_id: "40",seller_id: "1", buyer_id: "1")
+    end
+
+    def picture_params
+      params[:picture][:content]
     end
 end

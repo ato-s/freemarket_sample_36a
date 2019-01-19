@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     resources :transaction_messages
   end
 
+
+
   resources :groups, only: [:show, :index] do
     resources :brands, only: [:show]
   end
