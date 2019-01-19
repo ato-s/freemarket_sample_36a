@@ -12,5 +12,9 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//= require jquery-2.2.4.min
+//= require lib/jquery.magnific-popup.min
+//= require lib/owl.carousel.min
+//= require lib/owl.carousel2.thumbs
 //= require_tree .
 //= require dropzone

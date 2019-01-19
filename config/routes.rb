@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  root 'viewtest#index'
-  devise_for :users
+  root 'items#index'
+  devise_for :users, :controllers => {
+  :registrations => 'users/registrations'
+}
   devise_scope :user do
-    get 'login', to: 'viewtest#login'
-    get 'signup', to: 'viewtest#signup'
-    get 'signup/registration', to: 'viewtest#signup_registration'
+    get 'select_api' => 'users/registrations#select_api'
+    get 'complete' => 'users/registrations#complete'
   end
 
   resources :items do
@@ -22,9 +23,15 @@ Rails.application.routes.draw do
     resources :brands, only: [:show]
   end
 
-  resources :upper_categories, only: [:show] do
+  resources :upper_categories, only: [:index, :show] do
     resources :middle_categories, only: [:show] do
       resources :lower_categories, only: [:show]
     end
   end
+
+  get 'logout' => 'mypages#logout'
+  resources :mypages, only: [:index, :show, :edit]
+  resources :addresses, only: [:new, :create, :edit, :update]
+  resources :phone_numbers, only: [:new, :create, :edit, :update]
+
 end

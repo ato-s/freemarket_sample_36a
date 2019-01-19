@@ -27,6 +27,8 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'kaminari'
 gem 'dropzonejs-rails'
+gem 'fog-aws'
+
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -34,6 +36,11 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'capistrano'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano3-unicorn'
 end
 
 group :development do
@@ -42,4 +49,12 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'browser_sync_rails'
+end
+
+group :test do
+  gem 'faker'
+end
+
+group :production do
+  gem 'unicorn'
 end

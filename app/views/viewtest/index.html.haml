@@ -1,6 +1,6 @@
 .l-default-container
   %main.u-bgWt
-    %section.owl-carousel.owl-loaded.owl-drag.p-top_carousel
+    %section.owl-carousel.owl-loaded.owl-drag.p-top_carousel.js-owl-carousel
       %div
         .p-top_mainVisual
           %div
@@ -29,13 +29,13 @@
               フリマアプリ
             = image_tag 'common/jp/top/main_content_pc.png'
           .p-top_sp-dl.l-clearfix
-            = link_to 'dummy' do
+            = link_to '#' do
               = image_tag 'common/app-store.svg'
-            = link_to 'dummy' do
+            = link_to '#' do
               = image_tag 'common/google-play.svg'
-      = link_to '', 'dummy', class: 'p-top_banner p-top_banner-new-register'
-      = link_to '', 'dummy', class: 'is-disable', class: 'p-top_banner p-top_banner-kusanagi-xmas'
-      = link_to '', 'dummy', class: 'p-top_banner p-top_banner-welcome'
+      = link_to '', '#', class: 'p-top_banner p-top_banner-new-register'
+      = link_to '', '#', class: 'is-disable', class: 'p-top_banner p-top_banner-kusanagi-xmas'
+      = link_to '', '#', class: 'p-top_banner p-top_banner-welcome'
     %section.p-top_pickup
       %h2.p-top_pickup-head ピックアップカテゴリー
       %section.c-items-box_container.l-clearfix

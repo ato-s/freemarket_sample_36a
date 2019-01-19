@@ -1,0 +1,19 @@
+.l-content
+  .hidden-large.p-search_nav.l-clearfix
+    %div
+      %i.c-icon-sort
+      .p-search_nav-sort 並び替え
+    %div{"data-dropdown" => "nav", "data-dropdown-nav-id" => "extend"}
+      %i.c-icon-p-search_detail
+      詳細検索
+  %section
+    %section.c-items-box_container.l-clearfix
+      %h2.p-search_result-head
+        検索結果 0件
+      %p.p-search_result-description
+        該当する商品が見つかりません。商品は毎日増えていますので、これからの出品に期待してください。
+      %h3.c-items-box_head
+        新着商品
+      .c-items-box_content.l-clearfix
+        - 18.times do
+          = render 'layouts/itembox'

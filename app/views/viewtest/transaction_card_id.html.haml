@@ -1,0 +1,59 @@
+.l-single_wrapper
+  %main.l-single_main
+    %section.l-single_container
+      %h2.c-profile-head 支払い方法
+      = form_for 'dummy', html: {class: 'l-single_inner'} do |f|
+        .l-single_content
+          .c-form_group
+            = label :payment_card_no, 'カード番号'
+            %span.c-form_require 必須
+            = f.text_field :point, placeholder: '半角数字のみ', class: 'c-input-default'
+            %ul.c-has-error-text
+              %li 必須項目です
+            %ul.signup-card-list
+              %li
+                = image_tag 'card/visa.svg', alt: 'visa', width: '49', height: '20'
+              %li
+                = image_tag 'card/master-card.svg', alt: 'mastercard', width: '34', height: '20'
+              %li
+                = image_tag 'card/saison-card.svg', alt: 'saison card', width: '30', height: '20'
+              %li
+                = image_tag 'card/jcb.svg', alt: 'jcb', width: '32', height: '20'
+              %li
+                = image_tag 'card/american_express.svg', alt: 'american express', width: '21', height: '20'
+              %li
+                = image_tag 'card/dinersclub.svg', alt: 'dinersclub', width: '32', height: '20'
+              %li
+                = image_tag 'card/discover.svg', alt: 'discover', width: '32', height: '20'
+          .c-form_group.signup-form-expire
+            = label :payment_card_expire, '有効期限'
+            %span.c-form_require 必須
+            %br
+            .c-select-wrap
+              = f.select :param_name, options_for_select([['', '--'], ['1', '1'], ['2', '2'], ['3', '3'], ['4', '4', selected: 'selected']], params[:param_name]), {}, { class: 'c-select-default' }
+              %i.c-icon-arrow-bottom
+            %span 月
+            %ul.c-has-error-text
+              %li 必須項目です
+            .c-select-wrap
+              = f.select :param_name, options_for_select([['', '--'], ['1', '1'], ['2', '2'], ['3', '3'], ['4', '4', selected: 'selected']], params[:param_name]), {}, { class: 'c-select-default' }
+              %i.c-icon-arrow-bottom
+            %span 年
+            %ul.c-has-error-text
+              %li 必須項目です
+          .c-form_group
+            = label :payment_card_security_code, 'セキュリティコード'
+            %span.c-form_require 必須
+            = f.number_field :param_name, placeholder: 'カード背面4桁もしくは3桁の番号', class: 'c-input-default'
+            %ul.c-has-error-text
+              %li 必須項目です
+            .signup-seqcode
+              .signup-seqcode-text.js-tip_btn
+                %span.c-form_question ?
+                カード裏面の番号とは？
+              .signup-seqcode-info.js-tip_box
+                カードの裏面をご参照ください。
+                %br
+                = image_tag 'signup/seq-card.png', width: '240'
+          %p#primary-error.c-has-error-text
+          = f.submit '次へ進む', class: 'c-btn-default is-red'

@@ -1,0 +1,8 @@
+- content_for(:search) do
+  = render 'layouts/header'
+  = render 'layouts/breadcrumbs'
+  %main.p-search_container.l-container.l-clearfix
+    = yield
+    = render 'layouts/side_search'
+  = render 'layouts/footer'
+= render template: 'layouts/application'

@@ -1,0 +1,71 @@
+.l-single_wrapper
+  %section.l-single_container.p-buy_item-container
+    %h2.l-single_head 購入を確定しますか？
+    %section.p-buy_content.p-buy_item
+      .p-buy_content-inner
+        %h3.p-buy_item-image
+          = image_tag 'common/img_dummy.jpg', class: 'is-higher-height'
+        %p.p-buy_item-name.u-fwBold テキストテキスト商品名が入る
+        = form_for '#', html: {class: 'p-buy_form'} do |f|
+          %p.p-buy_price-ja.u-fwBold
+            ¥ 500
+            %span.p-item_shipping-fee.u-fw14.u-fwBold 送料込み
+          %ul.p-buy_accordion
+            %li.c-accordion
+              .c-accordion_toggle
+                ポイントを使う
+                %i.c-icon-arrow-bottom.c-accordion_icon
+              %ul.c-accordion_child
+                %li.u-fwBold 所持ポイント: P 500
+                %li.c-form_group
+                  .c-radio-default
+                    %label
+                      = f.radio_button 'consume_point_radio', 'none'
+                      ポイントを使わない
+                  .c-radio-default
+                    %label
+                      = f.radio_button 'consume_point_radio', 'all'
+                      すべてのポイントを使う
+                      %br
+                      P 500
+                  .c-radio-default
+                    %label
+                      = f.radio_button 'consume_point_radio', 'partial'
+                      一部のポイントを使う
+                  = f.number_field :point, placeholder: '使うポイントを入力', class: 'c-input-default'
+          %ul.p-buy_price-table
+            %li.p-buy_price-row.p-buy_you-pay.u-fwBold
+              .p-buy_price-cell 支払い金額
+              .p-buy_price-cell
+                %span ¥ 500
+          -# エラーメッセージ　配送先か支払い方法が未登録の際に表示
+          -# %p.c-has-error-text
+          -#   配送先と支払い方法の入力を完了してください。
+          = button_tag '購入する', class: 'c-btn-default is-red u-fzBold'
+    %section.p-buy_content.p-buy_user-info
+      .p-buy_content-inner
+        %h3 配送先
+        %address.p-buy_user-info-text
+          〒651-0091
+          %br
+          兵庫県 神戸市中央区若菜通
+          ４ー２４
+          セントラルハイツ三宮東601
+          %br
+          斎寺 亜斗
+        %p.p-buy_user-info-text
+        = link_to '#', class: 'p-buy_user-info-fix' do
+          %span 変更する
+          %i.c-icon-arrow-right
+    %section.p-buy_content.p-buy_user-info
+      .p-buy_content-inner
+        %h3 支払い方法
+        %p.p-buy_user-info-text
+          ************9889
+          %br
+          09 / 22
+        %figure
+          = image_tag 'card/master-card.svg', alt: 'master-card', width: '34', height: '20'
+        = link_to '#', class: 'p-buy_user-info-fix' do
+          %span 変更する
+          %i.c-icon-arrow-right

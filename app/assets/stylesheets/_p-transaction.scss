@@ -1,0 +1,279 @@
+.p-buy_content {
+  margin: 40px 0 0;
+  padding: 24px 12.5% 0;
+  border-top: 1px solid #f5f5f5;
+  &:first-of-type {
+    margin: 0;
+  }
+  &:last-of-type {
+    padding: 40px 12.5%;
+  }
+}
+.p-buy_content-inner {
+  max-width: 320px;
+  margin: 0 auto;
+}
+.p-buy_item {
+  text-align: center;
+  img {
+    width: 148px;
+    &.is-higher-height {
+      width: auto;
+      max-height: 148px;
+    }
+  }
+  .is-red {
+    margin: 16px 0 0;
+  }
+}
+.p-buy_item-name {
+  margin: 8px 0 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.p-buy_form {
+  p {
+    margin: 8px 0 0;
+    line-height: 1.5;
+  }
+  .c-btn-default {
+    margin: 8px 0 0;
+  }
+  .paypal-express-checkout-text {
+    width: 67px;
+    height: 23px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: left;
+    margin: 10px;
+    color: #179bd7;
+  }
+  .btn-paypal-express-checkout {
+    width: 100%;
+    height: 50px;
+    border: solid 3px #179bd7;
+    img {
+      width: 73px;
+      height: 20px;
+    }
+  }
+}
+.p-buy_price-ja {
+  margin: 16px 0 0;
+  font-size: 28px;
+  .p-item_shipping-fee {
+    margin: 0 0 0 8px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+.p-buy_accordion {
+  margin: 16px 0 0;
+  &.not-have {
+    background: #ccc;
+    .c-accordion_toggle {
+      cursor: default;
+    }
+  }
+  .c-accordion_toggle {
+    border: 1px solid #ccc;
+  }
+  .c-form_group {
+    margin: 0;
+  }
+  .c-accordion_toggle {
+    padding: 16px;
+  }
+  .c-accordion > ul {
+    padding: 24px 40px;
+    background: #fafafa;
+    text-align: left;
+  }
+  .c-icon-arrow-bottom {
+    font-size: 8px;
+  }
+}
+.p-buy_price-table {
+  display: table;
+  border-collapse: collapse;
+  width: 100%;
+  &:first-child {
+    margin: 8px 0 0;
+  }
+}
+.p-buy_price-row {
+  display: table-row;
+  border-top: 1px solid #ccc;
+  &:first-child {
+    border: 0;
+  }
+}
+.p-buy_price-cell {
+  display: table-cell;
+  padding: 16px 0;
+  text-align: right;
+  &:first-child {
+    text-align: left;
+  }
+  &.p-buy_accordion {
+    padding: 0;
+    .c-accordion_toggle {
+      padding: 16px 0;
+    }
+  }
+}
+.p-buy_you-pay {
+  font-size: 22px;
+
+  @include media-pc {
+    font-size: 28px;
+  }
+}
+.p-buy_user-info {
+  transition: all ease-out 0.3s;
+  &.disabled {
+    background: #888;
+    pointer-events: none;
+    a {
+      color: #333;
+    }
+  }
+  h3 {
+    margin: 40px 0 0;
+    font-size: 14px;
+    &:first-child {
+      margin: 0;
+    }
+  }
+  address {
+    display: block;
+  }
+}
+.p-buy_user-info-text {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.p-buy_user-info-fix {
+  display: block;
+  text-align: right;
+  .c-icon-arrow-right {
+    margin: 0 0 0 8px;
+    font-size: 10px;
+    vertical-align: middle;
+  }
+  span {
+    vertical-align: middle;
+  }
+}
+.signup-card-list {
+  margin: 8px 0 0;
+  font-size: 0;
+
+  li {
+    display: inline-block;
+    margin: 0 0 0 8px;
+    vertical-align: middle;
+
+    &::first-child {
+        margin: 0;
+    }
+  }
+}
+.signup-form-expire .c-select-wrap {
+    display: inline-block;
+    width: 35%;
+
+    + span {
+      margin: 0 8px;
+    }
+}
+.signup-seqcode {
+  position: relative;
+  margin: 8px 0 0;
+}
+.signup-seqcode-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 28px;
+  z-index: 1;
+  padding: 16px;
+  border-radius: 6px;
+  background: #eee;
+  color: #333;
+  line-height: 1.5;
+  text-align: center;
+  -webkit-transition: all ease-out .3s;
+  transition: all ease-out .3s;
+  visibility: hidden;
+  opacity: 0;
+
+  &.is-show {
+    visibility: visible;
+    opacity: 1;
+  }
+  &:before {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    top: -8px;
+    right: 32px;
+    border-width: 0 8px 8px 8px;
+    border-color: transparent transparent #eee transparent;
+  }
+  img {
+    margin: 8px 0 0;
+  }
+}
+.signup-seqcode-text {
+    text-align: right;
+    color: #0099e8;
+}
+.transact-select-card li {
+    padding: 24px 0;
+    border-bottom: 1px solid #eee;
+
+    label {
+      display: block;
+      position: relative;
+    }
+
+    input {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      -moz-appearance: radio;
+      -webkit-appearance: radio;
+      -o-appearance: radio;
+      -ms-appearance: radio;
+      appearance: radio;
+    }
+}
+.transact-select-card-footer {
+    padding-top: 24px;
+}
+.p-item_box-container {
+  background: #fff;
+  margin: 40px auto 0;
+  padding: 24px 16px 55px;
+
+  @include media-pc {
+    padding: 24px 40px 40px;
+  }
+
+  .c-item_sold-out-badge {
+    > div {
+      top: 24px;
+      font-size: 28px;
+    }
+    &:after {
+      border-width: 120px 120px 0 0;
+    }
+  }
+}
