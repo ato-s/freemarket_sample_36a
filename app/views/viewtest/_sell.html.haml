@@ -9,18 +9,20 @@
             %span.c-form_require 必須
           %p 最大10枚までアップロードできます
           .p-sell_upload_items-container
-            .p-sell_upload_item
-              %figure.p-sell_upload_figure{style: 'background-image: url(/assets/common/img_dummy.jpg)'}
-              %ul.p-sell_upload_button
-                %li
-                  = link_to '編集', '#'
-                %li
-                  = link_to '削除', '#'
-            -# = f.file_field :picture, class: "p-sell_upload_drop-box"
-            -# %pre.l-visiblePc
-            -#   ドラッグアンドドロップまたは
-            -#   クリックしてファイルをアップロード
-            -#   %i.c-icon-camera
+            -# .p-sell_upload_item
+            -#   %figure.p-sell_upload_figure{style: 'background-image: url(/assets/common/img_dummy.jpg)'}
+            -#   %ul.p-sell_upload_button
+            -#     %li
+            -#       = link_to '編集', '#'
+            -#     %li
+            -#       = link_to '削除', '#'
+            .p-sell_upload_drop-box
+              = f.fields_for :pictures, multiple: true do |picture|
+                = picture.file_field :content
+              %pre.l-visiblePc
+                ドラッグアンドドロップまたは
+                クリックしてファイルをアップロード
+                %i.c-icon-camera
         .p-sell_content
           .c-form_group
             = f.label :name do
@@ -42,7 +44,7 @@
                 %span.c-form_require 必須
               %div
                 .c-select-wrap
-                  = f.select :upper_category_id, options_for_select([['---', ''], ['レディース', '1'], ['メンズ', '2'], ['ベビー・キッズ', '3'], ['インテリア・住まい・小物', '4'], ['本・音楽・ゲーム', '5'], ['おもちゃ・ホビー・グッズ', '1328'], ['コスメ・香水・美容', '6'], ['家電・スマホ・カメラ', '7'], ['スポーツ・レジャー', '8'], ['ハンドメイド', '9'], ['チケット', '1027'], ['自動車・オートバイ', '1318'], ['その他', '10']], params[:upper_category_id]), class: 'c-select-default'
+                  = f.collection_select :upper_category_id, UpperCategory.all, :id, :name, include_blank: "---"
                   %i.c-icon-arrow-bottom
             .c-form_group
               = f.label :state do
@@ -88,13 +90,17 @@
                     %span.c-form_require 必須
                   .l-flRight.p-sell_price_input
                     ¥
-                    = f.text_field :buy_price, placeholder: '例）300', class: 'c-input-default'
+                    = f.text_field :buy_price, value: "",placeholder: "例）300", class: 'c-input-default', autocomplete: "off"
               %li.l-clearfix
                 .l-flLeft 販売手数料 (10%)
-                .l-flRight -
+                .l-flRight#commission_price -
+                = f.label :commission_price do
+                  = f.hidden_field :commission_price, id: "commission_price_val",value: 0
               %li.l-clearfix.u-fwBold
                 .l-flLeft 販売利益
-                .l-flRight -
+                .l-flRight#profit -
+                = f.label :sell_price do
+                  = f.hidden_field :sell_price, id: "sell_price_val",value: 0
         .p-sell_content.p-sell_btn_box
           %div
             %p
@@ -111,4 +117,4 @@
               = link_to '加盟店規約', '/seller_terms/'
               に同意したことになります。
           = f.submit '出品する',class: 'c-btn-default is-red'
-          -# = link_to 'もどる', "#", {class: 'c-btn-default is-gray'}
+          = link_to 'もどる', "#", {class: 'c-btn-default is-gray'}
