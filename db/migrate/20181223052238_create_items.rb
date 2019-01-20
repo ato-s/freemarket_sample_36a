@@ -19,7 +19,7 @@ class CreateItems < ActiveRecord::Migration[5.1]
       t.references :middle_category, foreign_key: true, null:false
       t.references :lower_category, foreign_key: true, null:false
       t.references :seller, null:false
-      t.references :buyer, null:false, default: 0
+      t.references :buyer
       t.timestamps
     end
     add_foreign_key :items, :users, column: :seller_id, index:true
