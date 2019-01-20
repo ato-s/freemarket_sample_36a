@@ -76,13 +76,14 @@ ActiveRecord::Schema.define(version: 20190115115316) do
     t.integer "commission_price", default: 0, null: false
     t.integer "transaction_stage", default: 0, null: false
     t.integer "like_count", default: 0, null: false
-    t.bigint "size_id", default: 0, null: false
-    t.bigint "brand_id", default: 0, null: false
-    t.bigint "upper_category_id", default: 0, null: false
-    t.bigint "middle_category_id", default: 0, null: false
-    t.bigint "lower_category_id", default: 0, null: false
-    t.bigint "seller_id", default: 0, null: false
-    t.bigint "buyer_id", default: 0, null: false
+    t.bigint "size_id", null: false
+    t.bigint "brand_id", null: false
+    t.bigint "upper_category_id", null: false
+    t.bigint "middle_category_id", null: false
+    t.bigint "lower_category_id", null: false
+    t.bigint "seller_id", null: false
+    t.bigint "buyer_id"
+
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["brand_id"], name: "index_items_on_brand_id"
@@ -105,14 +106,14 @@ ActiveRecord::Schema.define(version: 20190115115316) do
 
   create_table "lower_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", default: "", null: false
-    t.bigint "middle_category_id", null: false
+    t.bigint "middle_category_id"
     t.index ["middle_category_id"], name: "index_lower_categories_on_middle_category_id"
   end
 
   create_table "middle_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", default: "", null: false
-    t.bigint "upper_category_id", null: false
-    t.bigint "size_type_id", null: false
+    t.bigint "upper_category_id"
+    t.bigint "size_type_id"
     t.index ["size_type_id"], name: "index_middle_categories_on_size_type_id"
     t.index ["upper_category_id"], name: "index_middle_categories_on_upper_category_id"
   end
