@@ -1,9 +1,9 @@
 Devise.setup do |config|
 
-  config.omniauth :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'], scope: 'email', info_fields: 'email', callback_url: "#{ENV['API_HOST']}/users/auth/facebook/callback"
-  config.omniauth :twitter, ENV['TWITTER_API_KEY'], ENV['TWITTER_API_SECRET'], scope: 'email', oauth_callback: "#{ENV['API_HOST']}/users/auth/twitter/callback"
-  config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'], scope: 'email', redirect_uri: "#{ENV['API_HOST']}/users/auth/google_oauth2/callback"
-  config.omniauth :instagram, ENV['INSTAGRAM_CLIENT_ID'], ENV['INSTAGRAM_CLIENT_SECRET'], redirect_uri: "#{ENV['API_HOST']}/users/auth/instagram/callback"
+  config.omniauth :facebook, Rails.application.secrets.facebook_key, Rails.application.secrets.facebook_secret, scope: 'email', info_fields: 'email', callback_url: "#{Rails.application.secrets.api_host}/users/auth/facebook/callback"
+  config.omniauth :twitter, Rails.application.secrets.twitter_api_key, Rails.application.secrets.twitter_api_secret, scope: 'email', oauth_callback: "#{Rails.application.secrets.api_host}/users/auth/twitter/callback"
+  config.omniauth :google_oauth2, Rails.application.secrets.google_client_id, Rails.application.secrets.google_client_secret, scope: 'email', redirect_uri: "#{Rails.application.secrets.api_host}/users/auth/google_oauth2/callback"
+  config.omniauth :instagram, Rails.application.secrets.instagram_client_id, Rails.application.secrets.instagram_client_secret, redirect_uri: "#{Rails.application.secrets.api_host}/users/auth/instagram/callback"
   OmniAuth.config.logger = Rails.logger if Rails.env.development?
 
   config.secret_key = Rails.application.secrets.devise_secret_key
