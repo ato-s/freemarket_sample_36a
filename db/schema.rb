@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20190115115316) do
     t.bigint "lower_category_id", null: false
     t.bigint "seller_id", null: false
     t.bigint "buyer_id"
+
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["brand_id"], name: "index_items_on_brand_id"
