@@ -80,7 +80,7 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :description, :state, :delivery_payer, :upper_category_id, :delivery_region, :delivery_duration, :buy_price, :commission_price, :sell_price, pictures_attributes: [:content]).merge(size_id: "10",brand_id: "20",middle_category_id: "30",lower_category_id: "40", buyer_id: "1")
+      params.require(:item).permit(:name, :description, :state, :delivery_payer, :upper_category_id, :delivery_region, :delivery_duration, :buy_price, :commission_price, :sell_price, pictures_attributes: [:content]).merge(size_id: "10",brand_id: "20",middle_category_id: "30",lower_category_id: "40", seller_id: "1")
     end
 
 end
