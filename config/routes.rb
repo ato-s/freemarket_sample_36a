@@ -13,7 +13,6 @@ Rails.application.routes.draw do
     resources :reports, only: [:create, :destroy]
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create, :update, :destroy]
-    resources :buys, only: [:index]
     resources :transaction_messages
   end
 
@@ -25,6 +24,12 @@ Rails.application.routes.draw do
     resources :middle_categories, only: [:show] do
       resources :lower_categories, only: [:show]
     end
+  end
+
+  resource :transactions do
+    resources :buys
+    resources :addresses
+    resources :credits
   end
 
   get 'logout' => 'mypages#logout'
