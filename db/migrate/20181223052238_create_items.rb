@@ -13,13 +13,14 @@ class CreateItems < ActiveRecord::Migration[5.1]
       t.integer :transaction_stage, null:false, default: 0
       t.integer :like_count, null:false, default: 0
 
+
       t.references :size, foreign_key: true, null:false
       t.references :brand, foreign_key: true, null:false
       t.references :upper_category, foreign_key: true, null:false
       t.references :middle_category, foreign_key: true, null:false
       t.references :lower_category, foreign_key: true, null:false
       t.references :seller, null:false
-      t.references :buyer, null:false, default: 0
+      t.references :buyer
       t.timestamps
     end
     add_foreign_key :items, :users, column: :seller_id, index:true

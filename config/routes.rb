@@ -1,45 +1,44 @@
 Rails.application.routes.draw do
-  root 'viewtest#index'
-  devise_for :users
+  root 'items#index'
+  devise_for :users, :controllers => {
+  :registrations => 'users/registrations',
+  :omniauth_callbacks => 'users/omniauth_callbacks',
+  :sessions => 'users/sessions'
+}
   devise_scope :user do
-    get 'login', to: 'viewtest#login'
-    get 'signup', to: 'viewtest#signup'
-    get 'signup/registration', to: 'viewtest#signup_registration'
-    get 'u/id', to: 'viewtest#u_id'
-    get 'password/reset/start', to: 'viewtest#password_reset_start'
-    get 'logout', to: 'viewtest#logout'
+    get 'select_api' => 'users/registrations#select_api'
+    get 'complete' => 'users/registrations#complete'
   end
-
-  get 'sell', to: 'viewtest#sell'
-  get 'item/id', to: 'viewtest#item_id'
-  get 'transaction/buy/id', to: 'viewtest#transaction_buy_id'
-  get 'transaction/address/id/', to: 'viewtest#transaction_address_id'
-  get 'transaction/card/id/', to: 'viewtest#transaction_card_id'
-  get 'transaction/select_card/id/', to: 'viewtest#transaction_selectcard_id'
-  get 'search', to: 'viewtest#search_index'
-  get 'category', to: 'viewtest#category'
 
   resources :items do
     resources :reviews
     resources :reports, only: [:create, :destroy]
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create, :update, :destroy]
-    resources :buys, only: [:index]
     resources :transaction_messages
   end
+
+
 
   resources :groups, only: [:show, :index] do
     resources :brands, only: [:show]
   end
 
-  resources :upper_categories, only: [:show] do
+  resources :upper_categories, only: [:index, :show] do
     resources :middle_categories, only: [:show] do
       resources :lower_categories, only: [:show]
     end
   end
 
-  resources :mypage, only: [:index]
-  get 'mypage/profile', to: 'mypage#profile'
-  get 'mypage/identification', to: 'mypage#identification'
-  get 'mypage/card', to: 'mypage#card'
+  resource :transactions do
+    resources :buys
+    resources :addresses
+    resources :credits
+  end
+
+  get 'logout' => 'mypages#logout'
+  resources :mypages, only: [:index, :show, :edit]
+  resources :addresses, only: [:new, :create, :edit, :update]
+  resources :phone_numbers, only: [:new, :create, :edit, :update]
+
 end

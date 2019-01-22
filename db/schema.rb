@@ -10,7 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181223073017) do
+ActiveRecord::Schema.define(version: 20190120135701) do
+
+  create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.string "first_name_katakana", default: "", null: false
+    t.string "last_name_katakana", default: "", null: false
+    t.string "postal_code", limit: 7, default: "", null: false
+    t.integer "prefecture", default: 0, null: false
+    t.string "city", default: "", null: false
+    t.string "address", default: "", null: false
+    t.string "building_name", default: "", null: false
+    t.string "landline_number", default: "", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "avatars", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "content", default: "", null: false
+    t.integer "status", default: 0, null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_avatars_on_user_id"
+  end
 
   create_table "brand_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "brand_id", null: false
@@ -32,6 +58,18 @@ ActiveRecord::Schema.define(version: 20181223073017) do
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_comments_on_item_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "credits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "credit_number", null: false
+    t.string "limit_month", null: false
+    t.string "limit_year", null: false
+    t.string "security_code", null: false
+    t.string "customer_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_credits_on_user_id"
   end
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -56,7 +94,8 @@ ActiveRecord::Schema.define(version: 20181223073017) do
     t.bigint "middle_category_id", null: false
     t.bigint "lower_category_id", null: false
     t.bigint "seller_id", null: false
-    t.bigint "buyer_id", default: 0, null: false
+    t.bigint "buyer_id"
+
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["brand_id"], name: "index_items_on_brand_id"
@@ -79,16 +118,35 @@ ActiveRecord::Schema.define(version: 20181223073017) do
 
   create_table "lower_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", default: "", null: false
-    t.bigint "middle_category_id", null: false
+    t.bigint "middle_category_id"
     t.index ["middle_category_id"], name: "index_lower_categories_on_middle_category_id"
   end
 
   create_table "middle_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", default: "", null: false
-    t.bigint "upper_category_id", null: false
-    t.bigint "size_type_id", null: false
+    t.bigint "upper_category_id"
+    t.bigint "size_type_id"
     t.index ["size_type_id"], name: "index_middle_categories_on_size_type_id"
     t.index ["upper_category_id"], name: "index_middle_categories_on_upper_category_id"
+  end
+
+  create_table "mypages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text "profile"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_mypages_on_user_id"
+  end
+
+  create_table "phone_numbers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "number", null: false
+    t.integer "verification_code"
+    t.integer "verification_code_confirmation"
+    t.boolean "verified", default: false, null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_phone_numbers_on_user_id"
   end
 
   create_table "pictures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -173,15 +231,17 @@ ActiveRecord::Schema.define(version: 20181223073017) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "addresses", "users"
+  add_foreign_key "avatars", "users"
   add_foreign_key "brand_groups", "brands"
   add_foreign_key "brand_groups", "groups"
   add_foreign_key "comments", "items"
   add_foreign_key "comments", "users"
+  add_foreign_key "credits", "users"
   add_foreign_key "items", "brands"
   add_foreign_key "items", "lower_categories"
   add_foreign_key "items", "middle_categories"
@@ -194,6 +254,8 @@ ActiveRecord::Schema.define(version: 20181223073017) do
   add_foreign_key "lower_categories", "middle_categories"
   add_foreign_key "middle_categories", "size_types"
   add_foreign_key "middle_categories", "upper_categories"
+  add_foreign_key "mypages", "users"
+  add_foreign_key "phone_numbers", "users"
   add_foreign_key "pictures", "items"
   add_foreign_key "reports", "items"
   add_foreign_key "reports", "users"
