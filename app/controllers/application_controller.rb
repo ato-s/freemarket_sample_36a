@@ -34,6 +34,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def set_categories
+    @upper_categories = UpperCategory.eager_load(middle_categories: [:lower_categories])
+  end
+
   def production?
     Rails.env.production?
   end
