@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190115115316) do
+ActiveRecord::Schema.define(version: 20190120135701) do
 
   create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "first_name", default: "", null: false
@@ -58,6 +58,18 @@ ActiveRecord::Schema.define(version: 20190115115316) do
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_comments_on_item_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "credits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "credit_number", null: false
+    t.string "limit_month", null: false
+    t.string "limit_year", null: false
+    t.string "security_code", null: false
+    t.string "customer_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_credits_on_user_id"
   end
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -229,6 +241,7 @@ ActiveRecord::Schema.define(version: 20190115115316) do
   add_foreign_key "brand_groups", "groups"
   add_foreign_key "comments", "items"
   add_foreign_key "comments", "users"
+  add_foreign_key "credits", "users"
   add_foreign_key "items", "brands"
   add_foreign_key "items", "lower_categories"
   add_foreign_key "items", "middle_categories"
