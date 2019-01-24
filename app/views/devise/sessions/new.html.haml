@@ -8,7 +8,7 @@
         = button_tag 'Facebookでログイン', id: 'facebook-login', class: 'c-btn-default is-sns is-sns-facebook'
         = button_tag 'Googleでログイン', id: 'google-login', class: 'c-btn-default is-sns is-sns-google'
 
-      = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
         = devise_error_messages!
         .p-login_form-inner.is-borderNone
           .c-form_group
