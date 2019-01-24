@@ -3,13 +3,12 @@ module Payjp_process
   def create_customer
     require 'payjp'
     Payjp.api_key = 'sk_test_64c125fb9c7796c255cd46d5'
-#    year = "20" + params[:credit][:limit_year]
     token = Payjp::Token.create({
     card: {
       number: params[:credit][:credit_number],
       cvc: params[:credit][:security_code],
       exp_month: params[:credit][:limit_month],
-      exp_year: year,
+      exp_year: params[:credit][:limit_year],
     }},
       {
         'X-Payjp-Direct-Token-Generate': 'true'
