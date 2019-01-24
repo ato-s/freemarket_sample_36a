@@ -19,7 +19,11 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :mypage, allow_destroy: true
   accepts_nested_attributes_for :avatars, allow_destroy: true
 
-  validates :nickname, presence: true, uniqueness: true, length: { in: 3..14 }, if: :nickname_required?
+  validates :nickname, presence: true, if: :nickname_required?
+  validates :nickname, uniqueness: true, length: { in: 3..14 }, if: :nickname_not_blank?
+  validates :provider, presence: true, if: :provider_required?
+  validates :provider, inclusion: { in: ["instagram", "facebook", "google_oauth2", "twitter"] }, if: :provider_not_blank?
+  validates :uid, presence: true, if: :uid_required?
   validates :good_count, :normal_count, :bad_count, presence: true
 
 
@@ -29,12 +33,24 @@ class User < ApplicationRecord
     end
   end
   def email_required?
-    (provider.blank? || !email.blank?) && super
+    ((provider.blank? && uid.blank?) || !email.blank?) && super
   end
   def nickname_required?
-    (provider.blank? || !nickname.blank?)
+    (provider.blank? && uid.blank?) || !nickname.blank?
+  end
+  def nickname_not_blank?
+    !nickname.blank?
   end
   def password_required?
-    (provider.blank? || !password.blank?) && super
+    ((provider.blank? && uid.blank?) || !password.blank?) && super
+  end
+  def provider_required?
+    !uid.blank?
+  end
+  def provider_not_blank?
+    !provider.blank?
+  end
+  def uid_required?
+    !provider.blank?
   end
 end
