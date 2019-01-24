@@ -15,11 +15,11 @@ include Payjp_process
       end
   end
 
-#  def destroy
-#    @credit = Credit.find(params[:id])
-#    @credit.destroy
-#    redirect_to new_transaction_credit_path
-#  end
+  def destroy
+    @credit = Credit.find_by(user_id: current_user.id)
+    @credit.destroy
+    redirect_to new_credit_path
+  end
 
   private
 
