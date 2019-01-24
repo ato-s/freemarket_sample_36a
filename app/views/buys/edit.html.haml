@@ -11,8 +11,6 @@
           %p.p-buy_price-ja.u-fwBold
             ¥
             = @item.sell_price
-            = f.hidden_field :buyer_id, :value => current_user.id
-            = f.hidden_field :buy_price, :value => @item.sell_price
             %span.p-item_shipping-fee.u-fw14.u-fwBold 送料込み
           %ul.p-buy_accordion
             %li.c-accordion
@@ -21,8 +19,7 @@
                 %i.c-icon-arrow-bottom.c-accordion_icon
               %ul.c-accordion_child
                 %li.u-fwBold
-                所持ポイント : P
-                = @item.sell_price
+                所持ポイント : P 0
                 %li.c-form_group
                   .c-radio-default
                     %label
@@ -33,8 +30,7 @@
                       = f.radio_button 'consume_point_radio', 'all'
                       すべてのポイントを使う
                       %br
-                      P
-                      = @item.sell_price
+                      P 0
                   .c-radio-default
                     %label
                       = f.radio_button 'consume_point_radio', 'partial'
@@ -54,14 +50,15 @@
       .p-buy_content-inner
         %h3 配送先
         %address.p-buy_user-info-text
-          =@address.postal_code
+          〒
+          =@address.postal_code[0,3]+"-"+@address.postal_code[3,6]
           %br
           =@address.city
           =@address.address
           =@address.building_name
           =@address.landline_number
           %br
-          =@address.first_name+" "+@address.last_name
+          =@address.last_name+" "+@address.first_name
         %p.p-buy_user-info-text
         = link_to '#', class: 'p-buy_user-info-fix' do
           %span 変更する
@@ -70,9 +67,12 @@
       .p-buy_content-inner
         %h3 支払い方法
         %p.p-buy_user-info-text
-          ************9889
+          ************
+          = @credit_data.last4
           %br
-          09 / 22
+          = @credit_data.exp_month
+          \/
+          = @credit_data.exp_year
         %figure
           = image_tag 'card/master-card.svg', alt: 'master-card', width: '34', height: '20'
         = link_to new_credit_path, class: 'p-buy_user-info-fix' do

@@ -3,7 +3,7 @@ module Payjp_process
   def create_customer
     require 'payjp'
     Payjp.api_key = 'sk_test_64c125fb9c7796c255cd46d5'
-    year = "20" + params[:credit][:limit_year]
+#    year = "20" + params[:credit][:limit_year]
     token = Payjp::Token.create({
     card: {
       number: params[:credit][:credit_number],
@@ -28,5 +28,15 @@ module Payjp_process
       currency: 'jpy',
     )
   end
+
+  def show_customer_data
+    require 'payjp'
+    Payjp.api_key = 'sk_test_64c125fb9c7796c255cd46d5'
+    @credit = Credit.find_by(user_id: current_user.id)
+    @user_credit = Payjp::Customer.retrieve(@credit.customer_id).cards.data[0] if @credit.present?
+    return @user_credit
+  end
+
+
 
 end
