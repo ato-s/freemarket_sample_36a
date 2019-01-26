@@ -1,5 +1,6 @@
 module Payjp_process
-
+  layout "single"
+  
   def create_customer
     require 'payjp'
     Payjp.api_key = 'sk_test_64c125fb9c7796c255cd46d5'
