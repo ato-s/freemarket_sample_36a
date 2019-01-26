@@ -29,20 +29,20 @@
         %ul.l-headerPc_nav
           %li
             %h2
-              = link_to 'カテゴリーから探す', '/category/', class: 'l-headerPc_nav-root'
+              = link_to 'カテゴリーから探す', upper_categories_path, class: 'l-headerPc_nav-root'
             %ul.l-headerPc_nav-parent-wrap
               - @upper_categories.each do |upper_category|
                 %li.l-headerPc_nav-parent
                   %h3
-                    = link_to "#{upper_category.name}", '/category/1/'
+                    = link_to "#{upper_category.name}", upper_category_path(upper_category)
                   %ul.l-headerPc_nav-child-wrap
                     - upper_category.middle_categories.first(14).each do |middle_category|
                       %li.l-headerPc_nav-child
-                        = link_to "#{middle_category.name}", '/category/11/'
+                        = link_to "#{middle_category.name}", middle_category_path(middle_category)
                         %ul.l-headerPc_nav-grand-child-wrap
                           - middle_category.lower_categories.first(14).each do |lower_category|
                             %li.l-headerPc_nav-grand-child
-                              = link_to "#{lower_category.name}", '/category/119/'
+                              = link_to "#{lower_category.name}", lower_category_path(lower_category)
           %li
             %h2
               = link_to 'ブランドから探す', '/brand/', class: 'l-headerPc_nav-root'

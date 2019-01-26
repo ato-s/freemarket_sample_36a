@@ -1,5 +1,6 @@
 class LowerCategoriesController < ApplicationController
   before_action :set_lower_category, only: [:show, :edit, :update, :destroy]
+  layout "include_breadcrumbs"
 
   # GET /lower_categories
   # GET /lower_categories.json

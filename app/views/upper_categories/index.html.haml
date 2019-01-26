@@ -1,3 +1,4 @@
+- breadcrumb :categories
 .l-default-container
   .category-index.l-single_container
     .l-visibleSp
@@ -14,20 +15,20 @@
                   %i.c-icon-plus.c-accordion_icon
                 %ul.c-accordion_child
                   %li
-                    = link_to '/upper_categories/#{upper_category.id}/' do
+                    = link_to upper_category_path(upper_category) do
                       .p-search_category-child
                         すべて
                       %i.c-icon-arrow-right
                   - upper_category.middle_categories.each do |middle_category|
                     %li.c-accordion
-                      = link_to '/middle_categories/#{middle_category.id}/', class: 'c-accordion_toggle' do
+                      = link_to middle_category_path(middle_category), class: "c-accordion_toggle" do
                         .p-search_category-child
                           = middle_category.name
                         %i.c-icon-plus.c-accordion_icon
                       %ul.c-accordion_child.p-search_category-subparent
                         - middle_category.lower_categories.each do |lower_category|
                           %li
-                            = link_to '/lower_categories/#{lower_category.id}/' do
+                            = link_to lower_category_path(lower_category) do
                               %i.c-icon-arrow-right
                               .p-search_category-child.p-search_category-subchild
                                 = lower_category.name
@@ -46,7 +47,7 @@
                 = upper_category.name
             .category-list-individual-box-inner-box
               %p
-                = link_to "/upper_categories/#{upper_category.id}/" do
+                = link_to upper_category_path(upper_category) do
                   すべて
               - upper_category.middle_categories.each do |middle_category|
                 .category-list-individual-box-sub-category-name
@@ -55,10 +56,10 @@
                 .l-clearfix.category-list-individual-box-sub-sub-category-box
                   .category-list-individual-box-sub-sub-category-name
                     %p
-                      = link_to "/middle_categories/#{middle_category.id}/" do
+                      = link_to middle_category_path(middle_category) do
                         すべて
                   - middle_category.lower_categories.each do |lower_category|
                     .category-list-individual-box-sub-sub-category-name
                       %p
-                        = link_to "/lower_categories/#{lower_category.id}/" do
+                        = link_to lower_category_path(lower_category) do
                           = lower_category.name

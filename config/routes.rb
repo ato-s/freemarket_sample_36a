@@ -18,17 +18,13 @@ Rails.application.routes.draw do
     resources :transaction_messages
   end
 
-
-
   resources :groups, only: [:show, :index] do
     resources :brands, only: [:show]
   end
 
-  resources :upper_categories, only: [:index, :show] do
-    resources :middle_categories, only: [:show] do
-      resources :lower_categories, only: [:show]
-    end
-  end
+  resources :upper_categories, only: [:index, :show]
+  resources :middle_categories, only: [:show]
+  resources :lower_categories, only: [:show]
 
   resource :transactions do
     resources :buys

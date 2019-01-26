@@ -1,5 +1,6 @@
 class MiddleCategoriesController < ApplicationController
   before_action :set_middle_category, only: [:show, :edit, :update, :destroy]
+  layout "include_breadcrumbs"
 
   # GET /middle_categories
   # GET /middle_categories.json
