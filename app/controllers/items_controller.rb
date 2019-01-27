@@ -28,9 +28,7 @@ class ItemsController < ApplicationController
     # binding.pry
     @item = Item.new(item_params)
     @item.save
-    redirect_to root_path
-    # @picture = @item.pictures.new(picture_params)
-    # @picture.save
+    redirect_to items_path
     logger.debug @item.errors.inspect
 
     # # if @item.save
@@ -81,7 +79,7 @@ class ItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     # seller_id: current_user.idに変更予定
     def item_params
-      params.require(:item).permit(:name, :description, :state, :delivery_payer, :upper_category_id, :delivery_region, :delivery_duration, :buy_price, :commission_price, :sell_price, pictures_attributes: [:content]).merge(size_id: "10",brand_id: "20",middle_category_id: "30",lower_category_id: "40", seller_id: "1")
+      params.require(:item).permit(:name,pictures_attributes: [:content]).merge(description: "1", state: "1", delivery_payer: "1", upper_category_id: "1", delivery_region: "1", delivery_duration: "1", buy_price: "1000", commission_price: "100", sell_price: "900", size_id: "10",brand_id: "20",middle_category_id: "30",lower_category_id: "40", seller_id: "1")
     end
 
 end
