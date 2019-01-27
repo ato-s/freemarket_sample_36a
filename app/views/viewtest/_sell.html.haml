@@ -17,9 +17,8 @@
             -#     %li
             -#       = link_to '削除', '#'
             .p-sell_upload_drop-box
-              - 3.times do
-                = f.fields_for :pictures do |picture|
-                  = picture.file_field :content
+              = f.fields_for :pictures, multiple: true do |picture|
+                = picture.file_field :content
               %pre.l-visiblePc
                 ドラッグアンドドロップまたは
                 クリックしてファイルをアップロード
