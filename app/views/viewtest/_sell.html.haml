@@ -17,8 +17,9 @@
             -#     %li
             -#       = link_to '削除', '#'
             .p-sell_upload_drop-box
-              = f.fields_for :pictures, multiple: true do |picture|
-                = picture.file_field :content
+              - 3.times do
+                = f.fields_for :pictures do |picture|
+                  = picture.file_field :content
               %pre.l-visiblePc
                 ドラッグアンドドロップまたは
                 クリックしてファイルをアップロード
@@ -38,7 +39,7 @@
         .p-sell_content.l-clearfix
           %h3.p-sell_sub-head 商品の詳細
           .p-sell_form_box
-            .c-form_group
+            .c-form_group#product_category
               = f.label :upper_category_id do
                 カテゴリー
                 %span.c-form_require 必須
@@ -46,6 +47,20 @@
                 .c-select-wrap
                   = f.collection_select :upper_category_id, UpperCategory.all, :id, :name, include_blank: "---"
                   %i.c-icon-arrow-bottom
+            -# .c-form_group
+            -#   = f.label :middle_category_id do
+            -#     %span
+            -#   %div
+            -#     .c-select-wrap
+            -#       = f.collection_select :middle_category_id, MiddleCategory.where(upper_category_id: ), :id, :name, include_blank: "---"
+            -#       %i.c-icon-arrow-bottom
+            -# .c-form_group
+            -#   = f.label :lower_category_id do
+            -#     %span
+            -#   %div
+            -#     .c-select-wrap
+            -#       = f.collection_select :lower_category_id, LowerCategory.where, :id, :name, include_blank: "---"
+            -#       %i.c-icon-arrow-bottom
             .c-form_group
               = f.label :state do
                 商品の状態
