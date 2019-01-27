@@ -33,8 +33,11 @@ Rails.application.routes.draw do
   end
 
   get 'logout' => 'mypages#logout'
-  resources :mypages, only: [:index, :show, :edit]
-  resources :addresses, only: [:new, :create, :edit, :update]
+  resources :mypages, only: [:index, :show, :edit, :update] do
+    resources :likes, only: [:index]
+    resources :reviews, only: [:index]
+  end
+  resources :addresses, only: [:index, :new, :create, :edit, :update]
   resources :phone_numbers, only: [:new, :create, :edit, :update]
 
 end
