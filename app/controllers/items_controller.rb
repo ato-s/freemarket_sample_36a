@@ -80,7 +80,7 @@ class ItemsController < ApplicationController
         :lower_category_id,
         :seller_id,
         :buyer_id,
-        pictures_attributes: [:content]
+        pictures_attributes: [:content, :status]
       )
     end
     def upper_category_params
