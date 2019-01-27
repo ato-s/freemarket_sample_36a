@@ -2,6 +2,8 @@ class MypagesController < ApplicationController
   before_action :set_mypage, only: [:show, :edit, :update]
   before_action :move_to_sign_in
   before_action :confirm_current_user, only: [:edit, :update]
+  layout "mypage"
+
   def index
     @mypages = Mypage.all
   end

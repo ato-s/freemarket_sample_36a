@@ -1,0 +1,24 @@
+.l-single_wrapper
+  %main.l-single_main
+    %section.l-single_container
+      %h2.l-single_head 会員情報入力
+      = form_for 'registration_path', html: {class: 'l-single_inner'} do |f|
+        .l-single_content
+          .c-form_group
+            = f.label :nickname, 'ニックネーム'
+            %span.c-form_require 必須
+            = f.text_field :nickname, placeholder: '例）メルカリ太郎', class: 'c-input-default'
+          .c-form_group
+            = f.label :email, 'メールアドレス'
+            %span.c-form_require 必須
+            = f.email_field :email, placeholder: 'PC・携帯どちらでも可', class: 'c-input-default'
+          .c-form_group
+            = f.label :password, 'パスワード'
+            %span.c-form_require 必須
+            = f.password_field :password, placeholder: '6文字以上', class: 'c-input-default'
+          .c-form_group
+            = f.label :password, 'パスワード（確認）'
+            %span.c-form_require 必須
+            = f.password_field :password2, placeholder: '6文字以上', class: 'c-input-default'
+          .c-form_group
+            = button_tag '次へ進む', class: 'c-btn-default is-red'

@@ -2,5 +2,5 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :item
 
-  validates :text, :user_id, :item_id, presence: true
+  validates :text, presence: true
 end
