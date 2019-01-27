@@ -1,64 +1,19 @@
-.l-default-container
-  .category-index.l-single_container
-    .l-visibleSp
-      %section.p-search_category
-        .gray.l-clearfix
-          %h2 カテゴリー一覧
-        %nav
-          %ul.l-clearfix
-            - @upper_categories.each do |upper_category|
-              %li.c-accordion
-                %h3{class: "c-accordion_toggle category-thumb#{upper_category.id}"}
-                  %div
-                    = upper_category.name
-                  %i.c-icon-plus.c-accordion_icon
-                %ul.c-accordion_child
-                  %li
-                    = link_to '/upper_categories/#{upper_category.id}/' do
-                      .p-search_category-child
-                        すべて
-                      %i.c-icon-arrow-right
-                  - upper_category.middle_categories.each do |middle_category|
-                    %li.c-accordion
-                      = link_to '/middle_categories/#{middle_category.id}/', class: 'c-accordion_toggle' do
-                        .p-search_category-child
-                          = middle_category.name
-                        %i.c-icon-plus.c-accordion_icon
-                      %ul.c-accordion_child.p-search_category-subparent
-                        - middle_category.lower_categories.each do |lower_category|
-                          %li
-                            = link_to '/lower_categories/#{lower_category.id}/' do
-                              %i.c-icon-arrow-right
-                              .p-search_category-child.p-search_category-subchild
-                                = lower_category.name
-    .l-visiblePc
-      .gray
-        %h2 カテゴリー一覧
-      .category-list-nav.slide-nav-parent.u-taCenter.l-clearfix
-        - @upper_categories.each do |upper_category|
-          = link_to "#root_category-#{upper_category.id}", class: "u-bgWt category-root-category-link-name" do
-            = upper_category.name
-      .category-list-box
-        .category-list-individual-box.u-bgWt.l-clearfix
-          - @upper_categories.each do |upper_category|
-            .u-bgRd.u-clWt.category-list-individual-box-root-category-name
-              %h3#root_category-1
-                = upper_category.name
-            .category-list-individual-box-inner-box
-              %p
-                = link_to "/upper_categories/#{upper_category.id}/" do
-                  すべて
-              - upper_category.middle_categories.each do |middle_category|
-                .category-list-individual-box-sub-category-name
-                  %h4
-                    = middle_category.name
-                .l-clearfix.category-list-individual-box-sub-sub-category-box
-                  .category-list-individual-box-sub-sub-category-name
-                    %p
-                      = link_to "/middle_categories/#{middle_category.id}/" do
-                        すべて
-                  - middle_category.lower_categories.each do |lower_category|
-                    .category-list-individual-box-sub-sub-category-name
-                      %p
-                        = link_to "/lower_categories/#{lower_category.id}/" do
-                          = lower_category.name
+%h1 Listing upper_categories
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @upper_categories.each do |upper_category|
+      %tr
+        %td= link_to 'Show', upper_category
+        %td= link_to 'Edit', edit_upper_category_path(upper_category)
+        %td= link_to 'Destroy', upper_category, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Upper category', new_upper_category_path

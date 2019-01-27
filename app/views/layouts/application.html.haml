@@ -17,8 +17,6 @@
       = yield(:mypage)
     - elsif content_for?(:search)
       = yield(:search)
-    - elsif content_for?(:include_breadcrumbs)
-      = yield(:include_breadcrumbs)
     - else
       = render 'layouts/header'
       = yield

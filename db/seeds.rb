@@ -25188,7 +25188,7 @@ BrandGroup.create!([
   {brand_id: 10020, group_id: 14}
 ])
 SizeType.create!([
-  {size_type: "------", id: 0},
+  {size_type: "---", id: 0},
   {size_type: "size"},
   {size_type: "shoes"},
   {size_type: "kids_size"},
