@@ -1,0 +1,9 @@
+= form_with model: item, html: {class: 'p-sell_form'} do |f|
+  .c-form_group#product_size
+    = f.label :size_id do
+      サイズ
+      %span
+    %div
+      .c-select-wrap
+        = f.select :size_id, options_from_collection_for_select(@sizes, :id, :name), {prompt: "---"}
+        %i.c-icon-arrow-bottom
