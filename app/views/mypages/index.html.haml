@@ -6,9 +6,9 @@
           .p-user_detail-photo{style: 'background-image: url(/assets/common/member_photo_noimage_thumb.png)'}
           %h2.p-user_detail-title.c-font-6
             - if current_user.nickname.present?
-              #{current_user.nickname}
-            -else
-              #{current_user.provider}_#{current_user.uid}
+              = current_user.nickname
+            - else
+              = "#{current_user.provider}_#{current_user.uid}"
         .p-user_detail-score.c-font-3
           %span 評価 #{current_user.received_reviews.length}
           %span 出品数 #{current_user.sell_items.length}
@@ -18,22 +18,22 @@
           .p-user_detail-ratings.l-clearfix
             %i.c-icon-good
             .u-taCenter.p-user_detail-ragtings-score
-              #{current_user.good_count}
+              = current_user.good_count
         %div
           .p-user_detail-ratings.l-clearfix
             %i.c-icon-normal
             .u-taCenter.p-user_detail-ragtings-score
-              #{current_user.normal_count}
+              = current_user.normal_count
         %div
           .p-user_detail-ratings.l-clearfix
             %i.c-icon-bad
             .u-taCenter.p-user_detail-ragtings-score
-              #{current_user.bad_count}
+              = current_user.bad_count
       .p-user_detail-description_box
         %p.c-font-2
           - if current_user.mypage.profile.present?
-            #{current_user.mypage.profile}
-          -else
+            = current_user.mypage.profile
+          - else
             = link_to "プロファイルの設定を行ってください", edit_mypage_path(@mypage)
     .c-item_social-media-box
       %ul.c-social-media-box
@@ -50,5 +50,4 @@
       %h2.c-items-box_head
         この出品者の商品
       .c-items-box_content.l-clearfix
-        - @items.each do |item|
-          = render 'layouts/itembox', item: item
+        =render :partial => "layouts/itembox", :collection => @items, :as => "item"

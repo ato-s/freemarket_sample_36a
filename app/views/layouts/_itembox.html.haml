@@ -3,10 +3,12 @@
     %figure.c-items-box_photo
       = image_tag "#{item.pictures.find_by(status: 0).content}"
     .c-items-box_body
-      %h3.c-items-box_name.c-font-2 #{item.name}
+      %h3.c-items-box_name.c-font-2
+        = item.name
       .c-items-box_num.l-clearfix
         .c-items-box_price.c-font-5 ¥ #{item.buy_price}
-        .c-items-box_likes.c-font-2 #{item.likes.length}
+        .c-items-box_likes.c-font-2
+          = item.likes.length
         %i.c-icon-like-border
         %span 1
         %p.c-item-box_tax (税込)

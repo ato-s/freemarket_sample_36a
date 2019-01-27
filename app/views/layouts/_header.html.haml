@@ -79,12 +79,16 @@
                   %figure
                     %div
                       = image_tag 'common/member_photo_noimage_thumb.png', width: '60'
-                    %figcaption atos
+                    %figcaption
+                      - if current_user.nickname.present?
+                        = current_user.nickname
+                      - else
+                        = "#{current_user.provider}_#{current_user.uid}"
                   %ul.l-headerPc_p-mypage_review-listing
                     %li
-                      = link_to '評価: 0', '/mypage/review/history/'
+                      = link_to "評価: #{current_user.received_reviews.length}", '/mypage/review/history/'
                     %li
-                      = link_to '出品数: 0', '/mypage/listings/listing/'
+                      = link_to "出品数: #{current_user.sell_items.length}", '/mypage/listings/listing/'
                   %ul.l-headerPc_p-mypage_sales-point
                     %li
                       = link_to '/mypage/sales/', class: 'l-clearfix' do

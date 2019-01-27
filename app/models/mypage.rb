@@ -4,4 +4,3 @@ class Mypage < ApplicationRecord
   validates :profile, :user_id, presence: true, on: :update
 
 end
-3
