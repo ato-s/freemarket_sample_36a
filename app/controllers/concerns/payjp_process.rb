@@ -36,6 +36,4 @@ module Payjp_process
     return @user_credit
   end
 
-
-
 end

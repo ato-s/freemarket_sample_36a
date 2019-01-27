@@ -16,4 +16,7 @@ class Item < ApplicationRecord
   accepts_nested_attributes_for :pictures, reject_if: :reject_pictures, allow_destroy: true
 
   validates :name, :description, :state, :delivery_payer, :delivery_region, :delivery_duration, :buy_price, :sell_price, :commission_price, :transaction_stage, :like_count, presence: true
+
+enum transaction_stage:[:sale, :sold]
+
 end

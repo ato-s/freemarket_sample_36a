@@ -7,12 +7,16 @@ include Payjp_process
   end
 
   def create
+    unless current_user.credits.present?
     @credit = Credit.create(credit_params)
       if @credit.save
         redirect_to new_credit_path
       else
         render :new
       end
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy
