@@ -1,87 +1,92 @@
 class ItemsController < ApplicationController
+  protect_from_forgery except: [:dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_new_item, only: [:new, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
+  before_action :move_to_sign_in, except: [:dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
 
-  # GET /items
-  # GET /items.json
+  def dynamic_upper_category
+    @middle_categories = MiddleCategory.where(upper_category_params)
+  end
+  def dynamic_middle_category
+    @lower_categories = LowerCategory.where(middle_category_params)
+  end
+  def dynamic_lower_category
+    @sizes = LowerCategory.find(params[:item][:lower_category_id]).middle_category.size_type.sizes
+  end
+
   def index
     @items = Item.all
   end
 
-  # GET /items/1
-  # GET /items/1.json
   def show
   end
 
-  # GET /items/new
   def new
-    @item = Item.new
-    @item.pictures.build
+    @upper_categories = UpperCategory.all.includes([middle_categories: :lower_categories])
   end
 
-  # GET /items/1/edit
   def edit
   end
 
-  # POST /items
-  # POST /items.json
   def create
-    # binding.pry
     @item = Item.new(item_params)
-    @item.save
-    redirect_to root_path
-    # @picture = @item.pictures.new(picture_params)
-    # @picture.save
-    logger.debug @item.errors.inspect
-
-    # # if @item.save
-    # #   redirect_to items_path
-    # # end
-
-    # respond_to do |format|
-    #   if @item.save
-    #     format.html { redirect_to :index, notice: 'Item was successfully created.' }
-    #     format.json { render :root, status: :created, location: @item }
-    #   else
-    #     format.html { render :index }
-    #     format.json { render json: @item.errors, status: :unprocessable_entity }
-    #   end
-    # end
-  end
-
-  # PATCH/PUT /items/1
-  # PATCH/PUT /items/1.json
-  def update
-    respond_to do |format|
-      if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @item }
-      else
-        format.html { render :edit }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
+    @item.transaction_stage = 0
+    @item.seller_id = current_user.id
+    if @item.save
+      redirect_to root_path, notice: 'Item was successfully saved.'
+    else
+      render :new
     end
   end
 
-  # DELETE /items/1
-  # DELETE /items/1.json
+  def update
+    if @item.update(item_params)
+      redirect_to root_path, notice: 'Item was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
   def destroy
     @item.destroy
-    respond_to do |format|
-      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to root_path, notice: 'Item was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = Item.find(params[:id])
     end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    # seller_id: current_user.idに変更予定
-    def item_params
-      params.require(:item).permit(:name, :description, :state, :delivery_payer, :upper_category_id, :delivery_region, :delivery_duration, :buy_price, :commission_price, :sell_price, pictures_attributes: [:content]).merge(size_id: "10",brand_id: "20",middle_category_id: "30",lower_category_id: "40", seller_id: "1")
+    def set_new_item
+      @item = Item.new
     end
-
+    def item_params
+      params.require(:item).permit(
+        :name,
+        :description,
+        :state,
+        :delivery_payer,
+        :delivery_region,
+        :delivery_duration,
+        :buy_price,
+        :commission_price,
+        :sell_price,
+        :commition_price,
+        :tranzaction_stage,
+        :like_count,
+        :size_id,
+        :brand_id,
+        :upper_category_id,
+        :middle_category_id,
+        :lower_category_id,
+        :seller_id,
+        :buyer_id,
+        pictures_attributes: [:content]
+      )
+    end
+    def upper_category_params
+      params.require(:item).permit(:upper_category_id)
+    end
+    def middle_category_params
+      params.require(:item).permit(:middle_category_id)
+    end
 end
