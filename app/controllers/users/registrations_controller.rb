@@ -1,4 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  layout "single"
+
   def select_api
   end
   def complete

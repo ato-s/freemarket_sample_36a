@@ -2,21 +2,3 @@
   %h1
     = link_to root_path do
       =image_tag 'common/logo.svg', alt: 'mercari'
-  -if current_page? user_registration_path
-    %nav.l-progressBar.p-signup_bar
-      %ol.l-clearfix
-        %li.is-active
-          会員情報
-          .l-progressBar_status
-        %li
-          電話番号認証
-          .l-progressBar_status
-        %li
-          住所入力
-          .l-progressBar_status
-        %li
-          支払い方法
-          .l-progressBar_status
-        %li
-          完了
-          .l-progressBar_status
