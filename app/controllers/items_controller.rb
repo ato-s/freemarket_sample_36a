@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    binding.pry
+    # binding.pry
     @item = Item.new(item_params)
     @item.save
     redirect_to root_path
