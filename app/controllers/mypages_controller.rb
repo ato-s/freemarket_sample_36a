@@ -27,7 +27,7 @@ class MypagesController < ApplicationController
 
   private
     def set_mypage
-      @mypage = Mypage.find(current_user.id)
+      @mypage = current_user.mypage
     end
     def mypage_params
       params.require(:mypage).permit(:profile).merge(user_id: current_user.id)
