@@ -66,13 +66,17 @@
     %section.p-buy_content.p-buy_user-info
       .p-buy_content-inner
         %h3 支払い方法
-        %p.p-buy_user-info-text
-          ************
-          = @credit_data.last4
-          %br
-          = @credit_data.exp_month
-          \/
-          = @credit_data.exp_year
+        - if @credit_data.present?
+          %p.p-buy_user-info-text
+            ************
+            = @credit_data.last4
+            %br
+            = @credit_data.exp_month
+            \/
+            = @credit_data.exp_year
+        - else
+          %p.p-buy_user-info-text
+          カード情報未登録です
         %figure
           = image_tag 'card/master-card.svg', alt: 'master-card', width: '34', height: '20'
         = link_to new_credit_path, class: 'p-buy_user-info-fix' do
