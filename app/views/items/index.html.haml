@@ -1,18 +1,35 @@
 %h1 Listing items
 
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
+-# %table
+-#   %thead
+-#     %tr
+-#       %th
+-#       %th
+-#       %th
 
-  %tbody
-    - @items.each do |item|
-      %tr
-        %td= link_to 'Show', item
-        %td= link_to 'Edit', edit_item_path(item)
-        %td= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' }
+-#   %tbody
+-#     - @items.each do |item|
+-#       %tr
+-#         %td= link_to 'Show', item
+-#         %td= link_to 'Edit', edit_item_path(item)
+-#         %td= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' }
+
+- @items.each do |item|
+  .c-items-box_content.l-clearfix
+    %section.c-items-box
+      %figure.c-items-box_photo
+        = image_tag item.pictures.first.content
+      .c-items-box_body
+        %h3.c-items-box_name.c-font-2
+          = item.name
+        .c-items-box_num.l-clearfix
+          .c-items-box_price.c-font-5
+            = item.buy_price
+          .c-items-box_likes.c-font-2
+            %i.c-icon-like-border
+            %span
+              = item.like_count
+          %p.c-item-box_tax (税込)
 
 %br
 

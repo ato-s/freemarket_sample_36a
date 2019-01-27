@@ -1,14 +1,10 @@
-.l-single_wrapper
-  %main.l-single_main
-    %section.l-single_container
-      %h2.l-single_head パスワードをお忘れの方
-      = form_for resource, as: resource_name, url: password_path(resource_name), html: {class: 'l-single_inner'} do |f|
-        = devise_error_messages!
-        .l-single_content
-          .c-form_group
-            = f.label :email, 'メールアドレス'
-            = f.email_field :email, placeholder: 'ご登録されたメールアドレス', class: 'c-input-default'
-            %p.password-reset-info ご登録されたメールアドレスにパスワード再設定のご案内が送信されます。
-          .c-form_group
-          = f.submit '送信する', class: 'c-btn-default is-red'
-      = render "devise/shared/links"
+%h2 Forgot your password?
+= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+  = devise_error_messages!
+  .field
+    = f.label :email
+    %br/
+    = f.email_field :email, autofocus: true, autocomplete: "email"
+  .actions
+    = f.submit "Send me reset password instructions"
+= render "devise/shared/links"

@@ -1,0 +1,13 @@
+.l-single_wrapper
+  %main.l-single_main
+    %section.l-single_container
+      %h2.l-single_head 新規会員登録
+      .l-single_inner
+        .l-single_content
+          = link_to new_user_registration_path, class: 'c-btn-default is-mail' do
+            %i.c-icon-mail
+            メールアドレスで登録
+        = link_to 'Facebookで登録', user_facebook_omniauth_authorize_path, id: 'facebook-login', class: 'c-btn-default is-sns is-sns-facebook'
+        = link_to 'Googleで登録', user_google_oauth2_omniauth_authorize_path, id: 'google-login', class: 'c-btn-default is-sns is-sns-google'
+        = link_to 'Twitterで登録', user_twitter_omniauth_authorize_path, id: 'twitter-login', class: 'c-btn-default is-sns is-sns-twitter'
+        = link_to 'Instagramで登録', user_instagram_omniauth_authorize_path, id: 'instagram-login', class: 'c-btn-default is-sns is-sns-instagram'

@@ -1,10 +1,8 @@
 class UpperCategoriesController < ApplicationController
   before_action :set_upper_category, only: [:show, :edit, :update, :destroy]
+  layout "include_breadcrumbs"
 
-  # GET /upper_categories
-  # GET /upper_categories.json
   def index
-    @upper_categories = UpperCategory.all
   end
 
   # GET /upper_categories/1
