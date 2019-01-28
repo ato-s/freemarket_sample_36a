@@ -15,7 +15,8 @@ class MypagesController < ApplicationController
   end
 
   def update
-    if @mypage.update(mypage_params) && current_user.update(user_params)
+    binding.pry
+    if current_user.update(mypage_params)
       redirect_to @mypage, notice: 'Mypage was successfully updated.'
     else
       render :edit
@@ -30,10 +31,7 @@ class MypagesController < ApplicationController
       @mypage = current_user.mypage
     end
     def mypage_params
-      params.require(:mypage).permit(:profile).merge(user_id: current_user.id)
-    end
-    def user_params
-      params.require(:mypage).require(:user).permit(:nickname)
+      params.require(:user).permit(:nickname, mypage_attributes: [:profile, :id])
     end
     def confirm_current_user
       redirect_to root_path unless current_user == @mypage.user
