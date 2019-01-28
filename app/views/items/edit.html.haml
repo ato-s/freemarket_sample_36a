@@ -1,5 +1,7 @@
-.l-single_wrapper
-  %main.l-single_main
-    %section.l-single_container
-      %h2.l-single_head 商品の情報を修正
-      = render 'form', item: @item
+%h1 Editing item
+
+= render 'form'
+
+= link_to 'Show', @item
+\|
+= link_to 'Back', items_path
