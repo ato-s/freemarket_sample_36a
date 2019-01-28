@@ -49,4 +49,8 @@ class ApplicationController < ActionController::Base
       # username == ENV["BASIC_AUTH_USER"] && password == ENV["BASIC_AUTH_PASSWORD"]
     end
   end
+
+  def set_locale
+    I18n.locale = :ja
+  end
 end
