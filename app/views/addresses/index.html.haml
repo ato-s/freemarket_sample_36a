@@ -5,4 +5,4 @@
     - @addresses.each do |address|
       .l-single_content
         .c-form_group
-          =link_to "#{address.postal_code} #{address.prefecture} #{address.city}", edit_address_path(address)
+          =link_to full_address(address), edit_address_path(address)
