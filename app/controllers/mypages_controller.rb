@@ -15,7 +15,6 @@ class MypagesController < ApplicationController
   end
 
   def update
-    binding.pry
     if current_user.update(mypage_params)
       redirect_to @mypage, notice: 'Mypage was successfully updated.'
     else
