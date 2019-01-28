@@ -73,7 +73,7 @@ class ItemsController < ApplicationController
         :commission_price,
         :sell_price,
         :commition_price,
-        :tranzaction_stage,
+        :transaction_stage,
         :like_count,
         :size_id,
         :brand_id,
@@ -83,7 +83,7 @@ class ItemsController < ApplicationController
         :seller_id,
         :buyer_id,
         pictures_attributes: [:content, :status]
-      ).merge(transaction_stage: 0).merge(seller_id: current_user.id)
+      ).merge(transaction_stage: 'under_sale', seller_id: current_user.id)
     end
     def item_params
       params.require(:item).permit(
@@ -97,7 +97,7 @@ class ItemsController < ApplicationController
         :commission_price,
         :sell_price,
         :commition_price,
-        :tranzaction_stage,
+        :transaction_stage,
         :like_count,
         :size_id,
         :brand_id,

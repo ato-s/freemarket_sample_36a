@@ -18,16 +18,16 @@ class Item < ApplicationRecord
   # validates :name, :description, :state, :delivery_payer, :delivery_region, :delivery_duration, :buy_price, :sell_price, :commission_price, :transaction_stage, :like_count, presence: true
 
   enum state: {
-    '新品、未使用': 1,
-    '未使用に近い': 2,
-    '目立った傷や汚れなし': 3,
-    'やや傷や汚れあり': 4,
-    '傷や汚れあり': 5,
-    '全体的に状態が悪い': 6
+    perfectly_new: 1,
+    almost_new: 2,
+    no_noticeable_scratches_and_dirt: 3,
+    slightly_scratchs_and_dirt: 4,
+    scratched_and_dirt: 5,
+    overall_bad_condition: 6
   }
   enum delivery_payer: {
-    '送料込み(出品者負担)': 1,
-    '着払い(購入者負担)': 2
+    seller: 1,
+    buyer: 2
   }
   enum delivery_region: {
     北海道: 1,
@@ -80,13 +80,13 @@ class Item < ApplicationRecord
     未定: 99
   }
   enum delivery_duration: {
-    '1~2日で発送': 1,
-    '2~3日で発送': 2,
-    '4~7日で発送': 3,
+    one_to_two_days: 1,
+    two_to_three_days: 2,
+    four_to_seven_days: 3
   }
-  enum tranzaction_stage: {
-    '出品中': 0,
-    '取引中': 1,
-    '売却済': 2,
+  enum transaction_stage: {
+    under_sale: 1,
+    under_transaction: 2,
+    sold_out: 3
   }
 end
