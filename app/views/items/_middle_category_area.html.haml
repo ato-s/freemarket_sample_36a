@@ -1,0 +1,3 @@
+= form_with model: item, html: {class: 'p-sell_form'} do |f|
+  = f.select :middle_category_id, options_from_collection_for_select(@middle_categories, :id, :name), {prompt: "---"}, {data: {remote: true, url: url_for(action: :dynamic_middle_category)}}
+  %i.c-icon-arrow-bottom
