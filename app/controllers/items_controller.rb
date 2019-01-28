@@ -26,12 +26,14 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @upper_categories = UpperCategory.all.includes([middle_categories: :lower_categories])
+    @middle_categories = MiddleCategory.where(upper_category_id: @item.upper_category_id)
+    @lower_categories = LowerCategory.where(middle_category_id: @item.middle_category_id)
+    @sizes = Size.where(size_type_id: @item.middle_category.size_type_id)
   end
 
   def create
-    @item = Item.new(item_params)
-    @item.transaction_stage = 0
-    @item.seller_id = current_user.id
+    @item = Item.new(item_create_params)
     if @item.save
       redirect_to root_path, notice: 'Item was successfully saved.'
     else
@@ -43,7 +45,7 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to root_path, notice: 'Item was successfully updated.'
     else
-      render :edit
+      redirect_to edit_item_path(@item)
     end
   end
 
@@ -58,6 +60,30 @@ class ItemsController < ApplicationController
     end
     def set_new_item
       @item = Item.new
+    end
+    def item_create_params
+      params.require(:item).permit(
+        :name,
+        :description,
+        :state,
+        :delivery_payer,
+        :delivery_region,
+        :delivery_duration,
+        :buy_price,
+        :commission_price,
+        :sell_price,
+        :commition_price,
+        :tranzaction_stage,
+        :like_count,
+        :size_id,
+        :brand_id,
+        :upper_category_id,
+        :middle_category_id,
+        :lower_category_id,
+        :seller_id,
+        :buyer_id,
+        pictures_attributes: [:content, :status]
+      ).merge(transaction_stage: 0).merge(seller_id: current_user.id)
     end
     def item_params
       params.require(:item).permit(
