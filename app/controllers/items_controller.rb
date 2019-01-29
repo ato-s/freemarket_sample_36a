@@ -1,9 +1,6 @@
 class ItemsController < ApplicationController
   protect_from_forgery except: [:dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
-<<<<<<< HEAD
   before_action :set_locale
-=======
->>>>>>> parent of eed0d2f... Revert "Merge branch 'develop-mypage_creation' of https://github.com/ato-s/freemarket_sample_36a into develop-mypage_creation"
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_new_item, only: [:new, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
   before_action :move_to_sign_in, except: [:dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
@@ -19,7 +16,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all
+    @items = Item.all.includes(:pictures)
   end
 
   def show
@@ -86,7 +83,7 @@ class ItemsController < ApplicationController
         :lower_category_id,
         :seller_id,
         :buyer_id,
-        pictures_attributes: [:content, :status]
+        pictures_attributes: [:id, :content, :status]
       ).merge(transaction_stage: 'under_sale', seller_id: current_user.id)
     end
     def item_params
@@ -110,7 +107,7 @@ class ItemsController < ApplicationController
         :lower_category_id,
         :seller_id,
         :buyer_id,
-        pictures_attributes: [:content, :status]
+        pictures_attributes: [:id, :content, :status]
       )
     end
     def upper_category_params
