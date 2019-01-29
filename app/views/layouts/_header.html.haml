@@ -4,7 +4,7 @@
       = link_to root_path do
         = image_tag 'common/logo.svg', alt: 'mercari'
     .l-headerSp_user-nav.l-clearfix
-      = link_to '/mypage/', class: 'l-headerSp_user-icon' do
+      = link_to mypages_path, class: 'l-headerSp_user-icon' do
         %figure
           %div
             = image_tag 'common/member_photo_noimage_thumb.png', width: '32'
@@ -69,7 +69,7 @@
         - if user_signed_in?
           %ul.l-headerPc_user-nav
             %li
-              = link_to '/mypage/', class: 'l-headerSp_user-icon l-headerPc_nav-root' do
+              = link_to mypages_path, class: 'l-headerSp_user-icon l-headerPc_nav-root' do
                 %figure
                   %div
                     = image_tag 'common/member_photo_noimage_thumb.png', width: '32'
@@ -79,12 +79,16 @@
                   %figure
                     %div
                       = image_tag 'common/member_photo_noimage_thumb.png', width: '60'
-                    %figcaption atos
+                    %figcaption
+                      - if current_user.nickname.present?
+                        = current_user.nickname
+                      - else
+                        = "#{current_user.provider}_#{current_user.uid}"
                   %ul.l-headerPc_p-mypage_review-listing
                     %li
-                      = link_to '評価: 0', '/mypage/review/history/'
+                      = link_to "評価: #{current_user.received_reviews.length}", '/mypage/review/history/'
                     %li
-                      = link_to '出品数: 0', '/mypage/listings/listing/'
+                      = link_to "出品数: #{current_user.sell_items.length}", '/mypage/listings/listing/'
                   %ul.l-headerPc_p-mypage_sales-point
                     %li
                       = link_to '/mypage/sales/', class: 'l-clearfix' do

@@ -6,6 +6,7 @@ class Address < ApplicationRecord
   validates :postal_code, length: { is: 7 }
 
   enum prefecture: {
+    "----": 0,
     北海道: 1,
     青森県: 2,
     岩手県: 3,

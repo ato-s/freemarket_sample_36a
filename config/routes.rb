@@ -10,9 +10,6 @@ Rails.application.routes.draw do
     get 'complete' => 'users/registrations#complete'
   end
 
-  match 'dynamic_upper_category', to: 'items#dynamic_upper_category', via: [:get, :post]
-  match 'dynamic_middle_category', to: 'items#dynamic_middle_category', via: [:get, :post]
-  match 'dynamic_lower_category', to: 'items#dynamic_lower_category', via: [:get, :post]
   resources :items do
     resources :reviews
     resources :reports, only: [:create, :destroy]
@@ -36,8 +33,11 @@ Rails.application.routes.draw do
   end
 
   get 'logout' => 'mypages#logout'
-  resources :mypages, only: [:index, :show, :edit]
-  resources :addresses, only: [:new, :create, :edit, :update]
+  resources :mypages, only: [:index, :show, :edit, :update] do
+    resources :likes, only: [:index]
+    resources :reviews, only: [:index]
+  end
+  resources :addresses, only: [:index, :new, :create, :edit, :update]
   resources :phone_numbers, only: [:new, :create, :edit, :update]
 
 end
