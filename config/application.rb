@@ -27,5 +27,13 @@ module FreemarketSample36a
       g.helper false
       g.test_framework false
     end
+    config.action_view.embed_authenticity_token_in_remote_forms = false
+
+    config.time_zone = 'Tokyo'
+    config.active_record.default_timezone = :local
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+    config.i18n.default_locale = :en
+    config.i18n.available_locales = [:ja, :en]
+    config.i18n.enforce_available_locales = true
   end
 end
