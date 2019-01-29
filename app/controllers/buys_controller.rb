@@ -10,7 +10,7 @@ include Payjp_process
       @address = Address.find_by(user_id: current_user.id)
       @credit_data = show_customer_data
     else
-      redirect_to root_path
+      redirect_to root_path, alert: "既に販売済みの商品です"
     end
   end
 
@@ -22,7 +22,7 @@ include Payjp_process
       charge = create_charge(@buy_price)
       redirect_to edit_item_buy_path
     else
-      redirect_to root_path
+      redirect_to root_path, alert:"既に販売済みの商品です"
     end
   end
 

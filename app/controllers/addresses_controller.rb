@@ -11,7 +11,6 @@ class AddressesController < ApplicationController
 
   def create
     @address = Address.new(address_params)
-    @address.user_id = current_user.id
     if @address.save
       redirect_to root_path, notice: '登録されました'
     else
@@ -33,8 +32,7 @@ class AddressesController < ApplicationController
     end
 
     def address_params
-      params[:address][:prefecture] = Address.prefectures[params[:address][:prefecture]]
-      params.require(:address).permit(:first_name, :last_name, :first_name_katakana, :last_name_katakana, :postal_code, :prefecture, :city, :address, :building_name, :landline_number, :user_id)
+      params.require(:address).permit(:first_name, :last_name, :first_name_katakana, :last_name_katakana, :postal_code, :prefecture, :city, :address, :building_name, :landline_number).merge(user_id: current_user.id)
     end
     def confirm_current_user
       redirect_to root_path unless current_user == @address.user

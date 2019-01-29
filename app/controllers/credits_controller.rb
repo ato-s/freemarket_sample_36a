@@ -10,19 +10,22 @@ include Payjp_process
     unless current_user.credits.present?
     @credit = Credit.create(credit_params)
       if @credit.save
-        redirect_to new_credit_path
+        redirect_to new_credit_path, alert: "登録しました"
       else
-        render :new
+        render :new, alert:"登録できませんでした"
       end
     else
-      redirect_to root_path
+      redirect_to root_path, alert:"既に登録されています"
     end
   end
 
   def destroy
     @credit = Credit.find_by(user_id: current_user.id)
-    @credit.destroy
-    redirect_to new_credit_path
+    if @credit.destroy
+      redirect_to new_credit_path, alert: "削除しました"
+    else
+      redirect_to new_credit_path, alert: "削除できませんでした"
+    end
   end
 
   private
