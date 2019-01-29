@@ -32,8 +32,12 @@ module FreemarketSample36a
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+<<<<<<< HEAD
     config.i18n.default_locale = :en
     config.i18n.available_locales = [:ja, :en]
     config.i18n.enforce_available_locales = true
+=======
+    config.i18n.default_locale = :ja
+>>>>>>> parent of eed0d2f... Revert "Merge branch 'develop-mypage_creation' of https://github.com/ato-s/freemarket_sample_36a into develop-mypage_creation"
   end
 end
