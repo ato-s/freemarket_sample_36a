@@ -7,15 +7,19 @@ include Payjp_process
   end
 
   def create
-    unless current_user.credits.present?
-    @credit = Credit.create(credit_params)
-      if @credit.save
-        redirect_to new_credit_path, alert: "登録しました"
+    if user_signed_in?
+      unless current_user.credits.present?
+      @credit = Credit.create(credit_params)
+        if @credit.save
+          redirect_to new_credit_path, alert: "登録が完了しました"
+        else
+          redirect_to new_credit_path, alert: "登録できませんでした"
+        end
       else
-        render :new, alert:"登録できませんでした"
+        redirect_to root_path, alert: "既に登録されています"
       end
     else
-      redirect_to root_path, alert:"既に登録されています"
+      redirect_to new_credit_path, alert: "ログインしてください"
     end
   end
 
