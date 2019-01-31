@@ -973,6 +973,14 @@ i {
   &_toggle {
     cursor: pointer;
     .c-icon-plus {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      -webkit-transform: translate(0, -50%);
+      transform: translate(0, -50%);
+      color: #aaa;
+      font-size: 14px;
+    }
   }
   &_icon {
     transition: .4s;
@@ -985,6 +993,18 @@ i {
     display: none;
   }
 }
+.p-search_category-child {
+  + .c-icon-arrow-right {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    color: #aaa;
+    font-size: 14px;
+  }
+}
+
 /* item list */
 .c-mypage_item-list {
   li {

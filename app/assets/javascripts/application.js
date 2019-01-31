@@ -17,3 +17,4 @@
 //= require lib/owl.carousel.min
 //= require lib/owl.carousel2.thumbs
 //= require_tree .
+//= require dropzone

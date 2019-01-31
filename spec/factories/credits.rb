@@ -2,7 +2,7 @@ FactoryBot.define do
 
   factory :credit do
     id              {"1"}
-    credit_number   Faker::Number.number(16)
+    credit_number   {"4242424242424242"}
     limit_month     {"12"}
     limit_year      {"29"}
     security_code   {"123"}
