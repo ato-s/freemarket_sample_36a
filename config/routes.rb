@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   root 'items#index'
   devise_for :users, :controllers => {
-  :registrations => 'users/registrations',
-  :omniauth_callbacks => 'users/omniauth_callbacks',
-  :sessions => 'users/sessions'
+  :registrations => 'users/registrations'
 }
   devise_scope :user do
     get 'select_api' => 'users/registrations#select_api'
@@ -16,9 +14,8 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create, :update, :destroy]
     resources :transaction_messages
+    resource :buy, only: [:edit,:update]
   end
-
-
 
   resources :groups, only: [:show, :index] do
     resources :brands, only: [:show]
@@ -30,15 +27,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :transactions do
-    resources :buys
-    resources :addresses
-    resources :credits
-  end
-
   get 'logout' => 'mypages#logout'
   resources :mypages, only: [:index, :show, :edit]
   resources :addresses, only: [:new, :create, :edit, :update]
   resources :phone_numbers, only: [:new, :create, :edit, :update]
+  resources :credits, only: [:new, :create, :delete, :index]
 
 end

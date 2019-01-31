@@ -26,13 +26,8 @@ gem 'pry-rails'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'kaminari'
-gem 'dropzonejs-rails'
 gem 'fog-aws'
 gem 'payjp'
-gem 'omniauth-facebook'
-gem 'omniauth-twitter'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-instagram'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -45,6 +40,7 @@ group :development, :test do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
+  gem 'faker'
 end
 
 group :development do
@@ -56,7 +52,7 @@ group :development do
 end
 
 group :test do
-  gem 'faker'
+
 end
 
 group :production do

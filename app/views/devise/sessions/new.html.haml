@@ -5,12 +5,10 @@
         %p アカウントをお持ちでない方はこちら
         = link_to '新規会員登録', select_api_path
       .p-login_form-inner
-        = link_to 'Facebookでログイン', user_facebook_omniauth_authorize_path, id: 'facebook-login', class: 'c-btn-default is-sns is-sns-facebook'
-        = link_to 'Googleでログイン', user_google_oauth2_omniauth_authorize_path, id: 'google-login', class: 'c-btn-default is-sns is-sns-google'
-        = link_to 'Twitterでログイン', user_twitter_omniauth_authorize_path, id: 'twitter-login', class: 'c-btn-default is-sns is-sns-twitter'
-        = link_to 'Instagramでログイン', user_instagram_omniauth_authorize_path, id: 'instagram-login', class: 'c-btn-default is-sns is-sns-instagram'
+        = button_tag 'Facebookでログイン', id: 'facebook-login', class: 'c-btn-default is-sns is-sns-facebook'
+        = button_tag 'Googleでログイン', id: 'google-login', class: 'c-btn-default is-sns is-sns-google'
 
-      = form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
         = devise_error_messages!
         .p-login_form-inner.is-borderNone
           .c-form_group
