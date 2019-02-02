@@ -22,7 +22,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.from_omniauth(request.env["omniauth.auth"])
     @user.skip_confirmation!
     Avatar.create(user_id: @user.id) if @user.avatars.length == 0
-    Mypage.create(user_id: @user.id) if @user.mypage == nil
     if @user.persisted?
       sign_in_and_redirect @user, event: :authentication
       set_flash_message(:notice, :success, kind: "#{provider}".capitalize) if is_navigational_format?
