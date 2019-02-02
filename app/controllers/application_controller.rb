@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :uid, :provider, :good_count, :normal_count, :bad_count, avatars_attributes: [:user_id, :content], mypage_attributes: [:user_id, :profile]])
-    devise_parameter_sanitizer.permit(:sign_in, keys: [:nickname, :uid, :provider, :good_count, :normal_count, :bad_count])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:nickname, :uid, :provider, :good_count, :normal_count, :bad_count])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :profile, :uid, :provider, :good_count, :normal_count, :bad_count, avatars_attributes: [:user_id, :content]])
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:nickname, :profile, :uid, :provider, :good_count, :normal_count, :bad_count])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:nickname, :profile, :uid, :provider, :good_count, :normal_count, :bad_count])
   end
   def after_sign_out_path_for(resource)
     root_path
