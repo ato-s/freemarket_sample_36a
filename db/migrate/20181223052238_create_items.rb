@@ -9,6 +9,7 @@ class CreateItems < ActiveRecord::Migration[5.1]
       t.integer :delivery_duration, null:false, default: 0
       t.integer :buy_price, null:false, default: 0
       t.integer :sell_price, null:false, default: 0
+      t.integer :discount_point, null:false, default: 0
       t.integer :commission_price, null:false, default: 0
       t.integer :transaction_stage, null:false, default: 0
       t.integer :like_count, null:false, default: 0

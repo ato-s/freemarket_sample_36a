@@ -57,6 +57,7 @@
 
 ### Association
 - belonsgs_to :user
+- has_many :deliverd_items, class_name: 'Item', foreign_key: 'shipping_address_id'
 
 
 # avatarsテーブル
@@ -199,12 +200,14 @@
 |lower_category_id|integer|null:false, foreign_key:true|
 |seller_id|integer|null:false, add_foreign_key :items, :users, column: :seller_id, index:true|
 |buyer_id|integer|add_foreign_key :items, :users, column: :buyer_id, index:true|
+|shipping_address_id|integer|add_foreign_key :items, :addresses, column: :shipping_address_id, index:true|
 
 ### Association
   belongs_to :brand, optional: true
   belongs_to :size, optional: true
   belongs_to :seller, class_name: 'User', foreign_key: 'seller_id', optional: true
   belongs_to :buyer, class_name: 'User', foreign_key: 'buyer_id', optional: true
+  belongs_to :shipping_address, class_name: 'Address', foreign_key: 'shipping_address_id', optional: true
   belongs_to :upper_category, optional: true
   belongs_to :middle_category, optional: true
   belongs_to :lower_category, optional: true

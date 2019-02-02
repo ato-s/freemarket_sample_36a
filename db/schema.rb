@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190120135701) do
+ActiveRecord::Schema.define(version: 20190202094356) do
 
   create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "first_name", default: "", null: false
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20190120135701) do
     t.integer "delivery_duration", default: 0, null: false
     t.integer "buy_price", default: 0, null: false
     t.integer "sell_price", default: 0, null: false
+    t.integer "discount_point", default: 0, null: false
     t.integer "commission_price", default: 0, null: false
     t.integer "transaction_stage", default: 0, null: false
     t.integer "like_count", default: 0, null: false
@@ -97,11 +98,13 @@ ActiveRecord::Schema.define(version: 20190120135701) do
     t.bigint "buyer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "shipping_address_id"
     t.index ["brand_id"], name: "index_items_on_brand_id"
     t.index ["buyer_id"], name: "index_items_on_buyer_id"
     t.index ["lower_category_id"], name: "index_items_on_lower_category_id"
     t.index ["middle_category_id"], name: "index_items_on_middle_category_id"
     t.index ["seller_id"], name: "index_items_on_seller_id"
+    t.index ["shipping_address_id"], name: "index_items_on_shipping_address_id"
     t.index ["size_id"], name: "index_items_on_size_id"
     t.index ["upper_category_id"], name: "index_items_on_upper_category_id"
   end
@@ -234,6 +237,7 @@ ActiveRecord::Schema.define(version: 20190120135701) do
   add_foreign_key "comments", "items"
   add_foreign_key "comments", "users"
   add_foreign_key "credits", "users"
+  add_foreign_key "items", "addresses", column: "shipping_address_id"
   add_foreign_key "items", "brands"
   add_foreign_key "items", "lower_categories"
   add_foreign_key "items", "middle_categories"
