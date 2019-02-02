@@ -2,7 +2,7 @@
   %section.p-user_details.l-single_container
     .p-user_detail-profile-box{style: 'background-image: url(/assets/common/user_bg.jpg)'}
       .p-user_detail-photo_box.u-taCenter
-        = link_to mypage_path(@mypage) do
+        = link_to mypage_path(current_user.id) do
           .p-user_detail-photo{style: 'background-image: url(/assets/common/member_photo_noimage_thumb.png)'}
           %h2.p-user_detail-title.c-font-6
             - if current_user.nickname.present?
@@ -31,10 +31,10 @@
               = current_user.bad_count
       .p-user_detail-description_box
         %p.c-font-2
-          - if current_user.mypage.profile.present?
-            = current_user.mypage.profile
+          - if current_user.profile.present?
+            = current_user.profile
           - else
-            = link_to "プロファイルの設定を行ってください", edit_mypage_path(@mypage)
+            = link_to "プロファイルの設定を行ってください", edit_mypage_path(current_user.id)
     .c-item_social-media-box
       %ul.c-social-media-box
         %li
