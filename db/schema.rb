@@ -88,8 +88,8 @@ ActiveRecord::Schema.define(version: 20190120135701) do
     t.integer "commission_price", default: 0, null: false
     t.integer "transaction_stage", default: 0, null: false
     t.integer "like_count", default: 0, null: false
-    t.bigint "size_id", null: false
-    t.bigint "brand_id", null: false
+    t.bigint "size_id", default: 0, null: false
+    t.bigint "brand_id", default: 0, null: false
     t.bigint "upper_category_id", null: false
     t.bigint "middle_category_id", null: false
     t.bigint "lower_category_id", null: false
@@ -127,14 +127,6 @@ ActiveRecord::Schema.define(version: 20190120135701) do
     t.bigint "size_type_id"
     t.index ["size_type_id"], name: "index_middle_categories_on_size_type_id"
     t.index ["upper_category_id"], name: "index_middle_categories_on_upper_category_id"
-  end
-
-  create_table "mypages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text "profile"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_mypages_on_user_id"
   end
 
   create_table "phone_numbers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -207,6 +199,7 @@ ActiveRecord::Schema.define(version: 20190120135701) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "nickname", default: "", null: false
+    t.text "profile"
     t.string "uid", default: "", null: false
     t.string "provider", default: "", null: false
     t.integer "good_count", default: 0, null: false
@@ -253,7 +246,6 @@ ActiveRecord::Schema.define(version: 20190120135701) do
   add_foreign_key "lower_categories", "middle_categories"
   add_foreign_key "middle_categories", "size_types"
   add_foreign_key "middle_categories", "upper_categories"
-  add_foreign_key "mypages", "users"
   add_foreign_key "phone_numbers", "users"
   add_foreign_key "pictures", "items"
   add_foreign_key "reports", "items"
