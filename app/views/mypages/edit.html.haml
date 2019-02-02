@@ -1,12 +1,11 @@
 .l-content
   %section.l-chapter-container
     %h2.l-chapter-head プロフィール
-    = form_with model: current_user, url: mypage_path, local: true do |user|
+    = form_with model: current_user, url: mypage_path, local: true do |f|
       .p-mypage_profile-icon
         %figure
           = image_tag 'common/member_photo_noimage_thumb.png', width: '60', height: '60'
-        = user.text_field :nickname, placeholder: '例)AYA☆セール中', class: 'c-input-default'
+        = f.text_field :nickname, placeholder: '例)AYA☆セール中', class: 'c-input-default'
       .p-mypage_profile-content
-        = user.fields_for :mypage, current_user.mypage do |mypage|
-          = mypage.text_area :profile, placeholder: '例）こんにちは☆ ご覧いただきありがとうございます！かわいいものやきれいめオフィスカジュアル中心に出品しています。服のサイズは主に9号です。気持ちよくお取引できるよう心がけていますので、商品や発送方法などご質問がありましたらお気軽にどうぞ♪', class: 'c-textarea-default'
-        = user.submit '変更する', class: 'c-btn-default is-red'
+        = f.text_area :profile, placeholder: '例）こんにちは☆ ご覧いただきありがとうございます！かわいいものやきれいめオフィスカジュアル中心に出品しています。服のサイズは主に9号です。気持ちよくお取引できるよう心がけていますので、商品や発送方法などご質問がありましたらお気軽にどうぞ♪', class: 'c-textarea-default'
+        = f.submit '変更する', class: 'c-btn-default is-red'
