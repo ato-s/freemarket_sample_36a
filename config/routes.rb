@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :reports, only: [:create, :destroy]
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create, :update, :destroy]
-    resources :transaction_messages
+    resources :transaction_messages, only: [:index, :create]
     resource :buy, only: [:edit,:update]
   end
 
