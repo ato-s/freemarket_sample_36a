@@ -22,6 +22,7 @@ class ReviewsController < ApplicationController
 
   def create
     if @review = Review.create(review_params)
+      update_user_review_count
       redirect_to mypages_path, notice: 'Review was successfully created.'
     else
       render :new
@@ -72,5 +73,19 @@ class ReviewsController < ApplicationController
       elsif @item.reviews.length == 1
         @item.update(transaction_stage: 'sold_out')
       end
+    end
+    def update_user_review_count
+      @appraisee = @review.appraisee
+      @good_count = @appraisee.good_count
+      @normal_count = @appraisee.normal_count
+      @bad_count = @appraisee.bad_count
+      if @review.evaluation == 'good'
+        @good_count += 1
+      elsif @review.evaluation == 'normal'
+        @normal_count += 1
+      else
+        @bad_count += 1
+      end
+      @appraisee.update(good_count: @good_count, normal_count: @normal_count, bad_count: @bad_count)
     end
 end
