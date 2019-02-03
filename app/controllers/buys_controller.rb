@@ -24,7 +24,7 @@ class BuysController < ApplicationController
     @item = Item.find(params[:item_id])
   end
   def buy_params
-    params.require(:patch).permit(:discount_point, :shipping_address_id).merge(buyer_id: current_user.id, transaction_stage: "under_transaction")
+    params.require(:patch).permit(:discount_point).merge(buyer_id: current_user.id, transaction_stage: "under_transaction",shipping_address_id:current_user.addresses.ids[0])
   end
   def confirm_item_seller_and_buyer
     redirect_to root_path, alert: "出品した商品を購入することはできません" if @item.seller == current_user

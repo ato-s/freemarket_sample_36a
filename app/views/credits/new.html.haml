@@ -59,3 +59,6 @@
                 = image_tag 'signup/seq-card.png', width: '240'
           %p#primary-error.c-has-error-text
           = f.submit '次へ進む', class: 'c-btn-default is-red'
+      %p#primary-error.c-has-error-text
+        /以下は画面操作での便宜上、仮で設置しています
+        = button_to '購入画面へ戻る', edit_item_buy_path(item_id:1),method: :get ,class: 'c-btn-default is-red'

@@ -43,10 +43,9 @@
                 %span ¥
                 = @item.buy_price
                 / @item.buy_price - point
-          -# エラーメッセージ,配送先か支払い方法が未登録の際に表示
-          -# %p.c-has-error-text
-          -#   配送先と支払い方法の入力を完了してください。
-          = f.hidden_field :shipping_address_id, value: 1 #仮置きです
+          - unless @adress.present?||@credit_data.present?
+            %p.c-has-error-text
+              配送先と支払い方法の入力を完了してください。
           = f.submit '購入する', class: 'c-btn-default is-red u-fzBold'
     %section.p-buy_content.p-buy_user-info
       .p-buy_content-inner
