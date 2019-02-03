@@ -45,4 +45,11 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = :ja
   end
+
+  def confirm_transaction_stage_under_transaction
+    redirect_to mypages_path unless @item.transaction_stage == 'under_transaction'
+  end
+  def confirm_buyer_or_seller_include_current_user
+    redirect_to mypages_path unless [@item.buyer_id, @item.seller_id].include?(current_user.id)
+  end
 end
