@@ -30,15 +30,6 @@
 - has_many : appraiser, class_name : 'review', foreign_key : 'appraiser_id'
 - has_many : appraisee, class_name : 'review', foreign_key : 'appraisee_id'
 
-# mypagesテーブル
-|Column|Type|Options|
-|------|----|-------|
-|user_id|integer|null:false, foreign_key:true|
-|profile|text||
-
-### Association
-- belongs_to : user
-
 
 # phone_numbersテーブル
 |Column|Type|Options|
