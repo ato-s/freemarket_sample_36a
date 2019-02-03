@@ -6,9 +6,6 @@ describe Item do
     end
 
     it "is invalid without a name" do
-      item = FactoryGirl.build(:item, name: "")
-      item.valid?
-      expect(item.errors[:name]).to include("can't be blank.")
     end
 
     it "is invalid without a description" do

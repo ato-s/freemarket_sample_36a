@@ -131,6 +131,20 @@
 - has_many :withdraws
 
 
+# creditsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|credit_number|string|null:false,uniqueness:true|
+|limit_month|string|null:false,length:2|
+|limit_year|string|null:false,length:2|
+|security_code|string|null:false|
+|customer_id|string|null:false,uniqueness:true|
+|user_id|integer|null:false,foreign_key:true|
+
+### Association
+- belongs_to : user
+
+
 # withdrawalsテーブル
 |Column|Type|Options|
 |------|----|-------|
