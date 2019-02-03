@@ -16,7 +16,7 @@
           やることリスト
           %i.c-icon-arrow-right
       %li
-        = link_to mypage_likes_path(current_user.id), class: 'p-mypage_nav_list-item' do
+        = link_to likes_path, class: 'p-mypage_nav_list-item' do
           いいね！一覧
           %i.c-icon-arrow-right
       %li
@@ -48,7 +48,7 @@
           ニュース一覧
           %i.c-icon-arrow-right
       %li
-        = link_to mypage_reviews_path(current_user.id), class: 'p-mypage_nav_list-item' do
+        = link_to reviews_path, class: 'p-mypage_nav_list-item' do
           評価一覧
           %i.c-icon-arrow-right
       %li
