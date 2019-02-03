@@ -170,7 +170,7 @@
 - has_many :user_informations
 
 
-# infomationsテーブル
+# user_infomationsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null:false, foreign_key:true|
@@ -226,7 +226,7 @@
   belongs_to :middle_category, optional: true
   belongs_to :lower_category, optional: true
 
-  has_many :reviews, dependent: :destroy
+  has_many :reviews
   has_many :reports, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy

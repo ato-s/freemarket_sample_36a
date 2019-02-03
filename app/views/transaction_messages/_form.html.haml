@@ -1,10 +1,12 @@
-= form_for @transaction_message do |f|
-  - if @transaction_message.errors.any?
+= form_with model: [@item, @transaction_message], authenticity_token: true do |f|
+  - if @created_transaction_message.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@transaction_message.errors.count, "error")} prohibited this transaction_message from being saved:"
+      %h2= "#{pluralize(@created_transaction_message.errors.count, "error")} prohibited this review from being saved:"
       %ul
-        - @transaction_message.errors.full_messages.each do |message|
+        - @created_transaction_message.errors.full_messages.each do |message|
           %li= message
 
+  = f.text_field :text
+
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: 'c-btn-default is-red u-fzBold'

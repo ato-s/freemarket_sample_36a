@@ -19,3 +19,8 @@ ja:
         under_sale: '出品中'
         under_transaction: '取引中'
         sold_out: '売却済'
+    review:
+      evaluation:
+        good: '良い'
+        normal: '普通'
+        bad: '悪い'
