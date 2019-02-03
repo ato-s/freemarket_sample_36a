@@ -32,41 +32,20 @@ $(function(){
     return html;
   }
 
-  // // input(picture.file_field)の値を消去
-  // function deleteAllPictureValue(){
-  //   var figure_box_number = $(".p-sell_upload_figure").length; //0,1,2...
-  //   for( var content_i = 0; content_i <= figure_box_number ; content_i++ ){
-  //     $("#item_pictures_attributes_" + content_i + "_content").val("")
-  //   }
-  // }
+  function getTargetInput(variabelenumber){
+    var target_input = $("#item_pictures_attributes_"+ variabelenumber +"_content");
+    return target_input;
+  }
 
-  // input(picture.file_field)に値を入力
-  // function addPictureValue(){
-  //   var figure_box_number = $(".p-sell_upload_figure").length; //0,1,2...
-  //   var picture_value = [];
-  //   var picture_target = $(".p-sell_upload_figure");
-  //   var content_i = 0;
-
-  //   if(figure_box_number > 0){
-  //     content_i = 0;
-  //     var picture_url = picture_target.eq(content_i).css("background-image");
-  //     // console.log(picture_url);
-  //   }
-
-  //   if(figure_box_number > 0 ){
-  //     for(var content_i = 0; content_i < figure_box_number ; content_i++ ){
-  //       var picture_url = picture_target.eq(content_i).css("background-image");
-  //       picture_url = picture_url.replace(/^url\(\"|\"\)/g, "");
-  //       picture_value.push(picture_url);
-  //     }
-  //   }
-
-  //   console.log(picture_value);
-
-  //   for(content_i=0; content_i < figure_box_number ; content_i++ ){
-  //     $("#item_pictures_attributes_" + content_i + "_content").val(picture_value[content_i]);
-  //   }
-  // }
+  function getUploaderBoxIndex(){
+    if($(".p-sell_upload_item").length){
+      var box_number = $(".p-sell_upload_item").length;
+      var uploader_box_index = 9 - box_number;
+      return uploader_box_index;
+    }else{
+      return 9;
+    }
+  }
 
   var picture_container = $(".p-sell_upload_items-container");
 //   // // 処理
@@ -75,9 +54,10 @@ $(function(){
   // //写真が選択されたとき、写真を表示
   $(".p-sell_upload_drop-box").on("change",function(e){
     var insertPicture = "";
-    var file = e.target.files[0];
-    var file1 = e.target.files[1];
+    var picuture_file = e.target.files[0];
     var reader = new FileReader();
+    var target_index = getUploaderBoxIndex();
+    var target_input = getTargetInput(target_index);
 
     reader.addEventListener("load", function(){
       insertPicture = appendPicture(reader.result);
@@ -88,19 +68,14 @@ $(function(){
       }
     },false);
 
-    if(file){
-      reader.readAsDataURL(file);
+    if(picuture_file){
+      reader.readAsDataURL(picuture_file);
     }
 
-    // deleteAllPictureValue();
+    target_input.css({
+      "display": "none"
+    });
   });
-
-  // $("#item_pictures_attributes_0_content").on("change", function(){
-  //   var value = $(this).val();
-  //   console.log(value);
-  //   $("#item_pictures_attributes_1_content").val() = value;
-  //   $("#item_pictures_attributes_0_content").val() = $("#item_pictures_attributes_1_content").val();
-  // })
 
   // // 編集ボタンが押された時の処理 -> 写真の編集
   // // 写真の編集:=140x140でトリミング
@@ -112,17 +87,23 @@ $(function(){
   // 削除ボタンが押された時の処理 -> 写真の削除
   picture_container.on("click", "#upload_item_delete", function(){
     var delete_target = $(this).parents(".p-sell_upload_item");
-    delete_target.remove();
+    var empty_input = getTargetInput();
+    var delete_input = getTargetInput(delete_target.index());
+
+    // 削除されたinputの名前の数字を10にする
+    console.log(delete_input);
+
+
+    // それぞれの名前の数字に+1する
+    // for(var i = 0; target_input_index - i > ; i++){
+
+    // }
+    // inputのnameの数字が10のものを空いた数字のnameにする
+    // empty_input.css({
+    //   "display": "block"
+    // });
+    // delete_target.remove();
   });
-
-  // $("#item_upper_category_id").on("change", function(){
-  //   var upper_category_id = $(this).val();
-  //   var insert_html = "";
-  //   console.log(upper_category_id);
-  //   insert_html = appendMiddlecategoryForm(upper_category_id);
-  //   $("#product_category").after(insert_html);
-  // })
-
 
   // 販売手数料、販売利益の表示
   $(".c-input-default").on("keyup", function(){
@@ -139,8 +120,6 @@ $(function(){
       $("#commision_price").html("-");
       $("#profit").html("-");
     }
-    // test
-    // test
   });
 
   $("#profit").on("change", "#sell_price_val", function(){
