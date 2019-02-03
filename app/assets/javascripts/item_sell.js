@@ -103,7 +103,6 @@ $(function(){
     delete_input.attr('name', 'item[pictures_attributes][10][content]')
     delete_input.attr('id', 'item_pictures_attributes_10_content');
     var target_input_10 = getTargetInput(10);
-    console.log(target_input_10);
 
     // それぞれの名前の数字に+1する(inputの箱をずらす)
     for(var i = 1; target_input_index - i > empty_input ; i++){
