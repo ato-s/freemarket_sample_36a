@@ -11,24 +11,20 @@
 |bad_count|integer|null:false, default:0|
 
 ### Association
-- has_one : phone_number
-- has_many : adresses
-- has_one : avatar
-- has_many : reports
-- has_many : likes
-- has_many : comments
-- has_many : transaction_messages
-- has_many : items
-- has_many : todos
-- has_many : informations
-- has_many : user_informations
-- has_one : walet
-- has_many : reviews
-- has_one : mypage
-- has_many : credits
+- has_many :reports, dependent: :destroy
+- has_many :likes, dependent: :destroy
+- has_many :comments, dependent: :destroy
+- has_many :transaction_messages, dependent: :destroy
+- has_many :addresses, dependent: :destroy
+- has_many :avatars, dependent: :destroy, inverse_of: :user
+- has_many :credits,dependent: :destroy
+- has_one :phone_number, dependent: :destroy
+- accepts_nested_attributes_for :avatars, allow_destroy: true
 
-- has_many : appraiser, class_name : 'review', foreign_key : 'appraiser_id'
-- has_many : appraisee, class_name : 'review', foreign_key : 'appraisee_id'
+- has_many :sell_items, class_name: 'Item', foreign_key: 'seller_id', dependent: :destroy
+- has_many :buy_items, class_name: 'Item', foreign_key: 'buyer_id', dependent: :destroy
+- has_many :sent_reviews, class_name: 'Review', foreign_key: 'appraiser_id'
+- has_many :received_reviews, class_name: 'Review', foreign_key: 'appraisee_id'
 
 
 # phone_numbersテーブル
