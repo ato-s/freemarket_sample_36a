@@ -14,8 +14,9 @@
     .p-sell_upload_items-container
       .p-sell_upload_drop-box
         - if current_page?(new_item_path)
-          = f.fields_for :pictures, Picture.new, multiple: true do |picture|
-            = picture.file_field :content
+          - 10.times do
+            = f.fields_for :pictures, Picture.new do |picture|
+              = picture.file_field :content
         - else
           = f.fields_for :pictures, @item.pictures, multiple: true do |picture|
             = picture.file_field :content
