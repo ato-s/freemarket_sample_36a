@@ -41,7 +41,6 @@ $(function(){
     if($(".p-sell_upload_item").length){
       var box_number = $(".p-sell_upload_item").length;
       var uploader_box_index = 9 - box_number;
-      console.log(uploader_box_index);
       return uploader_box_index;
     }else{
       return 9;
