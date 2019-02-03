@@ -8,7 +8,7 @@ class TransactionMessagesController < ApplicationController
   end
 
   def create
-    TransactionMessage.create(transaction_message_params)
+    @created_transaction_message = TransactionMessage.create(transaction_message_params)
   end
 
   private
