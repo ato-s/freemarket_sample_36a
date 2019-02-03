@@ -26,7 +26,6 @@
 - has_many :sent_reviews, class_name: 'Review', foreign_key: 'appraiser_id'
 - has_many :received_reviews, class_name: 'Review', foreign_key: 'appraisee_id'
 
-
 # phone_numbersテーブル
 |Column|Type|Options|
 |------|----|-------|
