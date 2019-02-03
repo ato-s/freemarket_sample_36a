@@ -5,5 +5,9 @@ class Review < ApplicationRecord
 
   validates :text, :evaluation, :item_id, :appraisee_id, :appraiser_id, presence: true
 
-  enum evaluation: { "-----": 0, good: 1, normal: 2, bad: 3 }
+  enum evaluation: {
+    good: 1,
+    normal: 2,
+    bad: 3
+  }
 end
