@@ -1,0 +1,21 @@
+ja:
+  enums:
+    item:
+      state:
+        perfectly_new: '新品、未使用'
+        almost_new: '未使用に近い'
+        no_noticeable_scratches_and_dirt: '目立った傷や汚れなし'
+        slightly_scratchs_and_dirt: 'やや傷や汚れあり'
+        scratched_and_dirt: '傷や汚れあり'
+        overall_bad_condition: '全体的に状態が悪い'
+      delivery_payer:
+        seller: '送料込み(出品者負担)'
+        buyer: '着払い(購入者負担)'
+      delivery_duration:
+        one_to_two_days: '1~2日で発送'
+        two_to_three_days: '2~3日で発送'
+        four_to_seven_days: '4~7日で発送'
+      transaction_stage:
+        under_sale: '出品中'
+        under_transaction: '取引中'
+        sold_out: '売却済'

@@ -4,6 +4,8 @@
       %h2.c-profile-head 支払い方法
       = form_for @credit, url:{:action => :create,:method => :post},html:{class:'l-single_inner'} do |f|
         .l-single_content
+          .c-has-error-text
+            = flash[:alert]
           .c-form_group
             = label :credit_number, 'カード番号'
             %span.c-form_require 必須

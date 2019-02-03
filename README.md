@@ -4,6 +4,7 @@
 |Column|Type|Options|
 |------|----|-------|
 |nickname|string|null:false, unique:ture|
+|profile|text||
 |uid|string|null:false, default:""|
 |provider|string|null:false, default:""|
 |good_count|integer|null:false, default:0|
@@ -11,32 +12,33 @@
 |bad_count|integer|null:false, default:0|
 
 ### Association
-- has_one : phone_number
-- has_many : adresses
-- has_one : avatar
-- has_many : reports
-- has_many : likes
-- has_many : comments
-- has_many : transaction_messages
-- has_many : items
-- has_many : todos
-- has_many : informations
-- has_many : user_informations
-- has_one : walet
-- has_many : reviews
+- has_many :reports, dependent: :destroy
+- has_many :likes, dependent: :destroy
+- has_many :comments, dependent: :destroy
+- has_many :transaction_messages, dependent: :destroy
+- has_many :addresses, dependent: :destroy
+- has_many :avatars, dependent: :destroy, inverse_of: :user
+- has_many :credits,dependent: :destroy
+- has_one :phone_number, dependent: :destroy
+- accepts_nested_attributes_for :avatars, allow_destroy: true
 
-- has_many : appraiser, class_name : 'review', foreign_key : 'appraiser_id'
-- has_many : appraisee, class_name : 'review', foreign_key : 'appraisee_id'
-
+- has_many :sell_items, class_name: 'Item', foreign_key: 'seller_id', dependent: :destroy
+- has_many :buy_items, class_name: 'Item', foreign_key: 'buyer_id', dependent: :destroy
+- has_many :sent_reviews, class_name: 'Review', foreign_key: 'appraiser_id'
+- has_many :received_reviews, class_name: 'Review', foreign_key: 'appraisee_id'
 
 # phone_numbersテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null:false, foreign_key:true|
-|number|integer|null:false, unique:true|
+|number|string|null:false, unique: true|
+|verification_code|integer||
+|verification_code_confirmation|integer||
+|verified|boolean|null:false, default: false|
+|user_id|integer|null:false, foreign_key: true|
+
 
 ### Association
-- belongs_to : user
+- belongs_to :user
 
 # addressesテーブル
 |Column|Type|Options|
@@ -54,7 +56,8 @@
 |landline_number|integer|null:false|
 
 ### Association
-- belonsgs_to : user
+- belonsgs_to :user
+- has_many :deliverd_items, class_name: 'Item', foreign_key: 'shipping_address_id'
 
 
 # avatarsテーブル
@@ -64,7 +67,7 @@
 |content|text|null:false|
 
 ### Association
-- belongs_to : user
+- belongs_to :user
 
 
 # reportsテーブル
@@ -74,8 +77,8 @@
 |item_id|integer|null:false, foreign_key:true|
 
 ### Association
-- belongs_to : user
-- belongs_to : item
+- belongs_to :user
+- belongs_to :item
 
 
 # likesテーブル
@@ -85,8 +88,8 @@
 |item_id|integer|null:false, foreign_key:true|
 
 ### Association
-- belongs_to : user
-- belongs_to : item, counter_cache:like_count
+- belongs_to :user
+- belongs_to :item, counter_cache:like_count
 
 
 # commentsテーブル
@@ -97,8 +100,8 @@
 |text|text|null:false|
 
 ### Association
-- belongs_to : user
-- belongs_to : item
+- belongs_to :user
+- belongs_to :item
 
 # reviewsテーブル
 |Column|Type|Options|
@@ -112,8 +115,8 @@
 - enum evaluation: { error: 0, good: 1, normal: 2, bad: 3 }
 
 ### Association
-- belongs_to : user
-- belongs_to : item
+- belongs_to :user
+- belongs_to :item
 
 
 # walletsテーブル
@@ -124,8 +127,8 @@
 |point|integer|null:false, default:0|
 
 ### Association
-- belongs_to : user
-- has_many : withdraws
+- belongs_to :user
+- has_many :withdraws
 
 
 # withdrawalsテーブル
@@ -135,7 +138,7 @@
 |withdrawal_price|integer|null:false|
 
 ### Association
-- belongs_to : wallet
+- belongs_to :wallet
 
 
 # informationsテーブル
@@ -148,20 +151,20 @@
 |changed_stage|integer|null:false, default:0|
 
 ### Association
-- belongs_to : user
-- belongs_to : item
-- has_many : user_informations
+- belongs_to :user
+- belongs_to :item
+- has_many :user_informations
 
 
-# user_infomationsテーブル
+# infomationsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null:false, foreign_key:true|
 |infomation_id|integer|null:false, foreign_key:true|
 
 ### Association
-- belongs_to : user_information
-- belongs_to : user
+- belongs_to :user_information
+- belongs_to :user
 
 
 # todosテーブル
@@ -173,14 +176,14 @@
 |text|text|null:false|
 
 ### Association
-- belongs_to : user
-- belongs_to : item
+- belongs_to :user
+- belongs_to :item
 
 # itemsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null:false, default:""|
-|description|text|null:false, default:""|
+|description|text||
 |state|integer|null:false, default:0|
 |delivery_payer|integer|null:false, default:0|
 |delivery_region|integer|null:false, default:0|
@@ -190,29 +193,32 @@
 |commition_price|integer|null:false, default:0|
 |transaction_stage|integer|null:false, default:0|
 |like_count|integer|null:false, default:0|
-|size_id|integer|null:false, foreign_key:true|
-|brand_id|integer|null:false, foreign_key:true|
+|size_id|integer|null:false, foreign_key:true, default:0|
+|brand_id|integer|null:false, foreign_key:true, default:0|
 |upper_category_id|integer|null:false, foreign_key:true|
 |middle_category_id|integer|null:false, foreign_key:true|
 |lower_category_id|integer|null:false, foreign_key:true|
 |seller_id|integer|null:false, add_foreign_key :items, :users, column: :seller_id, index:true|
-|buyer_id|integer|null:false, add_foreign_key :items, :users, column: :buyer_id, index:true|
+|buyer_id|integer|add_foreign_key :items, :users, column: :buyer_id, index:true|
+|shipping_address_id|integer|add_foreign_key :items, :addresses, column: :shipping_address_id, index:true|
 
 ### Association
-- belongs_to : user
-- has_many : reports
-- has_many : likes
-- has_many : comments
-- has_many : transactions
-- has_many : pictures
-- belongs_to : brand
-- belongs_to : upper_category
-- belongs_to : middle_category
-- belongs_to : lower_category
-- belongs_to : size
-- has_many : todos
-- has_many : informations
-- has_many : reviews
+  belongs_to :brand, optional: true
+  belongs_to :size, optional: true
+  belongs_to :seller, class_name: 'User', foreign_key: 'seller_id', optional: true
+  belongs_to :buyer, class_name: 'User', foreign_key: 'buyer_id', optional: true
+  belongs_to :shipping_address, class_name: 'Address', foreign_key: 'shipping_address_id', optional: true
+  belongs_to :upper_category, optional: true
+  belongs_to :middle_category, optional: true
+  belongs_to :lower_category, optional: true
+
+  has_many :reviews, dependent: :destroy
+  has_many :reports, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :transaction_messages, dependent: :destroy
+  has_many :pictures, dependent: :destroy
+  accepts_nested_attributes_for :pictures, allow_destroy: true
 
 
 # transaction_messagesテーブル

@@ -19,12 +19,12 @@
     .c-form_group
       = f.label :postal_code, '郵便番号'
       %span.c-form_require 必須
-      = f.text_field :postal_code, value: "", placeholder: '例）1234567', class: 'c-input-default'
+      = f.text_field :postal_code, placeholder: '例）1234567', class: 'c-input-default'
     .c-form_group
       = f.label :prefecture, '都道府県'
       %span.c-form_require 必須
       .c-select-wrap
-        = f.select :prefecture, Address.prefectures.keys.to_a
+        = f.select :prefecture, Address.prefectures.keys.to_a, {prompt: "---"}
         %i.c-icon-arrow-bottom
     .c-form_group
       = f.label :city, '市区町村'

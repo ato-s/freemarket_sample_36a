@@ -15,6 +15,7 @@ Group.create!([
   {name: "食品"}
 ])
 Brand.create!([
+  {name: "不明", initial_word: "ア", id: 0},
   {name: "アー ヴェ ヴェ", initial_word: "ア"},
   {name: "アーカー", initial_word: "ア"},
   {name: "アーカイブ", initial_word: "ア"},
@@ -25188,13 +25189,14 @@ BrandGroup.create!([
   {brand_id: 10020, group_id: 14}
 ])
 SizeType.create!([
-  {size_type: "------", id: 0},
+  {size_type: "---", id: 0},
   {size_type: "size"},
   {size_type: "shoes"},
   {size_type: "kids_size"},
   {size_type: "kids_shoes"}
 ])
 Size.create!([
+  {name: "---", id: 0, size_type_id: 0},
   {name: "XXS以下", size_type_id: 1},
   {name: "XS(SS)", size_type_id: 1},
   {name: "S", size_type_id: 1},

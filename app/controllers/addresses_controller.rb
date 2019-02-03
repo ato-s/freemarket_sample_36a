@@ -1,7 +1,12 @@
 class AddressesController < ApplicationController
   before_action :set_address, only: [:edit, :update]
-  before_action :move_to_sign_in, only: [:new, :edit, :create, :update]
+  before_action :move_to_sign_in
   before_action :confirm_current_user, only: [:edit, :update]
+
+  def index
+    @addresses = current_user.addresses
+  end
+
   def new
     @address = Address.new
   end
@@ -11,9 +16,8 @@ class AddressesController < ApplicationController
 
   def create
     @address = Address.new(address_params)
-    @address.user_id = current_user.id
     if @address.save
-      redirect_to root_path, notice: '登録されました'
+      redirect_to mypages_path, notice: '登録されました'
     else
       render :new
     end
@@ -21,7 +25,7 @@ class AddressesController < ApplicationController
 
   def update
     if @address.update(address_params)
-      redirect_to root_path, notice: '更新しました'
+      redirect_to mypages_path, notice: '更新しました'
     else
       render :edit
     end
@@ -33,8 +37,7 @@ class AddressesController < ApplicationController
     end
 
     def address_params
-      params[:address][:prefecture] = Address.prefectures[params[:address][:prefecture]]
-      params.require(:address).permit(:first_name, :last_name, :first_name_katakana, :last_name_katakana, :postal_code, :prefecture, :city, :address, :building_name, :landline_number, :user_id)
+      params.require(:address).permit(:first_name, :last_name, :first_name_katakana, :last_name_katakana, :postal_code, :prefecture, :city, :address, :building_name, :landline_number).merge(user_id: current_user.id)
     end
     def confirm_current_user
       redirect_to root_path unless current_user == @address.user
