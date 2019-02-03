@@ -47,6 +47,13 @@ $(function(){
     }
   }
 
+  function changeInputIdAndName(variabelenumber, revisednumber){
+    var target_input = $("#item_pictures_attributes_"+ variabelenumber +"_content");
+    var new_number = revisednumber + 1;
+    target_input.attr('name', 'item[pictures_attributes]['+ new_number +'][content]');
+    target_input.attr('id', 'item_pictures_attributes_'+ new_number +'_content');
+  }
+
   var picture_container = $(".p-sell_upload_items-container");
 //   // // 処理
 //   // // todo: 写真の最大枚数は10枚
@@ -87,22 +94,29 @@ $(function(){
   // 削除ボタンが押された時の処理 -> 写真の削除
   picture_container.on("click", "#upload_item_delete", function(){
     var delete_target = $(this).parents(".p-sell_upload_item");
-    var empty_input = getTargetInput();
-    var delete_input = getTargetInput(delete_target.index());
+    var target_input_index = 9 - delete_target.index();
+    var delete_input = getTargetInput(target_input_index);
 
-    // 削除されたinputの名前の数字を10にする
-    console.log(delete_input);
+    var empty_input = getUploaderBoxIndex();
 
+    // 削除されたinputの名前,idの数字を10にする(名前の競合の回避)(1時的な避難場所)
+    delete_input.attr('name', 'item[pictures_attributes][10][content]')
+    delete_input.attr('id', 'item_pictures_attributes_10_content');
+    var target_input_10 = getTargetInput(10);
 
-    // それぞれの名前の数字に+1する
-    // for(var i = 0; target_input_index - i > ; i++){
+    // それぞれの名前の数字に+1する(inputの箱をずらす)
+    for(var i = 1; target_input_index - i > empty_input ; i++){
+      var new_taget_input_index = target_input_index -i;
+      changeInputIdAndName(new_taget_input_index, new_taget_input_index);
+    }
 
-    // }
     // inputのnameの数字が10のものを空いた数字のnameにする
-    // empty_input.css({
-    //   "display": "block"
-    // });
-    // delete_target.remove();
+    changeInputIdAndName(10,empty_input);
+    target_input_10.css({
+      "display": "block"
+    });
+
+    delete_target.remove();
   });
 
   // 販売手数料、販売利益の表示
