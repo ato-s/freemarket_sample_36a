@@ -54,7 +54,7 @@ $(function(){
   // //写真が選択されたとき、写真を表示
   $(".p-sell_upload_drop-box").on("change",function(e){
     var insertPicture = "";
-    var file = e.target.files[0];
+    var picuture_file = e.target.files[0];
     var reader = new FileReader();
     var target_index = getUploaderBoxIndex();
     var target_input = getTargetInput(target_index);
@@ -68,8 +68,8 @@ $(function(){
       }
     },false);
 
-    if(file){
-      reader.readAsDataURL(file);
+    if(picuture_file){
+      reader.readAsDataURL(picuture_file);
     }
 
     target_input.css({
