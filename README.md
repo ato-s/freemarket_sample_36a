@@ -25,6 +25,7 @@
 - has_one : walet
 - has_many : reviews
 - has_one : mypage
+- has_many : credits
 
 - has_many : appraiser, class_name : 'review', foreign_key : 'appraiser_id'
 - has_many : appraisee, class_name : 'review', foreign_key : 'appraisee_id'
@@ -136,6 +137,21 @@
 ### Association
 - belongs_to : user
 - has_many : withdraws
+
+
+# creditsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|credit_number|string|null:false,uniqueness:true|
+|limit_month|string|null:false,length:2|
+|limit_year|string|null:false,length:2|
+|security_code|string|null:false|
+|customer_id|string|null:false,uniqueness:true|
+|user_id|integer|null:false,foreign_key:true|
+
+
+### Association
+- belongs_to : user
 
 
 # withdrawalsテーブル
