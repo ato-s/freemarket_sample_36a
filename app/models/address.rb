@@ -1,5 +1,6 @@
 class Address < ApplicationRecord
   belongs_to :user
+  has_many :deliverd_items, class_name: 'Item', foreign_key: 'shipping_address_id'
 
   validates :first_name, :last_name, :postal_code, :prefecture, :city, :address, :user_id, presence: true
   validates :first_name_katakana, :last_name_katakana, presence: true, format: { with: /\A[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+\z/, message: 'はカタカナで入力して下さい。'}

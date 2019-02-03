@@ -3,6 +3,7 @@ class Item < ApplicationRecord
   belongs_to :size, optional: true
   belongs_to :seller, class_name: 'User', foreign_key: 'seller_id', optional: true
   belongs_to :buyer, class_name: 'User', foreign_key: 'buyer_id', optional: true
+  belongs_to :shipping_address, class_name: 'Address', foreign_key: 'shipping_address_id', optional: true
   belongs_to :upper_category, optional: true
   belongs_to :middle_category, optional: true
   belongs_to :lower_category, optional: true

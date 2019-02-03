@@ -73,8 +73,6 @@ class ItemsController < ApplicationController
         :buy_price,
         :commission_price,
         :sell_price,
-        :commition_price,
-        :transaction_stage,
         :like_count,
         :size_id,
         :brand_id,
@@ -82,7 +80,6 @@ class ItemsController < ApplicationController
         :middle_category_id,
         :lower_category_id,
         :seller_id,
-        :buyer_id,
         pictures_attributes: [:id, :content, :status]
       ).merge(transaction_stage: 'under_sale', seller_id: current_user.id)
     end
@@ -97,8 +94,6 @@ class ItemsController < ApplicationController
         :buy_price,
         :commission_price,
         :sell_price,
-        :commition_price,
-        :transaction_stage,
         :like_count,
         :size_id,
         :brand_id,
@@ -106,7 +101,6 @@ class ItemsController < ApplicationController
         :middle_category_id,
         :lower_category_id,
         :seller_id,
-        :buyer_id,
         pictures_attributes: [:id, :content, :status]
       )
     end
