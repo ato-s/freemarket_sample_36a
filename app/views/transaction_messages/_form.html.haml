@@ -1,11 +1,4 @@
 = form_with model: [@item, @transaction_message], authenticity_token: true do |f|
-  - if @created_transaction_message.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@created_transaction_message.errors.count, "error")} prohibited this review from being saved:"
-      %ul
-        - @created_transaction_message.errors.full_messages.each do |message|
-          %li= message
-
   = f.text_field :text
 
   .actions
