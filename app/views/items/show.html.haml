@@ -6,7 +6,7 @@
       .p-item_photo
         .owl-carousel.owl-loaded.owl-drag.js-owl-carousel-item
           %div.p-item_photo_item
-            = image_tag @item.pictures.first.content
+            = image_tag @item.pictures[0].content
       %table.p-item_detail-table
         %tbody
           %tr
@@ -43,7 +43,7 @@
           %tr
             %th ブランド
             %td
-              = link_to '/brand/3117/' do
+              = link_to '#' do
                 = @brand.name
           %tr
             %th 商品の状態
@@ -55,11 +55,11 @@
               = @item.delivery_payer_i18n
           %tr
             %th 配送の方法
-            %td カラム確認(普通郵便(定形、定形外))
+            %td 要確認(普通郵便(定形、定形外))
           %tr
             %th 配送元地域
             %td
-              = link_to '/brand/3117/' do
+              = link_to items_path do
                 = @item.delivery_region
           %tr
             %th 発送日の目安
