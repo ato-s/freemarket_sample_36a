@@ -20,6 +20,13 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @seller = User.find(@item.seller_id)
+    @other_items = Item.where(seller_id: @item.seller_id)
+    @brand = Brand.find(@item.brand_id)
+    @upper_category = UpperCategory.find(@item.upper_category_id)
+    @middle_category = MiddleCategory.find(@item.middle_category_id)
+    @lower_category = LowerCategory.find(@item.lower_category_id)
+    @sizes = Size.find(@item.size_id)
   end
 
   def new
