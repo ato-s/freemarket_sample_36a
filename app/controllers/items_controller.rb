@@ -23,6 +23,7 @@ class ItemsController < ApplicationController
     @item = Item.includes(:transaction_messages).find(params[:id])
     @seller = User.find(@item.seller_id)
     @other_items = Item.where(seller_id: @item.seller_id)
+    @other_brand_items = Item.where(brand_id: @item.brand_id)
     @brand = Brand.find(@item.brand_id)
     @upper_category = UpperCategory.find(@item.upper_category_id)
     @middle_category = MiddleCategory.find(@item.middle_category_id)
