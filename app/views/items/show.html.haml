@@ -127,26 +127,26 @@
             %span コメントする
     %ul.p-item_nav-link.l-clearfix
       %li.p-item_nav-link_prev
-        = link_to '/' do
+        = link_to "#{@rand_prev}" do
           %i.c-icon-arrow-left>
-          マグ＆スプーンセット  きのこ
+          = @next_page.name
       %li.p-item_nav-link_next
-        = link_to '/' do
-          ★ちくわさん専用★エフデ ♡リボン スエード レザーグローブ♡手袋
+        = link_to '#{@rand_next}' do
           %i.c-icon-arrow-right
+          = @next_page.name
     .c-item_social-media-box
       %ul.c-social-media-box
         %li
-          = link_to '#', target: '_blank', class: 'c-share-btn' do
+          = link_to user_facebook_omniauth_authorize_path, target: '_blank', class: 'c-share-btn' do
             %i.c-icon-facebook
         %li
-          = link_to '#', target: '_blank', class: 'c-share-btn' do
+          = link_to user_twitter_omniauth_authorize_path, target: '_blank', class: 'c-share-btn' do
             %i.c-icon-twitter
         %li.social-hidden-item
           = link_to '#', target: '_blank', class: 'c-share-btn' do
             %i.c-icon-line
         %li
-          = link_to '#', target: '_blank', class: 'c-share-btn' do
+          = link_to user_instagram_omniauth_authorize_path, target: '_blank', class: 'c-share-btn' do
             %i.c-icon-pinterest
     .c-items-in-user-profile
       %section.c-items-box_container.l-clearfix.c-items-box_overflow.c-items-in-user-profile
