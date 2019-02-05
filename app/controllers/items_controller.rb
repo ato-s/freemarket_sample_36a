@@ -20,6 +20,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @item = Item.includes(:transaction_messages).find(params[:id])
     @seller = User.find(@item.seller_id)
     @other_items = Item.where(seller_id: @item.seller_id)
     @brand = Brand.find(@item.brand_id)

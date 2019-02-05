@@ -12,7 +12,8 @@
           %tr
             %th 出品者
             %td
-              = link_to @seller.nickname
+              = link_to '#' do
+                = @seller.nickname
               %div
                 .p-item_user-ratings
                   %i.c-icon-good
@@ -43,8 +44,7 @@
             %th ブランド
             %td
               = link_to '/brand/3117/' do
-                %div
-                  = @brand.name
+                = @brand.name
           %tr
             %th 商品の状態
             %td
@@ -59,14 +59,15 @@
           %tr
             %th 配送元地域
             %td
-              = link_to @item.delivery_region
+              = link_to '/brand/3117/' do
+                = @item.delivery_region
           %tr
             %th 発送日の目安
             %td
               =@item.delivery_duration_i18n
     .p-item_price-box.u-taCenter
-      %span.p-item_price.u-fwBold ¥
-      = @item.buy_price
+      %span.p-item_price.u-fwBold
+        ¥#{@item.buy_price}
       %span.p-item_tax (税込)
       %span.p-item_shipping-fee
       = @item.delivery_payer_i18n
@@ -95,43 +96,29 @@
     .p-item_message_container
       .p-item_message_content
         %ul.p-item_message_block
-          %li.l-clearfix
-            = link_to '#', class: 'p-item_message_user' do
-              %figure
-                %div
-                  = image_tag 'common/member_photo_noimage_thumb.png'
-                %figcaption.u-fwBold
-                  はる
-            .p-item_message_body
-              .p-item_message_body-text 購入希望です^_^
-              .p-item_message_icons.l-clearfix
-                %time.p-item_message_icon-left
-                  %i.c-icon-time
-                  %span 4 日前
-                .p-item_message_icon-right
-                  = form_for '#', html: {class: 'c-message-form'} do |f|
-                    = button_tag '' do
-                      %i.c-icon-flag
-              %i.c-icon-balloon
-          %li.l-clearfix
-            = link_to '#', class: 'p-item_message_user' do
-              %figure
-                %div
-                  = image_tag 'common/member_photo_noimage_thumb.png'
-                %figcaption.u-fwBold
-                  りさ
-              .p-item_message_seller 出品者
-            .p-item_message_body
-              .p-item_message_body-text ありがとうございます！このままこちらからご購入ください。
-              .p-item_message_icons.l-clearfix
-                %time.p-item_message_icon-left
-                  %i.c-icon-time
-                  %span 4 日前
-                .p-item_message_icon-right
-                  = form_for '#', html: {class: 'c-message-form'} do |f|
-                    = button_tag '' do
-                      %i.c-icon-flag
-              %i.c-icon-balloon
+          - @item.transaction_messages.each do|message|
+            %li.l-clearfix
+              = link_to '#', class: 'p-item_message_user' do
+                %figure
+                  %div
+                    = image_tag 'common/member_photo_noimage_thumb.png'
+                  %figcaption.u-fwBold
+                    = message.user.nickname
+                - if message.user.id == @item.seller.id
+                  .p-item_message_seller 出品者
+              .p-item_message_body
+                .p-item_message_body-text
+                  = message.text
+                .p-item_message_icons.l-clearfix
+                  %time.p-item_message_icon-left
+                    %i.c-icon-time
+                    %span
+                      = time_ago_in_words(message.created_at)+"前"
+                  .p-item_message_icon-right
+                    = form_for '#', html: {class: 'c-message-form'} do |f|
+                      = button_tag '' do
+                        %i.c-icon-flag
+                %i.c-icon-balloon
       .p-item_message_content
         = form_for '#', html: {class: 'c-message-form'} do |f|
           %p 相手のことを考え丁寧なコメントを心がけましょう。不快な言葉遣いなどは利用制限や退会処分となることがあります。
