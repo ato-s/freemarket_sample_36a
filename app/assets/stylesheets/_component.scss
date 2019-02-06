@@ -243,6 +243,30 @@ i {
     font-size: 14px;
   }
 }
+.is-sns-twitter {
+  margin: 16px 0 0;
+  background: #5d9dc9;
+  color: #fff;
+
+  &:before {
+    content: "\e02c";
+    @include icon;
+    font-size: 14px;
+  }
+}
+.is-sns-instagram {
+  margin: 16px 0 0;
+  background: #262626;
+  color: #fff;
+
+  &:before {
+    content: "\f16d";
+    @include icon;
+    font-family: fontAwesome;
+    font-size: 21px;
+    align-items: flex-start;
+  }
+}
 .is-mail {
   position: relative;
   background: #eee;

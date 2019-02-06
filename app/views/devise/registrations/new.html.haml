@@ -12,9 +12,10 @@
             %span.c-form_require 必須
             = f.text_field :nickname, autofocus: true, placeholder: '例）メルカリ太郎', class: 'c-input-default'
           .c-form_group
-            = f.label :email, 'メールアドレス(登録されたメールアドレスに認証メールが送信されます)'
+            = f.label :email, 'メールアドレス'
             %span.c-form_require 必須
             = f.email_field :email, autofocus: true, placeholder: 'PC・携帯どちらでも可', class: 'c-input-default'
+            %p.u-clRd 登録されたメールアドレスに認証メールが送信されます
           .c-form_group
             = f.label :password, 'パスワード'
             %span.c-form_require 必須
@@ -25,4 +26,3 @@
             = f.password_field :password_confirmation, placeholder: '6文字以上', class: 'c-input-default'
           .c-form_group
             = f.submit '次へ進む', class: 'c-btn-default is-red'
-      = render "devise/shared/links"

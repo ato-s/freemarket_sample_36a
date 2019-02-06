@@ -2,6 +2,7 @@ class AddressesController < ApplicationController
   before_action :set_address, only: [:edit, :update]
   before_action :move_to_sign_in
   before_action :confirm_current_user, only: [:edit, :update]
+  layout "mypage"
 
   def index
     @addresses = current_user.addresses
