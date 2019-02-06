@@ -74,7 +74,11 @@
     .u-taCenter
       .p-item_sales-point-message
         P 500 をお持ちです
-    = link_to '購入画面に進む',edit_item_buy_path(@item), class: 'p-item_buy-btn u-fz18-24'
+    - if @item.transaction_stage == "under_sale"
+      = link_to '購入画面に進む',edit_item_buy_path(@item), class: 'p-item_buy-btn u-fz18-24'
+    - else
+      .p-item_buy-btn_sold.u-fz18-24
+        売り切れです
     .p-item_description.u-fz14
       %p.p-item_description-inner
         = @item.description
