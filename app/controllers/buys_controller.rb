@@ -2,6 +2,7 @@ class BuysController < ApplicationController
   before_action :set_item
   before_action :confirm_item_seller_and_buyer
   before_action :confirm_transaction_stage_under_sale
+  before_action :confirm_user_sign_in
 
   include Payjp_process
 
@@ -32,4 +33,8 @@ class BuysController < ApplicationController
   def confirm_transaction_stage_under_sale
     redirect_to root_path, alert: "既に販売済みの商品です" unless @item.transaction_stage == "under_sale"
   end
+  def confirm_user_sign_in
+    redirect_to root_path, alert: "ログインして下さい" unless user_signed_in?
+  end
+
 end

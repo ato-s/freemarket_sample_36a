@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'descriptions/show'
+
   root 'items#index'
   devise_for :users, :controllers => {
   :registrations => 'users/registrations',
@@ -37,5 +39,9 @@ Rails.application.routes.draw do
   resources :addresses, only: [:index, :new, :create, :edit, :update]
   resources :phone_numbers, only: [:new, :create, :edit, :update]
   resources :credits, only: [:new, :create, :delete, :index]
+
+  resource :safe, only: [:show] do
+    resource :description,only: [:show]
+  end
 
 end
