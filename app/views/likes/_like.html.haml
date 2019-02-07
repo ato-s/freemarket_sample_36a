@@ -1,14 +1,11 @@
 - if user_signed_in?
   - if item.likes.find_by(user_id: current_user.id)
-
-    = button_to item_like_path(item_id: item.id), method: :delete,class: "c-item-button c-item-button-like", remote: true do
-      %i.c-icon-like-border
+    = button_to item_like_path(likes, item_id: item.id), method: :delete, class: "c-item-button c-item-button-like", remote: true do
+      %i.c-icon-like
       %span いいね!
       %span.is-fade-in-down
         = item.like_count
-
   - else
-
     = button_to item_likes_path(item_id: item.id), class: "c-item-button c-item-button-like", remote: true do
       %i.c-icon-like-border
       %span いいね!
@@ -20,7 +17,3 @@
     %span いいね!
     %span.is-fade-in-down
       = @item.like_count
-
-
-
-

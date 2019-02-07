@@ -84,8 +84,8 @@
         = @item.description
     .p-item_button-container.l-clearfix
       .c-item-button-left
-        #like_btn
-          = render partial: "likes/like", locals: { item: @item, items: @items, like: @like, likes: @likes }
+        #like_btn.c-item-button
+          = render partial: "likes/like", locals: { item: @item, likes: @likes }
         = link_to '#report-item', class: 'c-item-button c-item-button-report l-clearfix js-modal' do
           %i.c-icon-flag
           %span 不適切な商品の報告

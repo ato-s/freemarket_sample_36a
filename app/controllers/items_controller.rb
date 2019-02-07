@@ -30,14 +30,7 @@ class ItemsController < ApplicationController
     @lower_category = LowerCategory.find(@item.lower_category_id)
     @sizes = Size.find(@item.size_id)
     random_page_link
-
-
-    @like = Like.find_by(user_id: current_user.id, item_id: params[:item_id])
     @likes = Like.where(item_id: params[:item_id])
-    @items = Item.all
-
-
-
   end
 
   def new
