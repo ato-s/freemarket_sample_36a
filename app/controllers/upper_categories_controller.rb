@@ -5,9 +5,9 @@ class UpperCategoriesController < ApplicationController
   def index
   end
 
-  # GET /upper_categories/1
-  # GET /upper_categories/1.json
   def show
+    @items = @upper_category.items.order("created_at DESC").page(params[:page]).per(80)
+    @upper_category_navi = @upper_category.middle_categories.order("RAND()").limit(9)
   end
 
   # GET /upper_categories/new
