@@ -84,11 +84,8 @@
         = @item.description
     .p-item_button-container.l-clearfix
       .c-item-button-left
-        = button_tag class: 'c-item-button c-item-button-like' do
-          %i.c-icon-like-border
-          %span いいね!
-          %span.is-fade-in-down
-            = @item.like_count
+        #like_btn
+          = render "likes/like", item: @item
         = link_to '#report-item', class: 'c-item-button c-item-button-report l-clearfix js-modal' do
           %i.c-icon-flag
           %span 不適切な商品の報告
