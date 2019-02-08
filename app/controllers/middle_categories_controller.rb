@@ -2,15 +2,13 @@ class MiddleCategoriesController < ApplicationController
   before_action :set_middle_category, only: [:show, :edit, :update, :destroy]
   layout "include_breadcrumbs"
 
-  # GET /middle_categories
-  # GET /middle_categories.json
   def index
     @middle_categories = MiddleCategory.all
   end
 
-  # GET /middle_categories/1
-  # GET /middle_categories/1.json
   def show
+    @items = @middle_category.items.order("created_at DESC").page(params[:page]).per(80)
+    @middle_category_navi = @middle_category.lower_categories.order("RAND()").limit(9)
   end
 
   # GET /middle_categories/new

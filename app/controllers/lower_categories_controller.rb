@@ -8,9 +8,8 @@ class LowerCategoriesController < ApplicationController
     @lower_categories = LowerCategory.all
   end
 
-  # GET /lower_categories/1
-  # GET /lower_categories/1.json
   def show
+    @items = @lower_category.items.order("created_at DESC").page(params[:page]).per(80)
   end
 
   # GET /lower_categories/new

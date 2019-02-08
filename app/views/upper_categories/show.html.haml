@@ -1,1 +1,23 @@
 - breadcrumb :upper_categories, @upper_category
+.l-default-container
+  .l-container
+    .c-items-box_container.l-clearfix
+      %ul.c-parts-nav.l-clearfix
+        - @upper_category_navi.each do |navi|
+          %li
+            = link_to middle_category_path(navi) do
+              = navi.name
+      %h1.c-items-box-head
+        = @upper_category.name
+        の商品一覧
+        - if @items.current_page > 1
+          (#{@items.current_page} ページ目)
+      .c-items-box_content.l-clearfix
+        = render partial: 'layouts/item', collection: @items
+      = paginate @items, window: 2
+      .c-spacial-description
+        .u-taCenter.c-spacial-description_title.u-bgRd
+          %h3.u-clWt
+            = @upper_category.name
+        .u-bgWt.c-spacial-description_text
+          %p #{@upper_category.name}の着ない服、いらない洋服を売るならメルカリへ。#{@upper_category.name}の商品は100万点以上あります。人気のあるカテゴリーはデニム/ジーンズと名刺入れ/定期入れです。人気の商品は「和柄 デニム ジーンズ」や「革名刺入れ　パスケース　新品」があります。#{@upper_category.name}の買い取りやリサイクル処分、服の整理を検討中の方にお勧めです。
