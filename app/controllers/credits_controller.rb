@@ -2,6 +2,10 @@ class CreditsController < ApplicationController
 
 include Payjp_process
 
+  def index
+    @credit_data = show_customer_data
+  end
+
   def new
     @credit = Credit.new
   end

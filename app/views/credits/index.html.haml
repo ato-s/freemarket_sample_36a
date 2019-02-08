@@ -11,9 +11,14 @@
               = f.label :payment_card_no, class: 'l-single_content' do
                 %figure
                   = image_tag 'card/master-card.svg', width: '34', height: '20'
-                .p-mypage_payment-num ************9889
-                .p-mypage_payment-num 09 / 22
-                = f.radio_button 'consume_point_radio', '2', checked: 'checked'
+                %p.p-buy_user-info-text
+                  ************
+                  = @credit_data.last4
+                  %br
+                  = @credit_data.exp_month
+                  \/
+                  = @credit_data.exp_year
+                  = f.radio_button 'consume_point_radio', '2', checked: 'checked'
         %section.transact-select-card-footer
           .l-single_content
-            = f.submit '次に進む', class: 'c-btn-default is-red'
+            = link_to '次に進む' ,:back,  class: 'c-btn-default is-red'
