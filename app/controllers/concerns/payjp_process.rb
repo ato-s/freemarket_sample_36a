@@ -36,4 +36,12 @@ module Payjp_process
     @user_credit = Payjp::Customer.retrieve(@credit.customer_id).cards.data[0] if @credit.present?
   end
 
+  def delete_customer_data
+    require 'payjp'
+    Payjp.api_key = Rails.application.secrets.payjp_private_key
+    @credit = Credit.find_by(user_id: current_user.id)
+    @user_credit = Payjp::Customer.retrieve(@credit.customer_id)
+    @user_credit.delete
+  end
+
 end

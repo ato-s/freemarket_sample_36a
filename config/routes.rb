@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   resources :reviews, only: [:index, :show]
   resources :addresses, only: [:index, :new, :create, :edit, :update]
   resources :phone_numbers, only: [:new, :create, :edit, :update]
-  resources :credits, only: [:new, :create, :delete, :index]
+  resources :credits, only: [:new, :create, :destroy, :index]
 
   resource :safe, only: [:show] do
     resource :description,only: [:show]

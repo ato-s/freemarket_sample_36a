@@ -80,11 +80,13 @@
           カード情報未登録です
         %figure
           = image_tag 'card/master-card.svg', alt: 'master-card', width: '34', height: '20'
-        - if @credit_date.present?
-          = link_to new_credit_path, class: 'p-buy_user-info-fix' do
-            %span 登録する
-            %i.c-icon-arrow-right
-        - else
+        - if @credit_data.present?
           = link_to credits_path, class: 'p-buy_user-info-fix' do
             %span 変更する
             %i.c-icon-arrow-right
+        - else
+          = link_to new_credit_path, class: 'p-buy_user-info-fix' do
+            %span 登録する
+            %i.c-icon-arrow-right
+
+

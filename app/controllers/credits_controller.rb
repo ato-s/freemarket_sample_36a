@@ -28,6 +28,7 @@ include Payjp_process
   end
 
   def destroy
+    delete_customer_data
     @credit = Credit.find_by(user_id: current_user.id)
     if @credit.destroy
       redirect_to new_credit_path, alert: "削除しました"

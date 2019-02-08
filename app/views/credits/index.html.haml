@@ -2,13 +2,13 @@
   %main.l-single_main
     %section.l-single_container
       %h2.c-profile-head 支払い方法
-      = form_for 'dummy', html: {class: 'l-single_inner transact-select-card'} do |f|
+      .l-single_inner.transact-select-card
         %section
           .l-single_content
             %h3.l-chapter-sub-head クレジットカード一覧
           %ul
             %li
-              = f.label :payment_card_no, class: 'l-single_content' do
+              .l-single_content
                 %figure
                   = image_tag 'card/master-card.svg', width: '34', height: '20'
                 %p.p-buy_user-info-text
@@ -18,7 +18,7 @@
                   = @credit_data.exp_month
                   \/
                   = @credit_data.exp_year
-                  = f.radio_button 'consume_point_radio', '2', checked: 'checked'
+                  = link_to '削除する',credit_path(@credit_data.id),method: :delete
         %section.transact-select-card-footer
           .l-single_content
             = link_to '次に進む' ,:back,  class: 'c-btn-default is-red'
