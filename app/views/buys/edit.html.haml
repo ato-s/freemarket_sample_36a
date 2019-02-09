@@ -75,16 +75,14 @@
             = @credit_data.exp_month
             \/
             = @credit_data.exp_year
+          %figure
+            = image_tag @bard_brand_image_src , class: "credit_brand_image"
+            = link_to credits_path, class: 'p-buy_user-info-fix' do
+              %span 変更する
+              %i.c-icon-arrow-right
         - else
           %p.p-buy_user-info-text
           カード情報未登録です
-        %figure
-          = image_tag @bard_brand_image_src , class: "credit_brand_image"
-        - if @credit_data.present?
-          = link_to credits_path, class: 'p-buy_user-info-fix' do
-            %span 変更する
-            %i.c-icon-arrow-right
-        - else
           = link_to new_credit_path, class: 'p-buy_user-info-fix' do
             %span 登録する
             %i.c-icon-arrow-right
