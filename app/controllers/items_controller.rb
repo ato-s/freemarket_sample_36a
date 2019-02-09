@@ -16,7 +16,9 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all.includes(:pictures)
+    @pickup_categories = UpperCategory.find(1, 2, 3, 7)
+    @brand_categories = Brand.find(2443, 6146, 6762, 3806)
+    @items = Item.order("created_at DESC").limit(4)
   end
 
   def show

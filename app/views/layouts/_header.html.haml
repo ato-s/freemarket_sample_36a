@@ -13,8 +13,8 @@
       = search_field_tag :keyword, params[:keywords], placeholder: '何をお探しですか？', class: 'l-headerSp_search c-input-default'
       %i.c-icon-search
   %nav.l-headerSp_nav.l-search-links
-    = link_to 'カテゴリから探す', '/category/'
-    = link_to 'ブランドから探す', '/brand/'
+    = link_to 'カテゴリから探す', upper_categories_path
+    = link_to 'ブランドから探す', brands_path
 %header.l-headerPc.l-visiblePc
   .l-headerPc_inner
     .l-clearfix
@@ -45,26 +45,26 @@
                               = link_to "#{lower_category.name}", lower_category_path(lower_category)
           %li
             %h2
-              = link_to 'ブランドから探す', '/brand/', class: 'l-headerPc_nav-root'
+              = link_to 'ブランドから探す', brands_path, class: 'l-headerPc_nav-root'
               %ul.l-headerPc_nav-parent-wrap
                 %li.l-headerPc_nav-parent
                   %h3
-                    = link_to 'シャネル', '/brand/658/'
+                    = link_to 'シャネル', brand_path(2443)
                 %li.l-headerPc_nav-parent
                   %h3
-                    = link_to 'ナイキ', '/brand/857/'
+                    = link_to 'ナイキ', brand_path(3806)
                 %li.l-headerPc_nav-parent
                   %h3
-                    = link_to 'ルイ ヴィトン', '/brand/1326/'
+                    = link_to 'ルイ ヴィトン', brand_path(6146)
                 %li.l-headerPc_nav-parent
                   %h3
-                    = link_to 'シュプリーム', '/brand/1620/'
+                    = link_to 'シュプリーム', brand_path(6762)
                 %li.l-headerPc_nav-parent
                   %h3
-                    = link_to 'アディダス', '/brand/99/'
+                    = link_to 'アディダス', brand_path(219)
                 %li.l-headerPc_nav-parent
                   %h3
-                    = link_to 'ブランド一覧', '/brand/'
+                    = link_to 'ブランド一覧', brands_path
       .l-flRight
         - if user_signed_in?
           %ul.l-headerPc_user-nav
