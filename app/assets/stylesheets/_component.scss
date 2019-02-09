@@ -9,6 +9,34 @@ h2 {
 h3 {
   font-size: 22px;
 }
+.c-items-box-head {
+  font-size: 22px;
+  margin: 24px 4% 8px;
+  line-height: 1.4;
+
+  @include media-pc {
+    margin: 24px 0 8px;
+  }
+}
+.c-spacial-description {
+  margin-top: 30px;
+
+  @include media-pc {
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  &_title {
+    h3 {
+      padding: 16px 8px;
+    }
+  }
+  &_text {
+    padding: 30px;
+    line-height: 1.6em;
+  }
+}
+
 /* text */
 .c-font-1 {
   font-size: 16px;
@@ -241,6 +269,30 @@ i {
     content: "\E016";
     @include icon;
     font-size: 14px;
+  }
+}
+.is-sns-twitter {
+  margin: 16px 0 0;
+  background: #5d9dc9;
+  color: #fff;
+
+  &:before {
+    content: "\e02c";
+    @include icon;
+    font-size: 14px;
+  }
+}
+.is-sns-instagram {
+  margin: 16px 0 0;
+  background: #262626;
+  color: #fff;
+
+  &:before {
+    content: "\f16d";
+    @include icon;
+    font-family: fontAwesome;
+    font-size: 21px;
+    align-items: flex-start;
   }
 }
 .is-mail {
@@ -690,32 +742,10 @@ i {
   width: 100%;
   height: 0;
   padding: 0 0 100%;
-
-  @include media-pc {
-    width: 220px;
-    height: 220px;
-  }
-
-  img {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    width: 100%;
-    &.is-higher-height {
-      top: 50%;
-      transform: translate(0, -50%);
-    }
-    &.is-higher-width {
-      width: auto;
-      left: 50%;
-      right: auto;
-      height: 100%;
-      transform: translate(-50%, 0);
-    }
-  }
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  
   .p-search_container &,
   .category-brand-list & {
     width: 100%;
@@ -972,6 +1002,15 @@ i {
 .c-accordion {
   &_toggle {
     cursor: pointer;
+    .c-icon-plus {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      -webkit-transform: translate(0, -50%);
+      transform: translate(0, -50%);
+      color: #aaa;
+      font-size: 14px;
+    }
   }
   &_icon {
     transition: .4s;
@@ -984,6 +1023,18 @@ i {
     display: none;
   }
 }
+.p-search_category-child {
+  + .c-icon-arrow-right {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    color: #aaa;
+    font-size: 14px;
+  }
+}
+
 /* item list */
 .c-mypage_item-list {
   li {
@@ -1038,4 +1089,17 @@ i {
 }
 .js-tip_btn {
   cursor: pointer;
+}
+/* navi */
+.c-parts-nav {
+    margin: 0 4%;
+
+    @include media-pc {
+      margin: 0;
+    }
+
+    li {
+      float: left;
+      margin: 16px 16px 0 0;
+    }
 }

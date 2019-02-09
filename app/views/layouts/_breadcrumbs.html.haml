@@ -1,12 +1,2 @@
 %nav.l-breadCrumbs
-  %ul
-    %li
-      = link_to root_path do
-        %span メルカリ
-      %i.c-icon-arrow-right
-    %li
-      = link_to '#' do
-        %span テキスト
-      %i.c-icon-arrow-right
-    %li
-      %span テキスト
+  = breadcrumbs separator: "#{content_tag(:i, '', class: 'c-icon-arrow-right')}", style: :ul;

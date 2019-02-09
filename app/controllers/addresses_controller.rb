@@ -1,7 +1,13 @@
 class AddressesController < ApplicationController
   before_action :set_address, only: [:edit, :update]
-  before_action :move_to_sign_in, only: [:new, :edit, :create, :update]
+  before_action :move_to_sign_in
   before_action :confirm_current_user, only: [:edit, :update]
+  layout "mypage"
+
+  def index
+    @addresses = current_user.addresses
+  end
+
   def new
     @address = Address.new
   end
@@ -12,7 +18,7 @@ class AddressesController < ApplicationController
   def create
     @address = Address.new(address_params)
     if @address.save
-      redirect_to root_path, notice: '登録されました'
+      redirect_to mypages_path, notice: '登録されました'
     else
       render :new
     end
@@ -20,7 +26,7 @@ class AddressesController < ApplicationController
 
   def update
     if @address.update(address_params)
-      redirect_to root_path, notice: '更新しました'
+      redirect_to mypages_path, notice: '更新しました'
     else
       render :edit
     end

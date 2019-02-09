@@ -3,14 +3,17 @@
     = link_to '#' do
       %figure
         = image_tag 'common/member_photo_noimage_thumb.png', width: '60', height: '60'
-      %h2.u-fwBold atos
+      %h2.u-fwBold
+        =current_user.nickname
       .p-mypage_number
         %div
           評価
-          %span.u-fwBold 0
+          %span.u-fwBold
+            = current_user.received_reviews.length
         %div
           出品数
-          %span.u-fwBold 0
+          %span.u-fwBold
+            = current_user.sell_items.length
   %section.p-mypage_tab-container-notification-todo
     %ul.p-mypage_tabs.js-tab_menu
       %li.is-active

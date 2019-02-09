@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190120135701) do
+ActiveRecord::Schema.define(version: 20190202094356) do
 
   create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "first_name", default: "", null: false
@@ -85,23 +85,26 @@ ActiveRecord::Schema.define(version: 20190120135701) do
     t.integer "delivery_duration", default: 0, null: false
     t.integer "buy_price", default: 0, null: false
     t.integer "sell_price", default: 0, null: false
+    t.integer "discount_point", default: 0, null: false
     t.integer "commission_price", default: 0, null: false
     t.integer "transaction_stage", default: 0, null: false
     t.integer "like_count", default: 0, null: false
-    t.bigint "size_id", null: false
-    t.bigint "brand_id", null: false
+    t.bigint "size_id", default: 0, null: false
+    t.bigint "brand_id", default: 0, null: false
     t.bigint "upper_category_id", null: false
     t.bigint "middle_category_id", null: false
     t.bigint "lower_category_id", null: false
     t.bigint "seller_id", null: false
-    t.bigint "buyer_id", default: 0, null: false
+    t.bigint "buyer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "shipping_address_id"
     t.index ["brand_id"], name: "index_items_on_brand_id"
     t.index ["buyer_id"], name: "index_items_on_buyer_id"
     t.index ["lower_category_id"], name: "index_items_on_lower_category_id"
     t.index ["middle_category_id"], name: "index_items_on_middle_category_id"
     t.index ["seller_id"], name: "index_items_on_seller_id"
+    t.index ["shipping_address_id"], name: "index_items_on_shipping_address_id"
     t.index ["size_id"], name: "index_items_on_size_id"
     t.index ["upper_category_id"], name: "index_items_on_upper_category_id"
   end
@@ -117,24 +120,16 @@ ActiveRecord::Schema.define(version: 20190120135701) do
 
   create_table "lower_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", default: "", null: false
-    t.bigint "middle_category_id", null: false
+    t.bigint "middle_category_id"
     t.index ["middle_category_id"], name: "index_lower_categories_on_middle_category_id"
   end
 
   create_table "middle_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", default: "", null: false
-    t.bigint "upper_category_id", null: false
-    t.bigint "size_type_id", null: false
+    t.bigint "upper_category_id"
+    t.bigint "size_type_id"
     t.index ["size_type_id"], name: "index_middle_categories_on_size_type_id"
     t.index ["upper_category_id"], name: "index_middle_categories_on_upper_category_id"
-  end
-
-  create_table "mypages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text "profile"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_mypages_on_user_id"
   end
 
   create_table "phone_numbers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -207,6 +202,7 @@ ActiveRecord::Schema.define(version: 20190120135701) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "nickname", default: "", null: false
+    t.text "profile"
     t.string "uid", default: "", null: false
     t.string "provider", default: "", null: false
     t.integer "good_count", default: 0, null: false
@@ -230,7 +226,6 @@ ActiveRecord::Schema.define(version: 20190120135701) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
@@ -242,6 +237,7 @@ ActiveRecord::Schema.define(version: 20190120135701) do
   add_foreign_key "comments", "items"
   add_foreign_key "comments", "users"
   add_foreign_key "credits", "users"
+  add_foreign_key "items", "addresses", column: "shipping_address_id"
   add_foreign_key "items", "brands"
   add_foreign_key "items", "lower_categories"
   add_foreign_key "items", "middle_categories"
@@ -254,7 +250,6 @@ ActiveRecord::Schema.define(version: 20190120135701) do
   add_foreign_key "lower_categories", "middle_categories"
   add_foreign_key "middle_categories", "size_types"
   add_foreign_key "middle_categories", "upper_categories"
-  add_foreign_key "mypages", "users"
   add_foreign_key "phone_numbers", "users"
   add_foreign_key "pictures", "items"
   add_foreign_key "reports", "items"

@@ -1,19 +1,12 @@
-%h1 Listing transaction_messages
+#transaction_messages
+  = render :partial => "transaction_message", :collection => @transaction_messages, :as => "transaction_message"
 
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
+#transaction_messages_form
+  = render 'form', locals: {item: @item, transaction_message: @transaction_message}
 
-  %tbody
-    - @transaction_messages.each do |transaction_message|
-      %tr
-        %td= link_to 'Show', transaction_message
-        %td= link_to 'Edit', edit_transaction_message_path(transaction_message)
-        %td= link_to 'Destroy', transaction_message, method: :delete, data: { confirm: 'Are you sure?' }
 
-%br
-
-= link_to 'New Transaction message', new_transaction_message_path
+= link_to new_item_review_path(@item) do
+  - if current_user.id == @item.buyer_id
+    受け取り評価する(buyer)
+  - else
+    評価する(seller)

@@ -2,7 +2,7 @@
   %nav.p-mypage_nav.js-active
     %ul.p-mypage_nav_list
       %li
-        = link_to '/mypage', class: 'p-mypage_nav_list-item' do
+        = link_to mypages_path, class: 'p-mypage_nav_list-item' do
           マイページ
           %i.c-icon-arrow-right
       %li
@@ -16,11 +16,11 @@
           やることリスト
           %i.c-icon-arrow-right
       %li
-        = link_to '/mypage/like/history', class: 'p-mypage_nav_list-item' do
+        = link_to likes_path, class: 'p-mypage_nav_list-item' do
           いいね！一覧
           %i.c-icon-arrow-right
       %li
-        = link_to '/sell', class: 'p-mypage_nav_list-item' do
+        = link_to new_item_path, class: 'p-mypage_nav_list-item' do
           出品する
           %i.c-icon-arrow-right
       %li
@@ -48,7 +48,7 @@
           ニュース一覧
           %i.c-icon-arrow-right
       %li
-        = link_to '/mypage/review/history', class: 'p-mypage_nav_list-item' do
+        = link_to reviews_path, class: 'p-mypage_nav_list-item' do
           評価一覧
           %i.c-icon-arrow-right
       %li
@@ -72,30 +72,30 @@
     %h3.p-mypage_nav_head 設定
     %ul.p-mypage_nav_list
       %li
-        = link_to '/mypage/profile', class: 'p-mypage_nav_list-item' do
+        = link_to edit_mypage_path(current_user.id), class: 'p-mypage_nav_list-item' do
           プロフィール
           %i.c-icon-arrow-right
       %li
-        = link_to '/mypage/deliver_address', class: 'p-mypage_nav_list-item' do
+        = link_to addresses_path, class: 'p-mypage_nav_list-item' do
           住所変更
           %i.c-icon-arrow-right
       %li
-        = link_to '/mypage/card', class: 'p-mypage_nav_list-item' do
+        = link_to new_credit_path, class: 'p-mypage_nav_list-item' do
           支払い方法
           %i.c-icon-arrow-right
       %li
-        = link_to '/mypage/email_password', class: 'p-mypage_nav_list-item' do
+        = link_to edit_user_registration_path(current_user), class: 'p-mypage_nav_list-item' do
           メール/パスワード
           %i.c-icon-arrow-right
       %li
-        = link_to '/mypage/identification', class: 'p-mypage_nav_list-item' do
+        = link_to addresses_path, class: 'p-mypage_nav_list-item' do
           本人情報
           %i.c-icon-arrow-right
       %li
-        = link_to '/mypage/sms_confirmation', class: 'p-mypage_nav_list-item' do
+        = link_to new_phone_number_path, class: 'p-mypage_nav_list-item' do
           電話番号の確認
           %i.c-icon-arrow-right
       %li
-        = link_to '/logout', class: 'p-mypage_nav_list-item' do
+        = link_to logout_path, class: 'p-mypage_nav_list-item' do
           ログアウト
           %i.c-icon-arrow-right

@@ -1,10 +1,166 @@
-= form_for @item do |f|
+= form_with model: item, local: true, html: {class: 'p-sell_form'} do |f|
   - if @item.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@item.errors.count, "error")} prohibited this item from being saved:"
+      %h2
+        = "#{pluralize(@item.errors.count, "error")} prohibited this item from being saved:"
       %ul
-        - @item.errors.full_messages.each do |message|
-          %li= message
+        - @item.errors.full_messages.each do |item|
+          %li= item
+  .p-sell_upload_box
+    %h3.p-sell_upload_head
+      出品画像
+      %span.c-form_require 必須
+    %p 最大10枚までアップロードできます
+    .p-sell_upload_items-container
+      .p-sell_upload_drop-box
+        - if current_page?(new_item_path)
+          - 10.times do
+            = f.fields_for :pictures, Picture.new do |picture|
+              = picture.file_field :content
+        - else
+          = f.fields_for :pictures, @item.pictures, multiple: true do |picture|
+            = picture.file_field :content
+        %pre.l-visiblePc
+          ドラッグアンドドロップまたは
+          クリックしてファイルをアップロード
+          %i.c-icon-camera
+  .p-sell_content
+    .c-form_group
+      = f.label :name do
+        商品名
+        %span.c-form_require 必須
+      %div
+        = f.text_field :name, placeholder: '商品名（必須 40文字まで)', class: 'c-input-default'
+    .c-form_group
+      = f.label :description do
+        商品の説明
+        %span.c-form_require 必須
+      = f.text_area :description, placeholder: '商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです', class: 'c-textarea-default', rows: '5'
+  .p-sell_content.l-clearfix
+    %h3.p-sell_sub-head 商品の詳細
+    .p-sell_form_box
+      .c-form_group#product_category
+        = f.label :upper_category_id do
+          カテゴリー
+          %span.c-form_require 必須
+        %div
+          .c-select-wrap
+            = f.select :upper_category_id, options_from_collection_for_select(@upper_categories, :id, :name), {prompt: "---"}, {data: {remote: true, url: url_for(action: :dynamic_upper_category)}}
+            %i.c-icon-arrow-bottom
+      .c-form_group
+        = f.label :middle_category_id do
+          %span
+        %div
+          .c-select-wrap
+            #item_middle_categories
+              - unless current_page?(new_item_path)
+                = f.select :middle_category_id, options_from_collection_for_select(@middle_categories, :id, :name), {prompt: "---"}, {data: {remote: true, url: url_for(action: :dynamic_middle_category)}}
+                %i.c-icon-arrow-bottom
+      .c-form_group
+        = f.label :lower_category_id do
+          %span
+        %div
+          .c-select-wrap
+            #item_lower_categories
+              - unless current_page?(new_item_path)
+                = f.select :lower_category_id, options_from_collection_for_select(@lower_categories, :id, :name), {prompt: "---"}, {data: {remote: true, url: url_for(action: :dynamic_lower_category)}}
+                %i.c-icon-arrow-bottom
+      .c-form_group#product_size
+        #item_sizes
+          - unless current_page?(new_item_path)
+            = f.label :size_id do
+              サイズ
+              %span
+            %div
+              .c-select-wrap
+                = f.select :size_id, options_from_collection_for_select(@sizes, :id, :name), {prompt: "---"}
+                %i.c-icon-arrow-bottom
+      .c-form_group
+        = f.label :brand_id do
+          ブランド
+          %span.c-form_require 必須
+        .c-select-wrap
+          = f.select :brand_id, options_from_collection_for_select(Brand.all, :id, :name), {prompt: "---"}
+          %i.c-icon-arrow-bottom
+      .c-form_group
+        = f.label :state do
+          商品の状態
+          %span.c-form_require 必須
+        .c-select-wrap
+          = f.select :state, Item.states_i18n.keys.map { |k| [Item.states_i18n[k], k]}, {prompt: "---"}
+          %i.c-icon-arrow-bottom
+  .p-sell_content.l-clearfix
+    %h3.p-sell_sub-head 配送について
+    = link_to '?', '/help_center/article/68/', target: '_blank', class: 'c-form_question'
+    .p-sell_form_box
+      .c-form_group
+        = f.label :delivery_payer do
+          配送料の負担
+          %span.c-form_require 必須
+        .c-select-wrap
+          = f.select :delivery_payer, Item.delivery_payers_i18n.keys.map { |k| [Item.delivery_payers_i18n[k], k]}, {prompt: "---"}
+          %i.c-icon-arrow-bottom
+      .c-form_group
+        = f.label :delivery_region do
+          発送元の地域
+          %span.c-form_require 必須
+        .c-select-wrap
+          = f.select :delivery_region, Item.delivery_regions_i18n.keys.map { |k| [Item.delivery_regions_i18n[k], k]}, {prompt: "---"}
+          %i.c-icon-arrow-bottom
+      .c-form_group
+        = f.label :delivery_duration do
+          発送までの日数
+          %span.c-form_require 必須
+        .c-select-wrap
+          = f.select :delivery_duration, Item.delivery_durations_i18n.keys.map { |k| [Item.delivery_durations_i18n[k], k]}, {prompt: "---"}
+          %i.c-icon-arrow-bottom
+  .p-sell_content.l-clearfix
+    %h3.p-sell_sub-head 販売価格(300〜9,999,999)
+    = link_to '?', '/help_center/article/64/', target: '_blank', class: 'c-form_question'
+    .p-sell_form_box
+      %ul.p-sell_price
+        %li.c-form_group
+          .l-clearfix
+            = f.label :buy_price, class: 'l-flLeft' do
+              価格
+              %span.c-form_require 必須
+            .l-flRight.p-sell_price_input
+              ¥
+              = f.text_field :buy_price, placeholder: "例）300", class: 'c-input-default', autocomplete: "off"
+        %li.l-clearfix
+          .l-flLeft 販売手数料 (10%)
+          .l-flRight#commission_price
+            - if current_page?(new_item_path)
+              = "-"
+            - else
+              = @item.commission_price
+          = f.label :commission_price do
+            = f.hidden_field :commission_price, id: "commission_price_val"
+        %li.l-clearfix.u-fwBold
+          .l-flLeft 販売利益
+          .l-flRight#profit
+            - if current_page?(new_item_path)
+              = "-"
+            - else
+              = @item.sell_price
+          = f.label :sell_price do
+            = f.hidden_field :sell_price, id: "sell_price_val"
+  .p-sell_content.p-sell_btn_box
+    %div
+      %p
+        = link_to '禁止されている出品', '/help_center/getting_started/prohibited_items/', target: '_blank'
+        、
+        = link_to '行為', '/help_center/getting_started/prohibited_conduct/', target: '_blank'
+        を必ずご確認ください。
+      %p
+        またブランド品でシリアルナンバー等がある場合はご記載ください。
+        = link_to '偽ブランドの販売', '/help_center/getting_started/counterfeit_goods/', target: '_blank'
+        は犯罪であり処罰される可能性があります。
+      %p
+        また、出品をもちまして
+        = link_to '加盟店規約', '/seller_terms/'
+        に同意したことになります。
+    = f.submit '出品する',class: 'c-btn-default is-red'
+    = link_to 'もどる', "#", {class: 'c-btn-default is-gray'}
 
-  .actions
-    = f.submit 'Save'
+

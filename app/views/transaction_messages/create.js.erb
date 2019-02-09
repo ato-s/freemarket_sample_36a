@@ -1,0 +1,6 @@
+$('#transaction_messages').html(
+  "<%= j(render :partial => "transaction_message", :collection => @transaction_messages, :as => "transaction_message") %>"
+);
+$('#transaction_messages_form').html(
+  "<%= j(render 'form', locals: {item: @item, transaction_message: @transaction_message}) %>"
+);

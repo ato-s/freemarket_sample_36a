@@ -1,74 +1,94 @@
 class ReviewsController < ApplicationController
+  before_action :move_to_sign_in
+  before_action :set_item, only: [:new, :edit, :create, :update]
   before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :confirm_buyer_or_seller_include_current_user, except: [:index, :show]
+  before_action :confirm_transaction_stage_under_transaction, except: [:index, :show]
+  before_action :confirm_item_appraiser_exist, only: [:new, :create]
+  before_action :confirm_buyer_already_create_review, only: [:new, :create]
+  after_action :update_transaction_stage_to_sold_out, only: :create
 
-  # GET /reviews
-  # GET /reviews.json
   def index
-    @reviews = Review.all
+    @recieved_reviews = current_user.received_reviews
+    @sent_reviews = current_user.sent_reviews
   end
 
-  # GET /reviews/1
-  # GET /reviews/1.json
   def show
   end
 
-  # GET /reviews/new
   def new
     @review = Review.new
   end
 
-  # GET /reviews/1/edit
   def edit
   end
 
-  # POST /reviews
-  # POST /reviews.json
   def create
-    @review = Review.new(review_params)
-
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
-        format.json { render :show, status: :created, location: @review }
-      else
-        format.html { render :new }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
+    if @review = Review.create(review_params)
+      update_user_review_count
+      redirect_to mypages_path, notice: 'Review was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /reviews/1
-  # PATCH/PUT /reviews/1.json
   def update
-    respond_to do |format|
-      if @review.update(review_params)
-        format.html { redirect_to @review, notice: 'Review was successfully updated.' }
-        format.json { render :show, status: :ok, location: @review }
-      else
-        format.html { render :edit }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /reviews/1
-  # DELETE /reviews/1.json
-  def destroy
-    @review.destroy
-    respond_to do |format|
-      format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
-      format.json { head :no_content }
+    if @review = Review.update(review_params)
+      redirect_to mypages_path, notice: 'Review was successfully created.'
+    else
+      render :edit
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_review
       @review = Review.find(params[:id])
     end
+    def set_item
+      @item = Item.find(params[:item_id])
+    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.fetch(:review, {})
+      if current_user == @item.seller
+        @appraisee_id = @item.buyer_id
+      else
+        @appraisee_id = @item.seller_id
+      end
+      params.require(:review).permit(:text, :evaluation, :item_id).merge(appraiser_id: current_user.id, appraisee_id: @appraisee_id, item_id: params[:item_id])
+    end
+    def confirm_item_appraiser_exist
+      @item_appraiser_ids = ['dammy']
+      @item.reviews.each do |review|
+        @item_appraiser_ids << review.appraiser_id
+      end
+      redirect_to mypages_path if @item_appraiser_ids.include?(current_user.id)
+    end
+    def confirm_buyer_already_create_review
+      if current_user == @item.seller
+        redirect_to mypages_path unless @item_appraiser_ids.include?(@item.buyer_id)
+      end
+    end
+
+    def update_transaction_stage_to_sold_out
+      if @item.reviews.length == 0
+        #create todo
+      elsif @item.reviews.length == 1
+        @item.update(transaction_stage: 'sold_out')
+      end
+    end
+    def update_user_review_count
+      @appraisee = @review.appraisee
+      @good_count = @appraisee.good_count
+      @normal_count = @appraisee.normal_count
+      @bad_count = @appraisee.bad_count
+      if @review.evaluation == 'good'
+        @good_count += 1
+      elsif @review.evaluation == 'normal'
+        @normal_count += 1
+      else
+        @bad_count += 1
+      end
+      @appraisee.update(good_count: @good_count, normal_count: @normal_count, bad_count: @bad_count)
     end
 end

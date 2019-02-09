@@ -5,44 +5,43 @@
       %ul
         - @address.errors.full_messages.each do |message|
           %li= message
-  .l-single_content
-    .c-form_group
-      = f.label :first_name, 'お名前'
-      %span.c-form_require 必須
-      = f.text_field :last_name, placeholder: '例）山田', class: 'c-input-default'
-      = f.text_field :first_name, placeholder: '例）彩', class: 'c-input-default'
-    .c-form_group
-      = f.label :first_name_katakana, 'お名前カナ'
-      %span.c-form_require 必須
-      = f.text_field :last_name_katakana, placeholder: '例）ヤマダ', class: 'c-input-default'
-      = f.text_field :first_name_katakana, placeholder: '例）アヤ', class: 'c-input-default'
-    .c-form_group
-      = f.label :postal_code, '郵便番号'
-      %span.c-form_require 必須
-      = f.text_field :postal_code, value: "", placeholder: '例）1234567', class: 'c-input-default'
-    .c-form_group
-      = f.label :prefecture, '都道府県'
-      %span.c-form_require 必須
-      .c-select-wrap
-        = f.select :prefecture, Address.prefectures.keys.to_a
-        %i.c-icon-arrow-bottom
-    .c-form_group
-      = f.label :city, '市区町村'
-      %span.c-form_require 必須
-      = f.text_field :city, placeholder: '例）横浜市緑区', class: 'c-input-default'
-    .c-form_group
-      = f.label :address, '番地'
-      %span.c-form_require 必須
-      = f.text_field :address, placeholder: '例）青山1−1−1', class: 'c-input-default'
-    .c-form_group
-      = f.label :building_name, '建物名'
-      %span.c-form_arbitrary 任意
-      = f.text_field :building_name, placeholder: '例）柳ビル103', class: 'c-input-default'
-    .c-form_group
-      = f.label :landline_number, '電話'
-      %span.c-form_arbitrary 任意
-      = f.number_field :landline_number, placeholder: '例）09012345678', class: 'c-input-default'
-    - if current_page?(new_address_path)
-      = f.submit '登録する', class: 'c-btn-default is-red'
-    - else
-      = f.submit '変更する', class: 'c-btn-default is-red'
+  .c-form_group
+    = f.label :first_name, 'お名前'
+    %span.c-form_require 必須
+    = f.text_field :last_name, placeholder: '例）山田', class: 'c-input-default'
+    = f.text_field :first_name, placeholder: '例）彩', class: 'c-input-default'
+  .c-form_group
+    = f.label :first_name_katakana, 'お名前カナ'
+    %span.c-form_require 必須
+    = f.text_field :last_name_katakana, placeholder: '例）ヤマダ', class: 'c-input-default'
+    = f.text_field :first_name_katakana, placeholder: '例）アヤ', class: 'c-input-default'
+  .c-form_group
+    = f.label :postal_code, '郵便番号'
+    %span.c-form_require 必須
+    = f.text_field :postal_code, placeholder: '例）1234567', class: 'c-input-default'
+  .c-form_group
+    = f.label :prefecture, '都道府県'
+    %span.c-form_require 必須
+    .c-select-wrap
+      = f.select :prefecture, Address.prefectures.keys.to_a, {prompt: "---"}
+      %i.c-icon-arrow-bottom
+  .c-form_group
+    = f.label :city, '市区町村'
+    %span.c-form_require 必須
+    = f.text_field :city, placeholder: '例）横浜市緑区', class: 'c-input-default'
+  .c-form_group
+    = f.label :address, '番地'
+    %span.c-form_require 必須
+    = f.text_field :address, placeholder: '例）青山1−1−1', class: 'c-input-default'
+  .c-form_group
+    = f.label :building_name, '建物名'
+    %span.c-form_arbitrary 任意
+    = f.text_field :building_name, placeholder: '例）柳ビル103', class: 'c-input-default'
+  .c-form_group
+    = f.label :landline_number, '電話'
+    %span.c-form_arbitrary 任意
+    = f.number_field :landline_number, placeholder: '例）09012345678', class: 'c-input-default'
+  - if current_page?(new_address_path)
+    = f.submit '登録する', class: 'c-btn-default is-red'
+  - else
+    = f.submit '変更する', class: 'c-btn-default is-red'

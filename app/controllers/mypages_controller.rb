@@ -1,9 +1,9 @@
 class MypagesController < ApplicationController
-  before_action :set_mypage, only: [:show, :edit, :update]
   before_action :move_to_sign_in
-  before_action :confirm_current_user, only: [:edit, :update]
+  layout "mypage"
+
   def index
-    @mypages = Mypage.all
+    @items = current_user.sell_items.includes(:pictures, :likes)
   end
 
   def show
@@ -13,8 +13,8 @@ class MypagesController < ApplicationController
   end
 
   def update
-    if @mypage.update(mypage_params)
-      redirect_to @mypage, notice: 'Mypage was successfully updated.'
+    if current_user.update(mypage_params)
+      redirect_to mypages_path, notice: 'Mypage was successfully updated.'
     else
       render :edit
     end
@@ -24,16 +24,7 @@ class MypagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_mypage
-      @mypage = Mypage.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
     def mypage_params
-      params.require(:mypage).permit(:profile, :user_id)
-    end
-    def confirm_current_user
-      redirect_to root_path unless current_user == @mypage.user
+      params.require(:user).permit(:nickname, :profile)
     end
 end

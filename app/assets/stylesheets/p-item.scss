@@ -143,7 +143,7 @@
   font-size: 10px;
 }
 .p-item_sales-point-message {
-  display: inline-block;
+  display: none;
   position: relative;
   line-height: 1.5;
   color: #fff;
@@ -188,6 +188,21 @@
   &.disabled {
     background: #888;
     cursor: not-allowed;
+  }
+}
+.p-item_buy-btn_sold {
+  display: block;
+  height: 56px;
+  margin: 16px 0 0;
+  background: gray;
+  color: #fff;
+  line-height: 56px;
+  text-align: center;
+  font-weight: 600;
+
+  @include media-pc {
+    height: 60px;
+    line-height: 60px;
   }
 }
 .p-item_description {

@@ -31,7 +31,7 @@
     display: none;
   }
 }
-.p-sell_upload_items {
+.p-sell_upload_item {
   position: relative;
   width: 100%;
   margin: 0 1.75% 0 0;
@@ -110,7 +110,21 @@
       word-wrap: break-word;
     }
   }
+  input[type="file"]{
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    background: red;
+    cursor: inherit;
+    display: block;
+  }
 }
+
 .p-sell_sub-head {
   color: #888;
   font-size: 14px;

@@ -8,12 +8,13 @@
       %th
 
   %tbody
-    - @reviews.each do |review|
+    - if @sent_reviews != nil
+      - @sent_reviews.each do |sent_review|
+        = sent_review.text
+    - if @received_reviews != nil
+      - @received_reviews.each do |received_review|
+        = received_review.text
       %tr
         %td= link_to 'Show', review
         %td= link_to 'Edit', edit_review_path(review)
         %td= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Review', new_review_path

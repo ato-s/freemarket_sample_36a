@@ -1,0 +1,114 @@
+.l-single_wrapper
+  %main.l-single_main
+    %section.l-single_container
+      %h2.l-single_head 商品の情報を入力
+      = form_for @item, url: items_path,html: {class: 'p-sell_form'} do |f|
+        .p-sell_upload_box
+          %h3.p-sell_upload_head
+            出品画像
+            %span.c-form_require 必須
+          %p 最大10枚までアップロードできます
+          .p-sell_upload_items-container
+            .p-sell_upload_drop-box
+              - 10.times do
+                = f.fields_for :pictures do |picture|
+                  = picture.file_field :content
+              %pre.l-visiblePc
+                ドラッグアンドドロップまたは
+                クリックしてファイルをアップロード
+                %i.c-icon-camera
+        .p-sell_content
+          .c-form_group
+            = f.label :name do
+              商品名
+              %span.c-form_require 必須
+            %div
+              = f.text_field :name, placeholder: '商品名（必須 40文字まで)', class: 'c-input-default'
+          .c-form_group
+            = f.label :description do
+              商品の説明
+              %span.c-form_require 必須
+            = f.text_area :description, placeholder: '商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです', class: 'c-textarea-default', rows: '5'
+        .p-sell_content.l-clearfix
+          %h3.p-sell_sub-head 商品の詳細
+          .p-sell_form_box
+            .c-form_group#product_category
+              = f.label :upper_category_id do
+                カテゴリー
+                %span.c-form_require 必須
+              %div
+                .c-select-wrap
+                  = f.collection_select :upper_category_id, UpperCategory.all, :id, :name, include_blank: "---"
+                  %i.c-icon-arrow-bottom
+            .c-form_group
+              = f.label :state do
+                商品の状態
+                %span.c-form_require 必須
+              .c-select-wrap
+                = f.select :state, options_for_select([['---', ''], ['新品、未使用', '1'], ['未使用に近い', '2'], ['目立った傷や汚れなし', '3'], ['やや傷や汚れあり', '4'], ['傷や汚れあり', '5'], ['全体的に状態が悪い', '6']], params[:state]), class: 'c-select-default'
+                %i.c-icon-arrow-bottom
+        .p-sell_content.l-clearfix
+          %h3.p-sell_sub-head 配送について
+          = link_to '?', '/help_center/article/68/', target: '_blank', class: 'c-form_question'
+          .p-sell_form_box
+            .c-form_group
+              = f.label :delivery_payer do
+                配送料の負担
+                %span.c-form_require 必須
+              .c-select-wrap
+                = f.select :delivery_payer, options_for_select([['---', ''], ['送料込み(出品者負担)', '2'], ['着払い(購入者負担)', '1']], params[:delivery_payer]), class: 'c-select-default'
+                %i.c-icon-arrow-bottom
+            .c-form_group
+              = f.label :delivery_region do
+                発送元の地域
+                %span.c-form_require 必須
+              .c-select-wrap
+                = f.select :delivery_region, options_for_select([['---', ''], ['北海道', '1'], ['青森県', '2'], ['岩手県', '3'], ['宮城県', '4'], ['秋田県', '5'], ['山形県', '6'], ['福島県', '7'], ['茨城県', '8'], ['栃木県', '9'], ['群馬県', '10'], ['埼玉県', '11'], ['千葉県', '12'], ['東京都', '13'], ['神奈川県', '14'], ['新潟県', '15'], ['富山県', '16'], ['石川県', '17'], ['福井県', '18'], ['山梨県', '19'], ['長野県', '20'], ['岐阜県', '21'], ['静岡県', '22'], ['愛知県', '23'], ['三重県', '24'], ['滋賀県', '25'], ['京都府', '26'], ['大阪府', '27'], ['兵庫県', '28'], ['奈良県', '29'], ['和歌山県', '30'], ['鳥取県', '31'], ['島根県', '32'], ['岡山県', '33'], ['広島県', '34'], ['山口県', '35'], ['徳島県', '36'], ['香川県', '37'], ['愛媛県', '38'], ['高知県', '39'], ['福岡県', '40'], ['佐賀県', '41'], ['長崎県', '42'], ['熊本県', '43'], ['大分県', '44'],['宮崎県', '45'],['鹿児島県', '46'], ['沖縄県', '47'], ['未定', '99']], params[:delivery_region]), class: 'c-select-default'
+                %i.c-icon-arrow-bottom
+            .c-form_group
+              = f.label :delivery_duration do
+                発送までの日数
+                %span.c-form_require 必須
+              .c-select-wrap
+                = f.select :delivery_duration, options_for_select([['---', ''], ['1~2日で発送', '1'], ['2~3日で発送', '2'], ['4~7日で発送', '3']], params[:delivery_duration]), class: 'c-select-default'
+                %i.c-icon-arrow-bottom
+        .p-sell_content.l-clearfix
+          %h3.p-sell_sub-head 販売価格(300〜9,999,999)
+          = link_to '?', '/help_center/article/64/', target: '_blank', class: 'c-form_question'
+          .p-sell_form_box
+            %ul.p-sell_price
+              %li.c-form_group
+                .l-clearfix
+                  = f.label :buy_price, class: 'l-flLeft' do
+                    価格
+                    %span.c-form_require 必須
+                  .l-flRight.p-sell_price_input
+                    ¥
+                    = f.text_field :buy_price, value: "",placeholder: "例）300", class: 'c-input-default', autocomplete: "off"
+              %li.l-clearfix
+                .l-flLeft 販売手数料 (10%)
+                .l-flRight#commission_price -
+                = f.label :commission_price do
+                  = f.hidden_field :commission_price, id: "commission_price_val",value: 0
+              %li.l-clearfix.u-fwBold
+                .l-flLeft 販売利益
+                .l-flRight#profit -
+                = f.label :sell_price do
+                  = f.hidden_field :sell_price, id: "sell_price_val",value: 0
+        .p-sell_content.p-sell_btn_box
+          %div
+            %p
+              = link_to '禁止されている出品', '/help_center/getting_started/prohibited_items/', target: '_blank'
+              、
+              = link_to '行為', '/help_center/getting_started/prohibited_conduct/', target: '_blank'
+              を必ずご確認ください。
+            %p
+              またブランド品でシリアルナンバー等がある場合はご記載ください。
+              = link_to '偽ブランドの販売', '/help_center/getting_started/counterfeit_goods/', target: '_blank'
+              は犯罪であり処罰される可能性があります。
+            %p
+              また、出品をもちまして
+              = link_to '加盟店規約', '/seller_terms/'
+              に同意したことになります。
+          = f.submit '出品する',class: 'c-btn-default is-red'
+          = link_to 'もどる', "#", {class: 'c-btn-default is-gray'}
