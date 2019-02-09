@@ -3,8 +3,12 @@ class CreditsController < ApplicationController
 include Payjp_process
 
   def index
-    @credit_data = show_customer_data
-    card_brand_image_src
+    if user_signed_in?
+      @credit_data = show_customer_data
+      card_brand_image_src
+    else
+      redirect_to root_path, alert: "ログインしてください"
+    end
   end
 
   def new
