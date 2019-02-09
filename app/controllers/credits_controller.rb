@@ -4,6 +4,7 @@ include Payjp_process
 
   def index
     @credit_data = show_customer_data
+    card_brand_image_src
   end
 
   def new

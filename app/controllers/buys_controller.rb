@@ -10,6 +10,8 @@ class BuysController < ApplicationController
     @image = Picture.find(params[:item_id])
     @address = Address.find_by(user_id: current_user.id)
     @credit_data = show_customer_data
+    card_brand_image_src
+
   end
 
   def update

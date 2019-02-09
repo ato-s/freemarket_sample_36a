@@ -79,7 +79,7 @@
           %p.p-buy_user-info-text
           カード情報未登録です
         %figure
-          = image_tag 'card/master-card.svg', alt: 'master-card', width: '34', height: '20'
+          = image_tag @bard_brand_image_src , alt: 'master-card', width: '34', height: '20'
         - if @credit_data.present?
           = link_to credits_path, class: 'p-buy_user-info-fix' do
             %span 変更する
