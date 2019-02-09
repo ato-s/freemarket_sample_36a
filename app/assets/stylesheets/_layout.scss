@@ -1264,3 +1264,22 @@
     left: 0;
   }
 }
+  .credit_delete_btn {
+  border: 1px solid red;
+  background: #fff;
+  color: red;
+  padding:2px 6px;
+  border-radius: 4px;
+  position:relative;
+    bottom:28px;
+    right:10px;
+  float:right;
+  &:hover {
+    background: red;
+    color: white;
+  }
+}
+.credit_brand_image {
+  width: 34px ;
+  height: 34px ;
+}
