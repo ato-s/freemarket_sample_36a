@@ -39,6 +39,7 @@ module Payjp_process
   def delete_customer_data
     require 'payjp'
     Payjp.api_key = Rails.application.secrets.payjp_private_key
+    @customer = Payjp::Customer.retrieve(current_user.credits[0].customer_id)
     @customer.delete
   end
 
