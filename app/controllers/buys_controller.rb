@@ -11,7 +11,6 @@ class BuysController < ApplicationController
     @address = Address.find_by(user_id: current_user.id)
     @credit_data = show_customer_data
     card_brand_image_src if @credit_data
-
   end
 
   def update
