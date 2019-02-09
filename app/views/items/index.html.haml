@@ -1,23 +1,64 @@
-%br
 .l-default-container
   %main.u-bgWt
+    %section.owl-carousel.owl-loaded.owl-drag.p-top_carousel.js-owl-carousel
+      %div
+        .p-top_mainVisual
+          %div
+            .p-top_mainVisual_content
+              %h2
+                スマホでかんたん
+                %br
+                フリマアプリ
+              %p
+                メルカリはスマホカメラからすぐに出品できる
+                %br
+                購入時も安心な独自システムのアプリです
+              .p-top_mainVisual_store.l-clearfix
+                = link_to '', target: '_blank' do
+                  = image_tag 'common/app-store.svg'
+                = link_to '', target: '_blank' do
+                  = image_tag 'common/google-play.svg'
+            = image_tag 'common/jp/top/main_content_pc.png'
+        .p-top_sp.l-visibleSp
+          .p-top_sp-banner
+            %h2
+              スマホで
+              %br
+              かんたん
+              %br
+              フリマアプリ
+            = image_tag 'common/jp/top/main_content_pc.png'
+          .p-top_sp-dl.l-clearfix
+            = link_to '#' do
+              = image_tag 'common/app-store.svg'
+            = link_to '#' do
+              = image_tag 'common/google-play.svg'
+      %div.p-top_banner.p-top_banner-new-register
+        = link_to '', '#'
+      %div.p-top_banner.p-top_banner-kusanagi-xmas
+        = link_to '', '#'
+      %div.p-top_banner.p-top_banner-welcome
+        = link_to '', '#'
     %section.p-top_pickup
-      %section.c-items-box_container.l-clearfix
-        .c-items-box_content.l-clearfix
-          - @items.each do |item|
-            %section.c-items-box
-              =link_to item_path(item) do
-                %figure.c-items-box_photo
-                  = image_tag item.pictures.first.content
-                .c-items-box_body
-                  %h3.c-items-box_name.c-font-2
-                    = item.name
-                  .c-items-box_num.l-clearfix
-                    .c-items-box_price.c-font-5
-                      = item.buy_price
-                    .c-items-box_likes.c-font-2
-                      %i.c-icon-like-border
-                      %span
-                        = item.like_count
-                    %p.c-item-box_tax (税込)
-%br
+      %h2.p-top_pickup-head ピックアップカテゴリー
+
+      - @pickup_categories.each do |pickup_category|
+        %section.c-items-box_container.l-clearfix
+          %h3.u-taCenter
+            = link_to upper_category_path(pickup_category) do
+              #{pickup_category.name} 新着アイテム
+          .c-items-box_content.l-clearfix
+            = render partial: 'layouts/item', collection: pickup_category.items.order("created_at DESC").limit(4)
+          .c-items-box_view-all
+            = link_to 'すべての商品を見る', upper_category_path(pickup_category)
+    %section.p-top_pickup
+      %h2.p-top_pickup-head ピックアップブランド
+      - @brand_categories.each do |brand_category|
+        %section.c-items-box_container.l-clearfix
+          %h3.u-taCenter
+            = link_to brand_path(brand_category) do
+              #{brand_category.name} 新着アイテム
+          .c-items-box_content.l-clearfix
+            = render partial: 'layouts/item', collection: brand_category.items.order("created_at DESC").limit(4)
+          .c-items-box_view-all
+            = link_to 'すべての商品を見る', brand_path(brand_category)
