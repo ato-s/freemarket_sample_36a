@@ -155,13 +155,13 @@
           = link_to '#' do
             = @seller.nickname + "さんのその他の出品"
         .c-items-box_content.l-clearfix
-          = render 'layouts/itembox',item: @other_items
+          = render 'layouts/item',item: @other_items
       %section.c-items-box_container.l-clearfix.c-items-box_overflow
         %h2.c-items-box_head
           = link_to '/brand/3117/791/' do
             = @brand.name + " " + @lower_category.name + " " + "その他の商品"
         .c-items-box_content.l-clearfix
-          = render 'layouts/itembox',item: @other_brand_items
+          = render 'layouts/item',item: @other_brand_items
     = form_for '#', html: {id: 'report-item', class: 'c-modal mfp-hide'} do |f|
       .c-modal_inner.c-modal_banner
         .c-modal_body
