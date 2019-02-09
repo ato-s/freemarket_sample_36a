@@ -126,15 +126,15 @@
           = f.text_area :param_name, class: 'c-textarea-default'
           = button_tag '#', class: 'p-message_submit c-btn-default is-gray' do
             %span コメントする
-    %ul.p-item_nav-link.l-clearfix
-      %li.p-item_nav-link_prev
-        = link_to "#{@rand_prev}" do
-          %i.c-icon-arrow-left>
-          = @next_page.name
-      %li.p-item_nav-link_next
-        = link_to '#{@rand_next}' do
-          %i.c-icon-arrow-right
-          = @next_page.name
+    -# %ul.p-item_nav-link.l-clearfix
+    -#   %li.p-item_nav-link_prev
+    -#     = link_to "#{@rand_prev}" do
+    -#       %i.c-icon-arrow-left>
+    -#       = @next_page.name
+    -#   %li.p-item_nav-link_next
+    -#     = link_to '#{@rand_next}' do
+    -#       %i.c-icon-arrow-right
+    -#       = @next_page.name
     .c-item_social-media-box
       %ul.c-social-media-box
         %li
