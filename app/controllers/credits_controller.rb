@@ -1,14 +1,11 @@
 class CreditsController < ApplicationController
+before_action :confirm_user_sign_in
 
 include Payjp_process
 
   def index
-    if user_signed_in?
-      @credit_data = show_customer_data
-      card_brand_image_src
-    else
-      redirect_to root_path, alert: "ログインしてください"
-    end
+    @credit_data = show_customer_data
+    card_brand_image_src
   end
 
   def new
@@ -46,6 +43,10 @@ include Payjp_process
 
   def credit_params
     params.require(:credit).permit(:credit_number,:limit_month,:limit_year,:security_code).merge(customer_id: create_customer.id).merge(user_id: current_user.id)
+  end
+
+  def confirm_user_sign_in
+    redirect_to root_path, alert: "ログインして下さい" unless user_signed_in?
   end
 
 end
