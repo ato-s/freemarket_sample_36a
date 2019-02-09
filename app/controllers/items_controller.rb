@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_locale
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_new_item, only: [:new, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
-  before_action :move_to_sign_in, except: [:dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
+  before_action :move_to_sign_in, except: [:index, :show, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
 
   def dynamic_upper_category
     @middle_categories = MiddleCategory.where(upper_category_params)
