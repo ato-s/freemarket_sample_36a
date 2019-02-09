@@ -1215,7 +1215,55 @@
     left: 50%;
   }
 }
-.credit_delete_btn {
+.l-pager {
+  position: relative;
+  font-size: 0;
+  text-align: center;
+
+  @include media-pc{
+    margin: 40px 0 0;
+  }
+
+  &_num {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+  &_cell {
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    border-radius: 4px;
+    background: #fff;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    line-height: 42px;
+
+    a{
+      display: block;
+      color: #333;
+
+      &:hover{
+        background:#f5f5f5;
+        text-decoration: none;
+      }
+    }
+
+    &.is-active {
+      color: #fff;
+      background: #ea352d;
+    }
+  }
+  &_next, &_prev {
+    position: absolute;
+    top: 0;
+  }
+  &_next {
+    right: 0;
+  }
+  &_prev {
+    left: 0;
+  }
+  .credit_delete_btn {
   border: 1px solid red;
   background: #fff;
   color: red;

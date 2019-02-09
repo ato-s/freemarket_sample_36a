@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_locale
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_new_item, only: [:new, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
-  before_action :move_to_sign_in, except: [:dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
+  before_action :move_to_sign_in, except: [:index, :show, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
 
   def dynamic_upper_category
     @middle_categories = MiddleCategory.where(upper_category_params)
@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
     @middle_category = MiddleCategory.find(@item.middle_category_id)
     @lower_category = LowerCategory.find(@item.lower_category_id)
     @sizes = Size.find(@item.size_id)
-    random_page_link
+    # random_page_link
     @likes = Like.where(item_id: params[:item_id])
   end
 
@@ -122,14 +122,14 @@ class ItemsController < ApplicationController
       params.require(:item).permit(:middle_category_id)
     end
 
-  def random_page_link
-    #ランダムなページリンクを生成する
-    rand_ranges = Item.all.count
-    random = Random.new
-    @rand_next = random.rand(rand_ranges)+1
-    @next_page = Item.find(@rand_next)
-    @rand_prev = random.rand(rand_ranges)+1
-    @prev_page = Item.find(@rand_prev)
-  end
+  # def random_page_link
+  #   #ランダムなページリンクを生成する
+  #   rand_ranges = Item.all.count
+  #   random = Random.new
+  #   @rand_next = random.rand(rand_ranges)+1
+  #   @next_page = Item.find(@rand_next)
+  #   @rand_prev = random.rand(rand_ranges)+1
+  #   @prev_page = Item.find(@rand_prev)
+  # end
 
 end
