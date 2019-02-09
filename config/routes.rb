@@ -28,9 +28,8 @@ Rails.application.routes.draw do
     resource :buy, only: [:edit,:update]
   end
 
-  resources :groups, only: [:show, :index] do
-    resources :brands, only: [:show]
-  end
+  resources :groups, only: [:show, :index]
+  resources :brands, only: [:show, :index]
 
   resources :upper_categories, only: [:index, :show]
   resources :middle_categories, only: [:show]
