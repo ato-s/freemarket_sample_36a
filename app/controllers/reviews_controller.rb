@@ -93,13 +93,11 @@ class ReviewsController < ApplicationController
       else
         @bad_count += 1
       end
-      binding.pry
       @appraisee.update(good_count: @good_count, normal_count: @normal_count, bad_count: @bad_count)
     end
     def seller_get_money
       @seller_possession_money = current_user.money.to_i
       @seller_possession_money += @item.sell_price.to_i
-      binding.pry
       current_user.update(money: @seller_possession_money)
     end
 end
