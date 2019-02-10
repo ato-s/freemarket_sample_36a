@@ -32,7 +32,7 @@ class ItemsController < ApplicationController
     @sizes = Size.find(@item.size_id)
     # random_page_link
     @likes = Like.where(item_id: params[:item_id])
-    @transaction_message = TransactionMessage.new
+    @comment = Comment.new
   end
 
   def new
