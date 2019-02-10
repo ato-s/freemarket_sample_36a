@@ -11,9 +11,12 @@ class Item < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :reports, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :users, through: :likes
   has_many :comments, dependent: :destroy
   has_many :transaction_messages, dependent: :destroy
   has_many :pictures, dependent: :destroy
+  has_many :information, class_name: 'Information', foreign_key: 'related_item_id'
+  has_one :todo, dependent: :destroy
   accepts_nested_attributes_for :pictures, allow_destroy: true
 
   # validates :name, :description, :state, :delivery_payer, :delivery_region, :delivery_duration, :buy_price, :sell_price, :commission_price, :transaction_stage, :like_count, presence: true
