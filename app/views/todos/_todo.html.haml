@@ -1,0 +1,11 @@
+%li
+  = link_to '#', class: 'p-mypage_item-link js-modal' do
+    %figure
+      = image_tag 'common/mercari_profile.png'
+    .p-mypage_item-body
+      .p-mypage_item-text
+        = todo.text
+      %time
+        %i.c-icon-time
+        %span 1 日前
+    %i.c-icon-arrow-right
