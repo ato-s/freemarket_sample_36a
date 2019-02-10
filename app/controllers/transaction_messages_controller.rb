@@ -1,14 +1,15 @@
 class TransactionMessagesController < ApplicationController
   before_action :move_to_sign_in
   before_action :set_item_and_transaction_messages
-  before_action :confirm_buyer_or_seller_include_current_user
-  before_action :confirm_transaction_stage_under_transaction
+#  before_action :confirm_buyer_or_seller_include_current_user, except: :create
+#  before_action :confirm_transaction_stage_under_transaction, except: :create
 
   def index
   end
 
   def create
     @created_transaction_message = TransactionMessage.create(transaction_message_params)
+    redirect_to item_path(@item.id)
   end
 
   private
