@@ -6,7 +6,6 @@ class ReviewsController < ApplicationController
   before_action :confirm_transaction_stage_under_transaction, except: [:index, :show]
   before_action :confirm_item_appraiser_exist, only: [:new, :create]
   before_action :confirm_buyer_already_create_review, only: [:new, :create]
-  after_action :update_transaction_stage_to_sold_out, only: :create
 
   def index
     @recieved_reviews = current_user.received_reviews
@@ -24,9 +23,11 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    if @review = Review.create(review_params)
+    @review = Review.new(review_params)
+    if @review.save
       update_user_review_count
-      redirect_to mypages_path, notice: 'Review was successfully created.'
+      update_transaction_stage_to_sold_out
+      redirect_to item_transaction_messages_path(@item), notice: 'Review was successfully created.'
     else
       render :new
     end
@@ -34,7 +35,7 @@ class ReviewsController < ApplicationController
 
   def update
     if @review = Review.update(review_params)
-      redirect_to mypages_path, notice: 'Review was successfully created.'
+      redirect_to item_transaction_messages_path(@item), notice: 'Review was successfully created.'
     else
       render :edit
     end
@@ -44,9 +45,6 @@ class ReviewsController < ApplicationController
 
     def set_review
       @review = Review.find(params[:id])
-    end
-    def set_item
-      @item = Item.find(params[:item_id])
     end
 
     def review_params
@@ -72,9 +70,15 @@ class ReviewsController < ApplicationController
 
     def update_transaction_stage_to_sold_out
       if @item.reviews.length == 0
-        #create todo
+        #create todo(seller must create review)
+        @information_type = 'be_evaluated'
+        create_information
       elsif @item.reviews.length == 1
         @item.update(transaction_stage: 'sold_out')
+        seller_get_money
+        #admin_get_money
+        @information_type = 'transaction_has_been_finished'
+        create_information
       end
     end
     def update_user_review_count
@@ -89,6 +93,13 @@ class ReviewsController < ApplicationController
       else
         @bad_count += 1
       end
+      binding.pry
       @appraisee.update(good_count: @good_count, normal_count: @normal_count, bad_count: @bad_count)
+    end
+    def seller_get_money
+      @seller_possession_money = current_user.money.to_i
+      @seller_possession_money += @item.sell_price.to_i
+      binding.pry
+      current_user.update(money: @seller_possession_money)
     end
 end
