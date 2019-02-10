@@ -1,0 +1,12 @@
+- if information.information_type == 'be_discounted'
+  = render "information/be_discounted", information: information
+- elsif information.information_type == 'be_evaluated'
+  = render "information/be_evaluated", information: information
+- elsif information.information_type == 'be_liked'
+  = render "information/be_liked", information: information
+- elsif information.information_type == 'be_purchased'
+  = render "information/be_purchased", information: information
+- elsif information.information_type == 'be_shiped'
+  = render "information/be_shiped", information: information
+- elsif information.information_type == 'transaction_has_been_finished'
+  = render "information/transaction_finished", information: information
