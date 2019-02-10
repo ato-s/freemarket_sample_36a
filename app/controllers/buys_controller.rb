@@ -35,7 +35,7 @@ class BuysController < ApplicationController
     redirect_to root_path, alert: "既に販売済みの商品です" unless @item.transaction_stage == "under_sale"
   end
   def confirm_user_sign_in
-    redirect_to new_user_session_path, alert: "ログインして下さい" unless user_signed_in?
+    redirect_to root_path, alert: "ログインして下さい" unless user_signed_in?
   end
 
 end

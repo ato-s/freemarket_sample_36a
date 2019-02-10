@@ -13,6 +13,7 @@ include Payjp_process
   end
 
   def create
+    if user_signed_in?
       unless current_user.credits.present?
       @credit = Credit.create(credit_params)
         if @credit.save
@@ -23,6 +24,9 @@ include Payjp_process
       else
         redirect_to new_credit_path, alert: "既に登録されています"
       end
+    else
+      redirect_to root_path, alert: "ログインしてください"
+    end
   end
 
   def destroy
@@ -42,7 +46,7 @@ include Payjp_process
   end
 
   def confirm_user_sign_in
-    redirect_to new_user_session_path, alert: "ログインして下さい" unless user_signed_in?
+    redirect_to root_path, alert: "ログインして下さい" unless user_signed_in?
   end
 
 end
