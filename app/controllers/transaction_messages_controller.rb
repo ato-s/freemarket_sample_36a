@@ -9,7 +9,7 @@ class TransactionMessagesController < ApplicationController
 
   def create
     @created_transaction_message = TransactionMessage.create(transaction_message_params)
-    redirect_to item_path(@item.id)
+    redirect_to item_path(@item.id) ,notice: 'メッセージを投稿しました'
   end
 
   private
