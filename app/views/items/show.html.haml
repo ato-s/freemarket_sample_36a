@@ -99,7 +99,7 @@
     .p-item_message_container
       .p-item_message_content
         %ul.p-item_message_block
-          - @item.transaction_messages.each do|message|
+          - @item.comments.each do|message|
             %li.l-clearfix
               = link_to '#', class: 'p-item_message_user' do
                 %figure
