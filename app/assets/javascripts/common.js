@@ -1,4 +1,4 @@
-$(function() {
+$(document).on('turbolinks:load', function() {
   // common：modal
   $('.js-modal').magnificPopup({
     type: 'inline',
@@ -49,8 +49,7 @@ $(function() {
       return false
     }
   });
-});
-$(document).on('turbolinks:load', function() {
+
   // common：smooth scroll
   $('.js-scroll').click(function(){
     var speed = 500;
