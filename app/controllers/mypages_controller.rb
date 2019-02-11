@@ -1,6 +1,6 @@
 class MypagesController < ApplicationController
   before_action :move_to_sign_in
-  before_action :set_todo_and_information, only: [:show]
+  before_action :set_todo_and_information, only: [:index, :show]
   layout "mypage"
 
   def index
@@ -8,8 +8,10 @@ class MypagesController < ApplicationController
   end
 
   def show
-    @under_transaction_items = current_user.buy_items.where(transaction_stage: 'under_transaction')
-    @sold_out_items = current_user.buy_items.where(transaction_stage: 'sold_out')
+    @todos = @todos.first(5)
+    @information = @information.first(5)
+    @under_transaction_items = current_user.buy_items.where(transaction_stage: ['purchased', 'shipping', 'evaluated'])
+    @sold_out_items = current_user.buy_items.where(transaction_stage: 'transaction_completed')
   end
 
   def edit
