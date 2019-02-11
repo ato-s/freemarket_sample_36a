@@ -22,12 +22,12 @@ crumb :lower_categories do |lower_category|
   parent :middle_categories, lower_category.middle_category
 end
 
-crumb :brands do
-  link 'ブランド一覧', brands_path
-  parent :root
+crumb :group do |group|
+  link 'ブランド一覧', group_path(group)
+  parent :root, group
 end
 
 crumb :brand do |brand|
   link brand.name, brand_path(brand)
-  parent :brands, brand
+  parent :group, brand
 end
