@@ -1,16 +1,12 @@
 Rails.application.routes.draw do
-  get 'likes/create'
-
-  get 'likes/destroy'
-
   get 'descriptions/show'
 
   root 'items#index'
   devise_for :users, :controllers => {
-  :registrations => 'users/registrations',
-  :omniauth_callbacks => 'users/omniauth_callbacks',
-  :sessions => 'users/sessions'
-}
+    :registrations => 'users/registrations',
+    :omniauth_callbacks => 'users/omniauth_callbacks',
+    :sessions => 'users/sessions'
+  }
   devise_scope :user do
     get 'select_api' => 'users/registrations#select_api'
     get 'complete' => 'users/registrations#complete'
@@ -29,9 +25,8 @@ Rails.application.routes.draw do
     resources :information, only: [:create]
   end
 
-  resources :groups, only: [:show, :index] do
-    resources :brands, only: [:show]
-  end
+  resources :groups, only: [:show, :index]
+  resources :brands, only: [:show, :index]
 
   resources :upper_categories, only: [:index, :show]
   resources :middle_categories, only: [:show]

@@ -1,5 +1,5 @@
 %section.c-items-box
-  = link_to items_path(item) do
+  = link_to item_path(item) do
     %figure.c-items-box_photo{style: "background-image: url(#{item.pictures.first.content})"}
     .c-items-box_body
       %h3.c-items-box_name.c-font-2
@@ -10,5 +10,6 @@
           = item.buy_price
         .c-items-box_likes.c-font-2
           %i.c-icon-like-border
-          %span 1
+          %span
+            = item.like_count
         %p.c-item-box_tax (税込)

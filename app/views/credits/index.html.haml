@@ -1,0 +1,24 @@
+.l-single_container
+  %main.l-single_main
+    %section.l-single_container
+      %h2.c-profile-head 支払い方法
+      .l-single_inner.transact-select-card
+        %section
+          .l-single_content
+            %h3.l-chapter-sub-head クレジットカード一覧
+          %ul
+            %li
+              .l-single_content
+                %figure
+                  = image_tag @bard_brand_image_src , class: "credit_brand_image"
+                %p.p-buy_user-info-text
+                  ************
+                  = @credit_data.last4
+                  %br
+                  = @credit_data.exp_month
+                  \/
+                  = @credit_data.exp_year
+                  = link_to '削除する',credit_path(@credit_data.id),method: :delete,class:"credit_delete_btn"
+        %section.transact-select-card-footer
+          .l-single_content
+            = link_to '次に進む' ,:back,  class: 'c-btn-default is-red'
