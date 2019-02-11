@@ -14,7 +14,7 @@
       %i.c-icon-search
   %nav.l-headerSp_nav.l-search-links
     = link_to 'カテゴリから探す', upper_categories_path
-    = link_to 'ブランドから探す', brands_path
+    = link_to 'ブランドから探す', group_path(1)
 %header.l-headerPc.l-visiblePc
   .l-headerPc_inner
     .l-clearfix
@@ -45,7 +45,7 @@
                               = link_to "#{lower_category.name}", lower_category_path(lower_category)
           %li
             %h2
-              = link_to 'ブランドから探す', brands_path, class: 'l-headerPc_nav-root'
+              = link_to 'ブランドから探す', group_path(1), class: 'l-headerPc_nav-root'
               %ul.l-headerPc_nav-parent-wrap
                 %li.l-headerPc_nav-parent
                   %h3
@@ -64,7 +64,7 @@
                     = link_to 'アディダス', brand_path(219)
                 %li.l-headerPc_nav-parent
                   %h3
-                    = link_to 'ブランド一覧', brands_path
+                    = link_to 'ブランド一覧', group_path(1)
       .l-flRight
         - if user_signed_in?
           %ul.l-headerPc_user-nav
