@@ -18,6 +18,6 @@ class InformationController < ApplicationController
     redirect_to item_transaction_messages_path(@item) unless @item.seller == current_user
   end
   def confirm_transaction_stage_purchased
-    redirect_to item_transaction_messages_path(@item) unless @item.transaction_stage == 'purchased'
+    redirect_to item_transaction_messages_path(@item) unless @item.purchased?
   end
 end

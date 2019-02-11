@@ -57,25 +57,25 @@ class ApplicationController < ActionController::Base
 
   def update_transaction_stage
     if @item.under_sale?
-      @item.update(transaction_stage: 'purchased')
+      @item.purchased!
       @information_type = 'be_purchased'
       create_information
       @todo_stage = 'ship_it'
       manage_todo
     elsif @item.purchased?
-      @item.update(transaction_stage: 'shipping')
+      @item.shipping!
       @information_type = 'be_shiped'
       create_information
       @todo_stage = 'review_if_buyer_received'
       manage_todo
     elsif @item.shipping?
-      @item.update(transaction_stage: 'evaluated')
+      @item.evaluated!
       @information_type = 'be_evaluated'
       create_information
       @todo_stage = 'review_and_receive_money'
       manage_todo
     elsif @item.evaluated?
-      @item.update(transaction_stage: 'transaction_completed')
+      @item.transaction_completed!
       @information_type = 'transaction_has_been_finished'
       create_information
       manage_todo

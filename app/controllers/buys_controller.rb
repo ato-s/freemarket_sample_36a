@@ -30,6 +30,6 @@ class BuysController < ApplicationController
     redirect_to root_path, alert: "出品した商品を購入することはできません" if @item.seller == current_user
   end
   def confirm_transaction_stage_under_sale
-    redirect_to root_path, alert: "既に販売済みの商品です" unless @item.transaction_stage == "under_sale"
+    redirect_to root_path, alert: "既に販売済みの商品です" unless @item.under_sale?
   end
 end

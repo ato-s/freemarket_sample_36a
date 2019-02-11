@@ -24,7 +24,7 @@ class ReviewsController < ApplicationController
     if @review.save
       update_user_review_count
       update_transaction_stage
-      seller_get_money if @item.transaction_stage == 'transaction_completed'
+      seller_get_money if @item.transaction_completed?
       redirect_to item_transaction_messages_path(@item), notice: 'Review was successfully created.'
     else
       render :new
@@ -58,7 +58,7 @@ class ReviewsController < ApplicationController
       end
     end
     def confirm_transaction_stage_shipping_or_evaluated
-      redirect_to item_transaction_messages_path(@item) unless @item.transaction_stage == 'shipping' || @item.transaction_stage == 'evaluated'
+      redirect_to item_transaction_messages_path(@item) unless @item.shipping? || @item.evaluated?
     end
     def update_user_review_count
       @appraisee = @review.appraisee
