@@ -56,7 +56,12 @@ class ItemsController < ApplicationController
   end
 
   def update
+    @originally_price = @item.buy_price
     if @item.update(item_params)
+      @changed_price = @item.buy_price
+      @liker_ids = @item.user_ids
+      @information_type = 'be_discounted'
+      create_information if @liker_ids.present? && @originally_price != @changed_price
       redirect_to root_path, notice: 'Item was successfully updated.'
     else
       redirect_to edit_item_path(@item)

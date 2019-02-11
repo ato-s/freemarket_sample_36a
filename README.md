@@ -10,6 +10,8 @@
 |good_count|integer|null:false, default:0|
 |normal_count|integer|null:false, default:0|
 |bad_count|integer|null:false, default:0|
+|money|integer|default:0|
+|point|integer|default:0|
 
 ### Association
 - has_many :reports, dependent: :destroy
@@ -19,6 +21,9 @@
 - has_many :addresses, dependent: :destroy
 - has_many :avatars, dependent: :destroy, inverse_of: :user
 - has_many :credits,dependent: :destroy
+- has_many :user_informations, dependent: :destroy
+- has_many :information, through: :user_informations, dependent: :destroy
+- has_many :todos, dependent: :destroy
 - has_one :phone_number, dependent: :destroy
 - accepts_nested_attributes_for :avatars, allow_destroy: true
 
@@ -160,14 +165,18 @@
 |------|----|-------|
 |item_id|integer|null:false, foreign_key:true|
 |infomation_type|integer|null:false, default:0|
-|text|text|null:false, default:""|
-|changed_price|integer|null:false, default:0|
-|changed_stage|integer|null:false, default:0|
+|text|text||
+|changed_price|integer|default:0|
+|originally_price|integer|default:0|
+|point|integer|default:0|
+|stakeholder_id|integer|null:false,foreign_key:true|
+|unread_or_read|boolean|default: false, null: false|
 
 ### Association
-- belongs_to :user
-- belongs_to :item
-- has_many :user_informations
+- has_many :user_informations, dependent: :destroy
+- has_many :users, through: :user_informations, dependent: :destroy
+- belongs_to :stakeholder, class_name: 'User', foreign_key: 'stakeholder_id', optional: true
+- belongs_to :related_item, class_name: 'Item', foreign_key: 'related_item_id', optional: true
 
 
 # user_infomationsテーブル
@@ -177,7 +186,7 @@
 |infomation_id|integer|null:false, foreign_key:true|
 
 ### Association
-- belongs_to :user_information
+- belongs_to :information
 - belongs_to :user
 
 
@@ -186,7 +195,7 @@
 |------|----|-------|
 |user_id|integer|null:false, foreign_key:true|
 |item_id|integer|null:false, foreign_key:true|
-|todo_type|integer|null:false|
+|todo_stage|integer|null:false|
 |text|text|null:false|
 
 ### Association
@@ -217,22 +226,24 @@
 |shipping_address_id|integer|add_foreign_key :items, :addresses, column: :shipping_address_id, index:true|
 
 ### Association
-  belongs_to :brand, optional: true
-  belongs_to :size, optional: true
-  belongs_to :seller, class_name: 'User', foreign_key: 'seller_id', optional: true
-  belongs_to :buyer, class_name: 'User', foreign_key: 'buyer_id', optional: true
-  belongs_to :shipping_address, class_name: 'Address', foreign_key: 'shipping_address_id', optional: true
-  belongs_to :upper_category, optional: true
-  belongs_to :middle_category, optional: true
-  belongs_to :lower_category, optional: true
+- belongs_to :brand, optional: true
+- belongs_to :size, optional: true
+- belongs_to :seller, class_name: 'User', foreign_key: 'seller_id', optional: true
+- belongs_to :buyer, class_name: 'User', foreign_key: 'buyer_id', optional: true
+- belongs_to :shipping_address, class_name: 'Address', foreign_key: 'shipping_address_id', optional: true
+- belongs_to :upper_category, optional: true
+- belongs_to :middle_category, optional: true
+= belongs_to :lower_category, optional: true
 
-  has_many :reviews
-  has_many :reports, dependent: :destroy
-  has_many :likes, dependent: :destroy
-  has_many :comments, dependent: :destroy
-  has_many :transaction_messages, dependent: :destroy
-  has_many :pictures, dependent: :destroy
-  accepts_nested_attributes_for :pictures, allow_destroy: true
+= has_many :reviews, dependent: :destroy
+- has_many :reports, dependent: :destroy
+= has_many :likes, dependent: :destroy
+= has_many :users, dependent: :destroy
+= has_many :comments, dependent: :destroy
+= has_many :transaction_messages, dependent: :destroy
+= has_many :pictures, dependent: :destroy
+= has_one :todo, dependent: :destroy
+- accepts_nested_attributes_for :pictures, allow_destroy: true
 
 
 # transaction_messagesテーブル

@@ -1,0 +1,12 @@
+%li
+  = link_to item_path(information.related_item), class: 'p-mypage_item-link js-modal' do
+    %figure
+      = image_tag 'common/mercari_profile.png'
+    .p-mypage_item-body
+      .p-mypage_item-text
+        = "あなたがいいねした#{information.stakeholder.nickname}の#{information.related_item.name}が\n#{information.originally_price}円から#{information.changed_price}円に変更されました。"
+      %time
+        %i.c-icon-time
+        %span
+          = "#{time_ago_in_words(information.created_at)}"
+    %i.c-icon-arrow-right

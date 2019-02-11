@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :update, :destroy]
     resources :transaction_messages, only: [:index, :create]
     resource :buy, only: [:edit,:update]
+    resources :information, only: [:create]
   end
 
   resources :groups, only: [:show, :index]
@@ -38,6 +39,8 @@ Rails.application.routes.draw do
   resources :addresses, only: [:index, :new, :create, :edit, :update]
   resources :phone_numbers, only: [:new, :create, :edit, :update]
   resources :credits, only: [:new, :create, :destroy, :index]
+  resources :information, only: [:index]
+  resources :todos, only: [:index]
 
   resource :safe, only: [:show] do
     resource :description,only: [:show]
