@@ -21,3 +21,13 @@ crumb :lower_categories do |lower_category|
   link lower_category.name, lower_category_path(lower_category)
   parent :middle_categories, lower_category.middle_category
 end
+
+crumb :group do |group|
+  link 'ブランド一覧', group_path(1)
+  parent :root, group
+end
+
+crumb :brand do |brand|
+  link brand.name, brand_path(brand)
+  parent :group, brand
+end

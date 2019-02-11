@@ -1,0 +1,32 @@
+- breadcrumb :group, @group
+.l-default-container
+  .category-index.l-single_container
+    %h2 ブランド一覧
+    .category-list-nav.slide-nav-parent.u-taCenter.l-clearfix
+      - @groups.each do |group|
+        - if current_page?(group_path(group))
+          = link_to group_path(group), class: "u-bgWt category-root-category-link-name is-active" do
+            = group.name
+        - else
+          = link_to group_path(group), class: "u-bgWt category-root-category-link-name" do
+            = group.name
+    .l-visiblePc.brand-initial-link-box.l-clearfix
+      - @initials.each do |initial|
+        .brand-initial-link-box-initial.slide-nav-parent
+          = link_to "#initial-#{initial.initial_word}", data: {turbolinks: false}, class: "js-scroll"  do
+            = initial.initial_word
+    .category-list-box
+      .category-list-individual-box.u-bgWt.l-clearfix
+        .u-bgRd.u-clWt.category-list-individual-box-root-category-name
+          %h3#root_category-1
+            = @group.name
+        .brand-list-box
+          - @initials.each do |initial|
+            .brand-list-initial-box.white.l-clearfix{id: "initial-#{initial.initial_word}"}
+              .brand-list-initial-box-initial.u-bgDgy
+                %h4
+                  = initial.initial_word
+              .brand-list-initial-box-brand-list.l-clearfix
+                - @brands.where(initial_word: initial.initial_word).each do |brand|
+                  = link_to brand_path(brand) do
+                    = brand.name

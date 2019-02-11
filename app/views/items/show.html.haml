@@ -1,4 +1,6 @@
 .l-default-container
+  .alert-text
+    = flash[:notice]
   %section.p-item_box-container.l-single_container
     %h1.p-item_name
       = @item.name
@@ -97,7 +99,7 @@
     .p-item_message_container
       .p-item_message_content
         %ul.p-item_message_block
-          - @item.transaction_messages.each do|message|
+          - @comments.each do|message|
             %li.l-clearfix
               = link_to '#', class: 'p-item_message_user' do
                 %figure
@@ -121,9 +123,9 @@
                         %i.c-icon-flag
                 %i.c-icon-balloon
       .p-item_message_content
-        = form_for '#', html: {class: 'c-message-form'} do |f|
+        = form_for [@item,@comment] , html: {class: 'c-message-form'} do |f|
           %p 相手のことを考え丁寧なコメントを心がけましょう。不快な言葉遣いなどは利用制限や退会処分となることがあります。
-          = f.text_area :param_name, class: 'c-textarea-default'
+          = f.text_area :text, class: 'c-textarea-default'
           = button_tag '#', class: 'p-message_submit c-btn-default is-gray' do
             %span コメントする
     -# %ul.p-item_nav-link.l-clearfix

@@ -16,21 +16,23 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all.includes(:pictures)
+    @pickup_categories = UpperCategory.find(1, 2, 3, 7)
+    @brand_categories = Brand.find(2443, 6146, 6762, 3806)
   end
 
   def show
-    @item = Item.includes(:transaction_messages).find(params[:id])
-    @seller = User.find(@item.seller_id)
-    @other_items = Item.where(seller_id: @item.seller_id)
+    @seller = @item.seller
+    @other_items = @seller.sell_items
     @other_brand_items = Item.where(brand_id: @item.brand_id)
-    @brand = Brand.find(@item.brand_id)
-    @upper_category = UpperCategory.find(@item.upper_category_id)
-    @middle_category = MiddleCategory.find(@item.middle_category_id)
-    @lower_category = LowerCategory.find(@item.lower_category_id)
-    @sizes = Size.find(@item.size_id)
+    @brand = @item.brand
+    @upper_category = @item.upper_category
+    @middle_category = @item.middle_category
+    @lower_category = @item.lower_category
+    @size = @item.size
     # random_page_link
-    @likes = Like.where(item_id: params[:item_id])
+    @likes = @item.likes
+    @comment = Comment.new
+    @comments = @item.comments.includes(:user)
   end
 
   def new
@@ -54,7 +56,12 @@ class ItemsController < ApplicationController
   end
 
   def update
+    @originally_price = @item.buy_price
     if @item.update(item_params)
+      @changed_price = @item.buy_price
+      @liker_ids = @item.user_ids
+      @information_type = 'be_discounted'
+      create_information if @liker_ids.present? && @originally_price != @changed_price
       redirect_to root_path, notice: 'Item was successfully updated.'
     else
       redirect_to edit_item_path(@item)
