@@ -56,25 +56,25 @@ class ApplicationController < ActionController::Base
 # following: finctions for management of transaction_stage, todo and information classes
 
   def update_transaction_stage
-    if @item.transaction_stage == 'under_sale'
+    if @item.under_sale?
       @item.update(transaction_stage: 'purchased')
       @information_type = 'be_purchased'
       create_information
       @todo_stage = 'ship_it'
       manage_todo
-    elsif @item.transaction_stage == 'purchased'
+    elsif @item.purchased?
       @item.update(transaction_stage: 'shipping')
       @information_type = 'be_shiped'
       create_information
       @todo_stage = 'review_if_buyer_received'
       manage_todo
-    elsif @item.transaction_stage == 'shipping'
+    elsif @item.shipping?
       @item.update(transaction_stage: 'evaluated')
       @information_type = 'be_evaluated'
       create_information
       @todo_stage = 'review_and_receive_money'
       manage_todo
-    elsif @item.transaction_stage == 'evaluated'
+    elsif @item.evaluated?
       @item.update(transaction_stage: 'transaction_completed')
       @information_type = 'transaction_has_been_finished'
       create_information
