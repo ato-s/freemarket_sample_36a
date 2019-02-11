@@ -1,14 +1,14 @@
 class ReviewsController < ApplicationController
   before_action :move_to_sign_in
-  before_action :set_item, only: [:new, :edit, :create, :update]
-  before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:new, :create]
+  before_action :set_review, only: :show
   before_action :confirm_buyer_or_seller_include_current_user, except: [:index, :show]
-  before_action :confirm_transaction_stage_under_transaction, except: [:index, :show]
+  before_action :confirm_transaction_stage_shipping_or_evaluated, except: [:index, :show]
   before_action :confirm_item_appraiser_exist, only: [:new, :create]
   before_action :confirm_buyer_already_create_review, only: [:new, :create]
 
   def index
-    @recieved_reviews = current_user.received_reviews
+    @received_reviews = current_user.received_reviews
     @sent_reviews = current_user.sent_reviews
   end
 
@@ -19,25 +19,15 @@ class ReviewsController < ApplicationController
     @review = Review.new
   end
 
-  def edit
-  end
-
   def create
     @review = Review.new(review_params)
     if @review.save
       update_user_review_count
-      update_transaction_stage_to_sold_out
+      update_transaction_stage
+      seller_get_money if @item.transaction_completed?
       redirect_to item_transaction_messages_path(@item), notice: 'Review was successfully created.'
     else
       render :new
-    end
-  end
-
-  def update
-    if @review = Review.update(review_params)
-      redirect_to item_transaction_messages_path(@item), notice: 'Review was successfully created.'
-    else
-      render :edit
     end
   end
 
@@ -60,26 +50,15 @@ class ReviewsController < ApplicationController
       @item.reviews.each do |review|
         @item_appraiser_ids << review.appraiser_id
       end
-      redirect_to mypages_path if @item_appraiser_ids.include?(current_user.id)
+      redirect_to item_transaction_messages_path(@item) if @item_appraiser_ids.include?(current_user.id)
     end
     def confirm_buyer_already_create_review
       if current_user == @item.seller
-        redirect_to mypages_path unless @item_appraiser_ids.include?(@item.buyer_id)
+        redirect_to item_transaction_messages_path(@item) unless @item_appraiser_ids.include?(@item.buyer_id)
       end
     end
-
-    def update_transaction_stage_to_sold_out
-      if @item.reviews.length == 0
-        #create todo(seller must create review)
-        @information_type = 'be_evaluated'
-        create_information
-      elsif @item.reviews.length == 1
-        @item.update(transaction_stage: 'sold_out')
-        seller_get_money
-        #admin_get_money
-        @information_type = 'transaction_has_been_finished'
-        create_information
-      end
+    def confirm_transaction_stage_shipping_or_evaluated
+      redirect_to item_transaction_messages_path(@item) unless @item.shipping? || @item.evaluated?
     end
     def update_user_review_count
       @appraisee = @review.appraisee

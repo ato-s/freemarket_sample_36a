@@ -2,10 +2,9 @@ class Todo < ApplicationRecord
   belongs_to :user
   belongs_to :item
 
-  enum information_type: {
+  enum todo_stage: {
     ship_it: 1,
-    has_been_shiped: 2,
-    buyer_review: 3,
-    seller_review: 4
+    review_if_buyer_received: 2,
+    review_and_receive_money: 3
   }
 end

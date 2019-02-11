@@ -90,7 +90,9 @@ class Item < ApplicationRecord
   }
   enum transaction_stage: {
     under_sale: 1,
-    under_transaction: 2,
-    sold_out: 3
+    purchased: 2,
+    shipping: 3,
+    evaluated: 4,
+    transaction_completed: 5
   }
 end
