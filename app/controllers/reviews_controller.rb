@@ -25,7 +25,6 @@ class ReviewsController < ApplicationController
       update_user_review_count
       update_transaction_stage
       seller_get_money if @item.transaction_stage == 'transaction_completed'
-      #admin_get_money if @item.transaction_stage == 'transaction_completed'
       redirect_to item_transaction_messages_path(@item), notice: 'Review was successfully created.'
     else
       render :new
