@@ -37,13 +37,13 @@
         %h2 カテゴリー一覧
       .category-list-nav.slide-nav-parent.u-taCenter.l-clearfix
         - @upper_categories.each do |upper_category|
-          = link_to "#root_category-#{upper_category.id}", class: "u-bgWt category-root-category-link-name" do
+          = link_to "#root_category-#{upper_category.id}", class: "u-bgWt category-root-category-link-name js-scroll", data: {turbolinks: false} do
             = upper_category.name
       .category-list-box
         .category-list-individual-box.u-bgWt.l-clearfix
           - @upper_categories.each do |upper_category|
             .u-bgRd.u-clWt.category-list-individual-box-root-category-name
-              %h3#root_category-1
+              %h3{id: "root_category-#{upper_category.id}"}
                 = upper_category.name
             .category-list-individual-box-inner-box
               %p

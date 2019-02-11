@@ -25,8 +25,8 @@ Rails.application.routes.draw do
     resources :information, only: [:create]
   end
 
-  resources :groups, only: [:show, :index]
-  resources :brands, only: [:show, :index]
+  resources :groups, only: [:show]
+  resources :brands, only: [:show]
 
   resources :upper_categories, only: [:index, :show]
   resources :middle_categories, only: [:show]
