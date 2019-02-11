@@ -49,16 +49,43 @@ class ApplicationController < ActionController::Base
     @item = Item.find(params[:item_id])
   end
 
-  def confirm_transaction_stage_under_transaction
-    redirect_to mypages_path unless @item.transaction_stage == 'under_transaction'
-  end
   def confirm_buyer_or_seller_include_current_user
     redirect_to mypages_path unless [@item.buyer_id, @item.seller_id].include?(current_user.id)
   end
 
-  def information_is_exist?
-    @item.information.where(information_type: @information_type).present?
+# following: finctions for management of transaction_stage, todo and information classes
+
+  def update_transaction_stage
+    if @item.transaction_stage == 'under_sale'
+      @item.update(transaction_stage: 'purchased')
+      @information_type = 'be_purchased'
+      create_information
+      @todo_stage = 'ship_it'
+      manage_todo
+    elsif @item.transaction_stage == 'purchased'
+      @item.update(transaction_stage: 'shipping')
+      @information_type = 'be_shiped'
+      create_information
+      @todo_stage = 'review_if_buyer_received'
+      manage_todo
+    elsif @item.transaction_stage == 'shipping'
+      @item.update(transaction_stage: 'evaluated')
+      @information_type = 'be_evaluated'
+      create_information
+      @todo_stage = 'review_and_receive_money'
+      manage_todo
+    elsif @item.transaction_stage == 'evaluated'
+      @item.update(transaction_stage: 'transaction_completed')
+      @information_type = 'transaction_has_been_finished'
+      create_information
+      manage_todo
+    end
   end
+
+  def information_is_needed?
+    !@item.information.where(information_type: @information_type, stakeholder_id: current_user.id, unread_or_read: 'unread').present?
+  end
+
   def create_information
     if @information_type == 'be_discounted'
       @information = Information.create(information_type: @information_type, stakeholder_id: current_user.id, related_item_id: @item.id, originally_price: @originally_price, changed_price: @changed_price)
@@ -77,11 +104,28 @@ class ApplicationController < ActionController::Base
         UserInformation.create(information_id: @information.id, user_id: @item.seller_id)
       elsif @information_type == 'transaction_has_been_finished'
         UserInformation.create(information_id: @information.id, user_id: @item.buyer_id)
+        UserInformation.create(information_id: @information.id, user_id: @item.seller_id)
+      elsif @information_type == 'be_commented'
+        UserInformation.create(information_id: @information.id, user_id: @item.seller_id)
       end
     end
   end
+  def manage_todo
+    if @todo_stage == 'ship_it'
+      @todo = Todo.create(todo_stage: @todo_stage, user_id: @item.seller_id, item_id: @item.id)
+    elsif @todo_stage == 'review_if_buyer_received'
+      @todo = @item.todo
+      @todo.update(todo_stage: @todo_stage, user_id: @item.buyer_id)
+    elsif @todo_stage == 'review_and_receive_money'
+      @todo = @item.todo
+      @todo.update(todo_stage: @todo_stage, user_id: @item.seller_id)
+    else
+      @todo = @item.todo
+      @todo.destroy
+    end
+  end
   def set_todo_and_information
-    @todos = current_user.todos.includes([item: :pictures])
-    @information = current_user.information.includes([related_item: :pictures])
+    @todos = current_user.todos.order(created_at: :desc).includes(:user, [item: :pictures])
+    @information = current_user.information.order(created_at: :desc).includes(:stakeholder, [related_item: :pictures])
   end
 end
