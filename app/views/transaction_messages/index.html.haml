@@ -13,4 +13,5 @@
 
 - if current_user == @item.seller
   = link_to item_information_index_path(@item), method: :post do
-    発送完了連絡を送る
+    .ship_button
+      発送完了連絡を送る
