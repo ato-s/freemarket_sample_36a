@@ -16,10 +16,10 @@ Rails.application.routes.draw do
   match 'dynamic_middle_category', to: 'items#dynamic_middle_category', via: [:get, :post]
   match 'dynamic_lower_category', to: 'items#dynamic_lower_category', via: [:get, :post]
   resources :items do
-    resources :reviews, only: [:new, :create, :edit, :update]
+    resources :reviews, only: [:new, :create]
     resources :reports, only: [:create, :destroy]
     resources :likes, only: [:create, :destroy]
-    resources :comments, only: [:create, :update, :destroy]
+    resources :comments, only: [:create, :destroy]
     resources :transaction_messages, only: [:index, :create]
     resource :buy, only: [:edit,:update]
     resources :information, only: [:create]
