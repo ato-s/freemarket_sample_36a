@@ -6,12 +6,12 @@
 
 
 = link_to new_item_review_path(@item) do
-  - if current_user.id == @item.buyer_id
+  - if current_user.id == @item.buyer_id && @item.transaction_stage == 'shipping'
     受け取り評価する(buyer)
-  - else
+  - elsif current_user.id == @item.seller_id && @item.transaction_stage == 'evaluated'
     評価する(seller)
 
-- if current_user == @item.seller
+- if current_user == @item.seller && @item.transaction_stage == 'purchased'
   = link_to item_information_index_path(@item), method: :post do
     .ship_button
       発送完了連絡を送る
