@@ -59,7 +59,7 @@
           %li.p-mypage_item-not-found.u-fwBold 現在、取引中の商品はありません
       - if @sold_out_items.present?
         %ul#p-mypage_tab-transaction-old.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
-          = render :partial => "mypages/sold_out_items", :collection => @sole_out_items, :as => "sold_out_item"
+          = render :partial => "mypages/sold_out_items", :collection => @sold_out_items, :as => "sold_out_item"
           %li.p-mypage_go-list
             = link_to '一覧を見る', index_sold_out_items_path
       - else
