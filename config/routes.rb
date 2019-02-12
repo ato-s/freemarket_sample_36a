@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :upper_categories, only: [:index, :show]
   resources :middle_categories, only: [:show]
   resources :lower_categories, only: [:show]
+  resources :area ,onl: [:show]
 
   get 'logout' => 'mypages#logout'
   resources :mypages, only: [:index, :show, :edit, :update]
