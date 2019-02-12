@@ -1,0 +1,11 @@
+%li
+  = link_to item_path(sold_out_item), class: 'p-mypage_item-link' do
+    %figure
+      = image_tag sold_out_item.pictures[0].content
+    .p-mypage_item-body
+      .p-mypage_item-text
+        = "#{sold_out_item.name}を購入しました"
+        %span
+      .p-mypage_item-status.u-fwBold.is-done
+        取引完了
+    %i.c-icon-arrow-right

@@ -1,0 +1,11 @@
+%li
+  = link_to item_path(under_transaction_item), class: 'p-mypage_item-link' do
+    %figure
+      = image_tag under_transaction_item.pictures[0].content
+    .p-mypage_item-body
+      .p-mypage_item-text
+        = "#{under_transaction_item.name}を購入しました。"
+        %span
+      .p-mypage_item-status.u-fwBold.is-action-required
+        = under_transaction_item_messages(under_transaction_item)
+    %i.c-icon-arrow-right

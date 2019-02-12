@@ -1,0 +1,12 @@
+%li
+  = link_to item_transaction_messages_path(todo.item), class: 'p-mypage_item-link js-modal' do
+    %figure
+      = image_tag todo.item.pictures[0].content
+    .p-mypage_item-body
+      .p-mypage_item-text
+        = todo_messages(todo)
+      %time
+        %i.c-icon-time
+        %span
+          = "#{time_ago_in_words(todo.created_at)}"
+    %i.c-icon-arrow-right
