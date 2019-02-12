@@ -32,4 +32,15 @@ module ApplicationHelper
       "#{todo.item.name}の評価を行ってください。\n評価完了後に入金されます。"
     end
   end
+
+  def under_transaction_item_messages(under_transaction_item)
+    if under_transaction_item.purchased?
+      '発送待ち'
+    elsif under_transaction_item.shipping?
+      '発送中'
+    else
+      '評価待ち'
+    end
+  end
+
 end
