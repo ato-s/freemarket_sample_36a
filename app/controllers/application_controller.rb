@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_categories
+  before_action :set_unread_information_length
+  before_action :set_todos_length
 
   protected
 
@@ -124,8 +126,10 @@ class ApplicationController < ActionController::Base
       @todo.destroy
     end
   end
-  def set_todo_and_information
-    @todos = current_user.todos.order(created_at: :desc).includes(:user, [item: :pictures])
-    @information = current_user.information.order(created_at: :desc).includes(:stakeholder, [related_item: :pictures])
+  def set_unread_information_length
+    @information_length = current_user.information.where(unread_or_read: 'unread').length if user_signed_in?
+  end
+  def set_todos_length
+    @todos_length = current_user.todos.length if user_signed_in?
   end
 end
