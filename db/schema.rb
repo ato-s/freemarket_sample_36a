@@ -84,9 +84,11 @@ ActiveRecord::Schema.define(version: 20190210074643) do
     t.integer "point", default: 0
     t.bigint "stakeholder_id"
     t.bigint "related_item_id"
+    t.bigint "created_review_id"
     t.boolean "unread_or_read", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_review_id"], name: "index_information_on_created_review_id"
     t.index ["related_item_id"], name: "index_information_on_related_item_id"
     t.index ["stakeholder_id"], name: "index_information_on_stakeholder_id"
   end
