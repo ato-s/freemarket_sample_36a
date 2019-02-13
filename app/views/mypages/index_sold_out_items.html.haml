@@ -11,7 +11,7 @@
     .p-mypage_tab-content
       - if @sold_out_items.present?
         %ul#p-mypage_tab-transaction-old.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
-          = render :partial => "mypages/sold_out_items", :collection => @sole_out_items, :as => "sold_out_item"
+          = render partial: "mypages/sold_out_items", collection: @sold_out_items, as: "sold_out_item"
       - else
         %ul#p-mypage_tab-transaction-old.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
           %li.p-mypage_item-not-found.u-fwBold 現在、取引完了の商品はありません
