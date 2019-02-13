@@ -13,9 +13,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_in, keys: [:nickname, :profile, :uid, :provider, :good_count, :normal_count, :bad_count, :money, :point])
     devise_parameter_sanitizer.permit(:account_update, keys: [:nickname, :profile, :uid, :provider, :good_count, :normal_count, :bad_count, :money, :point])
   end
+
   def after_sign_out_path_for(resource)
     root_path
   end
+
   def after_sign_in_path_for(resource)
     if current_user.addresses.present?
       root_path
@@ -23,6 +25,7 @@ class ApplicationController < ActionController::Base
       new_address_path
     end
   end
+
   def move_to_sign_in
     redirect_to new_user_session_path unless user_signed_in?
   end
@@ -47,6 +50,7 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = :ja
   end
+
   def set_item
     @item = Item.find(params[:item_id])
   end
@@ -112,6 +116,7 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
   def manage_todo
     if @todo_stage == 'ship_it'
       @todo = Todo.create(todo_stage: @todo_stage, user_id: @item.seller_id, item_id: @item.id)
@@ -126,9 +131,11 @@ class ApplicationController < ActionController::Base
       @todo.destroy
     end
   end
+
   def set_unread_information_length
     @information_length = current_user.information.where(unread_or_read: 'unread').length if user_signed_in?
   end
+
   def set_todos_length
     @todos_length = current_user.todos.length if user_signed_in?
   end

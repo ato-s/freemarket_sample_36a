@@ -37,10 +37,13 @@ class MypagesController < ApplicationController
     end
     @information_length = 0
   end
+
   def index_todos
   end
+
   def index_under_transaction_items
   end
+
   def index_sold_out_items
   end
 
@@ -49,15 +52,19 @@ class MypagesController < ApplicationController
   def mypage_params
     params.require(:user).permit(:nickname, :profile)
   end
+
   def set_todos
     @todos = current_user.todos.order(created_at: :desc).includes(item: :pictures)
   end
+
   def set_information
     @information = current_user.information.order(created_at: :desc).includes(:stakeholder, [related_item: :pictures])
   end
+
   def set_under_transaction_items
     @under_transaction_items = current_user.buy_items.includes(:pictures).where(transaction_stage: ['purchased', 'shipping', 'evaluated']).order(created_at: :desc)
   end
+
   def set_sold_out_items
     @sold_out_items = current_user.buy_items.includes(:pictures).where(transaction_stage: 'transaction_completed').order(created_at: :desc)
   end

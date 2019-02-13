@@ -8,9 +8,11 @@ class ItemsController < ApplicationController
   def dynamic_upper_category
     @middle_categories = MiddleCategory.where(upper_category_params)
   end
+
   def dynamic_middle_category
     @lower_categories = LowerCategory.where(middle_category_params)
   end
+
   def dynamic_lower_category
     @sizes = LowerCategory.find(params[:item][:lower_category_id]).middle_category.size_type.sizes
   end
@@ -74,12 +76,15 @@ class ItemsController < ApplicationController
   end
 
   private
+
     def set_item
       @item = Item.find(params[:id])
     end
+
     def set_new_item
       @item = Item.new
     end
+
     def item_create_params
       params.require(:item).permit(
         :name,
@@ -101,6 +106,7 @@ class ItemsController < ApplicationController
         pictures_attributes: [:id, :content, :status]
       ).merge(transaction_stage: 'under_sale', seller_id: current_user.id)
     end
+
     def item_params
       params.require(:item).permit(
         :name,
@@ -122,9 +128,11 @@ class ItemsController < ApplicationController
         pictures_attributes: [:id, :content, :status]
       )
     end
+
     def upper_category_params
       params.require(:item).permit(:upper_category_id)
     end
+
     def middle_category_params
       params.require(:item).permit(:middle_category_id)
     end
