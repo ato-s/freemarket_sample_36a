@@ -45,6 +45,7 @@ class ReviewsController < ApplicationController
       end
       params.require(:review).permit(:text, :evaluation, :item_id).merge(appraiser_id: current_user.id, appraisee_id: @appraisee_id, item_id: params[:item_id])
     end
+
     def confirm_item_appraiser_exist
       @item_appraiser_ids = ['dammy']
       @item.reviews.each do |review|
@@ -52,14 +53,17 @@ class ReviewsController < ApplicationController
       end
       redirect_to item_transaction_messages_path(@item) if @item_appraiser_ids.include?(current_user.id)
     end
+
     def confirm_buyer_already_create_review
       if current_user == @item.seller
         redirect_to item_transaction_messages_path(@item) unless @item_appraiser_ids.include?(@item.buyer_id)
       end
     end
+
     def confirm_transaction_stage_shipping_or_evaluated
       redirect_to item_transaction_messages_path(@item) unless @item.shipping? || @item.evaluated?
     end
+
     def update_user_review_count
       @appraisee = @review.appraisee
       @good_count = @appraisee.good_count
@@ -74,6 +78,7 @@ class ReviewsController < ApplicationController
       end
       @appraisee.update(good_count: @good_count, normal_count: @normal_count, bad_count: @bad_count)
     end
+
     def seller_get_money
       @seller_possession_money = current_user.money.to_i
       @seller_possession_money += @item.sell_price.to_i

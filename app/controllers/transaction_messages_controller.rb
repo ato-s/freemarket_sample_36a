@@ -17,10 +17,12 @@ class TransactionMessagesController < ApplicationController
   def transaction_message_params
     params.require(:transaction_message).permit(:text).merge(user_id: current_user.id, item_id: params[:item_id])
   end
+
   def set_transaction_messages
     @transaction_message = TransactionMessage.new
     @transaction_messages = @item.transaction_messages
   end
+
   def confirm_transaction_stage_under_transaction
     redirect_to mypages_path unless ['purchased', 'shipping', 'evaluated'].include?(@item.transaction_stage)
   end

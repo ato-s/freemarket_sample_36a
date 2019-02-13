@@ -1,0 +1,17 @@
+.l-content
+  %section.p-mypage_tab-container-notification-todo
+    %ul.p-mypage_tabs.js-tab_menu
+      %li.is-active
+        %h3
+          お知らせ
+      %li
+        %h3
+          やることリスト
+    .p-mypage_tab-content
+      - if @information.present?
+        %ul#p-mypage_tab-notification.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
+          = render partial: "mypages/information", collection: @information, as: "information"
+      - else
+        %ul#p-mypage_tab-nortification.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+          %li.p-mypage_item-not-found.u-fwBold 現在、お知らせはありません
+
