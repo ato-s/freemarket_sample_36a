@@ -61,7 +61,7 @@
           %tr
             %th 配送元地域
             %td
-              = link_to items_path do
+              = link_to areas_path(region: @item.delivery_region) do
                 = @item.delivery_region
           %tr
             %th 発送日の目安
