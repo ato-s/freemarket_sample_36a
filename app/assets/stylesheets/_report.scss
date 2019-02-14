@@ -1,0 +1,222 @@
+.l-single-container {
+  background: #fff
+}
+@media screen and (min-width: 768px) {
+  .l-single-container {
+    width: 700px;
+    margin: 0 auto
+  }
+}
+.form-require, .form-arbitrary, .message-is-seller, .news-private {
+  margin: 0 0 0 8px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  color: #fff;
+  font-size: 12px;
+  vertical-align: top
+}
+.form-require {
+  background: #ea352d
+}
+.l-single-head {
+  padding: 24px 8px;
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: center
+}
+@media screen and (min-width: 768px) {
+  .l-single-head {
+    padding: 32px 16px;
+    font-size: 22px
+  }
+}
+.l-single-inner {
+  border-top: 1px solid #f5f5f5;
+  padding: 40px
+}
+@media screen and (min-width: 768px) {
+  .l-single-inner {
+    padding: 64px
+  }
+}
+.l-single-inner .btn-red {
+  margin: 40px 0 0
+}
+.l-single-inner .btn-red:first-child {
+  margin: 0
+}
+.l-single-inner .btn-gray {
+  margin: 16px 0 0
+}
+.l-single-inner p {
+  margin: 8px 0 0;
+  line-height: 1.5
+}
+.l-single-content {
+  max-width: 320px;
+  margin: 0 auto
+}
+.l-single-content p {
+  margin: 8px 0 0;
+  line-height: 1.5
+}
+.l-single-content p.l-single-text {
+  margin: 8px 0 0;
+  padding: 0
+}
+.l-single-content p:first-child {
+  margin: 0;
+  padding: 0
+}
+.target-item-label {
+  font-size: 14px
+}
+.target-item-box {
+  background: #eee;
+  margin: 20px 0 40px 0;
+  padding: 10px;
+  overflow: hidden
+}
+.target-item-box img {
+  width: 70px;
+  height: 70px;
+  float: left;
+  margin: 0 10px 0 0
+}
+.form-group {
+  margin: 40px 0 0
+}
+.form-group:first-child {
+  margin: 0
+}
+.form-group.is-hidden {
+  display: none
+}
+.form-group label {
+  font-weight: 600
+}
+.form-group label+.textarea-default {
+  margin: 8px 0 0
+}
+.form-group .input-default {
+  width: 100%;
+  margin: 8px 0 0
+}
+.form-group .input-default+label {
+  margin: 24px 0 0
+}
+.form-group .select-wrap {
+  margin: 8px 0 0
+}
+.form-group select {
+  width: 100%
+}
+.form-group .checkbox-default, .form-group .radio-default, .form-group .textarea-default {
+  margin: 16px 0 0
+}
+.form-group .icon-arrow-bottom {
+  position: absolute
+}
+.login-form-inner .form-group {
+  margin: 24px 0 0
+}
+.login-form-inner .form-group:first-child {
+  margin: 0
+}
+.select-wrap {
+  position: relative;
+  background: #fff
+}
+.select-wrap .icon-arrow-bottom {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  z-index: 2;
+  color: #888;
+  font-size: 8px;
+  transform: translate(0, -50%);
+  transform: translate(0, -50%)
+}
+.select-default {
+  position: relative;
+  z-index: 2;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  cursor: pointer
+}
+.select-default:disabled {
+  background: #f5f5f5
+}
+.select-default.has-error {
+  border-color: #ea352d
+}
+.select-default:focus {
+  border-color: #0099e8
+}
+.search-sort .select-default {
+  height: 72px;
+  padding: 0;
+  border: 0
+}
+@media screen and (min-width: 1068px) {
+  .search-sort .select-default {
+    height: 48px;
+    padding: 0 16px;
+    border: 1px solid #ccc
+  }
+}
+.pc-header-nav .icon-arrow-bottom {
+  margin: 0 0 0 8px;
+  font-size: 7px
+}
+.icon-arrow-bottom:before {
+  content: '\e001'
+}
+.list-row .icon-arrow-up, .list-row .icon-arrow-bottom {
+  font-size: 8px
+}
+.buy-accordion .icon-arrow-bottom {
+  font-size: 8px
+}
+.form-info-text {
+  margin: 8px 0 0;
+  color: #888;
+  line-height: 1.5
+}
+.btn-default {
+  display: block;
+  width: 100%;
+  line-height: 48px;
+  font-size: 14px;
+  border: 1px solid transparent;
+  transition: all ease-out .3s;
+  transition: all ease-out .3s;
+  cursor: pointer;
+  text-align: center
+}
+.btn-default:hover {
+  text-decoration: none
+}
+.btn-default.is-disabled, .btn-default:disabled {
+  border: 1px solid #888;
+  background: #888;
+  color: #fff
+}
+.btn-default.is-disabled:hover, .btn-default:disabled:hover {
+  background: #888;
+  color: #fff
+}
+.btn-red {
+  background: #ea352d;
+  border: 1px solid #ea352d;
+  color: #fff
+}
+.btn-red:hover {
+  background: #e62017;
+  color: #fff
+}

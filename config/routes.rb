@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   match 'dynamic_lower_category', to: 'items#dynamic_lower_category', via: [:get, :post]
   resources :items do
     resources :reviews, only: [:new, :create]
-    resources :reports, only: [:create, :destroy]
+    resources :reports, only: [:new, :create, :destroy]
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
     resources :transaction_messages, only: [:index, :create]
@@ -32,7 +32,6 @@ Rails.application.routes.draw do
   resources :upper_categories, only: [:index, :show]
   resources :middle_categories, only: [:show]
   resources :lower_categories, only: [:show]
-  resources :area ,onl: [:show]
 
   get 'logout' => 'mypages#logout'
   get 'index_todos' => 'mypages#index_todos'

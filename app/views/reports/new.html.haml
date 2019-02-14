@@ -1,0 +1,36 @@
+.l-single_wrapper
+  %main.single-main
+    %section.l-single-container
+      %h2.l-single-head 商品の報告
+      .l-single-inner
+        .l-single-content
+          %h3.target-item-label 対象商品
+          .target-item-box
+            = image_tag @item.pictures[0].content
+            %h4
+              = @item.name
+            %h7
+              = @item.description.truncate(60)
+          = form_for [@item ,@report] , method: :post do |f|
+            .form-group
+              %label{for:'report_type'} 違反の種類
+              %span.form-require 必須
+              .select-wrap
+                %select.select-default{name:"report_type"}
+                  %option{value: ""} 選択してください
+                  %option{value: 1} 偽ブランド品・権利侵害品
+                  %option{value: 2} 医薬品・医療機器
+                  %option{value: 3} 薬機法違反（海外化粧品等）
+                  %option{value: 4} 危険物（花火や火薬など）
+                  %option{value: 5} ブルセラ・児童ポルノ・中古下着
+                  %option{value: 6} アダルト・18禁
+                  %option{value: 7} 銃刀法違反・武器類
+                  %option{value: 8} 現金類・偽造チケット・偽造金券
+                  %option{value: 9} 他サービス誘導・直接取引・交換
+                  %option{value: 10} 宣伝・捜し物・福袋
+                  %option{value: 11} その他
+            .form-group.is-hidden
+              %label{for:"body"} お問い合わせ内容
+              %span.form-require 必須
+            %p.form-info-text 不適切な商品の報告に基づいて随時、事務局でチェックさせていただき対応してまいります。特に返答はいたしませんが、ご了承ください。
+            = f.submit '送信する',class:"btn-default btn-red"
