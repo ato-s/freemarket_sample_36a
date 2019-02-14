@@ -13,20 +13,20 @@
     .l-visiblePc.brand-initial-link-box.l-clearfix
       - @initials.each do |initial|
         .brand-initial-link-box-initial.slide-nav-parent
-          = link_to "#initial-#{initial.initial_word}", data: {turbolinks: false}, class: "js-scroll"  do
-            = initial.initial_word
+          = link_to "#initial-#{initial}", data: {turbolinks: false}, class: "js-scroll"  do
+            = initial
     .category-list-box
       .category-list-individual-box.u-bgWt.l-clearfix
         .u-bgRd.u-clWt.category-list-individual-box-root-category-name
           %h3#root_category-1
             = @group.name
-        .brand-list-box
-          - @initials.each do |initial|
-            .brand-list-initial-box.white.l-clearfix{id: "initial-#{initial.initial_word}"}
-              .brand-list-initial-box-initial.u-bgDgy
-                %h4
-                  = initial.initial_word
-              .brand-list-initial-box-brand-list.l-clearfix
-                - @brands.where(initial_word: initial.initial_word).each do |brand|
-                  = link_to brand_path(brand) do
-                    = brand.name
+        .brand-list-box.l-clearfix
+          - @brands.each_with_index do |brand, index|
+            - if @initial_index.include?(index)
+              .brand-list-initial-box.white{id: "initial-#{brand.initial_word}"}
+                .brand-list-initial-box-initial.u-bgDgy
+                  %h4
+                    = brand.initial_word
+            .brand-list-initial-box-brand-list.l-clearfix
+              = link_to brand_path(brand) do
+                = brand.name
