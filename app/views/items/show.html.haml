@@ -14,7 +14,7 @@
           %tr
             %th 出品者
             %td
-              = link_to '#' do
+              = link_to mypage_path(@item.seller_id) do
                 = @seller.nickname
               %div
                 .p-item_user-ratings
@@ -32,20 +32,20 @@
           %tr
             %th カテゴリー
             %td
-              = link_to '#' do
+              = link_to upper_category_path(@item.upper_category_id) do
                 = @upper_category.name
-              = link_to '#' do
+              = link_to middle_category_path(@item.middle_category_id) do
                 .p-item_detail-table-sub-category
                   %i.c-icon-arrow-right
                   = @middle_category.name
-              = link_to '#' do
+              = link_to lower_category_path(@item.lower_category_id) do
                 .p-item_detail-table-sub-sub-category
                   %i.c-icon-arrow-right
                   = @lower_category.name
           %tr
             %th ブランド
             %td
-              = link_to '#' do
+              = link_to brand_path(@item.brand_id) do
                 = @brand.name
           %tr
             %th 商品の状態
