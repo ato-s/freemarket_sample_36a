@@ -10,8 +10,12 @@ class ReportsController < ApplicationController
   end
 
   def create
+    if params[:report_type] != ""
     @report = Report.create(user_id: current_user.id, item_id: params[:item_id],report_type: params[:report_type])
     redirect_to item_path(@item), notice: "問題を報告しました"
+    else
+      redirect_to new_item_report_path(@item),notice:"違反の種類を選択して下さい"
+    end
   end
 
   def destroy

@@ -32,5 +32,7 @@
             .form-group.is-hidden
               %label{for:"body"} お問い合わせ内容
               %span.form-require 必須
+            .flash_content
+              = flash[:notice]
             %p.form-info-text 不適切な商品の報告に基づいて随時、事務局でチェックさせていただき対応してまいります。特に返答はいたしませんが、ご了承ください。
             = f.submit '送信する',class:"btn-default btn-red"
