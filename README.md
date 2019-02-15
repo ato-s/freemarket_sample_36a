@@ -80,6 +80,7 @@
 |------|----|-------|
 |user_id|integer|null:false, foreign_key:true|
 |item_id|integer|null:false, foreign_key:true|
+|report_type|integer|null:false, default:0|
 
 ### Association
 - belongs_to :user
