@@ -33,7 +33,35 @@ module Payjp_process
     require 'payjp'
     Payjp.api_key = Rails.application.secrets.payjp_private_key
     @credit = Credit.find_by(user_id: current_user.id)
-    @user_credit = Payjp::Customer.retrieve(@credit.customer_id).cards.data[0] if @credit.present?
+    @customer = Payjp::Customer.retrieve(@credit.customer_id).cards.data[0] if @credit.present?
+  end
+
+  def delete_customer_data
+    require 'payjp'
+    Payjp.api_key = Rails.application.secrets.payjp_private_key
+    @customer = Payjp::Customer.retrieve(current_user.credits[0].customer_id)
+    @customer.delete
+  end
+
+  def card_brand_image_src
+    @user_data = show_customer_data
+    @card_brand = @user_data.brand
+    case @card_brand
+    when "American Express"
+      @bard_brand_image_src = 'card/american_express.svg'
+    when "Diners Club"
+      @bard_brand_image_src = 'card/dinersclub.svg'
+    when "Discover"
+      @bard_brand_image_src = 'card/discover.svg'
+    when "JCB"
+      @bard_brand_image_src = 'card/jcb.svg'
+    when "MasterCard"
+      @bard_brand_image_src = 'card/master-card.svg'
+    when "Saison Card"
+      @bard_brand_image_src = 'card/saison-card.svg'
+    when "Visa"
+      @bard_brand_image_src = 'card/visa.svg'
+    end
   end
 
 end

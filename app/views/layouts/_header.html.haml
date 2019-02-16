@@ -13,8 +13,8 @@
       = search_field_tag :keyword, params[:keywords], placeholder: '何をお探しですか？', class: 'l-headerSp_search c-input-default'
       %i.c-icon-search
   %nav.l-headerSp_nav.l-search-links
-    = link_to 'カテゴリから探す', '/category/'
-    = link_to 'ブランドから探す', '/brand/'
+    = link_to 'カテゴリから探す', upper_categories_path
+    = link_to 'ブランドから探す', group_path(1)
 %header.l-headerPc.l-visiblePc
   .l-headerPc_inner
     .l-clearfix
@@ -45,31 +45,31 @@
                               = link_to "#{lower_category.name}", lower_category_path(lower_category)
           %li
             %h2
-              = link_to 'ブランドから探す', '/brand/', class: 'l-headerPc_nav-root'
+              = link_to 'ブランドから探す', group_path(1), class: 'l-headerPc_nav-root'
               %ul.l-headerPc_nav-parent-wrap
                 %li.l-headerPc_nav-parent
                   %h3
-                    = link_to 'シャネル', '/brand/658/'
+                    = link_to 'シャネル', brand_path(2443)
                 %li.l-headerPc_nav-parent
                   %h3
-                    = link_to 'ナイキ', '/brand/857/'
+                    = link_to 'ナイキ', brand_path(3806)
                 %li.l-headerPc_nav-parent
                   %h3
-                    = link_to 'ルイ ヴィトン', '/brand/1326/'
+                    = link_to 'ルイ ヴィトン', brand_path(6146)
                 %li.l-headerPc_nav-parent
                   %h3
-                    = link_to 'シュプリーム', '/brand/1620/'
+                    = link_to 'シュプリーム', brand_path(6762)
                 %li.l-headerPc_nav-parent
                   %h3
-                    = link_to 'アディダス', '/brand/99/'
+                    = link_to 'アディダス', brand_path(219)
                 %li.l-headerPc_nav-parent
                   %h3
-                    = link_to 'ブランド一覧', '/brand/'
+                    = link_to 'ブランド一覧', group_path(1)
       .l-flRight
         - if user_signed_in?
           %ul.l-headerPc_user-nav
             %li
-              = link_to mypages_path, class: 'l-headerSp_user-icon l-headerPc_nav-root' do
+              = link_to mypage_path(current_user), class: 'l-headerSp_user-icon l-headerPc_nav-root' do
                 %figure
                   %div
                     = image_tag 'common/member_photo_noimage_thumb.png', width: '32'
@@ -128,16 +128,20 @@
                       購入した商品 - 過去の取引
                       %i.c-icon-arrow-right
             %li{"data-id" => "l-headerPc_user-nav", "data-key" => "notification_list", "data-url" => "/mypage/notification_and_todo_json/"}
-              = link_to '/mypage/notification/', class: 'l-headerPc_nav-root' do
+              = link_to index_information_path, class: 'l-headerPc_nav-root' do
                 %i.c-icon-bell
                 %span お知らせ
-                .l-headerPc_nav-count
-                  34
+                - if @information_length != 0
+                  .l-headerPc_nav-count
+                    = @information_length
               %ul.l-headerPc_user-box.l-headerPc_notification-box.c-mypage_item-list{"data-id" => "l-headerPc_user-items"}
             %li{"data-id" => "l-headerPc_user-nav", "data-key" => "todo_list", "data-url" => "/mypage/notification/"}
-              = link_to '/mypage/notification_and_todo_json/', class: 'l-headerPc_nav-root' do
+              = link_to index_todos_path, class: 'l-headerPc_nav-root' do
                 %i.c-icon-check
                 %span やることリスト
+                - if @todos_length != 0
+                  .l-headerPc_nav-count
+                    = @todos_length
               %ul.l-headerPc_user-box.l-headerPc_todo-box.c-mypage_item-list{"data-id" => "l-headerPc_user-items"}
         - else
           %ul.l-headerPc.l-login_nav

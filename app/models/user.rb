@@ -15,6 +15,9 @@ class User < ApplicationRecord
   has_many :addresses, dependent: :destroy
   has_many :avatars, dependent: :destroy, inverse_of: :user
   has_many :credits, dependent: :destroy
+  has_many :user_informations, dependent: :destroy
+  has_many :information, through: :user_informations, dependent: :destroy
+  has_many :todos, dependent: :destroy
   has_one :phone_number, dependent: :destroy
   accepts_nested_attributes_for :avatars, allow_destroy: true
 

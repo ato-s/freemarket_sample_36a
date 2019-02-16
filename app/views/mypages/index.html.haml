@@ -1,4 +1,4 @@
-.l-default-container
+.l-content
   %section.p-user_details.l-single_container
     .p-user_detail-profile-box{style: 'background-image: url(/assets/common/user_bg.jpg)'}
       .p-user_detail-photo_box.u-taCenter
@@ -50,4 +50,4 @@
       %h2.c-items-box_head
         この出品者の商品
       .c-items-box_content.l-clearfix
-        = render :partial => "layouts/itembox", :collection => @items, :as => "item"
+        = render :partial => "layouts/item", :collection => @items, :as => "item"

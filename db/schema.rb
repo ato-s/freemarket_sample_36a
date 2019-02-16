@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190202094356) do
+ActiveRecord::Schema.define(version: 20190210074643) do
 
   create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "first_name", default: "", null: false
@@ -74,6 +74,21 @@ ActiveRecord::Schema.define(version: 20190202094356) do
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", default: "", null: false
+  end
+
+  create_table "information", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "information_type"
+    t.text "text"
+    t.integer "originally_price", default: 0
+    t.integer "changed_price", default: 0
+    t.integer "point", default: 0
+    t.bigint "stakeholder_id"
+    t.bigint "related_item_id"
+    t.boolean "unread_or_read", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["related_item_id"], name: "index_information_on_related_item_id"
+    t.index ["stakeholder_id"], name: "index_information_on_stakeholder_id"
   end
 
   create_table "items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -184,6 +199,17 @@ ActiveRecord::Schema.define(version: 20190202094356) do
     t.index ["size_type_id"], name: "index_sizes_on_size_type_id"
   end
 
+  create_table "todos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "todo_stage"
+    t.text "text"
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_todos_on_item_id"
+    t.index ["user_id"], name: "index_todos_on_user_id"
+  end
+
   create_table "transaction_messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id", null: false
     t.bigint "item_id", null: false
@@ -196,6 +222,15 @@ ActiveRecord::Schema.define(version: 20190202094356) do
 
   create_table "upper_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", default: "", null: false
+  end
+
+  create_table "user_informations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id", null: false
+    t.bigint "information_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["information_id"], name: "index_user_informations_on_information_id"
+    t.index ["user_id"], name: "index_user_informations_on_user_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -225,6 +260,8 @@ ActiveRecord::Schema.define(version: 20190202094356) do
     t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "money", default: "0"
+    t.string "point", default: "0"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
@@ -237,6 +274,8 @@ ActiveRecord::Schema.define(version: 20190202094356) do
   add_foreign_key "comments", "items"
   add_foreign_key "comments", "users"
   add_foreign_key "credits", "users"
+  add_foreign_key "information", "items", column: "related_item_id"
+  add_foreign_key "information", "users", column: "stakeholder_id"
   add_foreign_key "items", "addresses", column: "shipping_address_id"
   add_foreign_key "items", "brands"
   add_foreign_key "items", "lower_categories"
@@ -258,6 +297,10 @@ ActiveRecord::Schema.define(version: 20190202094356) do
   add_foreign_key "reviews", "users", column: "appraisee_id"
   add_foreign_key "reviews", "users", column: "appraiser_id"
   add_foreign_key "sizes", "size_types"
+  add_foreign_key "todos", "items"
+  add_foreign_key "todos", "users"
   add_foreign_key "transaction_messages", "items"
   add_foreign_key "transaction_messages", "users"
+  add_foreign_key "user_informations", "information"
+  add_foreign_key "user_informations", "users"
 end

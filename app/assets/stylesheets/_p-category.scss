@@ -20,7 +20,7 @@
   color: #333;
   font-size: 16px;
   line-height: 40px;
-  &:hover {
+  &:hover, &.is-active {
     opacity: 1;
     text-decoration: none;
     color: #fff;
@@ -122,6 +122,7 @@
   border-radius: 4px;
 }
 .brand-list-initial-box {
+  clear: both;
   @include media-pc {
     padding-bottom: 10px;
   }
@@ -135,22 +136,20 @@
   padding: 10px 30px;
 }
 .brand-list-initial-box-brand-list {
-
+  background-color: white;
   @include media-pc {
     padding: 10px 50px;
+    float: left;
+    width: 50%;
+    padding: 10px 20px 10px 0;
+    border: 0;
   }
 
   a {
     display: block;
-    padding: 0 15px;
+    padding: 10px 20px 10px;
     border-bottom: 1px solid #eee;
 
-    @include media-pc {
-      float: left;
-      width: 50%;
-      padding: 6px 20px 0 0;
-      border: 0;
-    }
   }
   p {
     font-size: 16px;
@@ -166,7 +165,7 @@
 
 .brand-list-initial-box-brand-name {
   @include media-pc {
-    padding: 6px 20px 0 0;
+    padding: 10px 20px 10px 0;
     border-bottom: none;
 
     p {

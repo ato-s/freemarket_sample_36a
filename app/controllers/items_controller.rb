@@ -3,28 +3,32 @@ class ItemsController < ApplicationController
   before_action :set_locale
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_new_item, only: [:new, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
-  before_action :move_to_sign_in, except: [:dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
+  before_action :move_to_sign_in, except: [:index, :show, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
   before_action :delete_pictures, only: [:update]
+
 
   def dynamic_upper_category
     @middle_categories = MiddleCategory.where(upper_category_params)
   end
+
   def dynamic_middle_category
     @lower_categories = LowerCategory.where(middle_category_params)
   end
+
   def dynamic_lower_category
     @sizes = LowerCategory.find(params[:item][:lower_category_id]).middle_category.size_type.sizes
   end
 
   def index
-    @items = Item.all.includes(:pictures)
+    @pickup_categories = UpperCategory.find(1, 2, 3, 7)
+    @brand_categories = Brand.find(2443, 6146, 6762, 3806)
   end
 
   def show
-    @item = Item.includes(:transaction_messages).find(params[:id])
-    @seller = User.find(@item.seller_id)
-    @other_items = Item.where(seller_id: @item.seller_id)
+    @seller = @item.seller
+    @other_items = @seller.sell_items
     @other_brand_items = Item.where(brand_id: @item.brand_id)
+<<<<<<< HEAD
     @brand = Brand.find(@item.brand_id)
     @upper_category = UpperCategory.find(@item.upper_category_id)
     @middle_category = MiddleCategory.find(@item.middle_category_id)
@@ -32,6 +36,17 @@ class ItemsController < ApplicationController
     @sizes = Size.find(@item.size_id)
     # random_page_link
     @likes = Like.where(item_id: params[:item_id])
+=======
+    @brand = @item.brand
+    @upper_category = @item.upper_category
+    @middle_category = @item.middle_category
+    @lower_category = @item.lower_category
+    @size = @item.size
+    # random_page_link
+    @likes = @item.likes
+    @comment = Comment.new
+    @comments = @item.comments.includes(:user)
+>>>>>>> develop
   end
 
   def new
@@ -57,7 +72,16 @@ class ItemsController < ApplicationController
   end
 
   def update
+<<<<<<< HEAD
     if @item.update(item_create_params)
+=======
+    @originally_price = @item.buy_price
+    if @item.update(item_params)
+      @changed_price = @item.buy_price
+      @liker_ids = @item.user_ids
+      @information_type = 'be_discounted'
+      create_information if @liker_ids.present? && @originally_price != @changed_price
+>>>>>>> develop
       redirect_to root_path, notice: 'Item was successfully updated.'
     else
       redirect_to edit_item_path(@item)
@@ -70,6 +94,7 @@ class ItemsController < ApplicationController
   end
 
   private
+
     def set_item
       @item = Item.find(params[:id])
     end
@@ -126,6 +151,7 @@ class ItemsController < ApplicationController
       params.require(:item).permit(:middle_category_id)
     end
 
+<<<<<<< HEAD
     def delete_pictures
       pictures = @item.pictures.all
       params_ids = []
@@ -168,5 +194,16 @@ class ItemsController < ApplicationController
     #   @rand_prev = random.rand(rand_ranges)+1
     #   @prev_page = Item.find(@rand_prev)
     # end
+=======
+  # def random_page_link
+  #   #ランダムなページリンクを生成する
+  #   rand_ranges = Item.all.count
+  #   random = Random.new
+  #   @rand_next = random.rand(rand_ranges)+1
+  #   @next_page = Item.find(@rand_next)
+  #   @rand_prev = random.rand(rand_ranges)+1
+  #   @prev_page = Item.find(@rand_prev)
+  # end
+>>>>>>> develop
 
 end

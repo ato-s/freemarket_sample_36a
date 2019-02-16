@@ -9,6 +9,34 @@ h2 {
 h3 {
   font-size: 22px;
 }
+.c-items-box-head {
+  font-size: 22px;
+  margin: 24px 4% 8px;
+  line-height: 1.4;
+
+  @include media-pc {
+    margin: 24px 0 8px;
+  }
+}
+.c-spacial-description {
+  margin-top: 30px;
+
+  @include media-pc {
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  &_title {
+    h3 {
+      padding: 16px 8px;
+    }
+  }
+  &_text {
+    padding: 30px;
+    line-height: 1.6em;
+  }
+}
+
 /* text */
 .c-font-1 {
   font-size: 16px;
@@ -714,32 +742,10 @@ i {
   width: 100%;
   height: 0;
   padding: 0 0 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 
-  @include media-pc {
-    width: 220px;
-    height: 220px;
-  }
-
-  img {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    width: 100%;
-    &.is-higher-height {
-      top: 50%;
-      transform: translate(0, -50%);
-    }
-    &.is-higher-width {
-      width: auto;
-      left: 50%;
-      right: auto;
-      height: 100%;
-      transform: translate(-50%, 0);
-    }
-  }
   .p-search_container &,
   .category-brand-list & {
     width: 100%;
@@ -1083,4 +1089,24 @@ i {
 }
 .js-tip_btn {
   cursor: pointer;
+}
+/* navi */
+.c-parts-nav {
+    margin: 0 4%;
+
+    @include media-pc {
+      margin: 0;
+    }
+
+    li {
+      float: left;
+      margin: 16px 16px 0 0;
+    }
+}
+.alert-text {
+  color: #ea352d;
+  line-height: 50px ;
+  font-size: 16px;
+  text-align: center;
+  background-color:#F0FFF0;
 }

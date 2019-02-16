@@ -1,0 +1,17 @@
+- breadcrumb :region, @region
+.l-container
+  .c-items-box_container.l-clearfix
+    %h1.c-items-box-head
+      = @items.first.delivery_region
+      の商品一覧
+      - if @items.current_page > 1
+        (#{@items.current_page} ページ目)
+    .c-items-box_content.l-clearfix
+      = render partial: 'layouts/item', collection: @items
+    = paginate @items, window: 2
+    .c-spacial-description
+      .u-taCenter.c-spacial-description_title.u-bgRd
+        %h3.u-clWt
+          = @items.first.delivery_region
+      .u-bgWt.c-spacial-description_text
+        %p #{@items[0].delivery_region}から出品された商品は#{@items.count}点以上あります。人気のある商品は●●や●●があります。これまでに徳島県で出品された商品は#{@items.count}点以上あります。

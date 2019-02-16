@@ -6,14 +6,18 @@
           マイページ
           %i.c-icon-arrow-right
       %li
-        = link_to '/mypage/notification', class: 'p-mypage_nav_list-item' do
+        = link_to index_information_path, class: 'p-mypage_nav_list-item' do
           お知らせ
-          %span.p-mypage_nav_number
-            34
+          - if @information_length > 0
+            %span.p-mypage_nav_number
+              = @information_length
           %i.c-icon-arrow-right
       %li
-        = link_to '/mypage/todo', class: 'p-mypage_nav_list-item' do
+        = link_to index_todos_path, class: 'p-mypage_nav_list-item' do
           やることリスト
+          - if @todos_length > 0
+            %span.p-mypage_nav_number
+              = @todos_length
           %i.c-icon-arrow-right
       %li
         = link_to likes_path, class: 'p-mypage_nav_list-item' do
@@ -36,11 +40,11 @@
           出品した商品 - 売却済み
           %i.c-icon-arrow-right
       %li
-        = link_to '/mypage/purchase', class: 'p-mypage_nav_list-item' do
+        = link_to index_under_transaction_items_path, class: 'p-mypage_nav_list-item' do
           購入した商品 - 取引中
           %i.c-icon-arrow-right
       %li
-        = link_to '/mypage/purchased', class: 'p-mypage_nav_list-item' do
+        = link_to index_sold_out_items_path, class: 'p-mypage_nav_list-item' do
           購入した商品 - 過去の取引
           %i.c-icon-arrow-right
       %li

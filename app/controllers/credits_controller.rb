@@ -1,6 +1,12 @@
 class CreditsController < ApplicationController
+before_action :confirm_user_sign_in
 
 include Payjp_process
+
+  def index
+    @credit_data = show_customer_data
+    card_brand_image_src
+  end
 
   def new
     @credit = Credit.new
@@ -24,6 +30,7 @@ include Payjp_process
   end
 
   def destroy
+    delete_customer_data
     @credit = Credit.find_by(user_id: current_user.id)
     if @credit.destroy
       redirect_to new_credit_path, alert: "削除しました"
@@ -36,6 +43,10 @@ include Payjp_process
 
   def credit_params
     params.require(:credit).permit(:credit_number,:limit_month,:limit_year,:security_code).merge(customer_id: create_customer.id).merge(user_id: current_user.id)
+  end
+
+  def confirm_user_sign_in
+    redirect_to root_path, alert: "ログインして下さい" unless user_signed_in?
   end
 
 end

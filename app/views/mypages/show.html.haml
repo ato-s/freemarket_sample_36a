@@ -1,6 +1,6 @@
 .l-content
   %section.p-mypage_user-icon
-    = link_to '#' do
+    = link_to mypages_path do
       %figure
         = image_tag 'common/member_photo_noimage_thumb.png', width: '60', height: '60'
       %h2.u-fwBold
@@ -19,67 +19,26 @@
       %li.is-active
         %h3
           お知らせ
-
       %li
         %h3
           やることリスト
-
     .p-mypage_tab-content
-      %ul#p-mypage_tab-notification.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
-        %li
-          = link_to '#', class: 'p-mypage_item-link js-modal' do
-            %figure
-              = image_tag 'common/mercari_profile.png'
-            .p-mypage_item-body
-              .p-mypage_item-text 【機能のお知らせ】商品出品時に画像を最大10枚登録できるようになりました！
-              %time
-                %i.c-icon-time
-                %span 1 日前
-            %i.c-icon-arrow-right
-        %li
-          = link_to '#', class: 'p-mypage_item-link js-modal' do
-            %figure
-              = image_tag 'common/mercari_profile.png'
-            .p-mypage_item-body
-              .p-mypage_item-text 7日後、クーポンの有効期限が切れます！タップして詳細を確認しましょう。
-              %time
-                %i.c-icon-time
-                %span 3 日前
-            %i.c-icon-arrow-right
-        %li
-          = link_to '#', class: 'p-mypage_item-link js-modal' do
-            %figure
-              = image_tag 'common/mercari_profile.png'
-            .p-mypage_item-body
-              .p-mypage_item-text アメリカン・エキスプレス（AMEX）のクレジットカード決済が利用可能になりました！
-              %time
-                %i.c-icon-time
-                %span 3 日前
-            %i.c-icon-arrow-right
-        %li
-          = link_to '/mypage/news/', class: 'p-mypage_item-link' do
-            %figure
-              = image_tag 'common/mercari_profile.png'
-            .p-mypage_item-body
-              .p-mypage_item-text 事務局から個別メッセージ「【P500進呈】ご登録ありがとうございます！メルカリでのお買い物をお楽しみください♪」
-              %time
-                %i.c-icon-time
-                %span 3 日前
-            %i.c-icon-arrow-right
-        %li
-          = link_to '#', class: 'p-mypage_item-link js-modal' do
-            %figure
-              = image_tag 'common/mercari_profile.png'
-            .p-mypage_item-body
-              .p-mypage_item-text 【あなたの本はいくらで売れる？】バーコードを読み取るだけのラクラク査定！
-              %time
-                %i.c-icon-time
-                %span 4 日前
-            %i.c-icon-arrow-right
-        %li.p-mypage_go-list
-          = link_to '一覧を見る', '/mypage/notification/'
-      %ul#p-mypage_tab-todo.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
-        %li.p-mypage_item-not-found.u-fwBold 現在、やることリストはありません
+      - if @information.present?
+        %ul#p-mypage_tab-notification.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
+          = render :partial => "mypages/information", :collection => @information, :as => "information"
+          %li.p-mypage_go-list
+            = link_to '一覧を見る', index_information_path
+      - else
+        %ul#p-mypage_tab-nortification.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+          %li.p-mypage_item-not-found.u-fwBold 現在、お知らせはありません
+      - if @todos.present?
+        %ul#p-mypage_tab-todo.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
+          = render :partial => "mypages/todo", :collection => @todos, :as => "todo"
+          %li.p-mypage_go-list
+            = link_to '一覧を見る', index_todos_path
+      - else
+        %ul#p-mypage_tab-todo.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+          %li.p-mypage_item-not-found.u-fwBold 現在、やることリストはありません
   %section.p-mypage_tab-container
     %h2.p-mypage_tab-head 購入した商品
     %ul.p-mypage_tabs.js-tab_menu
@@ -90,51 +49,19 @@
         %h3
           過去の取引
     .p-mypage_tab-content
-      %ul#p-mypage_tab-transaction-now.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
-        %li
-          = link_to '', class: 'p-mypage_item-link' do
-            %figure
-              = image_tag 'common/img_dummy.jpg'
-            .p-mypage_item-body
-              .p-mypage_item-text
-                「お得☆150枚 サンキューシール ありがとうシール」 を購入しました。
-                %span 取引が完了しました
-              .p-mypage_item-status.u-fwBold.is-action-required
-                受取評価待ち
-            %i.c-icon-arrow-right
-      %ul#p-mypage_tab-transaction-old.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
-        %li
-          = link_to '', class: 'p-mypage_item-link' do
-            %figure
-              = image_tag 'common/img_dummy.jpg'
-            .p-mypage_item-body
-              .p-mypage_item-text
-                「お得☆150枚 サンキューシール ありがとうシール」 を購入しました。
-                %span 取引が完了しました
-              .p-mypage_item-status.u-fwBold.is-done
-                取引完了
-            %i.c-icon-arrow-right
-        %li
-          = link_to '', class: 'p-mypage_item-link' do
-            %figure
-              = image_tag 'common/img_dummy.jpg'
-            .p-mypage_item-body
-              .p-mypage_item-text
-                「お得☆150枚 サンキューシール ありがとうシール」 を購入しました。
-                %span 取引が完了しました
-              .p-mypage_item-status.u-fwBold.is-done
-                取引完了
-            %i.c-icon-arrow-right
-        %li
-          = link_to '', class: 'p-mypage_item-link' do
-            %figure
-              = image_tag 'common/img_dummy.jpg'
-            .p-mypage_item-body
-              .p-mypage_item-text
-                「お得☆150枚 サンキューシール ありがとうシール」 を購入しました。
-                %span 取引が完了しました
-              .p-mypage_item-status.u-fwBold.is-done
-                取引完了
-            %i.c-icon-arrow-right
-        %li.p-mypage_go-list
-          = link_to '一覧を見る', '/mypage/purchased/'
+      - if @under_transaction_items.present?
+        %ul#p-mypage_tab-transaction-now.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
+          = render :partial => "mypages/under_transaction_items", :collection => @under_transaction_items, :as => "under_transaction_item"
+          %li.p-mypage_go-list
+            = link_to '一覧を見る', index_under_transaction_items_path
+      - else
+        %ul#p-mypage_tab-transaction-now.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
+          %li.p-mypage_item-not-found.u-fwBold 現在、取引中の商品はありません
+      - if @sold_out_items.present?
+        %ul#p-mypage_tab-transaction-old.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+          = render :partial => "mypages/sold_out_items", :collection => @sold_out_items, :as => "sold_out_item"
+          %li.p-mypage_go-list
+            = link_to '一覧を見る', index_sold_out_items_path
+      - else
+        %ul#p-mypage_tab-transaction-old.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+          %li.p-mypage_item-not-found.u-fwBold 現在、取引完了の商品はありません
