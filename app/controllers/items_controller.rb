@@ -28,15 +28,6 @@ class ItemsController < ApplicationController
     @seller = @item.seller
     @other_items = @seller.sell_items
     @other_brand_items = Item.where(brand_id: @item.brand_id)
-<<<<<<< HEAD
-    @brand = Brand.find(@item.brand_id)
-    @upper_category = UpperCategory.find(@item.upper_category_id)
-    @middle_category = MiddleCategory.find(@item.middle_category_id)
-    @lower_category = LowerCategory.find(@item.lower_category_id)
-    @sizes = Size.find(@item.size_id)
-    # random_page_link
-    @likes = Like.where(item_id: params[:item_id])
-=======
     @brand = @item.brand
     @upper_category = @item.upper_category
     @middle_category = @item.middle_category
@@ -46,7 +37,6 @@ class ItemsController < ApplicationController
     @likes = @item.likes
     @comment = Comment.new
     @comments = @item.comments.includes(:user)
->>>>>>> develop
   end
 
   def new
@@ -72,16 +62,12 @@ class ItemsController < ApplicationController
   end
 
   def update
-<<<<<<< HEAD
-    if @item.update(item_create_params)
-=======
     @originally_price = @item.buy_price
     if @item.update(item_params)
       @changed_price = @item.buy_price
       @liker_ids = @item.user_ids
       @information_type = 'be_discounted'
       create_information if @liker_ids.present? && @originally_price != @changed_price
->>>>>>> develop
       redirect_to root_path, notice: 'Item was successfully updated.'
     else
       redirect_to edit_item_path(@item)
@@ -151,7 +137,6 @@ class ItemsController < ApplicationController
       params.require(:item).permit(:middle_category_id)
     end
 
-<<<<<<< HEAD
     def delete_pictures
       pictures = @item.pictures.all
       params_ids = []
@@ -194,16 +179,5 @@ class ItemsController < ApplicationController
     #   @rand_prev = random.rand(rand_ranges)+1
     #   @prev_page = Item.find(@rand_prev)
     # end
-=======
-  # def random_page_link
-  #   #ランダムなページリンクを生成する
-  #   rand_ranges = Item.all.count
-  #   random = Random.new
-  #   @rand_next = random.rand(rand_ranges)+1
-  #   @next_page = Item.find(@rand_next)
-  #   @rand_prev = random.rand(rand_ranges)+1
-  #   @prev_page = Item.find(@rand_prev)
-  # end
->>>>>>> develop
 
 end
