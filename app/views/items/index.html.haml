@@ -6,7 +6,7 @@
         .c-items-box_content.l-clearfix
           - @items.each do |item|
             %section.c-items-box
-              =link_to item_path(item.id) do
+              =link_to item_path(item), method: :get do
                 %figure.c-items-box_photo
                   = image_tag item.pictures.first.content
                 .c-items-box_body

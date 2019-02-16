@@ -13,12 +13,11 @@
     %p 最大10枚までアップロードできます
     .p-sell_upload_items-container
       .p-sell_upload_drop-box
-        - if current_page?(new_item_path)
-          - 10.times do
-            = f.fields_for :pictures, Picture.new do |picture|
-              = picture.file_field :content
-        - else
-          = f.fields_for :pictures, @item.pictures, multiple: true do |picture|
+        = f.fields_for :pictures do |picture|
+          -if picture.object.id.present?
+            = picture.file_field :content
+            = picture.hidden_field :id, status: picture.object.status,value: picture.object.id, picture_location: picture.object.content
+          -else
             = picture.file_field :content
         %pre.l-visiblePc
           ドラッグアンドドロップまたは
