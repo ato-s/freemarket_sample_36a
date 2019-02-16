@@ -63,11 +63,24 @@ $(function(){
     target_input_content.attr('name', 'item[pictures_attributes]['+ new_number +'][content]');
     target_input_content.attr('id', 'item_pictures_attributes_'+ new_number +'_content');
 
-    //hidden_fieldの名前の変更
-    var target_input_status = target_input_content.next("input");
+    //hidden_field_statusの名前の変更
+    var target_input_status = target_input_content.next('#item_pictures_attributes_'+ variabelenumber +'_status');
     target_input_status.attr('name', 'item[pictures_attributes]['+ new_number +'][status]');
     target_input_status.attr('id', 'item_pictures_attributes_'+ new_number +'_status');
     target_input_status.attr('value', new_number);
+
+    //hidden_field_idの名前の変更
+    var target_input_id = target_input_status.next('#item_pictures_attributes_'+ variabelenumber +'_id');
+    target_input_id.attr('name', 'item[pictures_attributes]['+ new_number +'][id]');
+    target_input_id.attr('id', 'item_pictures_attributes_'+ new_number +'_id');
+  }
+
+  function deleteIdAndStatusField(targetNumber){
+    var target_input_status = $("#item_pictures_attributes_"+ targetNumber +"_status");
+    var target_input_id = $("#item_pictures_attributes_"+ targetNumber +"_id");
+
+    target_input_status.remove();
+    target_input_id.remove();
   }
 
 //   // // 処理
@@ -138,27 +151,20 @@ $(function(){
     var empty_input_index = getUploaderBoxIndex();
     var empty_input = getTargetInput(empty_input_index);
 
-    delete_input.next("input").remove();
+    console.log(target_input_index);
+
+    deleteIdAndStatusField(target_input_index);
     delete_input.remove();
 
     var new_taget_input_index = target_input_index;
-    var new_taget_input = getTargetInput(new_taget_input_index - 1);
 
     // それぞれの名前の数字に+1する(inputの箱をずらす)
     for(var i = 1; target_input_index + i < empty_input_index ; i++){
       new_taget_input_index = target_input_index + i;
       changeInputIdAndName(new_taget_input_index, new_taget_input_index);
-      var new_taget_input = $('#item_pictures_attributes_' + (new_taget_input_index - 1) + '_content');
     }
 
-    console.log(new_taget_input_index);
-    console.log(new_taget_input);
-
-    if(new_taget_input_index == 0){
-      empty_input.before(appendFileInput(new_taget_input_index));
-    }else{
-      new_taget_input.next("input").after(appendFileInput(new_taget_input_index));
-    }
+    empty_input.before(appendFileInput(new_taget_input_index));
 
     empty_input.css('display','none');
 
@@ -187,5 +193,8 @@ $(function(){
   })
 
   $(".p-sell_form").on("submit",function(){
+    $("[picture_location]").each(function(){
+      console.log($(this).val());
+    });
   })
 })

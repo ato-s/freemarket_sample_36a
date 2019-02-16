@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_new_item, only: [:new, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
   before_action :move_to_sign_in, except: [:dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
+  before_action :delete_pictures, only: [:update]
 
   def dynamic_upper_category
     @middle_categories = MiddleCategory.where(upper_category_params)
@@ -29,15 +30,17 @@ class ItemsController < ApplicationController
     @middle_category = MiddleCategory.find(@item.middle_category_id)
     @lower_category = LowerCategory.find(@item.lower_category_id)
     @sizes = Size.find(@item.size_id)
-    random_page_link
+    # random_page_link
     @likes = Like.where(item_id: params[:item_id])
   end
 
   def new
+    10.times { @item.pictures.build }
     @upper_categories = UpperCategory.all.includes([middle_categories: :lower_categories])
   end
 
   def edit
+    (10 - @item.pictures.length ).times { @item.pictures.build }
     @upper_categories = UpperCategory.all.includes([middle_categories: :lower_categories])
     @middle_categories = MiddleCategory.where(upper_category_id: @item.upper_category_id)
     @lower_categories = LowerCategory.where(middle_category_id: @item.middle_category_id)
@@ -54,7 +57,7 @@ class ItemsController < ApplicationController
   end
 
   def update
-    if @item.update(item_params)
+    if @item.update(item_create_params)
       redirect_to root_path, notice: 'Item was successfully updated.'
     else
       redirect_to edit_item_path(@item)
@@ -70,9 +73,11 @@ class ItemsController < ApplicationController
     def set_item
       @item = Item.find(params[:id])
     end
+
     def set_new_item
       @item = Item.new
     end
+
     def item_create_params
       params.require(:item).permit(
         :name,
@@ -94,6 +99,7 @@ class ItemsController < ApplicationController
         pictures_attributes: [:id, :content, :status]
       ).merge(transaction_stage: 'under_sale', seller_id: current_user.id)
     end
+
     def item_params
       params.require(:item).permit(
         :name,
@@ -106,30 +112,61 @@ class ItemsController < ApplicationController
         :commission_price,
         :sell_price,
         :like_count,
-        :size_id,
         :brand_id,
-        :upper_category_id,
-        :middle_category_id,
-        :lower_category_id,
         :seller_id,
         pictures_attributes: [:id, :content, :status]
-      )
+      ).merge(upper_category_id: 1, middle_category_id: 1, lower_category_id: 1, size_id: 1)
     end
+
     def upper_category_params
       params.require(:item).permit(:upper_category_id)
     end
+
     def middle_category_params
       params.require(:item).permit(:middle_category_id)
     end
 
-  def random_page_link
-    #ランダムなページリンクを生成する
-    rand_ranges = Item.all.count
-    random = Random.new
-    @rand_next = random.rand(rand_ranges)+1
-    @next_page = Item.find(@rand_next)
-    @rand_prev = random.rand(rand_ranges)+1
-    @prev_page = Item.find(@rand_prev)
-  end
+    def delete_pictures
+      pictures = @item.pictures.all
+      params_ids = []
+      i = 0
+
+      while true
+        params_id = params[:item][:pictures_attributes][:"#{i}"]
+        if params_id == nil
+          break
+        end
+        params_ids.push(params_id)
+        i += 1
+      end
+
+      j = 0
+      params_ids_ver_i = []
+
+      while j < params_ids.length
+        params_ids_ver_i << params_ids[j][:id].to_i
+        j += 1
+      end
+
+      delete_ids = @item.pictures.ids
+
+      params_ids_ver_i.each do |num|
+        delete_ids.delete(num) if delete_ids.include?(num)
+      end
+
+      delete_ids.each do |dId|
+        Picture.find(dId).delete
+      end
+    end
+
+    # def random_page_link
+    #   #ランダムなページリンクを生成する
+    #   rand_ranges = Item.all.count
+    #   random = Random.new
+    #   @rand_next = random.rand(rand_ranges)+1
+    #   @next_page = Item.find(@rand_next)
+    #   @rand_prev = random.rand(rand_ranges)+1
+    #   @prev_page = Item.find(@rand_prev)
+    # end
 
 end
