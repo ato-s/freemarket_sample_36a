@@ -10,7 +10,7 @@ class ReportsController < ApplicationController
   end
 
   def create
-    @report = Report.new(user_id: current_user.id, item_id: params[:item_id],report_type: params[:report][:report_type])
+    @report = current_user.reports.new(item_id: params[:item_id],report_type: params[:report][:report_type])
     if @report.save
       redirect_to item_path(@item), notice: "問題を報告しました"
     else
@@ -25,7 +25,7 @@ class ReportsController < ApplicationController
 private
 
   def confirm_buyer_already_create_report
-        redirect_to item_path(@item), notice: "既に報告済みです" if @item.reports.exists?(user_id: current_user.id)
+    redirect_to item_path(@item), notice: "既に報告済みです" if @item.reports.exists?(user_id: current_user.id)
   end
 
 end
