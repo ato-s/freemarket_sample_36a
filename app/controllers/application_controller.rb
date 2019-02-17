@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  # before_action :basic_auth, if: :production?
+  before_action :basic_auth, if: :production?
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_categories
@@ -40,11 +40,11 @@ class ApplicationController < ActionController::Base
     Rails.env.production?
   end
 
-  # def basic_auth
-  #   authenticate_or_request_with_http_basic do |username, password|
-  #     username == Rails.application.secrets.auther_name && password == Rails.application.secrets.auther_password
-  #   end
-  # end
+  def basic_auth
+    authenticate_or_request_with_http_basic do |username, password|
+      username == Rails.application.secrets.auther_name && password == Rails.application.secrets.auther_password
+    end
+  end
 
   def set_locale
     I18n.locale = :ja
