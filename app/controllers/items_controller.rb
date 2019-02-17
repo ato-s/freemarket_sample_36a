@@ -131,7 +131,13 @@ class ItemsController < ApplicationController
         :like_count,
         :brand_id,
         :seller_id,
-        pictures_attributes: [:id, :content, :status]
+        pictures_attributes: [:id,
+                              :image_x,
+                              :image_y,
+                              :image_w,
+                              :image_h,
+                              :content,
+                              :status]
       ).merge(upper_category_id: 1, middle_category_id: 1, lower_category_id: 1, size_id: 1)
     end
 

@@ -83,6 +83,58 @@ $(function(){
     target_input_id.remove();
   }
 
+  function appendCoordinatesField(targetIndex, targetInput){
+    var x_name = 'item[pictures_attributes]['+ targetIndex +'][image_x]';
+    var x_id = 'item_pictures_attributes_'+ targetIndex +'_image_x';
+    var hiddenInputX = $('<input/>',{value: 0, type: 'hidden', name: x_name, id: x_id});
+
+    var y_name = 'item[pictures_attributes]['+ targetIndex +'][image_y]';
+    var y_id = 'item_pictures_attributes_'+ targetIndex +'_image_y';
+    var hiddenInputY = $('<input/>',{value: 0, type: 'hidden', name: y_name, id: y_id});
+
+    var w_name = 'item[pictures_attributes]['+ targetIndex +'][image_w]';
+    var w_id = 'item_pictures_attributes_'+ targetIndex +'_image_w';
+    var hiddenInputW = $('<input/>',{value: 0, type: 'hidden', name: w_name, id: w_id});
+
+    var h_name = 'item[pictures_attributes]['+ targetIndex +'][image_h]';
+    var h_id = 'item_pictures_attributes_'+ targetIndex +'_image_h';
+    var hiddenInputH = $('<input/>',{value: 0, type: 'hidden', name: h_name, id: h_id});
+
+    targetInput.before(hiddenInputX);
+    targetInput.before(hiddenInputY);
+    targetInput.before(hiddenInputW);
+    targetInput.before(hiddenInputH);
+
+  }
+
+    // cropper（トリミング部）のコーディング（詳しくはGitHub参照）
+  var cropper;
+  var croppable = false;
+  function initIconCrop(targetIndex){
+    cropper = new Cropper(crop_img, {
+      dragMode: 'move',
+      aspectRatio: 1,
+      restore: false,
+      guides: false,
+      center: false,
+      highlight: false,
+      cropBoxMovable: false,
+      cropBoxResizable: false,
+      minCropBoxWidth: 280,
+      minCropBoxHeight: 280,
+      ready: function(){
+        croppable = true;
+      },
+      crop :function(event){
+        $("#item_pictures_attributes_"+ targetIndex +"_image_x").val(event.detail.x);
+        $("#item_pictures_attributes_"+ targetIndex +"_image_y").val(event.detail.y);
+        $("#item_pictures_attributes_"+ targetIndex +"_image_w").val(event.detail.width);
+        $("#item_pictures_attributes_"+ targetIndex +"_image_h").val(event.detail.height);
+      }
+    });
+  }
+
+
   // croppedCanvas（トリミング後の画像をプレビューとして表示するための部分）のコーディング
   var croppedCanvas;
   function iconCropping(){
@@ -124,7 +176,7 @@ $(function(){
       class: "preview",
       id: "crop_img",
     }));
-    initIconCrop();
+    initIconCrop(index);
     $('.overlay').attr('id', index);
   }
 
@@ -188,6 +240,10 @@ $(function(){
     var file = $("#item_pictures_attributes_" + target_input_index + "_content").prop('files')[0];
     var reader = new FileReader();
 
+    var mark_input = $("#item_pictures_attributes_" + (target_input_index + 1) + "_content");
+
+    appendCoordinatesField(target_input_index,mark_input);
+
     // トリミング画面をフェードインさせる
     if(file){
       reader.addEventListener("load", function(){
@@ -197,7 +253,6 @@ $(function(){
       reader.readAsDataURL(file);
     }else{
       var exit_picture_url = $('#item_pictures_attributes_'+ target_input_index +'_id').attr('picture_location');
-      console.log(exit_picture_url);
       trimmingDisplay(exit_picture_url, target_input_index);
     }
   });
@@ -275,29 +330,6 @@ $(function(){
     $("[picture_location]").each(function(){
     });
   })
-
-
-
-    // cropper（トリミング部）のコーディング（詳しくはGitHub参照）
-  var cropper;
-  var croppable = false;
-  function initIconCrop(){
-    cropper = new Cropper(crop_img, {
-      dragMode: 'move',
-      aspectRatio: 1,
-      restore: false,
-      guides: false,
-      center: false,
-      highlight: false,
-      cropBoxMovable: false,
-      cropBoxResizable: false,
-      minCropBoxWidth: 280,
-      minCropBoxHeight: 280,
-      ready: function(){
-        croppable = true;
-      }
-    });
-  }
 
 
 })
