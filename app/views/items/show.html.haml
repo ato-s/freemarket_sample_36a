@@ -7,8 +7,9 @@
     .p-item_main-content.l-clearfix
       .p-item_photo
         .owl-carousel.owl-loaded.owl-drag.js-owl-carousel-item
-          %div.p-item_photo_item
-            = image_tag @item.pictures[0].content
+          - @item.pictures.each do |picture|
+            %div.p-item_photo_item
+              = image_tag picture.content
       %table.p-item_detail-table
         %tbody
           %tr
@@ -77,7 +78,11 @@
       .p-item_sales-point-message
         P 500 をお持ちです
     - if @item.transaction_stage == "under_sale"
-      = link_to '購入画面に進む',edit_item_buy_path(@item), class: 'p-item_buy-btn u-fz18-24'
+      - if @item.seller_id == current_user.id
+        = link_to '商品の編集',edit_item_path(@item),id: 'item-edit-button',class: 'p-item_buy-btn u-fz18-24', data: {turbolinks: false}
+        = link_to '商品の削除',item_path(@item), method: :delete,class: 'p-item_buy-btn_sold u-fz18-24'
+      - else
+        = link_to '購入画面に進む',edit_item_buy_path(@item), class: 'p-item_buy-btn u-fz18-24'
     - else
       .p-item_buy-btn_sold.u-fz18-24
         売り切れです
@@ -128,15 +133,15 @@
           = f.text_area :text, class: 'c-textarea-default'
           = button_tag '#', class: 'p-message_submit c-btn-default is-gray' do
             %span コメントする
-    -# %ul.p-item_nav-link.l-clearfix
-    -#   %li.p-item_nav-link_prev
-    -#     = link_to "#{@rand_prev}" do
-    -#       %i.c-icon-arrow-left>
-    -#       = @next_page.name
-    -#   %li.p-item_nav-link_next
-    -#     = link_to '#{@rand_next}' do
-    -#       %i.c-icon-arrow-right
-    -#       = @next_page.name
+    %ul.p-item_nav-link.l-clearfix
+      %li.p-item_nav-link_prev
+        = link_to "#{@rand_prev}" do
+          %i.c-icon-arrow-left>
+          -# = @next_page.name
+      %li.p-item_nav-link_next
+        = link_to '#{@rand_next}' do
+          %i.c-icon-arrow-right
+          -# = @next_page.name
     .c-item_social-media-box
       %ul.c-social-media-box
         %li
