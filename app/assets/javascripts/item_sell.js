@@ -96,7 +96,7 @@ $(function(){
     });
     var croppedImage = document.createElement('img');
     croppedImage.src = croppedCanvas.toDataURL();
-    displayPicture(croppedImage.src);
+    return croppedImage.src;
   };
 
   // blobへ変換するためのコーディング（blobという形式で画像データを保存するため）
@@ -149,8 +149,6 @@ $(function(){
     var picture_file = e.target.files[0];
     var reader = new FileReader();
 
-    console.log(e);
-
     var target_index = getUploaderBoxIndex();
     var target_input = getTargetInput(target_index);
     var target_next_input = getTargetInput(target_index + 1 );
@@ -173,10 +171,10 @@ $(function(){
   // // 編集ボタンが押された時の処理 -> 写真の編集
   // 画像選択時
   $(".p-sell_upload_items-container").on('click', "#upload_item_edit", function(e){
-    var file = $("#item_pictures_attributes_0_content").prop('files')[0];
+    var edit_target = $(this).parents(".p-sell_upload_item");
+    var target_input_index = edit_target.index();
+    var file = $("#item_pictures_attributes_" + target_input_index + "_content").prop('files')[0];
     var reader = new FileReader();
-
-    console.log(file);
 
     // トリミング画面をフェードインさせる
     reader.addEventListener("load", function(){
@@ -189,6 +187,7 @@ $(function(){
         title: file.name
       }));
       initIconCrop();
+      $('.overlay').attr('id', target_input_index);
     },false);
 
     if(file){
@@ -198,7 +197,12 @@ $(function(){
 
     // トリミング決定時
   $('.select_icon_btn').on('click', function(){
-    iconCropping();
+    var target_input_index = $('.overlay').attr('id');
+    var target_picture_box = $('.p-sell_upload_figure').eq(target_input_index);
+    var picture_url = iconCropping();
+    target_picture_box.css('background-image', 'url('+ picture_url +')');
+    var target_input = $("#item_pictures_attributes_" + target_input_index + "_content");
+    $('.overlay').attr('id', 'edit_box');
     $('.overlay').fadeOut();
     $('#crop_img').remove();
     $('.cropper-container').remove();
@@ -206,6 +210,7 @@ $(function(){
 
   // トリミング画面を閉じる時
   $('.close_btn').on('click', function(){
+    $('.overlay').attr('id', 'edit_box');
     $('.overlay').fadeOut();
     $('#crop_img').remove();
     $('.cropper-container').remove();
@@ -219,8 +224,6 @@ $(function(){
 
     var empty_input_index = getUploaderBoxIndex();
     var empty_input = getTargetInput(empty_input_index);
-
-    console.log(target_input_index);
 
     deleteIdAndStatusField(target_input_index);
     delete_input.remove();
@@ -263,7 +266,6 @@ $(function(){
 
   $(".p-sell_form").on("submit",function(){
     $("[picture_location]").each(function(){
-      console.log($(this).val());
     });
   })
 
