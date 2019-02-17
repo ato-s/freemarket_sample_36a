@@ -1,25 +1,25 @@
-.l-single{
-  &-container {
+.report{
+  &__container {
     background: #fff;
   }
-  &-head {
+  &__head {
     padding: 24px 8px;
     font-size: 18px;
     line-height: 1.5;
     text-align: center;
   }
-  &-inner {
+  &__inner {
     border-top: 1px solid #f5f5f5;
     padding: 40px;
     p {
       margin: 8px 0 0;
       line-height: 1.5;
     }
-    .btn-red{
+    .btn__red{
       margin: 40px 0 0;
     }
   }
-  &-content {
+  &__content {
     max-width: 320px;
     margin: 0 auto;
     p{
@@ -29,10 +29,10 @@
   }
 }
 .target-item{
-  &-label {
+  &__label {
     font-size: 14px;
   }
-  &-box {
+  &__box {
     background: #eee;
     margin: 20px 0 40px 0;
     padding: 10px;
@@ -46,7 +46,7 @@
   }
 }
 .form{
-  &-group {
+  &__group {
     margin: 40px 0 0;
     label {
       font-weight: 600;
@@ -54,11 +54,11 @@
     select {
       width: 100%;
     }
-    .select-wrap {
+    .select__wrap {
       margin: 8px 0 0;
     }
   }
-  &-require {
+  &__require {
     margin: 0 0 0 8px;
     padding: 2px 4px;
     border-radius: 2px;
@@ -67,18 +67,23 @@
     vertical-align: top;
     background: #ea352d;
   }
-  &-info-text {
+  &__info-text {
     margin: 8px 0 0;
     color: #888;
     line-height: 1.5;
   }
+  &__flash{
+    font-size:14px;
+    color: red;
+    margin: 10px 0 ;
+  }
 }
 .select{
-  &-wrap {
+  &__wrap {
     position: relative;
     background: #fff;
   }
-  &-default {
+  &__default {
     position: relative;
     z-index: 2;
     height: 48px;
@@ -92,7 +97,7 @@
   }
 }
 .btn{
-  &-default {
+  &__default {
     display: block;
     width: 100%;
     line-height: 48px;
@@ -106,7 +111,7 @@
       text-decoration: none;
     }
   }
-  &-red {
+  &__red {
     background: #ea352d;
     border: 1px solid #ea352d;
     color: #fff;
@@ -116,31 +121,18 @@
     }
   }
 }
-.flash_content{
-  font-size:14px;
-  color: red;
-  margin: 10px 0 ;
-}
-
 @media screen and (min-width: 768px) {
-  .l-single{
-    &-container {
+  .report{
+    &__container {
       width: 700px;
       margin: 0 auto;
     }
-    &-head {
+    &__head {
       padding: 32px 16px;
       font-size: 22px;
     }
-    &-inner {
+    &__inner {
       padding: 64px;
     }
-  }
-}
-@media screen and (min-width: 1068px) {
-  .search-sort .select-default {
-    height: 48px;
-    padding: 0 16px;
-    border: 1px solid #ccc
   }
 }
