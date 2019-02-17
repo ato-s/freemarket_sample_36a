@@ -83,6 +83,39 @@ $(function(){
     target_input_id.remove();
   }
 
+  // croppedCanvas（トリミング後の画像をプレビューとして表示するための部分）のコーディング
+  var croppedCanvas;
+  function iconCropping(){
+    if (!croppable) {
+      alert('トリミングする画像が設定されていません。');
+      return false;
+    }
+    croppedCanvas = cropper.getCroppedCanvas({
+      width: 280,
+      height: 280,
+    });
+    var croppedImage = document.createElement('img');
+    croppedImage.src = croppedCanvas.toDataURL();
+    displayPicture(croppedImage.src);
+  };
+
+  // blobへ変換するためのコーディング（blobという形式で画像データを保存するため）
+  var blob;
+  function blobing(){
+    if (croppedCanvas && croppedCanvas.toBlob){
+      croppedCanvas.toBlob(function(b){
+        blob = b;
+        sending();
+      });
+    }else if(croppedCanvas && croppedCanvas.msToBlob){
+      blob = croppedCanvas.msToBlob();
+      sending();
+    }else{
+      blob = null;
+      sending();
+    };
+  };
+
 //   // // 処理
 //   // // todo: 写真の最大枚数は10枚
   var picture_container = $(".p-sell_upload_items-container");
@@ -116,6 +149,8 @@ $(function(){
     var picture_file = e.target.files[0];
     var reader = new FileReader();
 
+    console.log(e);
+
     var target_index = getUploaderBoxIndex();
     var target_input = getTargetInput(target_index);
     var target_next_input = getTargetInput(target_index + 1 );
@@ -136,11 +171,45 @@ $(function(){
   });
 
   // // 編集ボタンが押された時の処理 -> 写真の編集
-  // // 写真の編集:=140x140でトリミング
-  // // todo: appendで追加したクラスに適用可能か
-  // $("#upload_item_edit").on("click", function(){
+  // 画像選択時
+  $(".p-sell_upload_items-container").on('click', "#upload_item_edit", function(e){
+    var file = $("#item_pictures_attributes_0_content").prop('files')[0];
+    var reader = new FileReader();
 
-  // });
+    console.log(file);
+
+    // トリミング画面をフェードインさせる
+    reader.addEventListener("load", function(){
+      $('.overlay').fadeIn();
+      $('.crop_modal').append($('<img>').attr({
+        src: reader.result,
+        height: "100%",
+        class: "preview",
+        id: "crop_img",
+        title: file.name
+      }));
+      initIconCrop();
+    },false);
+
+    if(file){
+      reader.readAsDataURL(file);
+    }
+  });
+
+    // トリミング決定時
+  $('.select_icon_btn').on('click', function(){
+    iconCropping();
+    $('.overlay').fadeOut();
+    $('#crop_img').remove();
+    $('.cropper-container').remove();
+  });
+
+  // トリミング画面を閉じる時
+  $('.close_btn').on('click', function(){
+    $('.overlay').fadeOut();
+    $('#crop_img').remove();
+    $('.cropper-container').remove();
+  });
 
   // 削除ボタンが押された時の処理 -> 写真の削除
   picture_container.on("click", "#upload_item_delete", function(){
@@ -197,4 +266,29 @@ $(function(){
       console.log($(this).val());
     });
   })
+
+
+
+    // cropper（トリミング部）のコーディング（詳しくはGitHub参照）
+  var cropper;
+  var croppable = false;
+  function initIconCrop(){
+    cropper = new Cropper(crop_img, {
+      dragMode: 'move',
+      aspectRatio: 1,
+      restore: false,
+      guides: false,
+      center: false,
+      highlight: false,
+      cropBoxMovable: false,
+      cropBoxResizable: false,
+      minCropBoxWidth: 280,
+      minCropBoxHeight: 280,
+      ready: function(){
+        croppable = true;
+      }
+    });
+  }
+
+
 })
