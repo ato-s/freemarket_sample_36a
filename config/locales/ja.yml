@@ -28,7 +28,6 @@ ja:
         bad: '悪い'
     report:
       report_type:
-        please_select: "選択してください"
         fake_or_infringing_goods: "偽ブランド品・権利侵害品"
         pharmaceuticals_or_medical_equipments: "医薬品・医療機器"
         violation_pharmaceutical_laws: "薬機法違反（海外化粧品等）"
