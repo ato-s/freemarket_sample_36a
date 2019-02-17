@@ -78,3 +78,12 @@ ja:
   recaptcha:
     errors:
       verification_failed: 'reCAPTCHA認証に失敗しました。'
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "0"
+          one: "1"
+          other: "%{count}"
+      more_pages:
+        display_entries: "%{first}-%{last}"
