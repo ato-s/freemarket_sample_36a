@@ -107,7 +107,13 @@ class ItemsController < ApplicationController
         :middle_category_id,
         :lower_category_id,
         :seller_id,
-        pictures_attributes: [:id, :content, :status]
+        pictures_attributes: [:id,
+                              :image_x,
+                              :image_y,
+                              :image_w,
+                              :image_h,
+                              :content,
+                              :status]
       ).merge(transaction_stage: 'under_sale', seller_id: current_user.id)
     end
 
