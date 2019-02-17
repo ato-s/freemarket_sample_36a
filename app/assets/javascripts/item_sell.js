@@ -116,6 +116,18 @@ $(function(){
     };
   };
 
+  function trimmingDisplay(url, index){
+    $('.overlay').fadeIn();
+    $('.crop_modal').append($('<img>').attr({
+      src: url,
+      height: "100%",
+      class: "preview",
+      id: "crop_img",
+    }));
+    initIconCrop();
+    $('.overlay').attr('id', index);
+  }
+
 //   // // 処理
 //   // // todo: 写真の最大枚数は10枚
   var picture_container = $(".p-sell_upload_items-container");
@@ -177,21 +189,16 @@ $(function(){
     var reader = new FileReader();
 
     // トリミング画面をフェードインさせる
-    reader.addEventListener("load", function(){
-      $('.overlay').fadeIn();
-      $('.crop_modal').append($('<img>').attr({
-        src: reader.result,
-        height: "100%",
-        class: "preview",
-        id: "crop_img",
-        title: file.name
-      }));
-      initIconCrop();
-      $('.overlay').attr('id', target_input_index);
-    },false);
-
     if(file){
+      reader.addEventListener("load", function(){
+        trimmingDisplay(reader.result, target_input_index);
+      },false);
+
       reader.readAsDataURL(file);
+    }else{
+      var exit_picture_url = $('#item_pictures_attributes_'+ target_input_index +'_id').attr('picture_location');
+      console.log(exit_picture_url);
+      trimmingDisplay(exit_picture_url, target_input_index);
     }
   });
 
