@@ -10,7 +10,7 @@ class ReportsController < ApplicationController
   end
 
   def create
-    @report = Report.new(user_id: current_user.id, item_id: params[:item_id],report_type: params[:report_type])
+    @report = Report.new(user_id: current_user.id, item_id: params[:item_id],report_type: params[:report][:report_type])
     if @report.save
       redirect_to item_path(@item), notice: "問題を報告しました"
     else

@@ -78,8 +78,8 @@
 # reportsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null:false, foreign_key:true|
-|item_id|integer|null:false, foreign_key:true|
+|user|references|null:false, foreign_key:true|
+|item|references|null:false, foreign_key:true|
 |report_type|integer|null:false, default:0|
 
 ### Association
