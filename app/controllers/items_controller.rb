@@ -79,6 +79,12 @@ class ItemsController < ApplicationController
     redirect_to root_path, notice: 'Item was successfully destroyed.'
   end
 
+  def search
+    @items = Item.where("name LIKE(?) OR description LIKE(?)","%#{params[:keyword]}%", "%#{params[:keyword]}%").order("created_at DESC").page(params[:page]).per(48).includes(:pictures)
+    @new_items = Item.order("created_at DESC").limit(24).includes(:pictures)
+    render :search, layout: "search"
+  end
+
   private
 
     def set_item
