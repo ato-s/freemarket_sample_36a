@@ -169,11 +169,11 @@
             = @brand.name + " " + @lower_category.name + " " + "その他の商品"
         .c-items-box_content.l-clearfix
           -# = render 'layouts/item',item: @other_brand_items
-    = form_for '#', html: {id: 'report-item', class: 'c-modal mfp-hide'} do |f|
+    #report-item.c-modal.mfp-hide
       .c-modal_inner.c-modal_banner
         .c-modal_body
           .c-modal_head.u-fwBold 確認
           不適切な商品を報告しますか？
         .l-clearfix
           .c-modal_btn.c-modal_btn-cancel.js-modal_btn-cancel キャンセル
-          = f.submit 'はい', class: 'c-modal_btn c-modal_btn-submit'
+          = link_to 'はい',new_item_report_path(@item), {class: 'c-modal_btn c-modal_btn-submit',method: :get}
