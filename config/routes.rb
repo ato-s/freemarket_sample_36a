@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     resources :transaction_messages, only: [:index, :create]
     resource :buy, only: [:edit,:update]
     resources :information, only: [:create]
+    collection do
+      get :search
+    end
   end
 
   resources :groups, only: [:show]
@@ -48,5 +51,4 @@ Rails.application.routes.draw do
   resource :safe, only: [:show] do
     resource :description,only: [:show]
   end
-
 end
