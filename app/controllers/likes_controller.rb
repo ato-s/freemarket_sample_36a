@@ -4,6 +4,7 @@ class LikesController < ApplicationController
 
   def create
     @like = Like.create(user_id: current_user.id, item_id: params[:item_id])
+    @item.reload
     @likes = Like.where(item_id: params[:item_id])
     @information_type = 'be_liked'
     if information_is_needed?
@@ -13,6 +14,7 @@ class LikesController < ApplicationController
 
   def destroy
     @like = Like.find_by(user_id: current_user.id, item_id: params[:item_id]).destroy
+    @item.reload
   end
 
   private
