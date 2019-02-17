@@ -106,7 +106,7 @@
         %ul.p-item_message_block
           - @comments.each do|message|
             %li.l-clearfix
-              = link_to '#', class: 'p-item_message_user' do
+              = link_to mypage_path(message.user_id), class: 'p-item_message_user' do
                 %figure
                   %div
                     = image_tag 'common/member_photo_noimage_thumb.png'
@@ -159,16 +159,16 @@
     .c-items-in-user-profile
       %section.c-items-box_container.l-clearfix.c-items-box_overflow.c-items-in-user-profile
         %h2.c-items-box_head
-          = link_to '#' do
+          = link_to mypage_path(@item.seller_id) do
             = @seller.nickname + "さんのその他の出品"
         .c-items-box_content.l-clearfix
-          -# = render 'layouts/item',item: @other_items
+          = render partial:'layouts/item',collection: @other_items
       %section.c-items-box_container.l-clearfix.c-items-box_overflow
         %h2.c-items-box_head
-          = link_to '/brand/3117/791/' do
+          = link_to lower_category_path(@item.lower_category_id) do
             = @brand.name + " " + @lower_category.name + " " + "その他の商品"
         .c-items-box_content.l-clearfix
-          -# = render 'layouts/item',item: @other_brand_items
+          = render partial:'layouts/item',collection: @other_brand_items
     #report-item.c-modal.mfp-hide
       .c-modal_inner.c-modal_banner
         .c-modal_body
