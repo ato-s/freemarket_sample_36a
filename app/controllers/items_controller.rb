@@ -33,10 +33,10 @@ class ItemsController < ApplicationController
     @middle_category = @item.middle_category
     @lower_category = @item.lower_category
     @size = @item.size
-    random_page_link
     @likes = @item.likes
     @comment = Comment.new
     @comments = @item.comments.includes(:user)
+    random_page_link
   end
 
   def new
