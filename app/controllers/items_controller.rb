@@ -41,7 +41,7 @@ class ItemsController < ApplicationController
 
   def new
     10.times { @item.pictures.build }
-    @upper_categories = UpperCategory.all.includes([middle_categories: :lower_categories])
+    render :new, layout: "single"
   end
 
   def edit
