@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
     @middle_category = @item.middle_category
     @lower_category = @item.lower_category
     @size = @item.size
-    # random_page_link
+    random_page_link
     @likes = @item.likes
     @comment = Comment.new
     @comments = @item.comments.includes(:user)
@@ -170,14 +170,14 @@ class ItemsController < ApplicationController
       end
     end
 
-    # def random_page_link
-    #   #ランダムなページリンクを生成する
-    #   rand_ranges = Item.all.count
-    #   random = Random.new
-    #   @rand_next = random.rand(rand_ranges)+1
-    #   @next_page = Item.find(@rand_next)
-    #   @rand_prev = random.rand(rand_ranges)+1
-    #   @prev_page = Item.find(@rand_prev)
-    # end
+     def random_page_link
+       rand_ranges = Item.all.count
+       random_next = Random.new
+       @rand_next = random_next.rand(rand_ranges)+1
+       @next_page = Item.find(@rand_next)
+       random_prev = Random.new
+       @rand_prev = random_prev.rand(rand_ranges)+1
+       @prev_page = Item.find(@rand_prev)
+     end
 
 end

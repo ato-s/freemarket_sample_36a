@@ -113,7 +113,7 @@
                   %figcaption.u-fwBold
                     = message.user.nickname
                 - if message.user.id == @item.seller.id
-                  .p-item_message_seller 出品者
+                  .p-item_message_seller-self 出品者
               .p-item_message_body
                 .p-item_message_body-text
                   = message.text
@@ -135,13 +135,13 @@
             %span コメントする
     %ul.p-item_nav-link.l-clearfix
       %li.p-item_nav-link_prev
-        = link_to "#{@rand_prev}" do
+        = link_to item_path(@prev_page) do
           %i.c-icon-arrow-left>
-          -# = @next_page.name
+          = @prev_page.name
       %li.p-item_nav-link_next
-        = link_to '#{@rand_next}' do
+        = link_to item_path(@next_page) do
           %i.c-icon-arrow-right
-          -# = @next_page.name
+          = @next_page.name
     .c-item_social-media-box
       %ul.c-social-media-box
         %li
