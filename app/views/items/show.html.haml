@@ -104,7 +104,7 @@
     .p-item_message_container
       .p-item_message_content
         %ul.p-item_message_block
-          = render partial: "items/comment",locals:{coment: @comments}
+          = render partial: "items/comment",collection: @comments
       .p-item_message_content
         = form_for [@item,@comment] , html: {class: 'c-message-form'} do |f|
           %p 相手のことを考え丁寧なコメントを心がけましょう。不快な言葉遣いなどは利用制限や退会処分となることがあります。
