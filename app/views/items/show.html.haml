@@ -78,7 +78,7 @@
       .p-item_sales-point-message
         P 500 をお持ちです
     - if @item.transaction_stage == "under_sale"
-      - if @item.seller_id == current_user.id
+      - if user_signed_in? && @item.seller_id == current_user.id
         = link_to '商品の編集',edit_item_path(@item),id: 'item-edit-button',class: 'p-item_buy-btn u-fz18-24', data: {turbolinks: false}
         = link_to '商品の削除',item_path(@item), method: :delete,class: 'p-item_buy-btn_sold u-fz18-24'
       - else
@@ -104,29 +104,7 @@
     .p-item_message_container
       .p-item_message_content
         %ul.p-item_message_block
-          - @comments.each do|message|
-            %li.l-clearfix
-              = link_to '#', class: 'p-item_message_user' do
-                %figure
-                  %div
-                    = image_tag 'common/member_photo_noimage_thumb.png'
-                  %figcaption.u-fwBold
-                    = message.user.nickname
-                - if message.user.id == @item.seller.id
-                  .p-item_message_seller 出品者
-              .p-item_message_body
-                .p-item_message_body-text
-                  = message.text
-                .p-item_message_icons.l-clearfix
-                  %time.p-item_message_icon-left
-                    %i.c-icon-time
-                    %span
-                      = time_ago_in_words(message.created_at)+"前"
-                  .p-item_message_icon-right
-                    = form_for '#', html: {class: 'c-message-form'} do |f|
-                      = button_tag '' do
-                        %i.c-icon-flag
-                %i.c-icon-balloon
+          = render partial: "items/comment",collection: @comments
       .p-item_message_content
         = form_for [@item,@comment] , html: {class: 'c-message-form'} do |f|
           %p 相手のことを考え丁寧なコメントを心がけましょう。不快な言葉遣いなどは利用制限や退会処分となることがあります。
