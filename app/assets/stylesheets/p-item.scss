@@ -533,10 +533,11 @@
     width: 100%;
   }
   figcaption {
+    text-align: right;
     overflow: hidden;
     position: absolute;
     top: 0;
-    left: 0px;
+    left: -615px;
     max-width: 100%;
     min-width: 214px;
     height: 1.2em;
@@ -565,6 +566,7 @@
     top: 8px;
     right: -9px;
     color: #f9f0e7;
+    transform: scale(-1, 1);
   }
 }
 .p-item_message_icons_current-user {
@@ -600,4 +602,19 @@
     display: inline;
   }
 }
-
+@media screen and (max-width: 768px) {
+  .p-item_message_user_current-user {
+    figcaption {
+      text-align: right;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: -230px;
+      max-width: 100%;
+      min-width: 214px;
+      height: 1.2em;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+}

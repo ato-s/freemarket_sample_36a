@@ -1,4 +1,4 @@
-- if comment.user_id == current_user.id
+- if user_signed_in? && comment.user_id == current_user.id
   %li.l-clearfix
     = link_to mypage_path(comment.user_id), class: 'p-item_message_user_current-user' do
       %figure
@@ -18,7 +18,7 @@
           = form_for '#', html: {class: 'c-message-form'} do |f|
             = button_tag '' do
               %i.c-icon-flag
-      %i.c-icon-balloon_current-user
+      %i.c-icon-balloon
 -else
   %li.l-clearfix
     = link_to mypage_path(comment.user_id), class: 'p-item_message_user' do

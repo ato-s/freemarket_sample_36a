@@ -78,7 +78,7 @@
       .p-item_sales-point-message
         P 500 をお持ちです
     - if @item.transaction_stage == "under_sale"
-      - if @item.seller_id == current_user.id
+      - if user_signed_in? && @item.seller_id == current_user.id
         = link_to '商品の編集',edit_item_path(@item),id: 'item-edit-button',class: 'p-item_buy-btn u-fz18-24', data: {turbolinks: false}
         = link_to '商品の削除',item_path(@item), method: :delete,class: 'p-item_buy-btn_sold u-fz18-24'
       - else
