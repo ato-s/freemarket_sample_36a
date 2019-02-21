@@ -19,7 +19,7 @@ class Item < ApplicationRecord
   has_one :todo, dependent: :destroy
   accepts_nested_attributes_for :pictures, allow_destroy: true
 
-  # validates :name, :description, :state, :delivery_payer, :delivery_region, :delivery_duration, :buy_price, :sell_price, :commission_price, :transaction_stage, :like_count, presence: true
+  validates :name, :description, :state, :delivery_payer, :delivery_region, :delivery_duration, :buy_price, :sell_price, :commission_price, :transaction_stage, :like_count, :size_id, :brand_id, :upper_category_id, :middle_category_id, :lower_category_id, :seller_id, :buyer_id, :created_at, :updated_at, presence: true
 
   enum state: {
     perfectly_new: 1,
