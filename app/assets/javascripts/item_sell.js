@@ -78,9 +78,17 @@ $(function(){
   function deleteIdAndStatusField(targetNumber){
     var target_input_status = $("#item_pictures_attributes_"+ targetNumber +"_status");
     var target_input_id = $("#item_pictures_attributes_"+ targetNumber +"_id");
+    var target_input_image_x = $("#item_pictures_attributes_"+ targetNumber +"_image_x");
+    var target_input_image_y = $("#item_pictures_attributes_"+ targetNumber +"_image_y");
+    var target_input_image_w = $("#item_pictures_attributes_"+ targetNumber +"_image_w");
+    var target_input_image_h = $("#item_pictures_attributes_"+ targetNumber +"_image_h");
 
     target_input_status.remove();
     target_input_id.remove();
+    target_input_image_x.remove();
+    target_input_image_y.remove();
+    target_input_image_w.remove();
+    target_input_image_h.remove();
   }
 
   function appendCoordinatesField(targetIndex, targetInput){
@@ -188,7 +196,7 @@ $(function(){
   if( $(location).attr('pathname').match(/edit/)){
     var size = $('[picture_location]').length ;
     for(var i = 0 ; i < size ; i++ ){
-      var picture_file_present = $('#item_pictures_attributes_'+ i +'_id').attr('picture_location');
+      var picture_file_present = $('#item_pictures_attributes_'+ i +'_content').attr('value');
       var target_input = getTargetInput(i);
       target_input.css({
         "display": "none"
