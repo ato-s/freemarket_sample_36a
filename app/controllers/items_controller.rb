@@ -63,7 +63,6 @@ class ItemsController < ApplicationController
   end
 
   def update
-    binding.pry
     @originally_price = @item.buy_price
     if @item.update(item_params)
       @changed_price = @item.buy_price
@@ -98,6 +97,9 @@ class ItemsController < ApplicationController
           break
         else
           if params[:item][:pictures_attributes][:"#{i}"][:image_x] != nil
+            ########### Alert ##############
+            #publicのとこ本番環境は、fm36umeda？？本番環境未実装
+            #################################
             params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open("public" + params[:item][:pictures_attributes][:"#{i}"][:status]))
           end
           i += 1
