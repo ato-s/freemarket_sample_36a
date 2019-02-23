@@ -112,7 +112,6 @@ class ItemsController < ApplicationController
           i += 1
         end
       end
-      binding.pry
     end
 
     def item_params
