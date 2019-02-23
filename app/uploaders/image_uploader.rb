@@ -47,8 +47,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   # version :thumb do
   #   process resize_to_fit: [50, 50]
   # end
-
   process :crop
+  process resize_to_fill: [600, 600]
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -66,7 +66,6 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   def crop
     if [ model.image_x , model.image_y , model.image_w , model.image_h ].all?
-
       manipulate! do |img|
         crop_x = model.image_x.to_i
         crop_y = model.image_y.to_i
@@ -76,8 +75,6 @@ class ImageUploader < CarrierWave::Uploader::Base
         img = yield(img) if block_given?
         img
       end
-    else
-      process resize_to_fill: [600, 600]
     end
   end
 end
