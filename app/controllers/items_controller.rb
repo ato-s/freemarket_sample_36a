@@ -43,6 +43,7 @@ class ItemsController < ApplicationController
   def new
     10.times { @item.pictures.build }
     render :new, layout: "single"
+    @upper_categories = UpperCategory.all.includes([middle_categories: :lower_categories])
   end
 
   def edit
@@ -115,31 +116,31 @@ class ItemsController < ApplicationController
     end
 
     def item_params
-      @item_params = params.require(:item).permit(
-                      :name,
-                      :description,
-                      :state,
-                      :delivery_payer,
-                      :delivery_region,
-                      :delivery_duration,
-                      :buy_price,
-                      :commission_price,
-                      :sell_price,
-                      :like_count,
-                      :size_id,
-                      :brand_id,
-                      :upper_category_id,
-                      :middle_category_id,
-                      :lower_category_id,
-                      :seller_id,
-                      pictures_attributes: [:id,
-                                            :image_x,
-                                            :image_y,
-                                            :image_w,
-                                            :image_h,
-                                            :content,
-                                            :status]
-                    ).merge(transaction_stage: 'under_sale', seller_id: current_user.id)
+      params.require(:item).permit(
+        :name,
+        :description,
+        :state,
+        :delivery_payer,
+        :delivery_region,
+        :delivery_duration,
+        :buy_price,
+        :commission_price,
+        :sell_price,
+        :like_count,
+        :size_id,
+        :brand_id,
+        :upper_category_id,
+        :middle_category_id,
+        :lower_category_id,
+        :seller_id,
+        pictures_attributes: [:id,
+                              :image_x,
+                              :image_y,
+                              :image_w,
+                              :image_h,
+                              :content,
+                              :status]
+      ).merge(transaction_stage: 'under_sale', seller_id: current_user.id)
     end
 
     def upper_category_params
