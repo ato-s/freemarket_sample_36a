@@ -103,7 +103,7 @@ class ItemsController < ApplicationController
         if params[:item][:pictures_attributes][:"#{i}"] == nil
           break
         else
-          if params[:item][:pictures_attributes][:"#{i}"][:image_x] != nil
+          if params[:item][:pictures_attributes][:"#{i}"][:trriming_x] != nil
             ########### Alert ##############
             #publicのとこ本番環境は、fm36umeda？？本番環境未実装
             #################################
@@ -133,10 +133,10 @@ class ItemsController < ApplicationController
         :lower_category_id,
         :seller_id,
         pictures_attributes: [:id,
-                              :image_x,
-                              :image_y,
-                              :image_w,
-                              :image_h,
+                              :trriming_x,
+                              :trriming_y,
+                              :trriming_width,
+                              :trriming_height,
                               :content,
                               :status]
       ).merge(transaction_stage: 'under_sale', seller_id: current_user.id)

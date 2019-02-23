@@ -4,8 +4,8 @@ class Picture < ApplicationRecord
   validates :item_id, presence: true, on: :update
   mount_uploader :content, ImageUploader
 
-  attr_accessor :image_x
-  attr_accessor :image_y
-  attr_accessor :image_w
-  attr_accessor :image_h
+  attr_accessor :trriming_x
+  attr_accessor :trriming_y
+  attr_accessor :trriming_width
+  attr_accessor :trriming_height
 end

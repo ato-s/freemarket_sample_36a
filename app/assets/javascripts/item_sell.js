@@ -78,34 +78,34 @@ $(function(){
   function deleteIdAndStatusField(targetNumber){
     var target_input_status = $("#item_pictures_attributes_"+ targetNumber +"_status");
     var target_input_id = $("#item_pictures_attributes_"+ targetNumber +"_id");
-    var target_input_image_x = $("#item_pictures_attributes_"+ targetNumber +"_image_x");
-    var target_input_image_y = $("#item_pictures_attributes_"+ targetNumber +"_image_y");
-    var target_input_image_w = $("#item_pictures_attributes_"+ targetNumber +"_image_w");
-    var target_input_image_h = $("#item_pictures_attributes_"+ targetNumber +"_image_h");
+    var target_input_trriming_x = $("#item_pictures_attributes_"+ targetNumber +"_trriming_x");
+    var target_input_trriming_y = $("#item_pictures_attributes_"+ targetNumber +"_trriming_y");
+    var target_input_trriming_width = $("#item_pictures_attributes_"+ targetNumber +"_trriming_width");
+    var target_input_trriming_height = $("#item_pictures_attributes_"+ targetNumber +"_trriming_height");
 
     target_input_status.remove();
     target_input_id.remove();
-    target_input_image_x.remove();
-    target_input_image_y.remove();
-    target_input_image_w.remove();
-    target_input_image_h.remove();
+    target_input_trriming_x.remove();
+    target_input_trriming_y.remove();
+    target_input_trriming_width.remove();
+    target_input_trriming_height.remove();
   }
 
   function appendCoordinatesField(targetIndex, targetInput){
-    var x_name = 'item[pictures_attributes]['+ targetIndex +'][image_x]';
-    var x_id = 'item_pictures_attributes_'+ targetIndex +'_image_x';
+    var x_name = 'item[pictures_attributes]['+ targetIndex +'][trriming_x]';
+    var x_id = 'item_pictures_attributes_'+ targetIndex +'_trriming_x';
     var hiddenInputX = $('<input/>',{value: 0, type: 'hidden', name: x_name, id: x_id});
 
-    var y_name = 'item[pictures_attributes]['+ targetIndex +'][image_y]';
-    var y_id = 'item_pictures_attributes_'+ targetIndex +'_image_y';
+    var y_name = 'item[pictures_attributes]['+ targetIndex +'][trriming_y]';
+    var y_id = 'item_pictures_attributes_'+ targetIndex +'_trriming_y';
     var hiddenInputY = $('<input/>',{value: 0, type: 'hidden', name: y_name, id: y_id});
 
-    var w_name = 'item[pictures_attributes]['+ targetIndex +'][image_w]';
-    var w_id = 'item_pictures_attributes_'+ targetIndex +'_image_w';
+    var w_name = 'item[pictures_attributes]['+ targetIndex +'][trriming_width]';
+    var w_id = 'item_pictures_attributes_'+ targetIndex +'_trriming_width';
     var hiddenInputW = $('<input/>',{value: 0, type: 'hidden', name: w_name, id: w_id});
 
-    var h_name = 'item[pictures_attributes]['+ targetIndex +'][image_h]';
-    var h_id = 'item_pictures_attributes_'+ targetIndex +'_image_h';
+    var h_name = 'item[pictures_attributes]['+ targetIndex +'][trriming_height]';
+    var h_id = 'item_pictures_attributes_'+ targetIndex +'_trriming_height';
     var hiddenInputH = $('<input/>',{value: 0, type: 'hidden', name: h_name, id: h_id});
 
     targetInput.before(hiddenInputX);
@@ -134,10 +134,10 @@ $(function(){
         croppable = true;
       },
       crop :function(event){
-        $("#item_pictures_attributes_"+ targetIndex +"_image_x").val(event.detail.x);
-        $("#item_pictures_attributes_"+ targetIndex +"_image_y").val(event.detail.y);
-        $("#item_pictures_attributes_"+ targetIndex +"_image_w").val(event.detail.width);
-        $("#item_pictures_attributes_"+ targetIndex +"_image_h").val(event.detail.height);
+        $("#item_pictures_attributes_"+ targetIndex +"_trriming_x").val(event.detail.x);
+        $("#item_pictures_attributes_"+ targetIndex +"_trriming_y").val(event.detail.y);
+        $("#item_pictures_attributes_"+ targetIndex +"_trriming_width").val(event.detail.width);
+        $("#item_pictures_attributes_"+ targetIndex +"_trriming_height").val(event.detail.height);
       }
     });
   }
