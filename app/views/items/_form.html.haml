@@ -15,8 +15,8 @@
       .p-sell_upload_drop-box
         = f.fields_for :pictures do |picture|
           -if picture.object.id.present?
-            = picture.file_field :content
-            = picture.hidden_field :status, value: picture.object.status
+            = picture.file_field :content, value: picture.object.content
+            = picture.hidden_field :status, value: picture.object.content
             = picture.hidden_field :id, value: picture.object.id, picture_location: picture.object.content
           -else
             = picture.file_field :content
