@@ -42,7 +42,7 @@ class ItemsController < ApplicationController
 
   def new
     10.times { @item.pictures.build }
-    @upper_categories = UpperCategory.all.includes([middle_categories: :lower_categories])
+    render :new, layout: "single"
   end
 
   def edit
@@ -78,6 +78,12 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
     redirect_to root_path, notice: 'Item was successfully destroyed.'
+  end
+
+  def search
+    @items = Item.where("name LIKE(?) OR description LIKE(?)","%#{params[:keyword]}%", "%#{params[:keyword]}%").order("created_at DESC").page(params[:page]).per(48).includes(:pictures)
+    @new_items = Item.order("created_at DESC").limit(24).includes(:pictures)
+    render :search, layout: "search"
   end
 
   private
