@@ -9,9 +9,10 @@
           %div
             = image_tag 'common/member_photo_noimage_thumb.png', width: '32'
   .l-search_bar
-    = form_tag '/search/', class: 'l-headerSp_form' do
-      = search_field_tag :keyword, params[:keywords], placeholder: '何をお探しですか？', class: 'l-headerSp_search c-input-default'
-      %i.c-icon-search
+    = form_with url: search_items_path, method: :get, local: true, class: 'l-headerSp_form' do |f|
+      = f.text_field :keyword, placeholder: '何をお探しですか？', class: 'l-headerSp_search c-input-default'
+      = button_tag type: 'submit', class: 'l-headerSp_form_button' do
+        %i.c-icon-search
   %nav.l-headerSp_nav.l-search-links
     = link_to 'カテゴリから探す', upper_categories_path
     = link_to 'ブランドから探す', group_path(1)
@@ -21,9 +22,10 @@
       %h1.l-flLeft
         = link_to root_path do
           = image_tag 'common/logo.svg', alt: 'mercari', width: '134', height: '36'
-      = form_tag '/search/', class: 'l-headerPc_form l-flRight' do
-        = search_field_tag :keyword, params[:keywords], placeholder: 'キーワードから探す', class: 'c-input-default'
-        %i.c-icon-search
+      = form_with url: search_items_path, method: :get, local: true, class: 'l-headerPc_form l-flRight' do |f|
+        = f.text_field :keyword, placeholder: '何をお探しですか？', class: 'c-input-default'
+        = button_tag type: 'submit', class: 'l-headerPc_form_button' do
+          %i.c-icon-search
     .l-headerPc_nav-box.l-clearfix
       %nav.l-flLeft
         %ul.l-headerPc_nav

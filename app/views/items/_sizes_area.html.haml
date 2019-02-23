@@ -4,6 +4,5 @@
     %span
   %div
     .c-select-wrap
-      = f.select :size_id, options_from_collection_for_select(@sizes, :id, :name), {prompt: "---"}
+      = f.select :size_id, options_from_collection_for_select(@sizes, :id, :name), {prompt: "---"}, class: 'c-select-default'
       %i.c-icon-arrow-bottom
-

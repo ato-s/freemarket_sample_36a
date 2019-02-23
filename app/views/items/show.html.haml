@@ -105,29 +105,7 @@
     .p-item_message_container
       .p-item_message_content
         %ul.p-item_message_block
-          - @comments.each do|message|
-            %li.l-clearfix
-              = link_to '#', class: 'p-item_message_user' do
-                %figure
-                  %div
-                    = image_tag 'common/member_photo_noimage_thumb.png'
-                  %figcaption.u-fwBold
-                    = message.user.nickname
-                - if message.user.id == @item.seller.id
-                  .p-item_message_seller 出品者
-              .p-item_message_body
-                .p-item_message_body-text
-                  = message.text
-                .p-item_message_icons.l-clearfix
-                  %time.p-item_message_icon-left
-                    %i.c-icon-time
-                    %span
-                      = time_ago_in_words(message.created_at)+"前"
-                  .p-item_message_icon-right
-                    = form_for '#', html: {class: 'c-message-form'} do |f|
-                      = button_tag '' do
-                        %i.c-icon-flag
-                %i.c-icon-balloon
+          = render partial: "items/comment",collection: @comments
       .p-item_message_content
         = form_for [@item,@comment] , html: {class: 'c-message-form'} do |f|
           %p 相手のことを考え丁寧なコメントを心がけましょう。不快な言葉遣いなどは利用制限や退会処分となることがあります。
@@ -170,11 +148,11 @@
             = @brand.name + " " + @lower_category.name + " " + "その他の商品"
         .c-items-box_content.l-clearfix
           -# = render 'layouts/item',item: @other_brand_items
-    = form_for '#', html: {id: 'report-item', class: 'c-modal mfp-hide'} do |f|
+    #report-item.c-modal.mfp-hide
       .c-modal_inner.c-modal_banner
         .c-modal_body
           .c-modal_head.u-fwBold 確認
           不適切な商品を報告しますか？
         .l-clearfix
           .c-modal_btn.c-modal_btn-cancel.js-modal_btn-cancel キャンセル
-          = f.submit 'はい', class: 'c-modal_btn c-modal_btn-submit'
+          = link_to 'はい',new_item_report_path(@item), {class: 'c-modal_btn c-modal_btn-submit',method: :get}
