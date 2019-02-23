@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_locale
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_new_item, only: [:new, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
+  before_action :set_params, only: [:update]
   before_action :move_to_sign_in, except: [:index, :show, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
   before_action :delete_pictures, only: [:update]
 
@@ -53,7 +54,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_create_params)
+    @item = Item.new(item_params)
     if @item.save
       redirect_to root_path, notice: 'Item was successfully saved.'
     else
@@ -62,6 +63,7 @@ class ItemsController < ApplicationController
   end
 
   def update
+    binding.pry
     @originally_price = @item.buy_price
     if @item.update(item_params)
       @changed_price = @item.buy_price
@@ -89,56 +91,47 @@ class ItemsController < ApplicationController
       @item = Item.new
     end
 
-    def item_create_params
-      params.require(:item).permit(
-        :name,
-        :description,
-        :state,
-        :delivery_payer,
-        :delivery_region,
-        :delivery_duration,
-        :buy_price,
-        :commission_price,
-        :sell_price,
-        :like_count,
-        :size_id,
-        :brand_id,
-        :upper_category_id,
-        :middle_category_id,
-        :lower_category_id,
-        :seller_id,
-        pictures_attributes: [:id,
-                              :image_x,
-                              :image_y,
-                              :image_w,
-                              :image_h,
-                              :content,
-                              :status]
-      ).merge(transaction_stage: 'under_sale', seller_id: current_user.id)
+    def set_params
+      i = 0
+      while true
+        if params[:item][:pictures_attributes][:"#{i}"] == nil
+          break
+        else
+          if params[:item][:pictures_attributes][:"#{i}"][:image_x] != nil
+            params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open("public" + params[:item][:pictures_attributes][:"#{i}"][:status]))
+          end
+          i += 1
+        end
+      end
+      binding.pry
     end
 
     def item_params
-      params.require(:item).permit(
-        :name,
-        :description,
-        :state,
-        :delivery_payer,
-        :delivery_region,
-        :delivery_duration,
-        :buy_price,
-        :commission_price,
-        :sell_price,
-        :like_count,
-        :brand_id,
-        :seller_id,
-        pictures_attributes: [:id,
-                              :image_x,
-                              :image_y,
-                              :image_w,
-                              :image_h,
-                              :content,
-                              :status]
-      ).merge(upper_category_id: 1, middle_category_id: 1, lower_category_id: 1, size_id: 1)
+      @item_params = params.require(:item).permit(
+                      :name,
+                      :description,
+                      :state,
+                      :delivery_payer,
+                      :delivery_region,
+                      :delivery_duration,
+                      :buy_price,
+                      :commission_price,
+                      :sell_price,
+                      :like_count,
+                      :size_id,
+                      :brand_id,
+                      :upper_category_id,
+                      :middle_category_id,
+                      :lower_category_id,
+                      :seller_id,
+                      pictures_attributes: [:id,
+                                            :image_x,
+                                            :image_y,
+                                            :image_w,
+                                            :image_h,
+                                            :content,
+                                            :status]
+                    ).merge(transaction_stage: 'under_sale', seller_id: current_user.id)
     end
 
     def upper_category_params
