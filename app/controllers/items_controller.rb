@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_locale
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_new_item, only: [:new, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
+  before_action :s3_client, only: [:set_params]
   before_action :set_params, only: [:update]
   before_action :move_to_sign_in, except: [:index, :show, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
   before_action :delete_pictures, only: [:update]
@@ -97,6 +98,15 @@ class ItemsController < ApplicationController
       @item = Item.new
     end
 
+    def s3_client
+      Aws::S3::Client.new(
+                            region: 'ap-northeast-1',
+                            aws_access_key_id: Rails.application.secrets.aws_access_key_id,
+                            aws_secret_access_key: Rails.application.secrets.aws_secret_access_key
+                          )
+
+    end
+
     def set_params
       i = 0
       while true
@@ -108,7 +118,7 @@ class ItemsController < ApplicationController
               if Rails.env.development? || Rails.env.test?
                 params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open("public" + params[:item][:pictures_attributes][:"#{i}"][:status]))
               elsif Rails.env.production?
-                params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open(params[:item][:pictures_attributes][:"#{i}"][:status]))
+                params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: s3_client.get_objet(bucket: 'fm36umeda',key: params[:item][:pictures_attributes][:"#{i}"][:status]))
               end
             end
           end
@@ -116,6 +126,7 @@ class ItemsController < ApplicationController
         end
       end
     end
+
 
     def item_params
       params.require(:item).permit(
