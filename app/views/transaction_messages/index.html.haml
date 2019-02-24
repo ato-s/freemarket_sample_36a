@@ -1,17 +1,98 @@
-#transaction_messages
-  = render :partial => "transaction_message", :collection => @transaction_messages, :as => "transaction_message"
+%main.l-container.l-clearfix
+  .l-content
+    %section.l-chapter-container
+      %h2.l-chapter-head 取引画面
+      .transact-attention
+        = render 'attention', item: @item
+      .transact-todo
+        = link_to new_item_review_path(@item), class: 'c-btn-default is-red u-fzBold' do
+          - if current_user.id == @item.buyer_id && @item.transaction_stage == 'shipping'
+            受け取り評価する(buyer)
+          - elsif current_user.id == @item.seller_id && @item.transaction_stage == 'evaluated'
+            評価する(seller)
 
-#transaction_messages_form
-  = render 'form', locals: {item: @item, transaction_message: @transaction_message}
+        - if current_user == @item.seller && @item.transaction_stage == 'purchased'
+          = link_to item_information_index_path(@item), class: 'c-btn-default is-red u-fzBold', method: :post do
+            商品を発送したので、発送通知をする
+      .p-item_message
+        .p-item_message_container
+          .p-item_message_content
+            %ul.p-item_message_block
+              #transaction_messages
+                = render :partial => "transaction_message", :collection => @transaction_messages, :as => "transaction_message"
+          .p-item_message_content
+            #transaction_messages_form
+              - if ['purchased', 'shipping', 'evaluated'].include?(@item.transaction_stage)
+                = render 'form', locals: {item: @item, transaction_message: @transaction_message}
+  .l-side
+    %section.l-side-container
+      %h3.transact-info-head 取引情報
+      .transact-info-inner
+        %ul.transact-info-table
+          %li.transact-info-table-row
+            %span.transact-info-table-cell 商品
+            %ul.transact-info-table-cell
+              %li
+                %figure.c-items-box_photo{style: "background-image: url(#{@picture.content})"}
+                = link_to item_path(@item) do
+                  .transact-info-item.bold
+                    = @item.name
+                    %br/
+                    = "¥#{@item.buy_price}"
+          %li.transact-info-table-row
+            %span.transact-info-table-cell 送料
+            %ul.transact-info-table-cell
+              %li
+                = @item.delivery_payer_i18n
+          %li.transact-info-table-row
+            %span.transact-info-table-cell 購入日時
+            %ul.transact-info-table-cell
+              %li
+                = "#{time_ago_in_words(@item.updated_at)}"
+          %li.transact-info-table-row
+            %span.transact-info-table-cell 商品ID
+            %ul.transact-info-table-cell
+              %li
+                = @item.id
+          %li.transact-info-table-row
+            %span.transact-info-table-cell お届け先
+            %ul.transact-info-table-cell
+              %li
+                %p
+                  = "〒#{@address.postal_code}"
+                %p
+                  = "#{@address.city}#{@address.address}"
+                %p
+                  %span.buyer-name
+                    = "#{@address.first_name}#{@address.last_name} 様"
+    %section.l-side-container
+      - if current_user.id == @item.buyer_id
+        %h3.transact-info-head 出品者情報
+        .transact-info-inner
+          = link_to mypage_path(@item.seller_id), class: 'transaction-user-icon' do
+            %figure
+              %div
+                = image_tag 'common/member_photo_noimage_thumb.png'
+              %figcaption.u-fwBold
+                .transact-user-name
+                  = @item.seller.nickname
+            %i.icon-arrow-right
+      - else
+        %h3.transact-info-head 購入者情報
+        .transact-info-inner
+          = link_to mypage_path(@item.buyer_id), class: 'transaction-user-icon' do
+            %figure
+              %div
+                = image_tag 'common/member_photo_noimage_thumb.png'
+              %figcaption.u-fwBold
+                .transact-user-name
+                  = @item.buyer.nickname
+            %i.icon-arrow-right
 
 
-= link_to new_item_review_path(@item) do
-  - if current_user.id == @item.buyer_id && @item.transaction_stage == 'shipping'
-    受け取り評価する(buyer)
-  - elsif current_user.id == @item.seller_id && @item.transaction_stage == 'evaluated'
-    評価する(seller)
 
-- if current_user == @item.seller && @item.transaction_stage == 'purchased'
-  = link_to item_information_index_path(@item), method: :post do
-    .ship_button
-      発送完了連絡を送る
+
+
+
+
+

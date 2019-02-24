@@ -1,5 +1,4 @@
-= form_with model: [@item, @transaction_message], authenticity_token: true do |f|
-  = f.text_field :text
-
-  .actions
-    = f.submit 'Save', class: 'c-btn-default is-red u-fzBold'
+= form_with model: [@item, @transaction_message], html: {class: 'c-message-form'}, authenticity_token: true do |f|
+  %p 相手のことを考え丁寧なコメントを心がけましょう。不快な言葉遣いなどは利用制限や退会処分となることがあります。
+  = f.text_area :text, class: 'c-textarea-default'
+  = f.submit '取引メッセージを送る', class: 'p-message_submit c-btn-default is-gray'
