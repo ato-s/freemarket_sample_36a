@@ -118,7 +118,7 @@ class ItemsController < ApplicationController
               if Rails.env.development? || Rails.env.test?
                 params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open("public" + params[:item][:pictures_attributes][:"#{i}"][:status]))
               elsif Rails.env.production?
-                params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: s3_client.get_objet(bucket: 'fm36umeda',key: params[:item][:pictures_attributes][:"#{i}"][:status]))
+                params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: s3_client.get_objet(bucket: 'fm36umeda',key: params[:item][:pictures_attributes][:"#{i}"][:status]).body.read )
               end
             end
           end
