@@ -25,7 +25,7 @@
     .p-mypage_tab-content
       - if @information.present?
         %ul#p-mypage_tab-notification.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
-          = render :partial => "mypages/information", :collection => @information, :as => "information"
+          = render partial: "mypages/information", collection: @information, as: "information"
           %li.p-mypage_go-list
             = link_to '一覧を見る', index_information_path
       - else
@@ -33,7 +33,7 @@
           %li.p-mypage_item-not-found.u-fwBold 現在、お知らせはありません
       - if @todos.present?
         %ul#p-mypage_tab-todo.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
-          = render :partial => "mypages/todo", :collection => @todos, :as => "todo"
+          = render partial: "mypages/todo", collection: @todos, as: "todo"
           %li.p-mypage_go-list
             = link_to '一覧を見る', index_todos_path
       - else
@@ -51,7 +51,7 @@
     .p-mypage_tab-content
       - if @under_transaction_items.present?
         %ul#p-mypage_tab-transaction-now.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
-          = render :partial => "mypages/item_box", :collection => @under_transaction_items, :as => "item"
+          = render partial: "mypages/item_box", collection: @under_transaction_items, as: "item"
           %li.p-mypage_go-list
             = link_to '一覧を見る', index_under_transaction_items_path
       - else
@@ -59,7 +59,7 @@
           %li.p-mypage_item-not-found.u-fwBold 現在、取引中の商品はありません
       - if @sold_out_items.present?
         %ul#p-mypage_tab-transaction-old.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
-          = render :partial => "mypages/item_box", :collection => @sold_out_items, :as => "item"
+          = render partial: "mypages/item_box", collection: @sold_out_items, as: "item"
           %li.p-mypage_go-list
             = link_to '一覧を見る', index_sold_out_items_path
       - else
