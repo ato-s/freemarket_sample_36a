@@ -103,11 +103,14 @@ class ItemsController < ApplicationController
         if params[:item][:pictures_attributes][:"#{i}"] == nil
           break
         else
-          if params[:item][:pictures_attributes][:"#{i}"][:trriming_x] != nil
-            ########### Alert ##############
-            #publicのとこ本番環境は、fm36umeda？？本番環境未実装
-            #################################
-            params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open("public" + params[:item][:pictures_attributes][:"#{i}"][:status]))
+          if params[:item][:pictures_attributes][:"#{i}"][:id] != nil
+            if Rails.env.development? || Rails.env.test?
+              if params[:item][:pictures_attributes][:"#{i}"][:trriming_x] != nil
+                params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open("public" + params[:item][:pictures_attributes][:"#{i}"][:status]))
+              end
+            elsif Rails.env.production?
+              params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open("fm36umeda" + params[:item][:pictures_attributes][:"#{i}"][:status]))
+            end
           end
           i += 1
         end
