@@ -250,7 +250,10 @@ $(function(){
 
     var mark_input = $("#item_pictures_attributes_" + (target_input_index + 1) + "_content");
 
-    appendCoordinatesField(target_input_index,mark_input);
+
+    if(!($('#item_pictures_attributes_'+ target_input_index +'_trriming_x').size())){
+      appendCoordinatesField(target_input_index,mark_input);
+    }
 
     // トリミング画面をフェードインさせる
     if(file){
