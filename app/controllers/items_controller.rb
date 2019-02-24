@@ -104,12 +104,12 @@ class ItemsController < ApplicationController
           break
         else
           if params[:item][:pictures_attributes][:"#{i}"][:id] != nil
-            if Rails.env.development? || Rails.env.test?
-              if params[:item][:pictures_attributes][:"#{i}"][:trriming_x] != nil
+            if params[:item][:pictures_attributes][:"#{i}"][:trriming_x] != nil
+              if Rails.env.development? || Rails.env.test?
                 params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open("public" + params[:item][:pictures_attributes][:"#{i}"][:status]))
+              elsif Rails.env.production?
+                params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open("fm36umeda" + params[:item][:pictures_attributes][:"#{i}"][:status]))
               end
-            elsif Rails.env.production?
-              params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open("fm36umeda" + params[:item][:pictures_attributes][:"#{i}"][:status]))
             end
           end
           i += 1
