@@ -78,9 +78,114 @@ $(function(){
   function deleteIdAndStatusField(targetNumber){
     var target_input_status = $("#item_pictures_attributes_"+ targetNumber +"_status");
     var target_input_id = $("#item_pictures_attributes_"+ targetNumber +"_id");
+    var target_input_trriming_x = $("#item_pictures_attributes_"+ targetNumber +"_trriming_x");
+    var target_input_trriming_y = $("#item_pictures_attributes_"+ targetNumber +"_trriming_y");
+    var target_input_trriming_width = $("#item_pictures_attributes_"+ targetNumber +"_trriming_width");
+    var target_input_trriming_height = $("#item_pictures_attributes_"+ targetNumber +"_trriming_height");
 
     target_input_status.remove();
     target_input_id.remove();
+    target_input_trriming_x.remove();
+    target_input_trriming_y.remove();
+    target_input_trriming_width.remove();
+    target_input_trriming_height.remove();
+  }
+
+  function appendCoordinatesField(targetIndex, targetInput){
+    var x_name = 'item[pictures_attributes]['+ targetIndex +'][trriming_x]';
+    var x_id = 'item_pictures_attributes_'+ targetIndex +'_trriming_x';
+    var hiddenInputX = $('<input/>',{value: 0, type: 'hidden', name: x_name, id: x_id});
+
+    var y_name = 'item[pictures_attributes]['+ targetIndex +'][trriming_y]';
+    var y_id = 'item_pictures_attributes_'+ targetIndex +'_trriming_y';
+    var hiddenInputY = $('<input/>',{value: 0, type: 'hidden', name: y_name, id: y_id});
+
+    var w_name = 'item[pictures_attributes]['+ targetIndex +'][trriming_width]';
+    var w_id = 'item_pictures_attributes_'+ targetIndex +'_trriming_width';
+    var hiddenInputW = $('<input/>',{value: 0, type: 'hidden', name: w_name, id: w_id});
+
+    var h_name = 'item[pictures_attributes]['+ targetIndex +'][trriming_height]';
+    var h_id = 'item_pictures_attributes_'+ targetIndex +'_trriming_height';
+    var hiddenInputH = $('<input/>',{value: 0, type: 'hidden', name: h_name, id: h_id});
+
+    targetInput.before(hiddenInputX);
+    targetInput.before(hiddenInputY);
+    targetInput.before(hiddenInputW);
+    targetInput.before(hiddenInputH);
+
+  }
+
+    // cropper（トリミング部）のコーディング（詳しくはGitHub参照）
+  var cropper;
+  var croppable = false;
+  function initIconCrop(targetIndex){
+    cropper = new Cropper(crop_img, {
+      dragMode: 'move',
+      aspectRatio: 1,
+      restore: false,
+      guides: false,
+      center: false,
+      highlight: false,
+      cropBoxMovable: false,
+      cropBoxResizable: false,
+      minCropBoxWidth: 280,
+      minCropBoxHeight: 280,
+      ready: function(){
+        croppable = true;
+      },
+      crop :function(event){
+        $("#item_pictures_attributes_"+ targetIndex +"_trriming_x").val(event.detail.x);
+        $("#item_pictures_attributes_"+ targetIndex +"_trriming_y").val(event.detail.y);
+        $("#item_pictures_attributes_"+ targetIndex +"_trriming_width").val(event.detail.width);
+        $("#item_pictures_attributes_"+ targetIndex +"_trriming_height").val(event.detail.height);
+      }
+    });
+  }
+
+
+  // croppedCanvas（トリミング後の画像をプレビューとして表示するための部分）のコーディング
+  var croppedCanvas;
+  function iconCropping(){
+    if (!croppable) {
+      alert('トリミングする画像が設定されていません。');
+      return false;
+    }
+    croppedCanvas = cropper.getCroppedCanvas({
+      width: 280,
+      height: 280,
+    });
+    var croppedImage = document.createElement('img');
+    croppedImage.src = croppedCanvas.toDataURL();
+    return croppedImage.src;
+  };
+
+  // blobへ変換するためのコーディング（blobという形式で画像データを保存するため）
+  var blob;
+  function blobing(){
+    if (croppedCanvas && croppedCanvas.toBlob){
+      croppedCanvas.toBlob(function(b){
+        blob = b;
+        sending();
+      });
+    }else if(croppedCanvas && croppedCanvas.msToBlob){
+      blob = croppedCanvas.msToBlob();
+      sending();
+    }else{
+      blob = null;
+      sending();
+    };
+  };
+
+  function trimmingDisplay(url, index){
+    $('.overlay').fadeIn();
+    $('.crop_modal').append($('<img>').attr({
+      src: url,
+      height: "100%",
+      class: "preview",
+      id: "crop_img",
+    }));
+    initIconCrop(index);
+    $('.overlay').attr('id', index);
   }
 
 //   // // 処理
@@ -91,7 +196,7 @@ $(function(){
   if( $(location).attr('pathname').match(/edit/)){
     var size = $('[picture_location]').length ;
     for(var i = 0 ; i < size ; i++ ){
-      var picture_file_present = $('#item_pictures_attributes_'+ i +'_id').attr('picture_location');
+      var picture_file_present = $('#item_pictures_attributes_'+ i +'_content').attr('value');
       var target_input = getTargetInput(i);
       target_input.css({
         "display": "none"
@@ -136,11 +241,53 @@ $(function(){
   });
 
   // // 編集ボタンが押された時の処理 -> 写真の編集
-  // // 写真の編集:=140x140でトリミング
-  // // todo: appendで追加したクラスに適用可能か
-  // $("#upload_item_edit").on("click", function(){
+  // 画像選択時
+  $(".p-sell_upload_items-container").on('click', "#upload_item_edit", function(e){
+    var edit_target = $(this).parents(".p-sell_upload_item");
+    var target_input_index = edit_target.index();
+    var file = $("#item_pictures_attributes_" + target_input_index + "_content").prop('files')[0];
+    var reader = new FileReader();
 
-  // });
+    var mark_input = $("#item_pictures_attributes_" + (target_input_index + 1) + "_content");
+
+
+    if(!($('#item_pictures_attributes_'+ target_input_index +'_trriming_x').size())){
+      appendCoordinatesField(target_input_index,mark_input);
+    }
+
+    // トリミング画面をフェードインさせる
+    if(file){
+      reader.addEventListener("load", function(){
+        trimmingDisplay(reader.result, target_input_index);
+      },false);
+
+      reader.readAsDataURL(file);
+    }else{
+      var exit_picture_url = $('#item_pictures_attributes_'+ target_input_index +'_id').attr('picture_location');
+      trimmingDisplay(exit_picture_url, target_input_index);
+    }
+  });
+
+    // トリミング決定時
+  $('.select_icon_btn').on('click', function(){
+    var target_input_index = $('.overlay').attr('id');
+    var target_picture_box = $('.p-sell_upload_figure').eq(target_input_index);
+    var picture_url = iconCropping();
+    target_picture_box.css('background-image', 'url('+ picture_url +')');
+    var target_input = $("#item_pictures_attributes_" + target_input_index + "_content");
+    $('.overlay').attr('id', 'edit_box');
+    $('.overlay').fadeOut();
+    $('#crop_img').remove();
+    $('.cropper-container').remove();
+  });
+
+  // トリミング画面を閉じる時
+  $('.close_btn').on('click', function(){
+    $('.overlay').attr('id', 'edit_box');
+    $('.overlay').fadeOut();
+    $('#crop_img').remove();
+    $('.cropper-container').remove();
+  });
 
   // 削除ボタンが押された時の処理 -> 写真の削除
   picture_container.on("click", "#upload_item_delete", function(){
@@ -150,8 +297,6 @@ $(function(){
 
     var empty_input_index = getUploaderBoxIndex();
     var empty_input = getTargetInput(empty_input_index);
-
-    console.log(target_input_index);
 
     deleteIdAndStatusField(target_input_index);
     delete_input.remove();
@@ -194,7 +339,8 @@ $(function(){
 
   $(".p-sell_form").on("submit",function(){
     $("[picture_location]").each(function(){
-      console.log($(this).val());
     });
   })
+
+
 })

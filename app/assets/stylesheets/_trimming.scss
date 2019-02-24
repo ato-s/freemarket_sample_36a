@@ -1,0 +1,82 @@
+// オーバーレイ
+.overlay {
+  z-index: 9999;
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+
+  .edit_box{
+    width: 600px;
+    height: 600px;
+    margin: auto;
+    background-color: white;
+    margin-top: 24px;
+
+    .crop_header {
+      font-size: 18px;
+      font-family: "Source Sans Pro", Helvetica, Arial, 游ゴシック体, YuGothic, メイリオ, Meiryo, sans-serif;
+      font-weight: bold;
+      padding: 20px;
+    }
+
+    .crop_editor {
+      width: 380px;
+      height: 450px;
+      margin: 0 auto;
+
+      .crop_modal {
+        width: 380px;
+        height: 380px;
+        position: absolute;
+        top: 100px;
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+      }
+
+    .input-range-default {
+      cursor: pointer
+    }
+
+    .input-range-default::-webkit-slider-runnable-track {
+      background: #eee;
+      -webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.4) inset;
+      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.4) inset;
+      border-radius: 40px
+    }
+
+    .input-range-default::-moz-range-track {
+      background: #eee;
+      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.4) inset;
+      border-radius: 40px
+    }
+
+    .input-range-default::-ms-fill-lower {
+      background: #eee;
+      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.4) inset;
+      border-radius: 40px
+    }
+    }
+
+    .crop_btn{
+      height: 40px;
+      line-height: 40px;
+      padding: 0 16px;
+      margin: 0 auto;
+
+      .close_btn {
+        width: 155px;
+        float: left;
+      }
+      // トリミング決定ボタン
+      .select_icon_btn {
+        width: 155px;
+        float: right;
+      }
+    }
+  }
+}
