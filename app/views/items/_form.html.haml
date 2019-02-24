@@ -152,8 +152,13 @@
         に同意したことになります。
     = f.submit '出品する',class: 'c-btn-default is-red'
     = link_to 'もどる', "#", {class: 'c-btn-default is-gray'}
-    
+
   .overlay#edit_box{style: "display:none"}
-    .crop_modal
-    .close_btn
-    .select_icon_btn 決定
+    .edit_box
+      .crop_header 写真を切り取る
+      .crop_editor
+        .crop_modal
+        = f.range_field :scale, class: 'input-range-default', min: 1, max: 2 , step: 0.01
+      .crop_btn.clearfix
+        .p-item_buy-btn_sold.close_btn キャンセル
+        .p-item_buy-btn.select_icon_btn 決定
