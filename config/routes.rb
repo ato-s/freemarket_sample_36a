@@ -45,7 +45,12 @@ Rails.application.routes.draw do
   resources :likes, only: [:index]
   resources :reviews, only: [:index, :show]
   resources :addresses, only: [:index, :new, :create, :edit, :update]
-  resources :phone_numbers, only: [:new, :create, :edit, :update]
+
+  resources :phone_numbers, only: [:new, :create, :edit, :update] do
+    get 'verification_input'
+    post 'verification'
+  end
+
   resources :credits, only: [:new, :create, :destroy, :index]
 
   resource :safe, only: [:show] do

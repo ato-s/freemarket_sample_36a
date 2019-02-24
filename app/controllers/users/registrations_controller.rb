@@ -9,7 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
   def after_inactive_sign_up_path_for(resource)
-    new_user_session_path
+    new_phone_number_path
   end
   def after_confirmation_path_for(resource_name, resource)
     new_user_session_path

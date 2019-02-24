@@ -1,0 +1,14 @@
+%br
+%br
+.l-single_wrapper
+  %main.l-single_main
+    %section.l-single_container
+      %h2.l-single_head 電話番号の確認
+      = form_with model: @phone_number, url: phone_number_verification_path, html: {class: 'l-single_inner'} do |f|
+        .l-single_content
+          .c-form_group
+            = f.label :verification_code_confirmation do
+              認証コード
+            = f.text_field :verification_code_confirmation, autofocus: true, placeholder: '認証コードを入力', class: 'c-input-default'
+          .c-form_group
+            = f.submit 'SMSを送信する', class: 'c-btn-default is-red'

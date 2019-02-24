@@ -1,5 +1,6 @@
 class PhoneNumbersController < ApplicationController
   before_action :set_phone_number, only: [:show, :edit, :update, :destroy]
+  before_action :phone_params, only: [:create]
 
   def new
     @phone_number = PhoneNumber.new
@@ -9,8 +10,8 @@ class PhoneNumbersController < ApplicationController
   end
 
   def create
-    @phone_number = PhoneNumber.new(phone_number_params)
-    @phone_number.user_id = current_user.id
+    @phone_number = PhoneNumber.new(phone_params)
+    # @phone_number.user_id = current_user.id
     if @phone_number.save
       redirect_to root_path, notice: 'Phone number was successfully created.'
     else
@@ -26,12 +27,36 @@ class PhoneNumbersController < ApplicationController
     end
   end
 
-  private
-    def set_phone_number
-      @phone_number = PhoneNumber.find(params[:id])
+  def create
+    @phone = Phone.new(phone_params)
+    user_id = params[:user_id]
+    if @phone.save
+      phone_id = @phone.id
+      redirect_to user_phone_verification_input_path(user_id,phone_id)
     end
+  end
 
-    def phone_number_params
-      params.require(:phone_number).permit(:number, :verification_code, :verification_code_confirmation, :verified, :user_id)
+  def verification_input
+  end
+
+  def verification
+    @phone = Phone.find(params[:phone_id])
+    @phone.verification_code_confirmation = params[:verification_code_confirmation]
+    if @phone.verified_true
+      redirect_to users_path
+    else
+      redirect_to user_phone_verification_input_path
     end
+  end
+
+
+  private
+  def phone_params
+    params.require(:phone).permit(:number).merge(user_id: 1)
+  end
+
+  def set_phone_number
+    @phone_number = PhoneNumber.find(params[:id])
+  end
+
 end
