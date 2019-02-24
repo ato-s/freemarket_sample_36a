@@ -28,15 +28,15 @@
           出品する
           %i.c-icon-arrow-right
       %li
-        = link_to '/mypage/listings/listing', class: 'p-mypage_nav_list-item' do
+        = link_to index_sell_items_path, class: 'p-mypage_nav_list-item' do
           出品した商品 - 出品中
           %i.c-icon-arrow-right
       %li
-        = link_to '/mypage/listings/in_progress', class: 'p-mypage_nav_list-item' do
+        = link_to index_under_transaction_sell_items_path, class: 'p-mypage_nav_list-item' do
           出品した商品 - 取引中
           %i.c-icon-arrow-right
       %li
-        = link_to '/mypage/listings/completed', class: 'p-mypage_nav_list-item' do
+        = link_to index_sold_out_sell_items_path, class: 'p-mypage_nav_list-item' do
           出品した商品 - 売却済み
           %i.c-icon-arrow-right
       %li
@@ -80,9 +80,14 @@
           プロフィール
           %i.c-icon-arrow-right
       %li
-        = link_to addresses_path, class: 'p-mypage_nav_list-item' do
-          住所変更
-          %i.c-icon-arrow-right
+        - if current_user.addresses.present?
+          = link_to edit_address_path(current_user.addresses.first.id), class: 'p-mypage_nav_list-item' do
+            住所変更
+            %i.c-icon-arrow-right
+        - else
+          = link_to new_address_path, class: 'p-mypage_nav_list-item' do
+            住所変更
+            %i.c-icon-arrow-right
       %li
         = link_to new_credit_path, class: 'p-mypage_nav_list-item' do
           支払い方法
