@@ -108,7 +108,7 @@ class ItemsController < ApplicationController
               if Rails.env.development? || Rails.env.test?
                 params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open("public" + params[:item][:pictures_attributes][:"#{i}"][:status]))
               elsif Rails.env.production?
-                params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open("fm36umeda" + params[:item][:pictures_attributes][:"#{i}"][:status]))
+                params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open(params[:item][:pictures_attributes][:"#{i}"][:status]))
               end
             end
           end
