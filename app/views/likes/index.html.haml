@@ -1,0 +1,11 @@
+.l-content
+  %h2.p-mypage_tab-head
+    = 'いいね！一覧'
+  .mypage-contents.is-white-background
+    - if @likes.present?
+      %ul#p-mypage_tab-transaction-now.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+        = render partial: "likes/like_box", collection: @likes, as: "like"
+    - else
+      %ul#p-mypage_tab-transaction-now.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+        %li.p-mypage_item-not-found.u-fwBold
+          = 'いいね！した商品はありません'

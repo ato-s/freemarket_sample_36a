@@ -6,10 +6,13 @@ class ReviewsController < ApplicationController
   before_action :confirm_transaction_stage_shipping_or_evaluated, except: [:index, :show]
   before_action :confirm_item_appraiser_exist, only: [:new, :create]
   before_action :confirm_buyer_already_create_review, only: [:new, :create]
+  layout "mypage", only: :index
 
   def index
-    @received_reviews = current_user.received_reviews
-    @sent_reviews = current_user.sent_reviews
+    @reviews = current_user.received_reviews.includes([appraiser: :avatars]).order(created_at: :desc)
+    @good_reviews = @reviews.where(evaluation: 'good')
+    @normal_reviews = @reviews.where(evaluation: 'normal')
+    @bad_reviews = @reviews.where(evaluation: 'bad')
   end
 
   def show

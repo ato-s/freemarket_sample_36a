@@ -1,0 +1,498 @@
+.icon-time {
+  font-size: 16px;
+  vertical-align: middle
+}
+.transact-attention {
+  position: relative;
+  padding: 24px 8px;
+  background: #fff6de;
+  text-align: center;
+  font-size: 0
+}
+
+.transact-attention h3 {
+  font-size: 16px;
+  color: #ea352d
+}
+
+.transact-attention i {
+  margin: 0 8px 0 0;
+  font-size: 32px;
+  color: #ea352d;
+  vertical-align: middle
+}
+
+.transact-attention span {
+  vertical-align: middle
+}
+
+.transact-attention p {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.5
+}
+
+.transact-attention .attention {
+  color: #ea352d
+}
+
+.transact-attention .strong {
+  font-weight: bold
+}
+
+.transact-form-review {
+  width: 280px;
+  margin: 0 auto;
+  padding: 40px 0
+}
+
+.transact-form-review>p {
+  margin: 32px 0 0;
+  font-size: 14px
+}
+
+.transact-form-review textarea {
+  width: 100%;
+  max-width: 280px;
+  margin: 8px 0 0
+}
+
+.transact-form-review .btn-red {
+  margin: 8px 0 0
+}
+
+.transact-review-list {
+  margin: 32px 0 0
+}
+
+.transact-review-list li {
+  position: relative;
+  float: left;
+  margin: 0 20px 0 0
+}
+
+.transact-review-list li:last-child {
+  margin: 0
+}
+
+.transact-review-list input[type='radio'] {
+  display: none
+}
+
+.transact-review-list input[type='radio']:checked+.transact-review-icon {
+  border-color: #ea352d
+}
+
+.transact-review-icon {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  text-align: center
+}
+
+.transact-review-icon i {
+  margin: 14px 0 0;
+  font-size: 30px
+}
+
+.transact-review-icon label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 50px 0 0;
+  cursor: pointer
+}
+
+.transact-info-head {
+  padding: 40px 4% 0;
+  font-size: 16px
+}
+
+@media screen and (min-width: 768px) {
+  .transact-info-head {
+    padding: 0
+  }
+}
+
+.transact-info-inner {
+  margin: 8px 0 0;
+  background: #fff
+}
+
+.transact-info-table {
+  display: table;
+  width: 100%;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee
+}
+
+@media screen and (min-width: 768px) {
+  .transact-info-table {
+    border: 1px solid #eee
+  }
+}
+
+.transact-info-table li {
+  line-height: 1.5
+}
+
+.transact-info-table a {
+  color: #333
+}
+
+.transact-info-table a.font-blue {
+  color: #0099e8
+}
+
+.transact-info-table-row {
+  display: table-row
+}
+
+.transact-info-table-row:nth-child(even) {
+  background: #fafafa
+}
+
+.transact-info-table-cell {
+  display: table-cell;
+  padding: 16px;
+  vertical-align: top;
+  word-wrap: break-word
+}
+
+.transact-info-table-cell:first-child {
+  width: 35%
+}
+
+.transact-info-table-cell:last-child {
+  width: 65%
+}
+
+.transact-info-table-cell a {
+  display: block
+}
+
+.transact-info-table-cell img {
+  width: 80px
+}
+
+.transact-info-table-cell img.is-higher-height {
+  width: auto;
+  max-height: 148px
+}
+
+.transact-info-table-cell .buyer-name {
+  font-weight: 600
+}
+
+.transact-info-table-cell-li {
+  color: #ea352d
+}
+
+.transact-info-item {
+  margin: 8px 0 0;
+  color: #0099e8;
+  text-decoration: underline;
+  font-size: 16px;
+  word-break: break-all;
+}
+
+.transaction-user-icon {
+  position: relative;
+  display: block;
+  color: #333
+}
+
+.transaction-user-icon figure {
+  padding: 16px;
+  font-size: 0
+}
+
+.transaction-user-icon figure>div {
+  overflow: hidden;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  vertical-align: middle
+}
+
+.transaction-user-icon img {
+  width: 100%
+}
+
+.transaction-user-icon figcaption {
+  overflow: hidden;
+  display: inline-block;
+  max-width: 75%;
+  margin: 0 0 0 16px;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-overflow: ellipsis
+}
+
+@media screen and (min-width: 768px) {
+  .transaction-user-icon figcaption {
+    max-width: 592px;
+    height: auto
+  }
+}
+
+@media screen and (min-width: 1068px) {
+  .transaction-user-icon figcaption {
+    max-width: 160px
+  }
+}
+
+.transaction-user-icon .icon-arrow-right {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%)
+}
+
+.transact-user-name {
+  overflow: hidden;
+  font-size: 16px;
+  white-space: nowrap;
+  text-overflow: ellipsis
+}
+
+@media screen and (min-width: 768px) {
+  .transact-user-name {
+    overflow: visible;
+    text-overflow: inherit;
+    white-space: normal
+  }
+}
+
+.transact-user-name.transact-user-official {
+  margin: 8px 0 0
+}
+
+.transact-shipping-soyo {
+  padding: 16px 32px
+}
+
+.transact-shipping-soyo h3 {
+  color: #888;
+  margin: 32px 0 8px 0
+}
+
+.transact-shipping-soyo .text-attention {
+  color: #ea352d
+}
+
+.rakuraku-content, .yuuyuu-content {
+  text-align: center
+}
+
+.rakuraku-content .progress-bar, .yuuyuu-content .progress-bar {
+  margin: 24px 0 0
+}
+
+.rakuraku-content .change-address-link, .yuuyuu-content .change-address-link {
+  display: block;
+  margin: 24px 0 0;
+  line-height: 1.5
+}
+
+.rakuraku-content p, .yuuyuu-content p {
+  margin: 16px 0 0;
+  line-height: 1.5
+}
+
+.transact-wordings, .transact-create-qr-code .reception-number, .transact-shipping-fee-display, .transact-number-display, .transact-phone-number-display {
+  padding: 16px 32px;
+  text-align: center;
+  line-height: 1.5
+}
+
+.transact-create-qr-code table, .transact-shipping-table table {
+  width: 88%;
+  margin: 28px auto
+}
+
+.transact-create-qr-code tr, .transact-shipping-table tr {
+  border: 1px solid #ccc
+}
+
+.transact-create-qr-code th, .transact-shipping-table th {
+  width: 24%;
+  padding: 8px;
+  word-wrap: break-word;
+  text-align: right;
+  color: #888
+}
+
+.transact-create-qr-code td, .transact-shipping-table td {
+  width: 76%;
+  padding: 16px;
+  word-wrap: break-word;
+  text-align: left;
+  line-height: 1.5
+}
+
+.transact-button {
+  padding: 24px 32px
+}
+
+.transact-button .after_second_child {
+  margin-top: 24px
+}
+
+.transact-rakuraku-head {
+  padding: 16px 32px;
+  text-align: center;
+  background: #aaa;
+  color: #fff
+}
+
+.transact-explain-shipping-method {
+  padding: 16px 32px
+}
+
+.transact-explain-shipping-method h2 {
+  text-align: center
+}
+
+.transact-explain-shipping-method h2+p {
+  margin: 16px 0 0
+}
+
+.transact-explain-shipping-method p {
+  margin: 8px 0 0
+}
+
+.transact-explain-shipping-method ol {
+  margin: 16px 0 0;
+  line-height: 1.5;
+  list-style-type: decimal;
+  list-style-position: inside
+}
+
+.transact-create-qr-code {
+  text-align: center
+}
+
+.transact-create-qr-code h2 {
+  margin: 8px
+}
+
+.transact-create-qr-code .transact-shipping-fee-list-default {
+  display: block
+}
+
+.transact-create-qr-code .transact-shipping-fee-list-child {
+  display: none
+}
+
+.transact-create-qr-code .transact-shipping-fee-list-child.is-show {
+  display: block
+}
+
+.transact-create-qr-code img {
+  width: 50%
+}
+
+.transact-create-qr-code .reception-number {
+  width: 80%;
+  margin: 0 auto;
+  text-align: left
+}
+
+.transact-shipping-fee-display {
+  padding: 0 32px 16px
+}
+
+.transact-pickup-attention {
+  padding: 16px 32px
+}
+
+.transact-pickup-attention>div {
+  background: #f8e5df;
+  padding: 16px;
+  line-height: 1.5
+}
+
+.transact-number-display {
+  font-size: 24px;
+  font-weight: 600
+}
+
+.transact-phone-number-display {
+  font-size: 40px;
+  font-weight: 600
+}
+
+.transact-check-box {
+  width: 32%;
+  margin: 0 34%
+}
+
+.transact-select-alert {
+  display: none
+}
+
+.transact-select-alert.show {
+  display: block
+}
+
+.transact-guide {
+  padding: 16px
+}
+
+.transact-guide li {
+  margin: 8px 0 0
+}
+
+.transact-guide li:first-child {
+  margin: 0
+}
+
+.transact-guide span, .transact-guide i {
+  vertical-align: middle
+}
+
+.transact-guide i {
+  margin: 0 0 0 8px
+}
+
+.transact-select-card li {
+  padding: 24px 0;
+  border-bottom: 1px solid #eee
+}
+
+.transact-select-card li label {
+  display: block;
+  position: relative
+}
+
+.transact-select-card li input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  appearance: radio;
+  -moz-appearance: radio;
+  -webkit-appearance: radio;
+  -o-appearance: radio;
+  -ms-appearance: radio
+}
+
+.transact-select-card-footer {
+  padding-top: 24px
+}
+
+.transact-select-card-add {
+  display: inline-block
+}
+
+.transact-select-card-add i {
+  margin-right: 8px
+}

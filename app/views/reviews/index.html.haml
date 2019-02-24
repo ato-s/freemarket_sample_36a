@@ -1,20 +1,41 @@
-%h1 Listing reviews
-
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
-
-  %tbody
-    - if @sent_reviews != nil
-      - @sent_reviews.each do |sent_review|
-        = sent_review.text
-    - if @received_reviews != nil
-      - @received_reviews.each do |received_review|
-        = received_review.text
-      %tr
-        %td= link_to 'Show', review
-        %td= link_to 'Edit', edit_review_path(review)
-        %td= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' }
+.l-content
+  %section.p-mypage_tab-container-notification-todo
+    %h2.p-mypage_tab-head 評価一覧
+    %ul.p-mypage_tabs.js-tab_menu
+      %li.is-active
+        %h3
+          全て
+      %li
+        %h3
+          良い
+      %li
+        %h3
+          普通
+      %li
+        %h3
+          悪い
+    .p-mypage_tab-content
+      - if @reviews.present?
+        %ul#p-mypage_tab-reviews.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
+          = render :partial => "reviews/review", :collection => @reviews, :as => "review"
+      - else
+        %ul#p-mypage_tab-reviews.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
+          %li.p-mypage_item-not-found.u-fwBold 評価はまだありません
+      - if @good_reviews.present?
+        %ul#p-mypage_tab-reviews.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+          = render :partial => "reviews/review", :collection => @good_reviews, :as => "review"
+      - else
+        %ul#p-mypage_tab-reviews.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+          %li.p-mypage_item-not-found.u-fwBold 評価はまだありません
+      - if @normal_reviews.present?
+        %ul#p-mypage_tab-reviews.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+          = render :partial => "reviews/review", :collection => @normal_reviews, :as => "review"
+      - else
+        %ul#p-mypage_tab-reviews.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+          %li.p-mypage_item-not-found.u-fwBold 評価はまだありません
+      - if @bad_reviews.present?
+        %ul#p-mypage_tab-reviews.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+          = render :partial => "reviews/review", :collection => @bad_reviews, :as => "review"
+      - else
+        %ul#p-mypage_tab-reviews.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+          %li.p-mypage_item-not-found.u-fwBold 評価はまだありません
