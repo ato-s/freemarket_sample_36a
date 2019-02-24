@@ -15,6 +15,7 @@
  *= require dropzone/dropzone
  */
 
+@import "cropper.min.scss";
 
 @import "./settings";
 @import "./base";
@@ -33,5 +34,5 @@
 @import "./p-mypage";
 @import "./p-search";
 @import "./p-category";
+@import "./trimming";
 @import "./report";
-
