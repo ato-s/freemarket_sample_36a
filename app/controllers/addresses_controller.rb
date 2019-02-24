@@ -4,10 +4,6 @@ class AddressesController < ApplicationController
   before_action :confirm_current_user, only: [:edit, :update]
   layout "mypage"
 
-  def index
-    @addresses = current_user.addresses
-  end
-
   def new
     @address = Address.new
   end
