@@ -17,8 +17,8 @@ ja:
         four_to_seven_days: '4~7日で発送'
       transaction_stage:
         under_sale: '出品中'
-        purchased: '購入済'
-        shipping: '配達中'
+        purchased: '発送待ち'
+        shipping: '発送中'
         evaluated: '購入者評価済'
         transaction_completed: '取引完了'
     review:
