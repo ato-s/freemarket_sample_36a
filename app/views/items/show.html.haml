@@ -84,8 +84,11 @@
       - else
         = link_to '購入画面に進む',edit_item_buy_path(@item), class: 'p-item_buy-btn u-fz18-24'
     - else
-      .p-item_buy-btn_sold.u-fz18-24
-        売り切れです
+      - if [@item.seller_id, @item.buyer_id].include?(current_user.id)
+        = link_to '取引画面', item_transaction_messages_path(@item), class: 'p-item_buy-btn u-fz18-24', data: {turbolinks: false}
+      - else
+        .p-item_buy-btn_sold.u-fz18-24
+          売り切れです
     .p-item_description.u-fz14
       %p.p-item_description-inner
         = @item.description
