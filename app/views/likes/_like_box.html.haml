@@ -1,0 +1,9 @@
+%li
+  = link_to item_path(like.item), class: 'p-mypage_item-link' do
+    %figure
+      = image_tag like.item.pictures[0].content
+    .p-mypage_item-body
+      .p-mypage_item-text
+        = "#{like.item.name}\n\n￥#{like.item.buy_price}"
+        %span
+    %i.c-icon-arrow-right
