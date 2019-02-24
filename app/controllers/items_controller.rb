@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
-  protect_from_forgery except: [:dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
-  before_action :set_locale
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_new_item, only: [:new, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
-  before_action :move_to_sign_in, except: [:index, :show, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
-  before_action :delete_pictures, only: [:update]
+#  protect_from_forgery except: [:dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
+#  before_action :set_locale
+#  before_action :set_item, only: [:show, :edit, :update, :destroy]
+#  before_action :set_new_item, only: [:new, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
+#  before_action :move_to_sign_in, except: [:index, :show, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
+#  before_action :delete_pictures, only: [:update]
 
 
   def dynamic_upper_category

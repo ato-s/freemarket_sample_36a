@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :item do
+    id                    "1"
     name                  "iphoneケーブル"
     description           "iphoneを買った時の付属品です。"
     state                 "perfectly_new"
@@ -16,13 +17,14 @@ FactoryBot.define do
     upper_category_id     "1"
     middle_category_id    "1"
     lower_category_id     "1"
-    seller_id             "1"
+    seller_id             "2"
     buyer_id              "0"
     created_at            "2019-1-12 10:00:00"
     updated_at            "2019-1-12 10:00:00"
   end
 
   factory :brand do
+    id            "1"
     name          "ロレックス"
     initial_word  "aaa"
   end
