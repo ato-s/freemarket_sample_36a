@@ -41,10 +41,13 @@ Rails.application.routes.draw do
   get 'index_information' => 'mypages#index_information'
   get 'index_under_transaction_items' => 'mypages#index_under_transaction_items'
   get 'index_sold_out_items' => 'mypages#index_sold_out_items'
+  get 'index_sell_items' => 'mypages#index_sell_items'
+  get 'index_under_transaction_sell_items' => 'mypages#index_under_transaction_sell_items'
+  get 'index_sold_out_sell_items' => 'mypages#index_sold_out_sell_items'
   resources :mypages, only: [:index, :show, :edit, :update]
   resources :likes, only: [:index]
   resources :reviews, only: [:index, :show]
-  resources :addresses, only: [:index, :new, :create, :edit, :update]
+  resources :addresses, only: [:new, :create, :edit, :update]
   resources :phone_numbers, only: [:new, :create, :edit, :update]
   resources :credits, only: [:new, :create, :destroy, :index]
 
