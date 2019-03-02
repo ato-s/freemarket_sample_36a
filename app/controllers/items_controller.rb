@@ -3,7 +3,6 @@ class ItemsController < ApplicationController
   before_action :set_locale
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_new_item, only: [:new, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
-  before_action :s3_client, only: [:set_params]
   before_action :set_params, only: [:update]
   before_action :move_to_sign_in, except: [:index, :show, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
   before_action :delete_pictures, only: [:update]
@@ -56,6 +55,7 @@ class ItemsController < ApplicationController
   end
 
   def create
+    binding.pry
     @item = Item.new(item_params)
     if @item.save
       redirect_to root_path, notice: 'Item was successfully saved.'
@@ -65,6 +65,7 @@ class ItemsController < ApplicationController
   end
 
   def update
+    binding.pry
     @originally_price = @item.buy_price
     if @item.update(item_params)
       @changed_price = @item.buy_price
@@ -98,16 +99,12 @@ class ItemsController < ApplicationController
       @item = Item.new
     end
 
-    def s3_client
-      Aws::S3::Client.new(
-                            region: 'ap-northeast-1',
-                            aws_access_key_id: Rails.application.secrets.aws_access_key_id,
-                            aws_secret_access_key: Rails.application.secrets.aws_secret_access_key
-                          )
-    end
-
-
     def set_params
+      client = Aws::S3::Client.new(
+        region: 'ap-northeast-1',
+        access_key_id: Rails.application.secrets.aws_access_key_id,
+        secret_access_key: Rails.application.secrets.aws_secret_access_key
+      )
       i = 0
       while true
         if params[:item][:pictures_attributes][:"#{i}"] == nil
@@ -116,7 +113,9 @@ class ItemsController < ApplicationController
           if params[:item][:pictures_attributes][:"#{i}"][:id] != nil
             if params[:item][:pictures_attributes][:"#{i}"][:trriming_x] != nil
               if Rails.env.development? || Rails.env.test?
-                params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open("public" + params[:item][:pictures_attributes][:"#{i}"][:status]))
+                s3_file_name = params[:item][:pictures_attributes][:"#{i}"][:status]
+                binding.pry
+                params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open(s3_file_name))
               elsif Rails.env.production?
                 params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: s3_client.get_objet(bucket: 'fm36umeda',key: params[:item][:pictures_attributes][:"#{i}"][:status]).body.read )
               end

@@ -47,4 +47,6 @@ Rails.application.configure do
     Bullet.console = true
     Bullet.rails_logger = true
   end
+
+  config.action_mailer.delivery_method = :aws_sdk
 end
