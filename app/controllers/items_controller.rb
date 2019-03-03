@@ -36,7 +36,9 @@ class ItemsController < ApplicationController
     @likes = @item.likes
     @comment = Comment.new
     @comments = @item.comments.includes(:user)
-    random_page_link
+    if Item.any?
+      random_page_link
+    end
   end
 
   def new
