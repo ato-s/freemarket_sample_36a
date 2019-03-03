@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_categories
-#  before_action :set_unread_information_length
-#  before_action :set_todos_length
+  before_action :set_unread_information_length
+  before_action :set_todos_length
 
   protected
 

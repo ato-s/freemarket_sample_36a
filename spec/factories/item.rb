@@ -18,7 +18,7 @@ FactoryBot.define do
     middle_category_id    "1"
     lower_category_id     "1"
     seller_id             "2"
-    buyer_id              "0"
+    buyer_id              "1"
     created_at            "2019-1-12 10:00:00"
     updated_at            "2019-1-12 10:00:00"
   end
@@ -27,6 +27,54 @@ FactoryBot.define do
     id            "1"
     name          "ロレックス"
     initial_word  "aaa"
+  end
+
+  factory :size_type do
+    id            "1"
+    size_type          "size"
+  end
+
+  factory :size do
+    id            "1"
+    name          "XXS以下"
+    size_type_id "1"
+  end
+
+  factory :lower_category do
+    id            "1"
+    name          "Tシャツ/カットソー(半袖/袖なし)"
+    middle_category_id  "1"
+  end
+
+  factory :middle_category do
+    id            "1"
+    name          "トップス"
+    upper_category_id  "1"
+    size_type_id   "1"
+  end
+
+  factory :upper_category do
+    id            "1"
+    name          "レディース"
+  end
+
+  factory :information do
+    id            "1"
+    information_type          ""
+    text         ""
+    originally_price  "0"
+    changed_price  "0"
+    point  "0"
+    stakeholder_id  "1"
+    related_item_id  "1"
+    created_review_id  ""
+    unread_or_read  "unread"
+  end
+
+  factory :user_information do
+    id            "1"
+    user_id  "1"
+    information_id "1"
   end
 
 end
