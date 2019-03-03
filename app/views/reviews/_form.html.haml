@@ -1,26 +1,26 @@
 = form_with model: [item, review], local: true, class: 'transact-form-review' do |f|
   - if item.buyer_id == current_user.id
-    .checkbox-default
+    .c-checkbox-default
       %input#transaction_delivered{:name => "transaction_delivered", :type => "checkbox", :value => "1"}/
-      %i.icon-check
+      %i.c-icon-check
       %label{:for => "transaction_delivered"} 商品の中身を確認しました。
-  %ul.transact-review-list.clearfix
+  %ul.transact-review-list.l-clearfix
     %li
       = f.radio_button :evaluation, 'good', id: 'face1'
       .transact-review-icon
-        %i.icon-good
+        %i.c-icon-good
         %label{:for => "face1"}
           良い
     %li
       = f.radio_button :evaluation, 'normal', id: 'face2'
       .transact-review-icon
-        %i.icon-normal
+        %i.c-icon-normal
         %label{:for => "face2"}
           普通
     %li
       = f.radio_button :evaluation, 'bad', id: 'face3'
       .transact-review-icon
-        %i.icon-bad
+        %i.c-icon-bad
         %label{:for => "face3"}
           悪い
   %p 評価のコメントを記入しましょう。
