@@ -134,14 +134,15 @@
           = button_tag '#', class: 'p-message_submit c-btn-default is-gray' do
             %span コメントする
     %ul.p-item_nav-link.l-clearfix
-      %li.p-item_nav-link_prev
-        = link_to item_path(@prev_page) do
-          %i.c-icon-arrow-left>
-          = @prev_page.name
-      %li.p-item_nav-link_next
-        = link_to item_path(@next_page) do
-          %i.c-icon-arrow-right
-          = @next_page.name
+      - if Item.any?
+        %li.p-item_nav-link_prev
+          = link_to item_path(@prev_page) do
+            %i.c-icon-arrow-left>
+            = @prev_page.name
+        %li.p-item_nav-link_next
+          = link_to item_path(@next_page) do
+            %i.c-icon-arrow-right
+            = @next_page.name
     .c-item_social-media-box
       %ul.c-social-media-box
         %li
