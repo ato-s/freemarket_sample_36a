@@ -21,9 +21,8 @@
           .p-item_message_icon-right
         - else
           .p-item_message_icon-right
-            - if comment.item.seller == current_user
-              = link_to item_comment_path(@item,comment), method: :patch , data: { confirm: "本当に削除しますか？" } do
-                %i.c-icon-delete
+            = link_to item_comment_path(@item,comment), method: :patch , data: { confirm: "本当に削除しますか？" } do
+              %i.c-icon-delete
       %i.c-icon-balloon
 -else
   %li.l-clearfix
