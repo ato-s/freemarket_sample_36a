@@ -1,8 +1,9 @@
 = form_with model: [item, review], local: true, class: 'transact-form-review' do |f|
-  .checkbox-default
-    %input#transaction_delivered{:name => "transaction_delivered", :type => "checkbox", :value => "1"}/
-    %i.icon-check
-    %label{:for => "transaction_delivered"} 商品の中身を確認しました。
+  - if item.buyer_id == current_user.id
+    .checkbox-default
+      %input#transaction_delivered{:name => "transaction_delivered", :type => "checkbox", :value => "1"}/
+      %i.icon-check
+      %label{:for => "transaction_delivered"} 商品の中身を確認しました。
   %ul.transact-review-list.clearfix
     %li
       = f.radio_button :evaluation, 'good', id: 'face1'
