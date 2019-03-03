@@ -118,14 +118,15 @@
           = button_tag '#', class: 'p-message_submit c-btn-default is-gray' do
             %span コメントする
     %ul.p-item_nav-link.l-clearfix
-      %li.p-item_nav-link_prev
-        = link_to "#{@rand_prev}" do
-          %i.c-icon-arrow-left>
-          -# = @next_page.name
-      %li.p-item_nav-link_next
-        = link_to '#{@rand_next}' do
-          %i.c-icon-arrow-right
-          -# = @next_page.name
+      - if Item.any?
+        %li.p-item_nav-link_prev
+          = link_to item_path(@prev_page) do
+            %i.c-icon-arrow-left>
+            = @prev_page.name
+        %li.p-item_nav-link_next
+          = link_to item_path(@next_page) do
+            %i.c-icon-arrow-right
+            = @next_page.name
     .c-item_social-media-box
       %ul.c-social-media-box
         %li
@@ -143,16 +144,16 @@
     .c-items-in-user-profile
       %section.c-items-box_container.l-clearfix.c-items-box_overflow.c-items-in-user-profile
         %h2.c-items-box_head
-          = link_to '#' do
+          = link_to mypage_path(@item.seller_id) do
             = @seller.nickname + "さんのその他の出品"
         .c-items-box_content.l-clearfix
-          -# = render 'layouts/item',item: @other_items
+          = render partial:'layouts/item',collection: @other_items
       %section.c-items-box_container.l-clearfix.c-items-box_overflow
         %h2.c-items-box_head
-          = link_to '/brand/3117/791/' do
+          = link_to lower_category_path(@item.lower_category_id) do
             = @brand.name + " " + @lower_category.name + " " + "その他の商品"
         .c-items-box_content.l-clearfix
-          -# = render 'layouts/item',item: @other_brand_items
+          = render partial:'layouts/item',collection: @other_brand_items
     #report-item.c-modal.mfp-hide
       .c-modal_inner.c-modal_banner
         .c-modal_body

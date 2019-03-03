@@ -5,13 +5,9 @@
       .transact-attention
         = render 'attention', item: @item
       .transact-todo
-        = link_to new_item_review_path(@item), class: 'c-btn-default is-red u-fzBold' do
-          - if current_user.id == @item.buyer_id && @item.transaction_stage == 'shipping'
-            受け取り評価する(buyer)
-          - elsif current_user.id == @item.seller_id && @item.transaction_stage == 'evaluated'
-            評価する(seller)
-
-        - if current_user == @item.seller && @item.transaction_stage == 'purchased'
+        - if (current_user.id == @item.buyer_id && @item.transaction_stage == 'shipping') || (current_user.id == @item.seller_id && @item.transaction_stage == 'evaluated')
+          = render 'reviews/form', item: @item, review: Review.new
+        - elsif current_user == @item.seller && @item.transaction_stage == 'purchased'
           = link_to item_information_index_path(@item), class: 'c-btn-default is-red u-fzBold', method: :post do
             商品を発送したので、発送通知をする
       .p-item_message

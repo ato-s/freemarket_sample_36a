@@ -51,12 +51,6 @@
   font-size: 14px
 }
 
-.transact-form-review textarea {
-  width: 100%;
-  max-width: 280px;
-  margin: 8px 0 0
-}
-
 .transact-form-review .btn-red {
   margin: 8px 0 0
 }
@@ -495,4 +489,111 @@
 
 .transact-select-card-add i {
   margin-right: 8px
+}
+
+.checkbox-default {
+  position: relative;
+  font-size: 0
+}
+
+.checkbox-default input[type='checkbox'] {
+  display: none
+}
+
+.checkbox-default input[type='checkbox']:checked+.icon-check {
+  border-color: transparent;
+  background: #0099e8;
+  opacity: 1
+}
+
+.checkbox-default .icon-check {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  background: #fff;
+  border: 1px solid #ccc;
+  font-size: 10px;
+  line-height: 17px;
+  text-align: center;
+  color: #fff;
+  vertical-align: middle;
+  -webkit-transition: all ease-out .3s;
+  transition: all ease-out .3s;
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%)
+}
+
+.checkbox-default label {
+  position: relative;
+  z-index: 2;
+  padding: 0 0 0 28px;
+  font-size: 14px;
+  font-weight: 400;
+  vertical-align: middle;
+  cursor: pointer
+}
+
+.radio-default {
+  position: relative
+}
+
+.radio-default input[type='radio'] {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  background: #fff;
+  -webkit-transition: all ease-out .3s;
+  transition: all ease-out .3s;
+  cursor: pointer;
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%)
+}
+
+.radio-default input[type='radio']:checked {
+  border: 0;
+  border: 6px solid #0099e8
+}
+
+.radio-default label {
+  margin: 0 0 0 28px;
+  font-weight: 400;
+  cursor: pointer
+}
+
+.radio-has-icon:first-child {
+  margin: 0
+}
+
+.radio-has-icon label {
+  margin: 0 0 0 4px;
+  vertical-align: middle
+}
+
+.radio-has-icon input[type='radio'] {
+  left: auto;
+  right: 0
+}
+
+.pc-header-user-nav .icon-check {
+  font-size: 16px
+}
+
+.icon-good {
+  color: #ef5185
+}
+
+.icon-normal {
+  color: #fba933
+}
+
+.icon-bad {
+  color: #6ab5d8
 }
