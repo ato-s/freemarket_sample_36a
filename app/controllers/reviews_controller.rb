@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
   layout "mypage", only: :index
 
   def index
-    @reviews = current_user.received_reviews.includes(:item, [appraiser: :avatars]).order(created_at: :desc)
+    @reviews = current_user.received_reviews.includes([appraiser: :avatars]).order(created_at: :desc)
     @good_reviews = @reviews.where(evaluation: 'good')
     @normal_reviews = @reviews.where(evaluation: 'normal')
     @bad_reviews = @reviews.where(evaluation: 'bad')
