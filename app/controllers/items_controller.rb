@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_locale
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_new_item, only: [:new, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
+  before_action :set_params, only: [:update]
   before_action :move_to_sign_in, except: [:index, :show, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
   before_action :delete_pictures, only: [:update]
 
@@ -43,6 +44,7 @@ class ItemsController < ApplicationController
 
   def new
     10.times { @item.pictures.build }
+    render :new, layout: "single"
     @upper_categories = UpperCategory.all.includes([middle_categories: :lower_categories])
   end
 
@@ -55,7 +57,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_create_params)
+    @item = Item.new(item_params)
     if @item.save
       redirect_to root_path, notice: 'Item was successfully saved.'
     else
@@ -81,6 +83,12 @@ class ItemsController < ApplicationController
     redirect_to root_path, notice: 'Item was successfully destroyed.'
   end
 
+  def search
+    @items = Item.where("name LIKE(?) OR description LIKE(?)","%#{params[:keyword]}%", "%#{params[:keyword]}%").order("created_at DESC").page(params[:page]).per(48).includes(:pictures)
+    @new_items = Item.order("created_at DESC").limit(24).includes(:pictures)
+    render :search, layout: "search"
+  end
+
   private
 
     def set_item
@@ -91,7 +99,27 @@ class ItemsController < ApplicationController
       @item = Item.new
     end
 
-    def item_create_params
+    def set_params
+      i = 0
+      while true
+        if params[:item][:pictures_attributes][:"#{i}"] == nil
+          break
+        else
+          if params[:item][:pictures_attributes][:"#{i}"][:id] != nil
+            if params[:item][:pictures_attributes][:"#{i}"][:trriming_x] != nil
+              if Rails.env.development? || Rails.env.test?
+                params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open("public" + params[:item][:pictures_attributes][:"#{i}"][:status]))
+              elsif Rails.env.production?
+                params[:item][:pictures_attributes][:"#{i}"] = params[:item][:pictures_attributes][:"#{i}"].merge(content: open(params[:item][:pictures_attributes][:"#{i}"][:status]))
+              end
+            end
+          end
+          i += 1
+        end
+      end
+    end
+
+    def item_params
       params.require(:item).permit(
         :name,
         :description,
@@ -109,26 +137,14 @@ class ItemsController < ApplicationController
         :middle_category_id,
         :lower_category_id,
         :seller_id,
-        pictures_attributes: [:id, :content, :status]
+        pictures_attributes: [:id,
+                              :trriming_x,
+                              :trriming_y,
+                              :trriming_width,
+                              :trriming_height,
+                              :content,
+                              :status]
       ).merge(transaction_stage: 'under_sale', seller_id: current_user.id)
-    end
-
-    def item_params
-      params.require(:item).permit(
-        :name,
-        :description,
-        :state,
-        :delivery_payer,
-        :delivery_region,
-        :delivery_duration,
-        :buy_price,
-        :commission_price,
-        :sell_price,
-        :like_count,
-        :brand_id,
-        :seller_id,
-        pictures_attributes: [:id, :content, :status]
-      ).merge(upper_category_id: 1, middle_category_id: 1, lower_category_id: 1, size_id: 1)
     end
 
     def upper_category_params
