@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
 
   def update
     @comment = Comment.find(params[:id])
-    @comment.update(text:"このコメントは削除されました")
+    @comment.update(state:"1")
     redirect_to item_path(@item.id), notice: "コメントを削除しました"
   end
 
