@@ -18,6 +18,9 @@
           = form_for '#', html: {class: 'c-message-form'} do |f|
             = button_tag '' do
               %i.c-icon-flag
+          - if comment.item.seller == current_user
+            = link_to item_comment_path(@item,comment), method: :patch , data: { confirm: "本当に削除しますか？" } do
+              %i.c-icon-delete
       %i.c-icon-balloon
 -else
   %li.l-clearfix
@@ -41,4 +44,7 @@
           = form_for '#', html: {class: 'c-message-form'} do |f|
             = button_tag '' do
               %i.c-icon-flag
+          - if comment.item.seller == current_user
+            = link_to item_comment_path(@item,comment), method: :patch , data: { confirm: "本当に削除しますか？" } do
+              %i.c-icon-delete
       %i.c-icon-balloon

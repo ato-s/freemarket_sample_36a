@@ -11,7 +11,10 @@ class CommentsController < ApplicationController
     redirect_to item_path(@item.id) ,notice: 'メッセージを投稿しました'
   end
 
-  def destroy
+  def update
+    @comment = Comment.find(params[:id])
+    @comment.update(text:"このコメントは削除されました")
+    redirect_to item_path(@item.id), notice: "コメントを削除しました"
   end
 
     private
