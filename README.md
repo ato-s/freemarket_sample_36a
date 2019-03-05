@@ -104,6 +104,7 @@
 |user_id|integer|null:false, foreign_key:true|
 |item_id|integer|null:false, foreign_key:true|
 |text|text|null:false|
+|state|integer|null:false, default:0|
 
 ### Association
 - belongs_to :user

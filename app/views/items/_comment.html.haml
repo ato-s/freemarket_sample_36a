@@ -8,16 +8,21 @@
           = comment.user.nickname
     .p-item_message_body_current-user
       .p-item_message_body-text
-        = comment.text
+        - if comment.state == "deleted"
+          このコメントは削除されました
+        - else
+          = comment.text
       .p-item_message_icons_current-user.l-clearfix
         %time.p-item_message_icon-left
           %i.c-icon-time
           %span
             = time_ago_in_words(comment.created_at)+"前"
-        .p-item_message_icon-right
-          = form_for '#', html: {class: 'c-message-form'} do |f|
-            = button_tag '' do
-              %i.c-icon-flag
+        - if comment.state == "deleted"
+          .p-item_message_icon-right
+        - else
+          .p-item_message_icon-right
+            = link_to item_comment_path(@item,comment), method: :patch , data: { confirm: "本当に削除しますか？" } do
+              %i.c-icon-delete
       %i.c-icon-balloon
 -else
   %li.l-clearfix
@@ -31,14 +36,23 @@
         .p-item_message_seller 出品者
     .p-item_message_body
       .p-item_message_body-text
-        = comment.text
+        - if comment.state == "deleted"
+          このコメントは削除されました
+        - else
+          = comment.text
       .p-item_message_icons.l-clearfix
         %time.p-item_message_icon-left
           %i.c-icon-time
           %span
             = time_ago_in_words(comment.created_at)+"前"
-        .p-item_message_icon-right
-          = form_for '#', html: {class: 'c-message-form'} do |f|
-            = button_tag '' do
-              %i.c-icon-flag
+        - if comment.state == "deleted"
+          .p-item_message_icon-right
+        - else
+          .p-item_message_icon-right
+            = form_for '#', html: {class: 'c-message-form'} do |f|
+              = button_tag '' do
+                %i.c-icon-flag
+            - if comment.item.seller == current_user
+              = link_to item_comment_path(@item,comment), method: :patch , data: { confirm: "本当に削除しますか？" } do
+                %i.c-icon-delete
       %i.c-icon-balloon
