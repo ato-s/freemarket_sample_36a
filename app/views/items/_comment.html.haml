@@ -8,7 +8,7 @@
           = comment.user.nickname
     .p-item_message_body_current-user
       .p-item_message_body-text
-        - if comment.state == 1
+        - if comment.state == "deleted"
           このコメントは削除されました
         - else
           = comment.text
@@ -17,7 +17,7 @@
           %i.c-icon-time
           %span
             = time_ago_in_words(comment.created_at)+"前"
-        - if comment.state == 1
+        - if comment.state == "deleted"
           .p-item_message_icon-right
         - else
           .p-item_message_icon-right
@@ -36,7 +36,7 @@
         .p-item_message_seller 出品者
     .p-item_message_body
       .p-item_message_body-text
-        - if comment.state == 1
+        - if comment.state == "deleted"
           このコメントは削除されました
         - else
           = comment.text
@@ -45,7 +45,7 @@
           %i.c-icon-time
           %span
             = time_ago_in_words(comment.created_at)+"前"
-        - if comment.state == 1
+        - if comment.state == "deleted"
           .p-item_message_icon-right
         - else
           .p-item_message_icon-right
