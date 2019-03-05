@@ -160,5 +160,5 @@
           .c-modal_head.u-fwBold 確認
           不適切な商品を報告しますか？
         .l-clearfix
-          .c-modal_btn.c-modal_btn-cancel.js-modal_btn-cancel キャンセル
-          = link_to 'はい',new_item_report_path(@item), {class: 'c-modal_btn c-modal_btn-submit',method: :get}
+          %a.c-modal_btn.c-modal_btn-cancel.js-modal_btn-cancel{style: :"text-decoration:none;"} キャンセル
+          = link_to 'はい',new_item_report_path(@item), {class: 'c-modal_btn c-modal_btn-submit',method: :get, style: :"text-decoration:none;"}
