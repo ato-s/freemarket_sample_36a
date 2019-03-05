@@ -1,5 +1,5 @@
 %section.c-items-box
-  = link_to item_path(item) , data: {turbolinks: false}　do
+  = link_to item_path(item) , data: {turbolinks: false} do
     %figure.c-items-box_photo{style: "background-image: url(#{item.pictures.first.content})"}
       -if item.under_sale!
         %figcaption
