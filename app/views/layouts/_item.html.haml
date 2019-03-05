@@ -1,6 +1,10 @@
 %section.c-items-box
-  = link_to item_path(item) , data: {turbolinks: false}do
+  = link_to item_path(item) , data: {turbolinks: false} do
     %figure.c-items-box_photo{style: "background-image: url(#{item.pictures.first.content})"}
+      -if !item.under_sale
+        %figcaption
+          .c-item_sold-out-badge
+            %div SOLD
     .c-items-box_body
       %h3.c-items-box_name.c-font-2
         = item.name
