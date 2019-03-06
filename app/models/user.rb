@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :report_comments, dependent: :destroy
   has_many :transaction_messages, dependent: :destroy
   has_many :addresses, dependent: :destroy
   has_many :avatars, dependent: :destroy, inverse_of: :user

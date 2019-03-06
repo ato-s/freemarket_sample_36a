@@ -1,0 +1,22 @@
+.l-single_wrapper
+  %section.report__container
+    %h2.report__head 不適切なコメントの報告
+    .report__inner
+      .report__content
+        = form_for [@item ,@comment, @report_comment] , method: :post do |f|
+          .form__group
+            %label{for:'report_type'} 違反の種類
+            %span.form__require 必須
+            .form__select--wrap
+              = f.select :report_type,ReportComment.report_types_i18n.keys.map {|k| [ReportComment.report_types_i18n[k], k]},{prompt: "選択して下さい"},{class: "form__select--default"}
+          .form__group
+            %label{for:'issue'} お問い合わせ内容
+            = f.text_area :issue, class: "c-textarea-default"
+          .form__flash
+            = flash[:notice]
+          %p.form__info-text 不適切なコメントに基づいて随時、事務局でチェックさせていただき対応してまいります。特に返信はいたしませんが、ご了承ください。
+          = f.submit '送信する',class:"btn__default btn__red"
+
+
+
+

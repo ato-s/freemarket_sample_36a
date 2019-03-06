@@ -49,9 +49,8 @@
           .p-item_message_icon-right
         - else
           .p-item_message_icon-right
-            = form_for '#', html: {class: 'c-message-form'} do |f|
-              = button_tag '' do
-                %i.c-icon-flag
+            = link_to new_item_comment_report_comment_path(@item,comment),html: {class: 'c-message-form'} do
+              %i.c-icon-flag
             - if comment.item.seller == current_user
               = link_to item_comment_path(@item,comment), method: :patch , data: { confirm: "本当に削除しますか？" } do
                 %i.c-icon-delete
