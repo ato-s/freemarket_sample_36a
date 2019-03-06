@@ -19,10 +19,6 @@ class ReportCommentsController < ApplicationController
     end
   end
 
-  def destroy
-    ReportComment.find_by(user_id: current_user.id, comment_id: params[:comment_id]).destroy
-  end
-
 private
 
   def set_comment
