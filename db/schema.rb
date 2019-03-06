@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190303063628) do
+ActiveRecord::Schema.define(version: 20190305125122) do
 
   create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "first_name", default: "", null: false
@@ -170,6 +170,17 @@ ActiveRecord::Schema.define(version: 20190303063628) do
     t.index ["item_id"], name: "index_pictures_on_item_id"
   end
 
+  create_table "report_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id", null: false
+    t.bigint "comment_id", null: false
+    t.integer "report_type", default: 0, null: false
+    t.text "issue", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_report_comments_on_comment_id"
+    t.index ["user_id"], name: "index_report_comments_on_user_id"
+  end
+
   create_table "reports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id", null: false
     t.bigint "item_id", null: false
@@ -295,6 +306,8 @@ ActiveRecord::Schema.define(version: 20190303063628) do
   add_foreign_key "middle_categories", "upper_categories"
   add_foreign_key "phone_numbers", "users"
   add_foreign_key "pictures", "items"
+  add_foreign_key "report_comments", "comments"
+  add_foreign_key "report_comments", "users"
   add_foreign_key "reports", "items"
   add_foreign_key "reports", "users"
   add_foreign_key "reviews", "items"

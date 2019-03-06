@@ -39,6 +39,14 @@ ja:
         other_services_or_direct_transactions_or_exchange: "他サービス誘導・直接取引・交換"
         publicity_or_searching: "宣伝・捜し物・福袋"
         other: "その他"
+    report_comment:
+      report_type:
+        violent_language_and_intimidation: "暴言脅迫"
+        slander: "誹謗中傷"
+        direct_trading_and_exchange: "直接取引交換半交換"
+        publication_of_private_information: "個人情報の公開"
+        induction_to_external_site: "外部サイトへの誘導"
+        others: "その他"
   datetime:
     distance_in_words:
       half_a_minute: "30秒前後"
