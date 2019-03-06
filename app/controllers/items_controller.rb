@@ -7,7 +7,6 @@ class ItemsController < ApplicationController
   before_action :move_to_sign_in, except: [:index, :show, :dynamic_upper_category, :dynamic_middle_category, :dynamic_lower_category]
   before_action :delete_pictures, only: [:update]
 
-
   def dynamic_upper_category
     @middle_categories = MiddleCategory.where(upper_category_params)
   end
@@ -44,8 +43,13 @@ class ItemsController < ApplicationController
 
   def new
     10.times { @item.pictures.build }
-    render :new, layout: "single"
+    @brands = Brand.where('name LIKE(?)', "%#{params[:brand_name]}%")
+    respond_to do |format|
+      format.html
+      format.json
+    end
     @upper_categories = UpperCategory.all.includes([middle_categories: :lower_categories])
+    render :new, layout: "single"
   end
 
   def edit
@@ -54,6 +58,11 @@ class ItemsController < ApplicationController
     @middle_categories = MiddleCategory.where(upper_category_id: @item.upper_category_id)
     @lower_categories = LowerCategory.where(middle_category_id: @item.middle_category_id)
     @sizes = Size.where(size_type_id: @item.middle_category.size_type_id)
+    @brands = Brand.where('name LIKE(?)', "%#{params[:brand_name]}%")
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def create
@@ -188,9 +197,10 @@ class ItemsController < ApplicationController
       end
     end
 
-     def random_page_link
-       @next_page = Item.order("RAND()").limit(1).first
-       @prev_page = Item.order("RAND()").limit(1).first
-     end
+    def random_page_link
+     @next_page = Item.order("RAND()").limit(1).first
+     @prev_page = Item.order("RAND()").limit(1).first
+    end
+
 
 end

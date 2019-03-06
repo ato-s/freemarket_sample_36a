@@ -49,12 +49,14 @@
             %i.c-icon-arrow-bottom
         #item_middle_categories
           - unless current_page?(new_item_path)
-            = f.select :middle_category_id, options_from_collection_for_select(@middle_categories, :id, :name), {prompt: "---"}, {data: {remote: true, url: url_for(action: :dynamic_middle_category)}, class: 'c-select-default' }
-            %i.c-icon-arrow-bottom
+            .c-select-wrap
+              = f.select :middle_category_id, options_from_collection_for_select(@middle_categories, :id, :name), {prompt: "---"}, {data: {remote: true, url: url_for(action: :dynamic_middle_category)}, class: 'c-select-default' }
+              %i.c-icon-arrow-bottom
         #item_lower_categories
           - unless current_page?(new_item_path)
-            = f.select :lower_category_id, options_from_collection_for_select(@lower_categories, :id, :name), {prompt: "---"}, {data: {remote: true, url: url_for(action: :dynamic_lower_category)}, class: 'c-select-default' }
-            %i.c-icon-arrow-bottom
+            .c-select-wrap
+              = f.select :lower_category_id, options_from_collection_for_select(@lower_categories, :id, :name), {prompt: "---"}, {data: {remote: true, url: url_for(action: :dynamic_lower_category)}, class: 'c-select-default' }
+              %i.c-icon-arrow-bottom
       .c-form_group#product_size
         #item_sizes
           - unless current_page?(new_item_path)
@@ -68,10 +70,14 @@
       .c-form_group
         = f.label :brand_id do
           ブランド
-          %span.c-form_require 必須
-        .c-select-wrap
-          = f.select :brand_id, options_from_collection_for_select(Brand.all, :id, :name), {prompt: "---"}, class: 'c-select-default'
-          %i.c-icon-arrow-bottom
+          %span.c-form_arbitrary 任意
+        - if current_page?(new_item_path)
+          = f.text_field :brand_name, class: 'c-input-default', placeholder: '例）シャネル', id: 'js-brand-search'
+        - else
+          = f.text_field :brand_name, value: @item.brand.name, class: 'c-input-default', placeholder: '例）シャネル', id: 'js-brand-search'
+        .p-search_extend-brand
+          %ul#js-brand-search-result
+        = f.hidden_field :brand_id, id: 'js-brand-search-input'
       .c-form_group
         = f.label :state do
           商品の状態
