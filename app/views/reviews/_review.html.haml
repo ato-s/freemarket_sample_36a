@@ -1,0 +1,15 @@
+%li
+  = link_to item_path(review.item), class: 'p-mypage_item-link' do
+    %figure
+      = image_tag review.appraiser.avatars.first.content
+    .p-mypage_item-body
+      .p-mypage_item-text
+        = review.appraiser.nickname
+        = review.item.name
+        = review.text
+      %time
+        %i.c-icon-time
+        %span
+          = "#{time_ago_in_words(review.created_at)}"
+    %i.c-icon-arrow-right
+

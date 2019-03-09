@@ -18,7 +18,8 @@
                   = @credit_data.exp_month
                   \/
                   = @credit_data.exp_year
-                  = link_to '削除する',credit_path(@credit_data.id),method: :delete,class:"credit_delete_btn"
+                  = link_to '削除する',credit_path(@credit_data.id),method: :delete,class:"credit_delete_btn", data:{confirm:"本当に削除してもよろしいでしょうか？"}
+
         %section.transact-select-card-footer
           .l-single_content
             = link_to '次に進む' ,:back,  class: 'c-btn-default is-red'

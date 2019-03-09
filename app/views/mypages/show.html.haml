@@ -1,99 +1,52 @@
 .l-content
-  %section.p-mypage_user-icon
-    = link_to mypage_path(current_user.id) do
-      %figure
-        = image_tag 'common/member_photo_noimage_thumb.png', width: '60', height: '60'
-      %h2.u-fwBold
-        =current_user.nickname
-      .p-mypage_number
+  %section.p-user_details.l-single_container
+    .p-user_detail-profile-box{style: 'background-image: url(/assets/common/user_bg.jpg)'}
+      .p-user_detail-photo_box.u-taCenter
+        .p-user_detail-photo{style: 'background-image: url(/assets/common/member_photo_noimage_thumb.png)'}
+        %h2.p-user_detail-title.c-font-6
+          - if @user.nickname.present?
+            = @user.nickname
+          - else
+            = "#{@user.provider}_#{@user.uid}"
+        .p-user_detail-score.c-font-3
+          %span 評価 #{@user.received_reviews.length}
+          %span 出品数 #{@user.sell_items.length}
+    .u-bgWhite
+      .p-user_detail-ratings-box.c-font-6
         %div
-          評価
-          %span.u-fwBold
-            = current_user.received_reviews.length
+          .p-user_detail-ratings.l-clearfix
+            %i.c-icon-good
+            .u-taCenter.p-user_detail-ragtings-score
+              = @user.good_count
         %div
-          出品数
-          %span.u-fwBold
-            = current_user.sell_items.length
-  %section.p-mypage_tab-container-notification-todo
-    %ul.p-mypage_tabs.js-tab_menu
-      %li.is-active
-        %h3
-          お知らせ
-      %li
-        %h3
-          やることリスト
-    .p-mypage_tab-content
-      - if @information.present?
-        %ul#p-mypage_tab-notification.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
-          = render :partial => "information/information", :collection => @information, :as => "information"
-          %li.p-mypage_go-list
-            = link_to '一覧を見る', '/mypage/notification/'
-      - else
-        %ul#p-mypage_tab-nortification.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
-          %li.p-mypage_item-not-found.u-fwBold 現在、やることリストはありません
-      - if @todos.present?
-        %ul#p-mypage_tab-todo.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
-          = render :partial => "todos/todo", :collection => @todos, :as => "todo"
-          %li.p-mypage_go-list
-            = link_to '一覧を見る', '/mypage/notification/'
-      - else
-        %ul#p-mypage_tab-todo.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
-          %li.p-mypage_item-not-found.u-fwBold 現在、やることリストはありません
-  %section.p-mypage_tab-container
-    %h2.p-mypage_tab-head 購入した商品
-    %ul.p-mypage_tabs.js-tab_menu
-      %li.is-active
-        %h3
-          取引中
-      %li
-        %h3
-          過去の取引
-    .p-mypage_tab-content
-      %ul#p-mypage_tab-transaction-now.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
+          .p-user_detail-ratings.l-clearfix
+            %i.c-icon-normal
+            .u-taCenter.p-user_detail-ragtings-score
+              = @user.normal_count
+        %div
+          .p-user_detail-ratings.l-clearfix
+            %i.c-icon-bad
+            .u-taCenter.p-user_detail-ragtings-score
+              = @user.bad_count
+      .p-user_detail-description_box
+        %p.c-font-2
+          - if @user.profile.present?
+            = @user.profile
+          - else
+            = link_to "プロファイルの設定を行ってください", edit_mypage_path(@user.id)
+    .c-item_social-media-box
+      %ul.c-social-media-box
         %li
-          = link_to '', class: 'p-mypage_item-link' do
-            %figure
-              = image_tag 'common/img_dummy.jpg'
-            .p-mypage_item-body
-              .p-mypage_item-text
-                「お得☆150枚 サンキューシール ありがとうシール」 を購入しました。
-                %span 取引が完了しました
-              .p-mypage_item-status.u-fwBold.is-action-required
-                受取評価待ち
-            %i.c-icon-arrow-right
-      %ul#p-mypage_tab-transaction-old.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+          %a.c-share-btn{"data-window-name" => "facebook_window", :href => "", :target => "_blank"}
+            %i.c-icon-facebook
         %li
-          = link_to '', class: 'p-mypage_item-link' do
-            %figure
-              = image_tag 'common/img_dummy.jpg'
-            .p-mypage_item-body
-              .p-mypage_item-text
-                「お得☆150枚 サンキューシール ありがとうシール」 を購入しました。
-                %span 取引が完了しました
-              .p-mypage_item-status.u-fwBold.is-done
-                取引完了
-            %i.c-icon-arrow-right
+          %a.c-share-btn{"data-window-name" => "twitter_window", :href => "", :target => "_blank"}
+            %i.c-icon-twitter
         %li
-          = link_to '', class: 'p-mypage_item-link' do
-            %figure
-              = image_tag 'common/img_dummy.jpg'
-            .p-mypage_item-body
-              .p-mypage_item-text
-                「お得☆150枚 サンキューシール ありがとうシール」 を購入しました。
-                %span 取引が完了しました
-              .p-mypage_item-status.u-fwBold.is-done
-                取引完了
-            %i.c-icon-arrow-right
-        %li
-          = link_to '', class: 'p-mypage_item-link' do
-            %figure
-              = image_tag 'common/img_dummy.jpg'
-            .p-mypage_item-body
-              .p-mypage_item-text
-                「お得☆150枚 サンキューシール ありがとうシール」 を購入しました。
-                %span 取引が完了しました
-              .p-mypage_item-status.u-fwBold.is-done
-                取引完了
-            %i.c-icon-arrow-right
-        %li.p-mypage_go-list
-          = link_to '一覧を見る', '/mypage/purchased/'
+          = link_to '', target: '_blank' do
+            %i.c-icon-line
+    %section.p-item-box_container.l-clearfix.c-items-box_overflow
+      %h2.c-items-box_head
+        この出品者の商品
+      .c-items-box_content.l-clearfix
+        = render :partial => "layouts/item", :collection => @items, :as => "item"

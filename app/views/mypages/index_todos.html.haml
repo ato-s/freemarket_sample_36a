@@ -1,0 +1,9 @@
+.l-content
+  %h2.p-mypage_tab-head やることリスト
+  .mypage-contents.is-white-background
+    - if @todos.present?
+      %ul#p-mypage_tab-todo.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content.is-active
+        = render partial: "mypages/todo", collection: @todos, as: "todo"
+    - else
+      %ul#p-mypage_tab-todo.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+        %li.p-mypage_item-not-found.u-fwBold 現在、やることリストはありません

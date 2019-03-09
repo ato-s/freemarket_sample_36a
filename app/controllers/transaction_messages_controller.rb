@@ -6,6 +6,8 @@ class TransactionMessagesController < ApplicationController
   before_action :confirm_transaction_stage_under_transaction
 
   def index
+    @address = @item.buyer.addresses.first
+    @picture = @item.pictures.first
   end
 
   def create
@@ -17,11 +19,13 @@ class TransactionMessagesController < ApplicationController
   def transaction_message_params
     params.require(:transaction_message).permit(:text).merge(user_id: current_user.id, item_id: params[:item_id])
   end
+
   def set_transaction_messages
     @transaction_message = TransactionMessage.new
-    @transaction_messages = @item.transaction_messages
+    @transaction_messages = @item.transaction_messages.includes(:user)
   end
+
   def confirm_transaction_stage_under_transaction
-    redirect_to mypages_path unless ['purchased', 'shipping', 'evaluated'].include?(@item.transaction_stage)
+    redirect_to mypages_path unless ['purchased', 'shipping', 'evaluated', 'transaction_completed'].include?(@item.transaction_stage)
   end
 end

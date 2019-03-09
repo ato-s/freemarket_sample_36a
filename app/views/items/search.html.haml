@@ -1,0 +1,19 @@
+- breadcrumb :search, @search
+.l-content
+  %section
+    %section.c-items-box_container.l-clearfix
+      %h2.p-search_result-head
+        検索結果
+        = page_entries_info @items
+        件
+      - if @items.length == 0
+        %p.p-search_result-description
+          該当する商品が見つかりません。商品は毎日増えていますので、これからの出品に期待してください。
+        %h3.c-items-box_head
+          新着商品
+        .c-items-box_content.l-clearfix
+          = render partial: 'layouts/item', collection: @new_items
+      - else
+        .c-items-box_content.l-clearfix
+          = render partial: 'layouts/item', collection: @items
+      = paginate @items, window: 2

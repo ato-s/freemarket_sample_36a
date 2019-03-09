@@ -18,5 +18,7 @@
           .c-form_group
             = f.password_field :password, placeholder: 'パスワード', class: 'p-login_input-text c-input-default'
           .c-form_group
+            = recaptcha_tags
+          .c-form_group
             = f.submit 'ログイン', class: 'p-login_submit c-btn-default is-red'
           = link_to "パスワードをお忘れの方", new_password_path(resource_name)

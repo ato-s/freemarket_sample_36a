@@ -1,0 +1,11 @@
+%li
+  = link_to item_path(item), class: 'p-mypage_item-link' do
+    %figure
+      = image_tag item.pictures[0].content
+    .p-mypage_item-body
+      .p-mypage_item-text
+        = item_box_message(item)
+        %span
+      .p-mypage_item-status.u-fwBold.is-action-required
+        = item.transaction_stage_i18n
+    %i.c-icon-arrow-right

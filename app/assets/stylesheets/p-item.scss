@@ -517,3 +517,104 @@
 .p-item_nav-link_next .c-icon-arrow-right, .nav-user-link-next .c-icon-arrow-right {
   right: 0;
 }
+.p-item_message_user_current-user {
+  float: right;
+  position: relative;
+  top: -20px;
+  display: inline-block;
+  color: red;
+  figure > div {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+  img {
+    width: 100%;
+  }
+  figcaption {
+    text-align: right;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: -615px;
+    max-width: 100%;
+    min-width: 214px;
+    height: 1.2em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    @include media-pc {
+      width: 600px;
+      min-width: 600px;
+    }
+  }
+}
+.p-item_message_body_current-user {
+  float: left;
+  position: relative;
+  width: calc(100% - 56px);
+  padding: 16px;
+  background: #f9f0e7;
+  border-radius: 15px;
+  line-height: 1.5;
+  word-break: break-all;
+    @include media-pc {
+      width: 600px;
+    }
+  .c-icon-balloon {
+    position: absolute;
+    top: 8px;
+    right: -9px;
+    color: #f9f0e7;
+    transform: scale(-1, 1);
+  }
+}
+.p-item_message_icons_current-user {
+  margin: 8px 0 0;
+  time {
+    display: block;
+    color: #aaa;
+  }
+  i, span {
+    vertical-align: middle;
+  }
+  a, div {
+    display: inline-block;
+    color: #aaa;
+    text-decoration: none;
+  }
+  a:hover {
+    opacity: 1;
+  }
+  div {
+    &:hover {
+      opacity: 1;
+    }
+    cursor: pointer;
+  }
+}
+.p-item_message_icon-left {
+  float: left;
+}
+.p-item_message_icon-right {
+  float: right;
+  form {
+    display: inline;
+  }
+}
+@media screen and (max-width: 768px) {
+  .p-item_message_user_current-user {
+    figcaption {
+      text-align: right;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: -230px;
+      max-width: 100%;
+      min-width: 214px;
+      height: 1.2em;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+}

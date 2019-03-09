@@ -1,4 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  prepend_before_action :check_captcha, only: [:create]
   layout "single"
 
   def select_api
@@ -15,5 +16,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
   def update_resource(resource, params)
     resource.update_without_password(params)
+  end
+
+  def check_captcha
+    unless verify_recaptcha
+      self.resource = resource_class.new sign_up_params
+      resource.validate
+      set_minimum_password_length
+      respond_with resource
+    end
   end
 end

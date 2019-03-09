@@ -1,0 +1,57 @@
+- if user_signed_in? && comment.user_id == current_user.id
+  %li.l-clearfix
+    = link_to mypage_path(comment.user_id), class: 'p-item_message_user_current-user' do
+      %figure
+        %div
+          = image_tag 'common/member_photo_noimage_thumb.png'
+        %figcaption.u-fwBold
+          = comment.user.nickname
+    .p-item_message_body_current-user
+      .p-item_message_body-text
+        - if comment.state == "deleted"
+          このコメントは削除されました
+        - else
+          = comment.text
+      .p-item_message_icons_current-user.l-clearfix
+        %time.p-item_message_icon-left
+          %i.c-icon-time
+          %span
+            = time_ago_in_words(comment.created_at)+"前"
+        - if comment.state == "deleted"
+          .p-item_message_icon-right
+        - else
+          .p-item_message_icon-right
+            = link_to item_comment_path(@item,comment), method: :patch , data: { confirm: "本当に削除しますか？" } do
+              %i.c-icon-delete
+      %i.c-icon-balloon
+-else
+  %li.l-clearfix
+    = link_to mypage_path(comment.user_id), class: 'p-item_message_user' do
+      %figure
+        %div
+          = image_tag 'common/member_photo_noimage_thumb.png'
+        %figcaption.u-fwBold
+          = comment.user.nickname
+      - if comment.user_id == @item.seller.id
+        .p-item_message_seller 出品者
+    .p-item_message_body
+      .p-item_message_body-text
+        - if comment.state == "deleted"
+          このコメントは削除されました
+        - else
+          = comment.text
+      .p-item_message_icons.l-clearfix
+        %time.p-item_message_icon-left
+          %i.c-icon-time
+          %span
+            = time_ago_in_words(comment.created_at)+"前"
+        - if comment.state == "deleted"
+          .p-item_message_icon-right
+        - else
+          .p-item_message_icon-right
+            = link_to new_item_comment_report_comment_path(@item,comment),html: {class: 'c-message-form'} do
+              %i.c-icon-flag
+            - if comment.item.seller == current_user
+              = link_to item_comment_path(@item,comment), method: :patch , data: { confirm: "本当に削除しますか？" } do
+                %i.c-icon-delete
+      %i.c-icon-balloon

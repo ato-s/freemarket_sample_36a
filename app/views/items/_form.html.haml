@@ -13,12 +13,12 @@
     %p 最大10枚までアップロードできます
     .p-sell_upload_items-container
       .p-sell_upload_drop-box
-        - if current_page?(new_item_path)
-          - 10.times do
-            = f.fields_for :pictures, Picture.new do |picture|
-              = picture.file_field :content
-        - else
-          = f.fields_for :pictures, @item.pictures, multiple: true do |picture|
+        = f.fields_for :pictures do |picture|
+          -if picture.object.id.present?
+            = picture.file_field :content, value: picture.object.content
+            = picture.hidden_field :status, value: picture.object.content
+            = picture.hidden_field :id, value: picture.object.id, picture_location: picture.object.content
+          -else
             = picture.file_field :content
         %pre.l-visiblePc
           ドラッグアンドドロップまたは
@@ -45,26 +45,18 @@
           %span.c-form_require 必須
         %div
           .c-select-wrap
-            = f.select :upper_category_id, options_from_collection_for_select(@upper_categories, :id, :name), {prompt: "---"}, {data: {remote: true, url: url_for(action: :dynamic_upper_category)}}
+            = f.select :upper_category_id, options_from_collection_for_select(@upper_categories, :id, :name), {prompt: "---"}, {data: {remote: true, url: url_for(action: :dynamic_upper_category)}, class: 'c-select-default' }
             %i.c-icon-arrow-bottom
-      .c-form_group
-        = f.label :middle_category_id do
-          %span
-        %div
-          .c-select-wrap
-            #item_middle_categories
-              - unless current_page?(new_item_path)
-                = f.select :middle_category_id, options_from_collection_for_select(@middle_categories, :id, :name), {prompt: "---"}, {data: {remote: true, url: url_for(action: :dynamic_middle_category)}}
-                %i.c-icon-arrow-bottom
-      .c-form_group
-        = f.label :lower_category_id do
-          %span
-        %div
-          .c-select-wrap
-            #item_lower_categories
-              - unless current_page?(new_item_path)
-                = f.select :lower_category_id, options_from_collection_for_select(@lower_categories, :id, :name), {prompt: "---"}, {data: {remote: true, url: url_for(action: :dynamic_lower_category)}}
-                %i.c-icon-arrow-bottom
+        #item_middle_categories
+          - unless current_page?(new_item_path)
+            .c-select-wrap
+              = f.select :middle_category_id, options_from_collection_for_select(@middle_categories, :id, :name), {prompt: "---"}, {data: {remote: true, url: url_for(action: :dynamic_middle_category)}, class: 'c-select-default' }
+              %i.c-icon-arrow-bottom
+        #item_lower_categories
+          - unless current_page?(new_item_path)
+            .c-select-wrap
+              = f.select :lower_category_id, options_from_collection_for_select(@lower_categories, :id, :name), {prompt: "---"}, {data: {remote: true, url: url_for(action: :dynamic_lower_category)}, class: 'c-select-default' }
+              %i.c-icon-arrow-bottom
       .c-form_group#product_size
         #item_sizes
           - unless current_page?(new_item_path)
@@ -73,21 +65,25 @@
               %span
             %div
               .c-select-wrap
-                = f.select :size_id, options_from_collection_for_select(@sizes, :id, :name), {prompt: "---"}
+                = f.select :size_id, options_from_collection_for_select(@sizes, :id, :name), {prompt: "---"}, class: 'c-select-default'
                 %i.c-icon-arrow-bottom
       .c-form_group
         = f.label :brand_id do
           ブランド
-          %span.c-form_require 必須
-        .c-select-wrap
-          = f.select :brand_id, options_from_collection_for_select(Brand.all, :id, :name), {prompt: "---"}
-          %i.c-icon-arrow-bottom
+          %span.c-form_arbitrary 任意
+        - if current_page?(new_item_path)
+          = f.text_field :brand_name, class: 'c-input-default', placeholder: '例）シャネル', id: 'js-brand-search'
+        - else
+          = f.text_field :brand_name, value: @item.brand.name, class: 'c-input-default', placeholder: '例）シャネル', id: 'js-brand-search'
+        .p-search_extend-brand
+          %ul#js-brand-search-result
+        = f.hidden_field :brand_id, id: 'js-brand-search-input'
       .c-form_group
         = f.label :state do
           商品の状態
           %span.c-form_require 必須
         .c-select-wrap
-          = f.select :state, Item.states_i18n.keys.map { |k| [Item.states_i18n[k], k]}, {prompt: "---"}
+          = f.select :state, Item.states_i18n.keys.map { |k| [Item.states_i18n[k], k]}, {prompt: "---"}, class: 'c-select-default'
           %i.c-icon-arrow-bottom
   .p-sell_content.l-clearfix
     %h3.p-sell_sub-head 配送について
@@ -98,21 +94,21 @@
           配送料の負担
           %span.c-form_require 必須
         .c-select-wrap
-          = f.select :delivery_payer, Item.delivery_payers_i18n.keys.map { |k| [Item.delivery_payers_i18n[k], k]}, {prompt: "---"}
+          = f.select :delivery_payer, Item.delivery_payers_i18n.keys.map { |k| [Item.delivery_payers_i18n[k], k]}, {prompt: "---"}, class: 'c-select-default'
           %i.c-icon-arrow-bottom
       .c-form_group
         = f.label :delivery_region do
           発送元の地域
           %span.c-form_require 必須
         .c-select-wrap
-          = f.select :delivery_region, Item.delivery_regions_i18n.keys.map { |k| [Item.delivery_regions_i18n[k], k]}, {prompt: "---"}
+          = f.select :delivery_region, Item.delivery_regions_i18n.keys.map { |k| [Item.delivery_regions_i18n[k], k]}, {prompt: "---"}, class: 'c-select-default'
           %i.c-icon-arrow-bottom
       .c-form_group
         = f.label :delivery_duration do
           発送までの日数
           %span.c-form_require 必須
         .c-select-wrap
-          = f.select :delivery_duration, Item.delivery_durations_i18n.keys.map { |k| [Item.delivery_durations_i18n[k], k]}, {prompt: "---"}
+          = f.select :delivery_duration, Item.delivery_durations_i18n.keys.map { |k| [Item.delivery_durations_i18n[k], k]}, {prompt: "---"}, class: 'c-select-default'
           %i.c-icon-arrow-bottom
   .p-sell_content.l-clearfix
     %h3.p-sell_sub-head 販売価格(300〜9,999,999)
@@ -163,4 +159,12 @@
     = f.submit '出品する',class: 'c-btn-default is-red'
     = link_to 'もどる', "#", {class: 'c-btn-default is-gray'}
 
-
+  .overlay#edit_box{style: "display:none"}
+    .edit_box
+      .crop_header 写真を切り取る
+      .crop_editor
+        .crop_modal
+        = f.range_field :scale, class: 'input-range-default', min: 1, max: 2 , step: 0.01
+      .crop_btn.clearfix
+        .p-item_buy-btn_sold.close_btn キャンセル
+        .p-item_buy-btn.select_icon_btn 決定

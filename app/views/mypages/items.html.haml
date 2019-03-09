@@ -1,0 +1,11 @@
+.l-content
+  %h2.p-mypage_tab-head
+    = mypage_item_head(@item)
+  .mypage-contents.is-white-background
+    - if @items.present?
+      %ul#p-mypage_tab-transaction-now.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+        = render partial: "mypages/item_box", collection: @items, as: "item"
+    - else
+      %ul#p-mypage_tab-transaction-now.c-mypage_item-list.p-mypage_tab-content_tab-pane.js-tab_content
+        %li.p-mypage_item-not-found.u-fwBold
+          = mypage_item_not_found(@item)

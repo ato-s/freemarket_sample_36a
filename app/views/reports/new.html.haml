@@ -1,0 +1,22 @@
+.l-single_wrapper
+  %section.report__container
+    %h2.report__head 商品の報告
+    .report__inner
+      .report__content
+        %h3.target-item__label 対象商品
+        .target-item__box
+          = image_tag @item.pictures[0].content
+          %h4
+            = @item.name
+          %h7
+            = @item.description.truncate(60)
+        = form_for [@item ,@report] , method: :post do |f|
+          .form__group
+            %label{for:'report_type'} 違反の種類
+            %span.form__require 必須
+            .form__select--wrap
+              = f.select :report_type,Report.report_types_i18n.keys.map {|k| [Report.report_types_i18n[k], k]},{prompt: "選択して下さい"},{class: "form__select--default"}
+          .form__flash
+            = flash[:notice]
+          %p.form__info-text 不適切な商品の報告に基づいて随時、事務局でチェックさせていただき対応してまいります。特に返答はいたしませんが、ご了承ください。
+          = f.submit '送信する',class:"btn__default btn__red"

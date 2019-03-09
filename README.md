@@ -17,6 +17,7 @@
 - has_many :reports, dependent: :destroy
 - has_many :likes, dependent: :destroy
 - has_many :comments, dependent: :destroy
+- has_many :comment_reports, dependent: :destroy
 - has_many :transaction_messages, dependent: :destroy
 - has_many :addresses, dependent: :destroy
 - has_many :avatars, dependent: :destroy, inverse_of: :user
@@ -78,8 +79,9 @@
 # reportsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null:false, foreign_key:true|
-|item_id|integer|null:false, foreign_key:true|
+|user|references|null:false, foreign_key:true|
+|item|references|null:false, foreign_key:true|
+|report_type|integer|null:false, default:0|
 
 ### Association
 - belongs_to :user
@@ -103,10 +105,26 @@
 |user_id|integer|null:false, foreign_key:true|
 |item_id|integer|null:false, foreign_key:true|
 |text|text|null:false|
+|state|integer|null:false, default:0|
 
 ### Association
 - belongs_to :user
 - belongs_to :item
+- has_many :comment_reports
+
+
+# comment_reportsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|user_id|integer|null:false, foreign_key:true|
+|comment_id|integer|null:false, foreign_key:true|
+|issue|text|null:false|
+|report_type|integer|null:false, default:0|
+
+### Association
+- belongs_to :user
+- belongs_to :comment
+
 
 # reviewsテーブル
 |Column|Type|Options|

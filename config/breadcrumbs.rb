@@ -31,3 +31,9 @@ crumb :brand do |brand|
   link brand.name, brand_path(brand)
   parent :group, brand
 end
+
+crumb :search do |search|
+  @keyword = params[:keyword]
+  link @keyword
+  parent :root
+end

@@ -1,7 +1,6 @@
 $(function(){
 
   //メソッドの定義
-
   function appendPicture(picture){
     var html = `<div class='p-sell_upload_item'>
                    <figure class='p-sell_upload_figure' style="background-image: url(${picture})"></figure>
@@ -17,20 +16,30 @@ $(function(){
     return html;
   }
 
-  function appendMiddlecategoryForm(upper_category_id){
-
-    var html = `<div class="c-form_group">
-                  <%= f.label :middle_category_id do %>
-                    <span></span>
-                  <% end %>
-                  <div>
-                    <div class="c-select-wrap">
-                      <%= f.collection_select :middle_category_id, MiddleCategory.where(upper_category_id: ${upper_category_id}), :id, :name, include_blank: "---" %>
-                    </div>
-                  </div>
-                </div>`
-    return html;
+  function displayPicture(pictureOriginal){
+      var insertPicture = "";
+      insertPicture = appendPicture(pictureOriginal);
+      if($('div').hasClass('p-sell_upload_item') == true){
+        $('.p-sell_upload_item:last').after(insertPicture);
+      }else{
+        picture_container.prepend(insertPicture);
+      }
   }
+
+  function appendHiddenInput(targetNumber){
+    var revise_name = 'item[pictures_attributes]['+ targetNumber +'][status]';
+    var revise_id = 'item_pictures_attributes_'+ targetNumber +'_status';
+    var hiddenInput = $('<input/>',{value: targetNumber, type: 'hidden', name: revise_name, id: revise_id});
+    return hiddenInput;
+  }
+
+  function appendFileInput(targetNumber){
+    var revise_name = 'item[pictures_attributes]['+ targetNumber +'][content]';
+    var revise_id = 'item_pictures_attributes_'+ targetNumber +'_content';
+    var fileInput = $('<input/>',{type: 'file', name: revise_name, id: revise_id, style: "display: block"});
+    return fileInput;
+  }
+
 
   function getTargetInput(variabelenumber){
     var target_input = $("#item_pictures_attributes_"+ variabelenumber +"_content");
@@ -40,83 +49,272 @@ $(function(){
   function getUploaderBoxIndex(){
     if($(".p-sell_upload_item").length){
       var box_number = $(".p-sell_upload_item").length;
-      var uploader_box_index = 9 - box_number;
-      return uploader_box_index;
+      return box_number;
     }else{
-      return 9;
+      return 0;
     }
   }
 
   function changeInputIdAndName(variabelenumber, revisednumber){
-    var target_input = $("#item_pictures_attributes_"+ variabelenumber +"_content");
-    var new_number = revisednumber + 1;
-    target_input.attr('name', 'item[pictures_attributes]['+ new_number +'][content]');
-    target_input.attr('id', 'item_pictures_attributes_'+ new_number +'_content');
+    var new_number = revisednumber - 1;
+
+    //f.file_fieldの名前の変更
+    var target_input_content = $("#item_pictures_attributes_"+ variabelenumber +"_content");
+    target_input_content.attr('name', 'item[pictures_attributes]['+ new_number +'][content]');
+    target_input_content.attr('id', 'item_pictures_attributes_'+ new_number +'_content');
+
+    //hidden_field_statusの名前の変更
+    var target_input_status = target_input_content.next('#item_pictures_attributes_'+ variabelenumber +'_status');
+    target_input_status.attr('name', 'item[pictures_attributes]['+ new_number +'][status]');
+    target_input_status.attr('id', 'item_pictures_attributes_'+ new_number +'_status');
+    target_input_status.attr('value', new_number);
+
+    //hidden_field_idの名前の変更
+    var target_input_id = target_input_status.next('#item_pictures_attributes_'+ variabelenumber +'_id');
+    target_input_id.attr('name', 'item[pictures_attributes]['+ new_number +'][id]');
+    target_input_id.attr('id', 'item_pictures_attributes_'+ new_number +'_id');
   }
 
-  var picture_container = $(".p-sell_upload_items-container");
+  function deleteIdAndStatusField(targetNumber){
+    var target_input_status = $("#item_pictures_attributes_"+ targetNumber +"_status");
+    var target_input_id = $("#item_pictures_attributes_"+ targetNumber +"_id");
+    var target_input_trriming_x = $("#item_pictures_attributes_"+ targetNumber +"_trriming_x");
+    var target_input_trriming_y = $("#item_pictures_attributes_"+ targetNumber +"_trriming_y");
+    var target_input_trriming_width = $("#item_pictures_attributes_"+ targetNumber +"_trriming_width");
+    var target_input_trriming_height = $("#item_pictures_attributes_"+ targetNumber +"_trriming_height");
+
+    target_input_status.remove();
+    target_input_id.remove();
+    target_input_trriming_x.remove();
+    target_input_trriming_y.remove();
+    target_input_trriming_width.remove();
+    target_input_trriming_height.remove();
+  }
+
+  function appendCoordinatesField(targetIndex, targetInput){
+    var x_name = 'item[pictures_attributes]['+ targetIndex +'][trriming_x]';
+    var x_id = 'item_pictures_attributes_'+ targetIndex +'_trriming_x';
+    var hiddenInputX = $('<input/>',{value: 0, type: 'hidden', name: x_name, id: x_id});
+
+    var y_name = 'item[pictures_attributes]['+ targetIndex +'][trriming_y]';
+    var y_id = 'item_pictures_attributes_'+ targetIndex +'_trriming_y';
+    var hiddenInputY = $('<input/>',{value: 0, type: 'hidden', name: y_name, id: y_id});
+
+    var w_name = 'item[pictures_attributes]['+ targetIndex +'][trriming_width]';
+    var w_id = 'item_pictures_attributes_'+ targetIndex +'_trriming_width';
+    var hiddenInputW = $('<input/>',{value: 0, type: 'hidden', name: w_name, id: w_id});
+
+    var h_name = 'item[pictures_attributes]['+ targetIndex +'][trriming_height]';
+    var h_id = 'item_pictures_attributes_'+ targetIndex +'_trriming_height';
+    var hiddenInputH = $('<input/>',{value: 0, type: 'hidden', name: h_name, id: h_id});
+
+    targetInput.before(hiddenInputX);
+    targetInput.before(hiddenInputY);
+    targetInput.before(hiddenInputW);
+    targetInput.before(hiddenInputH);
+
+  }
+
+    // cropper（トリミング部）のコーディング（詳しくはGitHub参照）
+  var cropper;
+  var croppable = false;
+  function initIconCrop(targetIndex){
+    cropper = new Cropper(crop_img, {
+      dragMode: 'move',
+      aspectRatio: 1,
+      restore: false,
+      guides: false,
+      center: false,
+      highlight: false,
+      cropBoxMovable: false,
+      cropBoxResizable: false,
+      minCropBoxWidth: 280,
+      minCropBoxHeight: 280,
+      ready: function(){
+        croppable = true;
+      },
+      crop :function(event){
+        $("#item_pictures_attributes_"+ targetIndex +"_trriming_x").val(event.detail.x);
+        $("#item_pictures_attributes_"+ targetIndex +"_trriming_y").val(event.detail.y);
+        $("#item_pictures_attributes_"+ targetIndex +"_trriming_width").val(event.detail.width);
+        $("#item_pictures_attributes_"+ targetIndex +"_trriming_height").val(event.detail.height);
+      }
+    });
+  }
+
+
+  // croppedCanvas（トリミング後の画像をプレビューとして表示するための部分）のコーディング
+  var croppedCanvas;
+  function iconCropping(){
+    if (!croppable) {
+      alert('トリミングする画像が設定されていません。');
+      return false;
+    }
+    croppedCanvas = cropper.getCroppedCanvas({
+      width: 280,
+      height: 280,
+    });
+    var croppedImage = document.createElement('img');
+    croppedImage.src = croppedCanvas.toDataURL();
+    return croppedImage.src;
+  };
+
+  // blobへ変換するためのコーディング（blobという形式で画像データを保存するため）
+  var blob;
+  function blobing(){
+    if (croppedCanvas && croppedCanvas.toBlob){
+      croppedCanvas.toBlob(function(b){
+        blob = b;
+        sending();
+      });
+    }else if(croppedCanvas && croppedCanvas.msToBlob){
+      blob = croppedCanvas.msToBlob();
+      sending();
+    }else{
+      blob = null;
+      sending();
+    };
+  };
+
+  function trimmingDisplay(url, index){
+    $('.overlay').fadeIn();
+    $('.crop_modal').append($('<img>').attr({
+      src: url,
+      height: "100%",
+      class: "preview",
+      id: "crop_img",
+    }));
+    initIconCrop(index);
+    $('.overlay').attr('id', index);
+  }
+
 //   // // 処理
 //   // // todo: 写真の最大枚数は10枚
+  var picture_container = $(".p-sell_upload_items-container");
+
+  // 商品の編集のとき、登録されている写真を表示
+  if( $(location).attr('pathname').match(/edit/)){
+    var size = $('[picture_location]').length ;
+    for(var i = 0 ; i < size ; i++ ){
+      var picture_file_present = $('#item_pictures_attributes_'+ i +'_content').attr('value');
+      var target_input = getTargetInput(i);
+      target_input.css({
+        "display": "none"
+      });
+      displayPicture(picture_file_present);
+    }
+    getTargetInput(i).css({
+      'display': 'block'
+    });
+  }
+
+  if($(location).attr('pathname').match(/new/)){
+    if($('div').hasClass('p-sell_upload_drop-box') == true){
+      var displayInput = getTargetInput(0);
+      displayInput.css('display','block');
+    }
+  }
+
 
   // //写真が選択されたとき、写真を表示
   $(".p-sell_upload_drop-box").on("change",function(e){
-    var insertPicture = "";
-    var picuture_file = e.target.files[0];
+    var picture_file = e.target.files[0];
     var reader = new FileReader();
+
     var target_index = getUploaderBoxIndex();
     var target_input = getTargetInput(target_index);
+    var target_next_input = getTargetInput(target_index + 1 );
+
+    var hiddenInput = appendHiddenInput(target_index);
+    target_input.after(hiddenInput);
 
     reader.addEventListener("load", function(){
-      insertPicture = appendPicture(reader.result);
-      if($('div').hasClass('p-sell_upload_item') == true){
-        $('.p-sell_upload_item:last').after(insertPicture);
-      }else{
-        picture_container.prepend(insertPicture);
-      }
+      displayPicture(reader.result);
     },false);
 
-    if(picuture_file){
-      reader.readAsDataURL(picuture_file);
+    if(picture_file){
+      reader.readAsDataURL(picture_file);
     }
 
-    target_input.css({
-      "display": "none"
-    });
+    target_input.css('display','none');
+    target_next_input.css('display','block');
   });
 
   // // 編集ボタンが押された時の処理 -> 写真の編集
-  // // 写真の編集:=140x140でトリミング
-  // // todo: appendで追加したクラスに適用可能か
-  // $("#upload_item_edit").on("click", function(){
+  // 画像選択時
+  $(".p-sell_upload_items-container").on('click', "#upload_item_edit", function(e){
+    var edit_target = $(this).parents(".p-sell_upload_item");
+    var target_input_index = edit_target.index();
+    var file = $("#item_pictures_attributes_" + target_input_index + "_content").prop('files')[0];
+    var reader = new FileReader();
 
-  // });
+    var mark_input = $("#item_pictures_attributes_" + (target_input_index + 1) + "_content");
+
+
+    if(!($('#item_pictures_attributes_'+ target_input_index +'_trriming_x').size())){
+      appendCoordinatesField(target_input_index,mark_input);
+    }
+
+    // トリミング画面をフェードインさせる
+    if(file){
+      reader.addEventListener("load", function(){
+        trimmingDisplay(reader.result, target_input_index);
+      },false);
+
+      reader.readAsDataURL(file);
+    }else{
+      var exit_picture_url = $('#item_pictures_attributes_'+ target_input_index +'_id').attr('picture_location');
+      trimmingDisplay(exit_picture_url, target_input_index);
+    }
+  });
+
+    // トリミング決定時
+  $('.select_icon_btn').on('click', function(){
+    var target_input_index = $('.overlay').attr('id');
+    var target_picture_box = $('.p-sell_upload_figure').eq(target_input_index);
+    var picture_url = iconCropping();
+    target_picture_box.css('background-image', 'url('+ picture_url +')');
+    var target_input = $("#item_pictures_attributes_" + target_input_index + "_content");
+    $('.overlay').attr('id', 'edit_box');
+    $('.overlay').fadeOut();
+    $('#crop_img').remove();
+    $('.cropper-container').remove();
+  });
+
+  // トリミング画面を閉じる時
+  $('.close_btn').on('click', function(){
+    $('.overlay').attr('id', 'edit_box');
+    $('.overlay').fadeOut();
+    $('#crop_img').remove();
+    $('.cropper-container').remove();
+  });
 
   // 削除ボタンが押された時の処理 -> 写真の削除
   picture_container.on("click", "#upload_item_delete", function(){
     var delete_target = $(this).parents(".p-sell_upload_item");
-    var target_input_index = 9 - delete_target.index();
+    var target_input_index = delete_target.index();
     var delete_input = getTargetInput(target_input_index);
 
-    var empty_input = getUploaderBoxIndex();
+    var empty_input_index = getUploaderBoxIndex();
+    var empty_input = getTargetInput(empty_input_index);
 
-    // 削除されたinputの名前,idの数字を10にする(名前の競合の回避)(1時的な避難場所)
-    delete_input.attr('name', 'item[pictures_attributes][10][content]')
-    delete_input.attr('id', 'item_pictures_attributes_10_content');
-    var target_input_10 = getTargetInput(10);
+    deleteIdAndStatusField(target_input_index);
+    delete_input.remove();
+
+    var new_taget_input_index = target_input_index;
 
     // それぞれの名前の数字に+1する(inputの箱をずらす)
-    for(var i = 1; target_input_index - i > empty_input ; i++){
-      var new_taget_input_index = target_input_index -i;
+    for(var i = 1; target_input_index + i < empty_input_index ; i++){
+      new_taget_input_index = target_input_index + i;
       changeInputIdAndName(new_taget_input_index, new_taget_input_index);
     }
 
-    // inputのnameの数字が10のものを空いた数字のnameにする
-    changeInputIdAndName(10,empty_input);
-    target_input_10.css({
-      "display": "block"
-    });
+    empty_input.before(appendFileInput(new_taget_input_index));
+
+    empty_input.css('display','none');
 
     delete_target.remove();
+
   });
 
   // 販売手数料、販売利益の表示
@@ -137,10 +335,12 @@ $(function(){
   });
 
   $("#profit").on("change", "#sell_price_val", function(){
-    // addPictureValue();exi
   })
 
   $(".p-sell_form").on("submit",function(){
-    console.log("success");
+    $("[picture_location]").each(function(){
+    });
   })
+
+
 })

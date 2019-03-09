@@ -7,14 +7,15 @@
     .p-item_main-content.l-clearfix
       .p-item_photo
         .owl-carousel.owl-loaded.owl-drag.js-owl-carousel-item
-          %div.p-item_photo_item
-            = image_tag @item.pictures[0].content
+          - @item.pictures.each do |picture|
+            %div.p-item_photo_item
+              = image_tag picture.content
       %table.p-item_detail-table
         %tbody
           %tr
             %th 出品者
             %td
-              = link_to '#' do
+              = link_to mypage_path(@item.seller_id) do
                 = @seller.nickname
               %div
                 .p-item_user-ratings
@@ -32,20 +33,20 @@
           %tr
             %th カテゴリー
             %td
-              = link_to '#' do
+              = link_to upper_category_path(@item.upper_category_id) do
                 = @upper_category.name
-              = link_to '#' do
+              = link_to middle_category_path(@item.middle_category_id) do
                 .p-item_detail-table-sub-category
                   %i.c-icon-arrow-right
                   = @middle_category.name
-              = link_to '#' do
+              = link_to lower_category_path(@item.lower_category_id) do
                 .p-item_detail-table-sub-sub-category
                   %i.c-icon-arrow-right
                   = @lower_category.name
           %tr
             %th ブランド
             %td
-              = link_to '#' do
+              = link_to brand_path(@item.brand_id) do
                 = @brand.name
           %tr
             %th 商品の状態
@@ -61,7 +62,7 @@
           %tr
             %th 配送元地域
             %td
-              = link_to items_path do
+              = link_to areas_path(region: @item.delivery_region) do
                 = @item.delivery_region
           %tr
             %th 発送日の目安
@@ -77,10 +78,20 @@
       .p-item_sales-point-message
         P 500 をお持ちです
     - if @item.transaction_stage == "under_sale"
-      = link_to '購入画面に進む',edit_item_buy_path(@item), class: 'p-item_buy-btn u-fz18-24'
+      - if current_user.present?
+        - if @item.seller_id == current_user.id
+          = link_to '商品の編集',edit_item_path(@item),id: 'item-edit-button',class: 'p-item_buy-btn u-fz18-24', data: {turbolinks: false}
+          = link_to '商品の削除',item_path(@item), method: :delete,class: 'p-item_buy-btn_sold u-fz18-24'
+        - else
+          = link_to '購入画面に進む',edit_item_buy_path(@item), class: 'p-item_buy-btn u-fz18-24'
+      - else
+        = link_to '購入画面に進む',edit_item_buy_path(@item), class: 'p-item_buy-btn u-fz18-24'
     - else
-      .p-item_buy-btn_sold.u-fz18-24
-        売り切れです
+      - if [@item.seller_id, @item.buyer_id].include?(current_user.id)
+        = link_to '取引画面', item_transaction_messages_path(@item), class: 'p-item_buy-btn u-fz18-24', data: {turbolinks: false}
+      - else
+        .p-item_buy-btn_sold.u-fz18-24
+          売り切れです
     .p-item_description.u-fz14
       %p.p-item_description-inner
         = @item.description
@@ -99,44 +110,23 @@
     .p-item_message_container
       .p-item_message_content
         %ul.p-item_message_block
-          - @comments.each do|message|
-            %li.l-clearfix
-              = link_to '#', class: 'p-item_message_user' do
-                %figure
-                  %div
-                    = image_tag 'common/member_photo_noimage_thumb.png'
-                  %figcaption.u-fwBold
-                    = message.user.nickname
-                - if message.user.id == @item.seller.id
-                  .p-item_message_seller 出品者
-              .p-item_message_body
-                .p-item_message_body-text
-                  = message.text
-                .p-item_message_icons.l-clearfix
-                  %time.p-item_message_icon-left
-                    %i.c-icon-time
-                    %span
-                      = time_ago_in_words(message.created_at)+"前"
-                  .p-item_message_icon-right
-                    = form_for '#', html: {class: 'c-message-form'} do |f|
-                      = button_tag '' do
-                        %i.c-icon-flag
-                %i.c-icon-balloon
+          = render partial: "items/comment",collection: @comments
       .p-item_message_content
         = form_for [@item,@comment] , html: {class: 'c-message-form'} do |f|
           %p 相手のことを考え丁寧なコメントを心がけましょう。不快な言葉遣いなどは利用制限や退会処分となることがあります。
           = f.text_area :text, class: 'c-textarea-default'
           = button_tag '#', class: 'p-message_submit c-btn-default is-gray' do
             %span コメントする
-    -# %ul.p-item_nav-link.l-clearfix
-    -#   %li.p-item_nav-link_prev
-    -#     = link_to "#{@rand_prev}" do
-    -#       %i.c-icon-arrow-left>
-    -#       = @next_page.name
-    -#   %li.p-item_nav-link_next
-    -#     = link_to '#{@rand_next}' do
-    -#       %i.c-icon-arrow-right
-    -#       = @next_page.name
+    %ul.p-item_nav-link.l-clearfix
+      - if Item.any?
+        %li.p-item_nav-link_prev
+          = link_to item_path(@prev_page) do
+            %i.c-icon-arrow-left>
+            = @prev_page.name
+        %li.p-item_nav-link_next
+          = link_to item_path(@next_page) do
+            %i.c-icon-arrow-right
+            = @next_page.name
     .c-item_social-media-box
       %ul.c-social-media-box
         %li
@@ -154,21 +144,21 @@
     .c-items-in-user-profile
       %section.c-items-box_container.l-clearfix.c-items-box_overflow.c-items-in-user-profile
         %h2.c-items-box_head
-          = link_to '#' do
+          = link_to mypage_path(@item.seller_id) do
             = @seller.nickname + "さんのその他の出品"
         .c-items-box_content.l-clearfix
-          -# = render 'layouts/item',item: @other_items
+          = render partial:'layouts/item',collection: @other_items
       %section.c-items-box_container.l-clearfix.c-items-box_overflow
         %h2.c-items-box_head
-          = link_to '/brand/3117/791/' do
+          = link_to lower_category_path(@item.lower_category_id) do
             = @brand.name + " " + @lower_category.name + " " + "その他の商品"
         .c-items-box_content.l-clearfix
-          -# = render 'layouts/item',item: @other_brand_items
-    = form_for '#', html: {id: 'report-item', class: 'c-modal mfp-hide'} do |f|
+          = render partial:'layouts/item',collection: @other_brand_items
+    #report-item.c-modal.mfp-hide
       .c-modal_inner.c-modal_banner
         .c-modal_body
           .c-modal_head.u-fwBold 確認
           不適切な商品を報告しますか？
         .l-clearfix
-          .c-modal_btn.c-modal_btn-cancel.js-modal_btn-cancel キャンセル
-          = f.submit 'はい', class: 'c-modal_btn c-modal_btn-submit'
+          %a.c-modal_btn.c-modal_btn-cancel.js-modal_btn-cancel{style: :"text-decoration:none;"} キャンセル
+          = link_to 'はい',new_item_report_path(@item), {class: 'c-modal_btn c-modal_btn-submit',method: :get, style: :"text-decoration:none;"}

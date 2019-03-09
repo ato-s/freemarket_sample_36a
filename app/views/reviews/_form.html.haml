@@ -1,26 +1,28 @@
-= form_with model: [item, review], local: true do |f|
-  - if @review.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@review.errors.count, "error")} prohibited this review from being saved:"
-      %ul
-        - @review.errors.full_messages.each do |message|
-          %li= message
-  .c-radio-default
-    %label
-      = f.radio_button :evaluation, 'good'
-      good
-      %br
-  .c-radio-default
-    %label
-      = f.radio_button :evaluation, 'normal'
-      normal
-      %br
-  .c-radio-default
-    %label
-      = f.radio_button :evaluation, 'bad'
-      bad
-      %br
-  = f.text_field :text
-
-  .actions
-    = f.submit 'Save', class: 'c-btn-default is-red u-fzBold'
+= form_with model: [item, review], local: true, class: 'transact-form-review' do |f|
+  - if item.buyer_id == current_user.id
+    .c-checkbox-default
+      %input#transaction_delivered{:name => "transaction_delivered", :type => "checkbox", :value => "1"}/
+      %i.c-icon-check
+      %label{:for => "transaction_delivered"} 商品の中身を確認しました。
+  %ul.transact-review-list.l-clearfix
+    %li
+      = f.radio_button :evaluation, 'good', id: 'face1'
+      .transact-review-icon
+        %i.c-icon-good
+        %label{:for => "face1"}
+          良い
+    %li
+      = f.radio_button :evaluation, 'normal', id: 'face2'
+      .transact-review-icon
+        %i.c-icon-normal
+        %label{:for => "face2"}
+          普通
+    %li
+      = f.radio_button :evaluation, 'bad', id: 'face3'
+      .transact-review-icon
+        %i.c-icon-bad
+        %label{:for => "face3"}
+          悪い
+  %p 評価のコメントを記入しましょう。
+  = f.text_field :text, class: 'c-textarea-default'
+  = f.submit '評価を投稿する', class: 'c-btn-default is-red u-fzBold'

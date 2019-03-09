@@ -17,8 +17,8 @@ ja:
         four_to_seven_days: '4~7日で発送'
       transaction_stage:
         under_sale: '出品中'
-        purchased: '購入済'
-        shipping: '配達中'
+        purchased: '発送待ち'
+        shipping: '発送中'
         evaluated: '購入者評価済'
         transaction_completed: '取引完了'
     review:
@@ -26,6 +26,27 @@ ja:
         good: '良い'
         normal: '普通'
         bad: '悪い'
+    report:
+      report_type:
+        fake_or_infringing_goods: "偽ブランド品・権利侵害品"
+        pharmaceuticals_or_medical_equipments: "医薬品・医療機器"
+        violation_pharmaceutical_laws: "薬機法違反（海外化粧品等）"
+        dangerous_goods: "危険物（花火や火薬など）"
+        pornographies: "ブルセラ・児童ポルノ・中古下"
+        adults: "アダルト・18禁"
+        violation_firearm_and_sword_law: "銃刀法違反・武器類"
+        cash_or_counterfeit_cash_and_tickets: "現金類・偽造チケット・偽造金券"
+        other_services_or_direct_transactions_or_exchange: "他サービス誘導・直接取引・交換"
+        publicity_or_searching: "宣伝・捜し物・福袋"
+        other: "その他"
+    report_comment:
+      report_type:
+        violent_language_and_intimidation: "暴言脅迫"
+        slander: "誹謗中傷"
+        direct_trading_and_exchange: "直接取引交換半交換"
+        publication_of_private_information: "個人情報の公開"
+        induction_to_external_site: "外部サイトへの誘導"
+        others: "その他"
   datetime:
     distance_in_words:
       half_a_minute: "30秒前後"
@@ -62,3 +83,15 @@ ja:
       over_x_years:
         one:   "1年以上"
         other: "%{count}年以上"
+  recaptcha:
+    errors:
+      verification_failed: 'reCAPTCHA認証に失敗しました。'
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "0"
+          one: "1"
+          other: "%{count}"
+      more_pages:
+        display_entries: "%{first}-%{last}"
