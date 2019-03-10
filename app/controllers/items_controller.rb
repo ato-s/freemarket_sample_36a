@@ -193,6 +193,7 @@ class ItemsController < ApplicationController
       end
 
       delete_ids.each do |dId|
+        Picture.find(dId).content.remove!
         Picture.find(dId).delete
       end
     end
